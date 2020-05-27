@@ -1,0 +1,33 @@
+.about-box{
+    margin-top: 70px;
+}
+.about-box h1{
+    font-size: 40px;
+    font-weight: 500;
+}
+.about h1,h2{
+    color: #29335c;
+}
+.about h1:before{
+    content: "";
+    border: 2px solid rgb(194, 184, 49);
+    height: unset;
+}
+.services-card{
+    text-align: center;
+    width: 250px;
+}
+.serices-card-icons{
+    font-size: 50px; 
+    color: #06d6a0;
+}
+
+.services-card mat-card-header mat-card-title{
+    text-align: center;
+    width: 100%;
+}
+
+.services-card mat-card-actions{
+    text-align: left;
+
+}

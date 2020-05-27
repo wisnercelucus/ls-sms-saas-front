@@ -1,0 +1,101 @@
+<section class="registration">
+    <form fxLayout="column" 
+        fxLayoutAlign="center center" 
+        #f="ngForm" 
+        (ngSubmit)="onSubmit(f)"
+        fxLayoutGap="10px">
+        <mat-form-field>
+            <mat-label>School Name</mat-label>
+            <input type="text" 
+                matInput 
+                placeholder="Ex. College Saint Vincent" 
+                ngModel 
+                name="schoolName"
+                required
+                #schoolNameInput="ngModel"
+                >
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>School Acronym</mat-label>
+            <input type="text" 
+                matInput 
+                placeholder="Ex. CSV" 
+                ngModel 
+                name="schoolAcronym"
+                required
+                #schoolAcronymInput="ngModel"
+                >
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Contact First Name</mat-label>
+            <input type="text" 
+                matInput 
+                placeholder="Ex. Roger" 
+                ngModel 
+                name="firstName"
+                required
+                #firstNameInput="ngModel"
+                >
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Contact Last Name</mat-label>
+            <input type="text" 
+                matInput 
+                placeholder="Ex. Buteau" 
+                ngModel 
+                name="lastName"
+                required
+                #lastNameInput="ngModel"
+                >
+        </mat-form-field>
+
+
+        <mat-form-field>
+            <mat-label>Contact Email</mat-label>
+            <input type="email" 
+                matInput 
+                placeholder="Ex. example@domain.ext" 
+                ngModel 
+                name="email"
+                email
+                required
+                #emailInput="ngModel"
+                >
+                <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid.</mat-error>
+                <mat-error *ngIf="emailInput.hasError('required')">Field must not be empty.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+
+            <mat-label>Contact Phone</mat-label>
+            <input type="number" 
+                matInput 
+                placeholder="Ex. phone" 
+                ngModel 
+                name="phone"
+                required
+                #phoneInput="ngModel"
+                >
+        </mat-form-field>
+        <mat-form-field *ngIf="countries">
+            <mat-label>Country</mat-label>
+            <mat-select  ngModel name="countryName">
+                <mat-option *ngFor="let country of countries" [value]="country.name">{{country.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>School size</mat-label>
+            <mat-select  ngModel name="schoolSize">
+                <mat-option *ngFor="let size of schoolSizes" [value]="size.value">{{size.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-checkbox ngModel name="agree" required>Agree to Terms and Conditions</mat-checkbox>
+
+        <button type="submit" mat-raised-button color="accent" [disabled]="f.invalid">Register</button>
+    </form>
+</section>

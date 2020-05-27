@@ -1,3 +1,7 @@
+.navbar{
+    background-color: #29335c;
+    position: fixed;
+}
 mat-sidenav-container, mat-sidenav-content, mat-sidenav{
     height: 100%;
 }
@@ -9,6 +13,10 @@ mat-sidenav{
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+.nav-item{
+    margin-left: 15px;
 }
 
 a{

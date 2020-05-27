@@ -1,0 +1,33 @@
+    <mat-toolbar class="navbar">
+    <div fxHide.gt-xs>
+        <button mat-icon-button (click)="onToggleSiveNav()">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </div>
+    <div><a class="site-logo" routerLink="/">LS SMS</a></div>
+    <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
+        <ul fxLayout fxLayoutGap="10px" class="nav-items">
+            <li class="nav-item">
+                <a routerLink="/auth/register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/">Contact</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/donors">Donors</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/donate">
+                    <button mat-raised-button color="accent">
+                        Donate
+                    </button>
+                </a>
+           <li class="nav-item">
+        </ul>
+    </div>
+    
+    </mat-toolbar>
+

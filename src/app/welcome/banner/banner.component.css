@@ -1,0 +1,79 @@
+.banner{
+	padding-left: 10%;
+	padding-right: 10%;
+	padding-top: 15%;
+	/*background-image: linear-gradient(90deg, rgba(210,28,203,1) 0%, rgba(1,4,69,1) 100%);*/
+    color: #fff;
+	background-color: #4e8098;
+	background-image: url('/assets/images/bg-image.jpg');
+	height:30em; 
+	background-size: cover;
+	background-repeat: no-repeat; 
+	width:auto;
+	background-position: 50% 30%;
+	
+}
+
+@media screen and (max-width: 800px) {
+	
+	.banner{
+		padding-left: 20px;
+		padding-right: 20px;
+		padding-top: 100px;
+		text-align: left;
+		background-size:cover; 
+		background-position:0% 0%;
+	}
+	.banner h1{
+		text-align: center;
+		margin-bottom: 50px;
+	}
+  }
+
+
+.banner p{
+	font-size: 2em;
+	font-weight: 300;
+}
+.banner h1{
+	font-size: 40px;
+	font-weight: 600;
+	text-align: center;
+}
+.banner-text{
+	margin-bottom: 50px;
+}
+.banner-text p{
+	line-height: 1.5;
+	font-weight: 400;
+}
+.banner-text p span{
+	font-size: 15px;
+	
+}
+.demo-btn{
+	margin: 10px;
+	width: 200px;
+	color: #fcbf49;
+}
+.demo-btn span{
+	padding: 8%;
+	padding-left: 5px;
+	font-weight: 500;
+	color: #fcbf49;
+	font-size: 20px;
+}
+
+.demo-btn i.material-icons{
+	font-size: 50px;
+	color: #fcbf49;
+}
+
+.banner a{
+	color: #fff;
+	text-decoration: none;
+}
+
+.banner-img{
+	width: 100%;
+}
