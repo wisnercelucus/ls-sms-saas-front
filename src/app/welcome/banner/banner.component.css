@@ -1,32 +1,42 @@
 .banner{
-	padding-left: 10%;
-	padding-right: 10%;
-	padding-top: 15%;
-	/*background-image: linear-gradient(90deg, rgba(210,28,203,1) 0%, rgba(1,4,69,1) 100%);*/
     color: #fff;
 	background-color: #4e8098;
 	background-image: url('/assets/images/bg-image.jpg');
-	height:30em; 
+	height:40rem; 
 	background-size: cover;
 	background-repeat: no-repeat; 
 	width:auto;
-	background-position: 50% 30%;
+	background-position: 20% 30%;
+	z-index: 10;
+
 	
 }
 
+.wrap-banner{
+	padding-left: 10%;
+	padding-right: 10%;
+	padding-top: 15%;
+	padding-bottom: 2%;
+
+}
+.wrap-particles{
+	max-height: 20px;
+}
 @media screen and (max-width: 800px) {
 	
 	.banner{
-		padding-left: 20px;
-		padding-right: 20px;
-		padding-top: 100px;
+
 		text-align: left;
 		background-size:cover; 
-		background-position:0% 0%;
+		background-position:50% 50%;
 	}
 	.banner h1{
 		text-align: center;
 		margin-bottom: 50px;
+		margin-top: 20px;
+	}
+	.banner p{
+		margin: 10px;
 	}
   }
 
@@ -40,6 +50,16 @@
 	font-weight: 600;
 	text-align: center;
 }
+.banner h1 .site-title{
+	padding: 8px;
+	height: 100%;
+
+}
+
+.banner h1 .material-icons{
+	font-size: 60px;
+}
+
 .banner-text{
 	margin-bottom: 50px;
 }
@@ -54,26 +74,34 @@
 .demo-btn{
 	margin: 10px;
 	width: 200px;
-	color: #fcbf49;
+	color: fuchsia;
 }
 .demo-btn span{
 	padding: 8%;
 	padding-left: 5px;
 	font-weight: 500;
-	color: #fcbf49;
+	color: fuchsia;
 	font-size: 20px;
 }
 
 .demo-btn i.material-icons{
 	font-size: 50px;
-	color: #fcbf49;
+	color: fuchsia;
 }
 
 .banner a{
 	color: #fff;
 	text-decoration: none;
+	z-index: 100;
 }
 
 .banner-img{
 	width: 100%;
+}
+.particles{
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	border: 1px solid black;
 }

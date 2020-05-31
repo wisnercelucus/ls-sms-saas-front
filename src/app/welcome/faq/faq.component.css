@@ -1,0 +1,15 @@
+.faq{
+    display: flex;
+    flex-direction: column;
+    padding: 70px;
+    background-color: #021e38;
+    justify-content: center;
+    text-align: center;
+}
+
+.faq .faq-title{
+    margin-bottom: 70px;
+    color: white;
+    text-align: center;
+    font-size: 50px;
+}

@@ -1,0 +1,141 @@
+section{
+    background-color: #021e38;
+    box-sizing: border-box;
+    text-align: center;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+
+}
+.section-title{
+    flex:1;
+    font-size: 50px;
+    color: white;
+    padding: 20px;
+    margin-bottom: 70px;
+    margin-top: 50px;
+}
+.pricing-table{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    justify-content: space-around;
+}
+@media screen and (max-width: 800px){
+    .pricing-table{
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 auto;
+        justify-content: center;
+        flex-direction: column;
+    } 
+    .pricing-card{
+        width: 360px;
+        max-width: 90% !important;
+        margin: 0 auto;
+    }
+
+}
+
+.pricing-card{
+    flex: 1;
+    background-color: #ffffff;
+    margin: 20px 10px;
+    text-align: center;
+    cursor: pointer;
+    overflow: hidden;
+    color: #2d2d2d;
+    transition: .3s linear;
+    border-radius: 20px;
+    width: 360px;
+}
+
+.card-pricing-header{
+    background-color: dodgerblue;
+    display: inline-block;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 0 0 20px 20px;
+    max-width: inherit;
+    text-align: center;
+    font-size: 16px;
+    text-transform: uppercase;
+    transition: .4s linear;
+}
+.free{
+    background-color: fuchsia;
+
+}
+.pricing-card:hover .card-pricing-header{
+    box-shadow: 0 0 0 95vh dodgerblue;
+}
+.pricing-card:hover .free{
+    box-shadow: 0 0 0 95vh fuchsia;
+}
+
+
+.pricing-card:hover, .pricing-card:hover .price {
+
+    color:white;
+}
+.billing-cycle{
+    color:#000;
+    font-size: 16px !important;
+}
+
+
+.price{
+    font-size: 50px;
+    margin: 40px 0;
+    transition: .2s linear;
+    color: dodgerblue;
+}
+
+.free-price{
+    color: fuchsia;
+}
+
+.price sup, .price span{
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.pricing-card ul{
+    list-style: none;
+    text-decoration: none;
+    text-align: left;
+} 
+
+.pricing-card ul li{
+    font-size: 14px !important;
+    padding: 7px 0;
+    text-transform: uppercase;
+    font-style: italic;
+} 
+
+.pricing-card ul li mat-icon{
+    color: dodgerblue;
+} 
+
+.not-available{
+    text-decoration: line-through;
+    color: #ee9d28;
+}
+
+.read-more-btn{
+    display: inline-block;
+    margin-bottom: 40px;
+    margin-top: 30px;
+    border: 1px solid dodgerblue;
+    padding: 18px 40px;
+    border-radius: 8px;
+    color: dodgerblue;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: .3s linear;
+}
+.read-more-btn:hover{
+    background-color: dodgerblue;
+    color:#ffffff;
+}

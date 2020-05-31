@@ -1,26 +1,74 @@
 .about-box{
-    margin-top: 70px;
+    z-index: 60;
+    padding-top: 70px;
+    background-color: #15314b;
+    color: white;
 }
+
 .about-box h1{
-    font-size: 40px;
-    font-weight: 500;
+    font-size: 50px;
+    margin-top: 50px;
+    color: #fff;
+    
 }
-.about h1,h2{
-    color: #29335c;
+.about-box p{
+    text-align: center;
 }
-.about h1:before{
+.about h2{
+    color: #fff;
+}
+
+.underline{
     content: "";
-    border: 2px solid rgb(194, 184, 49);
-    height: unset;
+    border: 2px solid dodgerblue;
+    width: 100px;
+    margin-bottom: 70px;
 }
+
+.about-row{
+    width: min(1850px, 100%);
+    padding: 3%;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.about-row h3{
+    font-size: 18px;
+    font-weight: 550;
+    color: #fff;
+}
+
 .services-card{
     text-align: center;
-    width: 250px;
+    width: 300px;
+    z-index: 1;
+    border-radius: 0px;
+    background-color: #001528;
+    box-shadow: 0 0 0 0 !important;
+    margin-bottom: 25px;
+    color: white;
+    transition: ease-in-out .3s;
 }
+
+.services-card:hover{
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.5) !important;
+    
+}
+
 .serices-card-icons{
     font-size: 50px; 
-    color: #06d6a0;
+    color: #5f6668;
+    transition: ease-in-out .3s;
 }
+
+.services-card:hover .serices-card-icons{
+    background-color: fuchsia;
+    color: white;
+    border-radius: 8px;
+    padding: 1px;
+   
+}
+
 
 .services-card mat-card-header mat-card-title{
     text-align: center;
@@ -31,3 +79,44 @@
     text-align: left;
 
 }
+
+a:hover{
+    cursor: pointer;
+}
+
+mat-card-actions button{
+    background-color: fuchsia;
+}
+
+.demo-btn2{
+    border: 2px solid dodgerblue;
+    color:#010101;
+    padding: 12px 20px;
+    border-radius: 8px;
+    background-color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    transition: .4s linear;
+}
+
+.demo-btn2:hover{
+    background-color: dodgerblue;
+    color: white;
+    cursor: pointer;
+}
+
+.demo-btn2 mat-icon{
+    font-size: 32px;
+    position: absolute;
+    top: 15%;
+}
+
+.demo-btn2 span{
+    margin-top: 3%;
+    margin-left: 35px;
+}
+

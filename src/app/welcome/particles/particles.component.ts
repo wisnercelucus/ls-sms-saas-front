@@ -1,18 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+
 @Component({
-  selector: 'app-banner',
-  templateUrl: './banner.component.html',
-  styleUrls: ['./banner.component.css']
+  selector: 'app-particles',
+  templateUrl: './particles.component.html',
+  styleUrls: ['./particles.component.css']
 })
-export class BannerComponent implements OnInit {
+export class ParticlesComponent implements OnInit {
+
   constructor() { }
+
   styles: object = {};
   params: object = {};
   height: number = 20;
 
     ngOnInit() {
         this.styles = {
-            'z-index': '-100',
+            'z-index': -10000,
             'width': '100%',
             'height': '100%',
             'margin':'0 auto',

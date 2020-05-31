@@ -25,6 +25,9 @@ import { TestimonialsComponent } from './welcome/testimonials/testimonials.compo
 import { FooterComponent } from './welcome/footer/footer.component';
 import { FaqComponent } from './welcome/faq/faq.component';
 
+import { ParticlesModule } from 'ngx-particle';
+import { ParticlesComponent } from './welcome/particles/particles.component';
+
 
 @NgModule({
   declarations: [
@@ -46,6 +49,7 @@ import { FaqComponent } from './welcome/faq/faq.component';
     TestimonialsComponent,
     FooterComponent,
     FaqComponent,
+    ParticlesComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +59,8 @@ import { FaqComponent } from './welcome/faq/faq.component';
     MaterialModule,
     HttpClientModule,
     ReactiveFormsModule,
+   ParticlesModule
+
     
   ],
   providers: [],
