@@ -19,6 +19,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 const Materials = [
@@ -41,7 +42,8 @@ const Materials = [
   MatSelectModule,
   MatProgressSpinnerModule,
   MatDialogModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatBadgeModule
 ]
 
 

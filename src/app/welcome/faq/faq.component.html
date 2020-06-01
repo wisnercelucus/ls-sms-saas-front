@@ -5,9 +5,30 @@
                         (closed)="panelOpenState = false">
         <mat-expansion-panel-header>
         <mat-panel-title>
-            Answers to frequently asked questions
+            {{  panelOpenState ? 'Click to hide the FAQs' : 'Click to read answers to frequently asked questions' }}
         </mat-panel-title>
         </mat-expansion-panel-header>
-        <p>I'm visible because I am open</p>
+
+            <mat-expansion-panel (opened)="panelOpenState1 = true"
+                                (closed)="panelOpenState1 = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <span class="front-q">
+                            <strong>Q1</strong>
+                        </span> 
+                        {{ panelOpenState1 ?  
+                            'Can we have to bundle at lower price with increasing number of students?' : 
+                            'Can we have to bundle at lower price...' }}
+                    </mat-panel-title>  
+                </mat-expansion-panel-header>
+                    <p class="answer-q">
+                        <span class="front-q">
+                            <strong>Aws1</strong>
+                        </span> 
+                        Yes, we have a plan for schools with various size. Please contact the sale's team for detail.
+                    </p>
+                
+        </mat-expansion-panel>  
+
     </mat-expansion-panel>
 </section>

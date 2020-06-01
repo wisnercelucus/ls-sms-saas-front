@@ -9,6 +9,7 @@
 }
 .wrap-contact{
     width: min(1500px, 98%);
+    margin-bottom: 70px;
 }
 .contact h1{
     margin-top: 50px;

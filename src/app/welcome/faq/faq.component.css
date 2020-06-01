@@ -25,4 +25,9 @@
 .mat-expansion-panel{
     flex:1;
     width: min(1500px, 98%);
+    margin-bottom: 70px;
+}
+
+.front-q{
+    margin-right: 8px;
 }
