@@ -3,6 +3,7 @@
     flex-direction: column;
     background-color: #15314b;
     align-items: center;
+    padding-top: 70px;
 }
 .testimonials-box h1{
     text-align: center;

@@ -26,4 +26,17 @@ export class HeaderComponent implements OnInit {
 
   }
 
+  toPricing(){
+    document.getElementById("pricing")
+            .scrollIntoView({behavior: 'smooth'})
+  }
+  toAbout(){
+    document.getElementById("about")
+            .scrollIntoView({behavior: 'smooth'})
+  }
+  toContact(){
+    document.getElementById("contact")
+            .scrollIntoView({behavior: 'smooth'})
+  }
+
 }

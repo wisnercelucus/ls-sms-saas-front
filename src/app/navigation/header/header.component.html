@@ -8,14 +8,20 @@
     <img class="site-logo" src="assets/logo/logo.png"></a></div>
     <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
         <ul fxLayout fxLayoutGap="10px" class="nav-items">
+
+            <li class="nav-item">
+                <a (click) = "toPricing()" routerLink="/">Pricing</a>
+            </li>
+
             <li class="nav-item">
                 <a routerLink="/auth/register">Register</a>
             </li>
             <li class="nav-item">
-                <a routerLink="/">About Us</a>
+                <a (click) = "toAbout()" routerLink="/">About Us</a>
             </li>
+
             <li class="nav-item">
-                <a routerLink="/">Contact</a>
+                <a (click) = "toContact()">Contact</a>
             </li>
             <li class="nav-item">
                 <a routerLink="/donors">Donors</a>

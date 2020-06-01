@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { faTwitter, faFacebook, faInstagram, faYoutube, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 import { NgForm } from '@angular/forms';
 
@@ -27,5 +27,11 @@ export class FooterComponent implements OnInit {
     console.log(form.value)
   }
   
+  @ViewChild('top')  top: ElementRef;
+
+  onScrollTop(): void{
+    console.log('get called')
+    this.top.nativeElement.scrollIntoView({behavior: 'smooth'});
+  }
 
 }

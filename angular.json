@@ -27,7 +27,8 @@
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": ["./node_modules/jquery/dist/jquery.min.js",
+                        "src/assets/scripts/jscroll.js"]
           },
           "configurations": {
             "production": {

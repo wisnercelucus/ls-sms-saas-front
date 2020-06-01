@@ -20,13 +20,17 @@ mat-sidenav{
 .nav-item{
     margin-left: 15px;
 }
-
+.nav-item:hover{
+    margin-left: 15px;
+    cursor: pointer;
+}
 a{
     text-decoration: none;
     color:white;
 }
 a:hover{
     color:lightgrey;
+    cursor: pointer;
 }
 .nav-caption{
     display: inline-block;

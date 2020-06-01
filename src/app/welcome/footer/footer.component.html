@@ -14,7 +14,7 @@
         
     </div>
     <div class="col right">
-        <h1>Newsletter</h1>
+        <h1 #top>Newsletter</h1>
         <div class="border"></div>
         <p class="subscribe-text">Enter your email to receive latest news and updates.</p>
         <form 
@@ -36,7 +36,7 @@
                     <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid.</mat-error>
                     <mat-error *ngIf="emailInput.hasError('required')">Field must not be empty.</mat-error>
             </mat-form-field>
-            <button class="subscrib-btn" type="submit" mat-raised-button>Subscribe</button> 
+            <button class="subscrib-btn" (click)="onScrollTop()" type="button" mat-raised-button>Subscribe</button> 
         </form>
     </div>
     </div>
