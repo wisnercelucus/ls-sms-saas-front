@@ -27,6 +27,7 @@ import { FaqComponent } from './welcome/faq/faq.component';
 
 import { ParticlesModule } from 'ngx-particle';
 import { ParticlesComponent } from './welcome/particles/particles.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { ParticlesComponent } from './welcome/particles/particles.component';
     MaterialModule,
     HttpClientModule,
     ReactiveFormsModule,
-   ParticlesModule
+   ParticlesModule,
+   FontAwesomeModule
 
     
   ],

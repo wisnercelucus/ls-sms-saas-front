@@ -1,8 +1,45 @@
 <section class="footer-box">
-    <div class="column-left">
+
+    <div class="wrap-footer">
+
+    <div class="col left">
         <img class="foot-logo" src="assets/logo/logo.png">
+        <div class="social-links">
+            <a href="javascript:void(0)"><fa-icon [icon]="faTwitter"></fa-icon></a>
+            <a href="javascript:void(0)"><fa-icon [icon]="faFacebook"></fa-icon></a>
+            <a href="javascript:void(0)"><fa-icon [icon]="faInstagram"></fa-icon></a>
+            <a href="javascript:void(0)"><fa-icon [icon]="faYoutube"></fa-icon></a>
+            <a href="javascript:void(0)"><fa-icon [icon]="faLinkedin"></fa-icon></a>
+        </div>
+        
+    </div>
+    <div class="col right">
+        <h1>Newsletter</h1>
+        <div class="border"></div>
+        <p class="subscribe-text">Enter your email to receive latest news and updates.</p>
+        <form 
+            (ngSubmit)="onSubmit(f)" #f="ngForm"
+            class="newsletter-form"
+            >
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input type="email" 
+                    matInput 
+                    placeholder="Ex. example@domain.ext" 
+                    ngModel 
+                    name="email"
+                    email
+                    required
+                    #emailInput="ngModel"
+                    class="email-input"
+                    >
+                    <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid.</mat-error>
+                    <mat-error *ngIf="emailInput.hasError('required')">Field must not be empty.</mat-error>
+            </mat-form-field>
+            <button class="subscrib-btn" type="submit" mat-raised-button>Subscribe</button> 
+        </form>
+    </div>
     </div>
 
-    <div class="column-right">
-    </div>
+    <p>&copy; LS SMS &middot; All right reserved &middot; {{ year }}.</p>
 </section>

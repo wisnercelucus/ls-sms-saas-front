@@ -2,14 +2,20 @@
     display: flex;
     flex-direction: column;
     background-color: #15314b;
-    justify-content: center;
+    align-items: center;
 }
 .testimonials-box h1{
     text-align: center;
     color: white;
     margin-top: 50px;
-    margin-bottom: 70px;
     font-size: 50px;
+}
+
+.underline{
+    content: "";
+    border: 2px solid dodgerblue;
+    width: 100px;
+    margin-bottom: 70px;
 }
 
 .testimonials{
@@ -17,7 +23,9 @@
     flex-wrap: wrap;
     justify-content: center;
     flex-direction: row;
-    padding: 4%;
+    padding-left: 4%;
+    padding-right: 4%;
+    padding-bottom: 4%;
 }
 
 .testimonial-card{

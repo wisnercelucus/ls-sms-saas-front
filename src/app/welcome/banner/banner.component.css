@@ -7,17 +7,17 @@
 	background-repeat: no-repeat; 
 	width:auto;
 	background-position: 20% 30%;
-	z-index: 10;
-
-	
+	z-index: 2;
 }
 
 .wrap-banner{
-	padding-left: 10%;
-	padding-right: 10%;
-	padding-top: 15%;
-	padding-bottom: 2%;
-
+	position: absolute;
+	z-index: 4;
+	left: 25%;
+	right: 25%;
+	top: 25%;
+	text-align: center;
+	text-align: center;
 }
 .wrap-particles{
 	max-height: 20px;
@@ -32,14 +32,43 @@
 	}
 	.banner h1{
 		text-align: center;
-		margin-bottom: 50px;
-		margin-top: 20px;
+		margin-bottom: 12px;
+		margin-top: 10px;
 	}
 	.banner p{
-		margin: 10px;
+		margin: 2px;
 	}
+	.banner-text{
+		width: min(1500px, 100%);
+	}
+
   }
 
+
+  @media screen and (max-width: 490px) {
+	.banner-text{
+		margin-top: -70px;
+		width: min(360px, 100%);
+	}
+	.banner h1{
+		text-align: center;
+		margin-bottom: 10px;
+		margin-top: 10px;
+	}
+	.banner p{
+		margin: 2px;
+	}
+
+	.banner-text p{
+		line-height: 1;
+		font-weight: 300;
+	}
+	.demo-btn{
+		margin-top: 10px;
+	}
+
+
+  }
 
 .banner p{
 	font-size: 2em;
@@ -49,6 +78,7 @@
 	font-size: 40px;
 	font-weight: 600;
 	text-align: center;
+	margin-bottom: 70px;
 }
 .banner h1 .site-title{
 	padding: 8px;
@@ -61,7 +91,12 @@
 }
 
 .banner-text{
-	margin-bottom: 50px;
+	margin-bottom: 0;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: min(1500px, 100%);
 }
 .banner-text p{
 	line-height: 1.5;
@@ -72,21 +107,40 @@
 	
 }
 .demo-btn{
-	margin: 10px;
-	width: 200px;
+	margin-top: 50px;
+	width: 250px;
 	color: fuchsia;
+	border: 1px solid fuchsia;
+	transition: .4s linear;
+	border-radius: 12px;
+	background-color: rgba(245, 96, 245, 0.5);
+	font-weight: 500;
+	display: block;
+	color:white;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.demo-btn:hover{
+	background-color: fuchsia;
+}
+
+.demo-btn:hover span, .demo-btn:hover i.material-icons{
+	color: white;
 }
 .demo-btn span{
 	padding: 8%;
 	padding-left: 5px;
 	font-weight: 500;
-	color: fuchsia;
+	color: rgb(255, 255, 255);
 	font-size: 20px;
 }
 
 .demo-btn i.material-icons{
-	font-size: 50px;
-	color: fuchsia;
+	font-size: 40px;
+	color: rgb(255, 255, 255);
+	padding: 5%;
+	padding-right: 0px;
 }
 
 .banner a{

@@ -1,4 +1,90 @@
 .contact{
-    padding: 70px;
     background-color: #153049;
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+    padding-left: 4%;
+    padding-right: 4%;
+    padding-bottom: 4%;
+}
+.wrap-contact{
+    width: min(1500px, 98%);
+}
+.contact h1{
+    margin-top: 50px;
+    color: white;
+    font-size: 50px;
+
+}
+
+.underline{
+    content: "";
+    border: 2px solid dodgerblue;
+    width: 100px;
+    margin-bottom: 70px;
+}
+
+.form-contact{
+    display: flex;
+    flex-direction: column;
+    padding-left: 8%;
+    padding-right: 8%;
+    width: min(1000px, 98%);
+}
+
+.group-fields{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 70px;
+}
+.group-fields mat-form-field:first-child{
+    margin-right: 10px;
+}
+.group-fields mat-form-field:last-child{
+    margin-left: 10px;
+}
+
+.form-contact mat-form-field{
+    flex: 1;
+}
+.send-message-btn{
+    background-color: dodgerblue;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.contact-directive{
+    font-size: 18px;
+    text-align: center;
+    background-color: dodgerblue;
+    border-radius: 8px;
+    width: min(500px, 98%);
+    padding: 8px;
+    margin: 0 auto;
+    color: white;
+    text-transform: uppercase;
+    transition: .3s linear;
+}
+.contact-directive:hover{
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (max-width: 460px){
+    .form-contact{
+        padding-left: 4%;
+        padding-right: 4%;
+        width: min(360px, 98%);
+    }
+    .group-fields{
+        margin-bottom: 10px;
+    }
+    .group-fields mat-form-field:first-child,
+    .group-fields mat-form-field:last-child
+    {
+        margin: 0px;
+    }
+    
+ 
 }
