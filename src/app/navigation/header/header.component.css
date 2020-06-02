@@ -38,6 +38,9 @@ a:hover{
 }
 .donate-btn{
     background-color: fuchsia;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
 }
 .site-logo{
     width: 230px;

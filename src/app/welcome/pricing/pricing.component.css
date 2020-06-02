@@ -74,18 +74,20 @@ section{
     background-color: fuchsia;
 
 }
+/*
 .pricing-card:hover .card-pricing-header{
     box-shadow: 0 0 0 95vh dodgerblue;
 }
 .pricing-card:hover .free{
     box-shadow: 0 0 0 95vh fuchsia;
 }
-
-
+*/
+/*
 .pricing-card:hover, .pricing-card:hover .price {
 
     color:white;
 }
+*/
 .billing-cycle{
     color:#000;
     font-size: 16px !important;

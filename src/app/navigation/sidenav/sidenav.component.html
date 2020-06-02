@@ -1,9 +1,44 @@
     <mat-nav-list>
-        <a mat-list-item routerLink="/signup" (click)="onCloseSideNav()"> 
-            <mat-icon>face</mat-icon> 
+        <a mat-list-item (click)="onCloseSideNavRedirect('pricing')"> 
+            <mat-icon>monetization_on</mat-icon>
+            <span class="nav-caption">Pricing</span> 
+        </a>
+
+        <a mat-list-item routerLink="/auth/register" (click)="onCloseSideNav()"> 
+            <mat-icon>school</mat-icon>
             <span class="nav-caption">Register</span> 
         </a>
-        <a mat-list-item routerLink="/login" (click)="onCloseSideNav()">
+
+        <a mat-list-item (click)="onCloseSideNavRedirect('about')"> 
+            <mat-icon>view_compact</mat-icon>
+            <span class="nav-caption">About Us</span> 
+        </a>
+
+        <a mat-list-item (click)="onCloseSideNavRedirect('faqs')"> 
+            <mat-icon>question_answer</mat-icon>
+            <span class="nav-caption">FAQs</span> 
+        </a>
+
+        <a mat-list-item (click)="onCloseSideNavRedirect('review')"> 
+            <mat-icon>rate_review</mat-icon>
+            <span class="nav-caption">Reviews</span> 
+        </a>
+
+        <a mat-list-item (click)="onCloseSideNavRedirect('contact')"> 
+            <mat-icon>contact_support</mat-icon>
+            <span class="nav-caption">Contact Us</span> 
+        </a>
+
+        <mat-divider></mat-divider>
+
+        <a mat-list-item routerLink="/donors" (click)="onCloseSideNav()">
+            <mat-icon>input</mat-icon> 
+            <span class="nav-caption">Donors</span> 
+         </a>   
+        
+        <mat-divider></mat-divider>
+
+        <a mat-list-item routerLink="/auth/login" (click)="onCloseSideNav()">
             <mat-icon>input</mat-icon> 
             <span class="nav-caption">Login</span> 
          </a>       

@@ -2,14 +2,16 @@
     background-color: #021e38;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
     color: white;
+    justify-content: space-around;
     padding: 70px;
+    padding-bottom: 20px;
 }
 .footer-box  p{
     color: rgb(240, 234, 234);
     font-size: 16px;
-    margin-top: 70px;  
+    margin: 0 auto;
 }
 
 
@@ -29,8 +31,43 @@
 }
 
 .wrap-footer .col{
-    flex:1;
-    width: min(600px, 98%);
+    flex: 1;
+    width: min(450px, 98%);
+}
+
+.foot-menu{
+    text-align: left;
+
+}
+.foot-menu ul{
+    box-sizing: border-box;
+    list-style: none;
+    text-align: left;
+    padding: 0;
+    
+}
+.foot-menu ul li{
+    list-style: none;
+    padding: 8px;
+    color: white;
+  
+}
+.foot-menu ul li{
+    cursor: pointer;
+   
+}
+
+.foot-menu ul li a{
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 1;
+    color: white;
+  
+}
+
+.foot-menu ul li a:hover{
+    cursor: pointer;
+   
 }
 
 .foot-logo{
@@ -64,8 +101,7 @@
 }
 .newsletter-form{
     display: flex;
-    justify-content: center;
-    align-items: center;
+    align-items: left;
     flex-wrap: wrap;
 }
 
@@ -74,6 +110,7 @@
 }
 .subscrib-btn{
     margin-left: 25px !important;
+    height: 40px !important;
 }
 .email-input{
     color: white;
@@ -81,7 +118,7 @@
 }
 
 .mat-form-field-underline {
-    height: 0px !important;
+    background-color: white !important;
 }
 .mat-form-field-ripple{
     background-color: green !important;

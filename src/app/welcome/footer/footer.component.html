@@ -2,14 +2,38 @@
 
     <div class="wrap-footer">
 
-    <div class="col left">
-        <img class="foot-logo" src="assets/logo/logo.png">
+        <div class="col left">
+        <h1>Social Media</h1>
         <div class="social-links">
             <a href="javascript:void(0)"><fa-icon [icon]="faTwitter"></fa-icon></a>
             <a href="javascript:void(0)"><fa-icon [icon]="faFacebook"></fa-icon></a>
             <a href="javascript:void(0)"><fa-icon [icon]="faInstagram"></fa-icon></a>
             <a href="javascript:void(0)"><fa-icon [icon]="faYoutube"></fa-icon></a>
             <a href="javascript:void(0)"><fa-icon [icon]="faLinkedin"></fa-icon></a>
+        </div>
+        
+    </div>
+
+    <div class="col center">
+        <img class="foot-logo" src="assets/logo/logo.png">
+        <div class="foot-menu">
+            <ul>
+                <li>
+                    <a routerLink="/auth/register">Get started</a>
+                </li>
+                <li>
+                    <a (click)="toAbout()">About Us</a>
+                </li>
+                <li>
+                    <a (click)="toPricing()">Pricing</a>
+                </li>
+                <li>
+                    <a (click)="toReview()">Reviews</a>
+                </li>
+                <li>
+                    <a (click)="toFAQs()">FAQs</a>
+                </li>
+            </ul>
         </div>
         
     </div>
@@ -36,7 +60,7 @@
                     <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid.</mat-error>
                     <mat-error *ngIf="emailInput.hasError('required')">Field must not be empty.</mat-error>
             </mat-form-field>
-            <button class="subscrib-btn" (click)="onScrollTop()" type="button" mat-raised-button>Subscribe</button> 
+            <button class="subscrib-btn" type="submit" mat-raised-button>Subscribe</button> 
         </form>
     </div>
     </div>

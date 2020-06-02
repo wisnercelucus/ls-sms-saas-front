@@ -1,0 +1,71 @@
+.donate{
+    margin-top: 70px;
+    padding: 8%;
+}
+
+
+/* Styling the donate section */
+
+.donate-section{
+	margin-top: 50px;
+}
+
+.charge-form{
+	padding: 30px;
+	background-image: linear-gradient(90deg, rgba(210,28,203,1) 0%, rgba(1,4,69,1) 100%);
+	border-radius: 10px;
+	color: #FFFFFF !important;
+}
+
+.form-row{
+	margin-top: 50px;
+	width: 100%;
+}
+
+.card-input{
+	width: 100%;
+}
+
+.btn-charge{
+	margin-top: 50px;
+	width: 100% !important;
+	background-image: linear-gradient(90deg, rgba(210,28,203,1) 0%, rgba(1,4,69,1) 100%);
+	border: 1px solid lightgrey !important;
+}
+
+.text-white{
+	color: #ffffff !important;
+}
+.amount-row{
+	margin-top: 50px;
+}
+
+ /*Stripe CSS */
+
+.StripeElement {
+  box-sizing: border-box;
+
+  height: 40px;
+
+  padding: 10px 12px;
+
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: white;
+
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}

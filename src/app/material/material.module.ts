@@ -20,6 +20,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatDividerModule} from '@angular/material/divider';
 
 
 const Materials = [
@@ -43,7 +44,8 @@ const Materials = [
   MatProgressSpinnerModule,
   MatDialogModule,
   MatExpansionModule,
-  MatBadgeModule
+  MatBadgeModule,
+  MatDividerModule
 ]
 
 

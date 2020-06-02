@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output} from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,8 +11,9 @@ export class HeaderComponent implements OnInit {
   @Output() sideNavToggle = new EventEmitter<void>();
   isAuth=false;
   subscription: Subscription;
-  constructor() { }
-
+  constructor(private router: Router) { }
+  
+  timer: any;
   ngOnInit(): void {
 
     
@@ -26,17 +28,39 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  toPricing(){
-    document.getElementById("pricing")
-            .scrollIntoView({behavior: 'smooth'})
+  scroolTo(id:string){
+    document.getElementById(id)
+    .scrollIntoView({behavior: 'smooth'})
   }
+
+  navigateTo(id:string, route:string){
+    if (location.pathname == route){
+      this.scroolTo(id)
+    }else{
+      this.router.navigate([route])
+      .then(
+        () =>{
+             this.timer = setTimeout( () =>{
+             this.scroolTo(id);
+             console.log("called");
+             clearTimeout(this.timer)
+          }, 700);
+
+          
+        }
+      )
+    } 
+  }
+
+  toPricing(){
+      this.navigateTo("pricing", "/")
+  }
+
   toAbout(){
-    document.getElementById("about")
-            .scrollIntoView({behavior: 'smooth'})
+    this.navigateTo("about", "/") 
   }
   toContact(){
-    document.getElementById("contact")
-            .scrollIntoView({behavior: 'smooth'})
+    this.navigateTo("contact", "/") 
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { faTwitter, faFacebook, faInstagram, faYoutube, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,23 +16,59 @@ export class FooterComponent implements OnInit {
   faYoutube = faYoutube;
   faLinkedin = faLinkedinIn;
   year = new Date().getFullYear();
+  timer: any;
 
-  constructor() { }
-
+  constructor(private router: Router) { }
+  
   ngOnInit(): void {
 
   }
-  
   
   onSubmit(form: NgForm){
     console.log(form.value)
   }
   
-  @ViewChild('top')  top: ElementRef;
+  
+  scroolTo(id:string){
+    document.getElementById(id)
+    .scrollIntoView({behavior: 'smooth'})
+  }
 
-  onScrollTop(): void{
-    console.log('get called')
-    this.top.nativeElement.scrollIntoView({behavior: 'smooth'});
+  navigateTo(id:string, route:string){
+    if (location.pathname == route){
+      this.scroolTo(id)
+    }else{
+      this.router.navigate([route])
+      .then(
+        () =>{
+             this.timer = setTimeout( () =>{
+             this.scroolTo(id);
+             console.log("called");
+             clearTimeout(this.timer)
+          }, 700);
+
+          
+        }
+      )
+    } 
+  }
+
+
+
+
+  toAbout(){
+    this.navigateTo("about", "/")
+  }
+
+  toPricing(){
+    this.navigateTo("pricing", "/")
+  }
+
+  toReview(){
+    this.navigateTo("testimonials", "/")
+  }
+  toFAQs(){
+    this.navigateTo("faqs", "/")
   }
 
 }
