@@ -28,25 +28,22 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  scroolTo(id:string){
+  scrollTo(id:string){
     document.getElementById(id)
     .scrollIntoView({behavior: 'smooth'})
   }
 
   navigateTo(id:string, route:string){
     if (location.pathname == route){
-      this.scroolTo(id)
+      this.scrollTo(id)
     }else{
       this.router.navigate([route])
       .then(
         () =>{
              this.timer = setTimeout( () =>{
-             this.scroolTo(id);
-             console.log("called");
+             this.scrollTo(id);
              clearTimeout(this.timer)
-          }, 700);
-
-          
+          }, 700); 
         }
       )
     } 
