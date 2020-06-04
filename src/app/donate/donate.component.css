@@ -80,6 +80,7 @@
 	width: 100%;
 }
 
+/*
 mat-label{
 
 }
@@ -88,7 +89,7 @@ mat-label{
 input{
 
 }
-
+*/
 .card-actions{
   margin: 6px;
   margin-top: 50px;
@@ -112,9 +113,7 @@ input{
   margin: 6px;
 }
 
-label{
 
-}
  /*Stripe CSS */
 
 .StripeElement {

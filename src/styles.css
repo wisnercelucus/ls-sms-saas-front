@@ -2,17 +2,17 @@
 html, body { height: 100%;}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
 
-  
+  /*
   .mat-form-field-infix{
   }
 
   .mat-form-field-appearance-legacy{
   }
-
+  .mat-form-field-ripple{
+      
+  }
+  */
   .mat-form-field-underline{
       background-color: dodgerblue !important;
   }
   
-  .mat-form-field-ripple{
-      
-  }
