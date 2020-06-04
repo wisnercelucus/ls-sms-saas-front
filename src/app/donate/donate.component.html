@@ -1,10 +1,19 @@
-<section class="donate">         
+<section class="donate"> 
+    <div class="engaging-message left">
+      <div class="wrap-message">
+      <p class="lead-message">We've made everything we can to bring value to your Life. 
+        You can support our effort by paying us something valuable if you can.</p>
+      </div>
+      <img class="sad-dog-image" src="assets/images/sad-dog.jpg" alt="sad dog">
+    </div>
+
     <form 
-      class="charge-form" 
+      class="charge-form right" 
       id="payment-form"
       #f="ngForm"
-      (ngSubmit)="onSubmit(f)"
+      (ngSubmit)="createStripeToken(f)"
       >
+      <h1>Fill in your information to make a donation.</h1>
       <div class="personal-information">
         <mat-form-field>
             <mat-label>Your Fullname</mat-label>
@@ -69,19 +78,24 @@
           >
         </mat-form-field>
       </div>
+      <div class="card-group-field">
           <label for="card-element">
                   Credit or debit card
           </label>
-          <div id="card-element"classs="StripeElement StripeElement--focus">
-                  <!-- A Stripe Element will be inserted here. -->
-          </div>
+          <div id="card-info" #cardInfo></div>
           <!-- Used to display form errors. -->
           <div id="card-errors" role="alert"></div>
-
-          <button type="submit" mat-raised-button class="btn-charge">Submit Donation</button>
-      </form>
-      <div class="engaging-message">
-        <h1>Summer giving</h1>
       </div>
+          <div class="card-actions">
+            <button type="submit" mat-raised-button class="btn-charge">Submit Donation</button>
+            <mat-error id="card-errors" role="alert" *ngIf="cardError">
+                <mat-icon style="color: #f44336">cancel</mat-icon>
+                    &nbsp;{{ cardError }}
+            </mat-error>
+          </div>
+      </form>
+
 
 </section>
+
+<app-footer></app-footer>

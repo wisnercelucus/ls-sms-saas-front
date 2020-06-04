@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef, ElementRef, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -6,30 +6,90 @@ import { NgForm } from '@angular/forms';
   templateUrl: './donate.component.html',
   styleUrls: ['./donate.component.css']
 })
-export class DonateComponent implements OnInit {
-  message_select ="A good card"
-  message_custom = "custum message"
-  amountOptions = []
-  constructor() {
-    this.amountOptions = [
-      {'value': '10', 'name': '$10 -- Good'},
-      {'value': '25', 'name': '$25 -- Great'},
-      {'value': '45', 'name': '$45 -- Amazing'},
-      {'value': 'custom', 'name': 'Custom amount'}
-    ]
-   }
-
+export class DonateComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('cardInfo') cardInfo: ElementRef;
+  @ViewChild('f') donateForm: ElementRef;
+    _totalAmount: number;
+        card: any;
+        cardHandler = this.onChange.bind(this);
+        cardError: string;
+        amountOptions = []
+    constructor(
+            private cd: ChangeDetectorRef,
+        ) {
+            
+        }
   ngOnInit(): void {
-    this.amountOptions = [
+
+    this._totalAmount = 45;
+    this.amountOptions =[
       {'value': '10', 'name': '$10 -- Good'},
       {'value': '25', 'name': '$25 -- Great'},
       {'value': '45', 'name': '$45 -- Amazing'},
       {'value': 'custom', 'name': 'Custom amount'},
     ]
   }
-  
-  onSubmit(form:NgForm){
-      console.log(form.value)
+    ngOnDestroy() {
+            if (this.card) {
+                // We remove event listener here to keep memory clean
+                this.card.removeEventListener('change', this.cardHandler);
+                this.card.destroy();
+            }
+        }
+    ngAfterViewInit() {
+            this.initiateCardElement();
+        }
 
-  }
+    initiateCardElement() {
+            // Giving a base style here, but most of the style is in scss file
+            const cardStyle = {
+                base: {
+                    width:'100%',
+                    color: '#32325d',
+                    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                    fontSmoothing: 'antialiased',
+                    fontSize: '16px',
+                    '::placeholder': {
+                        color: '#aab7c4',
+                    },
+                },
+                invalid: {
+                    color: '#fa755a',
+                    iconColor: '#fa755a',
+                },
+            };
+            this.card = elements.create('card', {cardStyle});
+            this.card.mount(this.cardInfo.nativeElement);
+    this.card.addEventListener('change', this.cardHandler);
+        }
+
+    onChange({error}) {
+            if (error) {
+                this.cardError = error.message;
+            } else {
+                this.cardError = null;
+            }
+            this.cd.detectChanges();
+        }
+
+    async createStripeToken(form: NgForm) {
+            const {token, error} = await stripe.createToken(this.card);
+            if (token) {
+                this.onSuccess(token, form);
+            } else {
+                this.onError(error);
+            }
+        }
+
+    onSuccess(token, form: NgForm) {
+      console.log(token)
+      console.log(form.value)
+    }
+
+    onError(error) {
+      if (error.message) {
+          this.cardError = error.message;
+      }
+    }
+
 }
