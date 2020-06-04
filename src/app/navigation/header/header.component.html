@@ -1,6 +1,6 @@
     <mat-toolbar class="navbar">
     <div fxHide.gt-xs>
-        <button mat-icon-button (click)="onToggleSiveNav()">
+        <button class="toggleButton" mat-icon-button (click)="onToggleSiveNav()">
             <mat-icon>menu</mat-icon>
         </button>
     </div>
@@ -27,7 +27,7 @@
                 <a routerLink="/donors">Donors</a>
             </li>
             <li class="nav-item">
-                <a routerLink="/donate">
+                <a href="/donate">
                     <button mat-raised-button class="donate-btn">
                         Donate
                     </button>
@@ -35,8 +35,8 @@
            <li class="nav-item">
         </ul>
     </div>
-    <a routerLink="/donate" fxHide.gt-xs>
-        <button mat-raised-button class="donate-btn">
+    <a href="/donate" fxHide.gt-xs>
+        <button mat-raised-button class="donate-btn btn-v-xs">
             Donate
         </button>
     </a>

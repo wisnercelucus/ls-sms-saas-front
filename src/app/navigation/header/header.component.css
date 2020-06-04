@@ -46,3 +46,39 @@ a:hover{
     width: 230px;
     margin-top: 10px;
 }
+
+
+
+@media screen and (max-width: 599px){
+    .site-logo{
+        display: none;
+    }
+    .navbar{
+        display: flex;
+        padding-left: 10px;
+        padding-right: 10px;
+        justify-content: space-between;
+
+    }
+    
+    .toggleButton{
+        color: white;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .site-logo{
+        display: none;
+    }
+    .navbar{
+        display: flex;
+        padding-left: 10px;
+        padding-right: 10px;
+        justify-content: space-between;
+
+    }
+    .toggleButton{
+        color: white;
+    }
+
+}

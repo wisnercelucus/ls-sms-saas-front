@@ -1,64 +1,87 @@
-<section class="donate">            
-            <form class="charge-form" id="payment-form">
-              <div class="row">
-               <div  class="col-md-6"> 
-                <div class="form-group">
-                <label for="name">
-                  Name
-                </label>
-                  <input class="form-control StripeElement" name="name" id="name" type="text" placeholder="Your full name" required>
-               </div>
-             </div>
-             <div  class="col-md-6"> 
-                <div class="form-group">
-                <label for="email">
-                  Email
-                </label>
-                  <input type="email" class="form-control StripeElement" id="email" aria-describedby="emailHelp" placeholder="Enter email" name="email" required>
-                  <small id="emailHelp" class="form-text text-muted text-white">We'll never share your email with anyone else.</small>
-               </div>
-             </div>
-             </div>
+<section class="donate">         
+    <form 
+      class="charge-form" 
+      id="payment-form"
+      #f="ngForm"
+      (ngSubmit)="onSubmit(f)"
+      >
+      <div class="personal-information">
+        <mat-form-field>
+            <mat-label>Your Fullname</mat-label>
+            <input type="text" 
+                matInput
+                placeholder="Ex. John Doe" 
+                ngModel 
+                name="fullname"
+                required
+                #fullNameInput
+                >
+                <mat-error>The field is required.</mat-error>
+        </mat-form-field>
 
-              <div class="row amount-row">
-              <div  class="col-md-6"> 
-              <div class="form-group">
-              <label for="select_amount">
-                  Select amount
-              </label>
-              <select class="form-control StripeElement" name="select_amount" id="select_amount" required>
-                <option value="10">$10 -- Good</option>
-                <option value="25">$25 -- Great</option>
-                <option value="45">$45 -- Amazing</option>
-                <option value="custom">Custom amount</option>
-              </select>
-              <small id="emailHelp" class="form-text text-muted text-white">{{ message_select }}</small>
-             </div>
-            </div>
-             <div  class="col-md-6"> 
-                <div class="form-group">
-                <label for="custom_amount">
-                  Custom amount
-                </label>
-                  <input type="number" class="form-control StripeElement" id="custom_amount" name="custom_amount" min="0" step="1" placeholder="0">
-              <small id="emailHelp" class="form-text text-muted text-white">{{ message_custom }}</small>
-               </div>
-             </div>
-              </div>
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input type="email" 
+                matInput
+                placeholder="Ex. example@domain.ext" 
+                ngModel 
+                name="email"
+                email
+                required
+                #emailInput="ngModel" 
+                >
+                <mat-error 
+                  *ngIf="!emailInput.hasError('required')">Email is invalid.
+                </mat-error>
 
-              <div class="form-row">
-                <div class="form-group card-input">
-                <label for="card-element">
+                <mat-error 
+                  *ngIf="emailInput.hasError('required')">Field must not be empty.
+                </mat-error>
+
+        </mat-form-field>
+        </div>
+
+      <div class="amount">
+
+        <mat-form-field>
+            <mat-label>Choose an amount to give</mat-label>
+            <mat-select ngModel matInput name="amountSelected">
+                <mat-option 
+                  *ngFor="let amountOption of amountOptions" 
+                  [value]="amountOption.value">{{amountOption.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>
+            Custom amount
+        </mat-label>
+        <input 
+          matInput
+          type="number" 
+          id="custom_amount" 
+          name="customAmount" 
+          min="0" 
+          step="1" 
+          ngModel
+          placeholder="0"
+          >
+        </mat-form-field>
+      </div>
+          <label for="card-element">
                   Credit or debit card
-                </label>
-                  <div id="card-element"classs="StripeElement StripeElement--focus">
+          </label>
+          <div id="card-element"classs="StripeElement StripeElement--focus">
                   <!-- A Stripe Element will be inserted here. -->
-                  </div>
-               </div>
-                <!-- Used to display form errors. -->
-                <div id="card-errors" role="alert"></div>
+          </div>
+          <!-- Used to display form errors. -->
+          <div id="card-errors" role="alert"></div>
 
-              </div>
-              <button type="submit" class="btn btn-primary btn-charge">Submit Donation</button>
-            </form>
+          <button type="submit" mat-raised-button class="btn-charge">Submit Donation</button>
+      </form>
+      <div class="engaging-message">
+        <h1>Summer giving</h1>
+      </div>
+
 </section>

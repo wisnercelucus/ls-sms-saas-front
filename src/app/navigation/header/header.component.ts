@@ -29,8 +29,13 @@ export class HeaderComponent implements OnInit {
   }
 
   scrollTo(id:string){
-    document.getElementById(id)
-    .scrollIntoView({behavior: 'smooth'})
+    if(document.getElementById(id)){
+      document.getElementById(id)
+      .scrollIntoView({behavior: 'smooth'});
+    }else{
+      return;
+    }
+
   }
 
   navigateTo(id:string, route:string){
@@ -58,6 +63,29 @@ export class HeaderComponent implements OnInit {
   }
   toContact(){
     this.navigateTo("contact", "/") 
+  }
+
+  onLoadStripe(){
+    if(document.readyState === "complete") {
+        console.log("Ready");
+       
+    }
+    else if(document.readyState === "interactive") {
+        // DOM ready! Images, frames, and other subresources are still downloading.
+        console.log("Interceptive")
+    }
+    else {
+        // Loading still in progress.
+        // To wait for it to complete, add "DOMContentLoaded" or "load" listeners.
+    
+        window.addEventListener("DOMContentLoaded", () => {
+          console.log("DOM Content Loaded")
+        });
+    
+        window.addEventListener("load", () => {
+          console.log("Fully loaded")
+        });
+    }
   }
 
 }

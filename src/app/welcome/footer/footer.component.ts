@@ -29,32 +29,31 @@ export class FooterComponent implements OnInit {
   }
   
   
-  scroolTo(id:string){
-    document.getElementById(id)
-    .scrollIntoView({behavior: 'smooth'})
+  scrollTo(id:string){
+    if(document.getElementById(id)){
+      document.getElementById(id)
+      .scrollIntoView({behavior: 'smooth'});
+    }else{
+      return;
+    }
+
   }
 
   navigateTo(id:string, route:string){
     if (location.pathname == route){
-      this.scroolTo(id)
+      this.scrollTo(id)
     }else{
       this.router.navigate([route])
       .then(
         () =>{
              this.timer = setTimeout( () =>{
-             this.scroolTo(id);
-             console.log("called");
+             this.scrollTo(id);
              clearTimeout(this.timer)
-          }, 700);
-
-          
+          }, 700); 
         }
       )
     } 
   }
-
-
-
 
   toAbout(){
     this.navigateTo("about", "/")
