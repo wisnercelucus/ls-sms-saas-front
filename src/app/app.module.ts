@@ -28,6 +28,7 @@ import { FaqComponent } from './welcome/faq/faq.component';
 import { ParticlesModule } from 'ngx-particle';
 import { ParticlesComponent } from './welcome/particles/particles.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MinBannerComponent } from './welcome/min-banner/min-banner.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FooterComponent,
     FaqComponent,
     ParticlesComponent,
+    MinBannerComponent,
   ],
   imports: [
     BrowserModule,
