@@ -1,26 +1,25 @@
 .banner{
     color: #fff;
-	background-color: #4e8098;
-	height:30rem; 
-	background-size: cover;
-	background-repeat: no-repeat; 
-	width:auto;
-	background-position: 20% 30%;
+	background-color: #021e38;
+	height:25rem;
 	z-index: 2;
 }
 
 .wrap-banner{
-	position: absolute;
 	z-index: 4;
-	left: 25%;
-	right: 25%;
-	top: 25%;
+	margin: 0 auto;
+	padding-top: 100px;
 	text-align: center;
-	text-align: center;
+	width: 90%;
 }
-.wrap-particles{
-	max-height: 20px;
+
+.donate-message{
+	font-style: italic;
+	font-size: 16px !important;
+	font-weight: 100 !important;
+	color: rgb(30, 255, 225);
 }
+
 @media screen and (max-width: 800px) {
 	
 	.banner{
@@ -46,7 +45,6 @@
 
   @media screen and (max-width: 490px) {
 	.banner-text{
-		margin-top: -70px;
 		width: min(360px, 100%);
 	}
 	.banner h1{
@@ -61,6 +59,7 @@
 	.banner-text p{
 		line-height: 1;
 		font-weight: 300;
+		font-size: 16px !important;
 	}
 	.demo-btn{
 		margin-top: 10px;

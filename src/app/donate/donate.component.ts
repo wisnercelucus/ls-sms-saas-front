@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit, ChangeDetectorRef, ElementRef, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { DonateService } from './donate.service';
 
 @Component({
   selector: 'app-donate',
@@ -14,11 +15,11 @@ export class DonateComponent implements OnInit, OnDestroy, AfterViewInit {
         cardHandler = this.onChange.bind(this);
         cardError: string;
         amountOptions = []
-    constructor(
-            private cd: ChangeDetectorRef,
-        ) {
+    constructor( private cd: ChangeDetectorRef, 
+                 private donateService: DonateService ) {
             
         }
+
   ngOnInit(): void {
 
     this._totalAmount = 45;
@@ -82,8 +83,7 @@ export class DonateComponent implements OnInit, OnDestroy, AfterViewInit {
         }
 
     onSuccess(token, form: NgForm) {
-      console.log(token)
-      console.log(form.value)
+      this.donateService.chargeCarte();
     }
 
     onError(error) {

@@ -2,36 +2,22 @@
     display: flex;
     padding: 70px;
     flex-wrap: wrap;
-    justify-content: center;
     background-color: #15314b;
+    align-items: center;
    
 }
 
-@media screen and (max-width: 1000px){
-  .donate{
-    flex-direction: column-reverse;
-}
- 
-  .engaging-message{
-    margin-top: 25px;
-
-  }
-
-  .lead-message{
-    margin-top: 40px;
-  }
-
-
-}
 
 .left{
-  margin-right: 10px;
-  margin-left: 10px;
+  margin-right: 15px;
+  margin-left: 15px;
+  flex: 1;
 }
 
 .right{
   margin-left: 15px;
   margin-right: 15px;
+  flex: 1;
 }
 
 .charge-form{
@@ -56,8 +42,6 @@
   margin-bottom: 40px;
 }
 
-
-
 .personal-information, .amount{
   display: flex;
   flex-direction: row;
@@ -79,16 +63,6 @@
 	width: 100%;
 }
 
-/*
-mat-label{
-
-}
-
-
-input{
-
-}
-*/
 .card-actions{
   margin: 6px;
   margin-top: 50px;
@@ -112,10 +86,73 @@ input{
   margin: 6px;
 }
 
+.sad-dog-image{
+  width: 100%;
+}
+
+@media screen and (max-width: 1000px){
+  .donate{
+    flex-direction: column-reverse;
+    padding: 10px !important;
+    align-items: center;
+  }
+ 
+  .engaging-message{
+    margin-top: 25px;
+
+  }
+
+  .lead-message{
+    margin-top: 40px;
+    font-size: 20px;
+  }
+  
+  .left{
+    margin: 20px auto;
+    max-width: 100% !important;
+    flex: 1;
+  }
+  
+  .right{
+    margin: 20px auto;
+    max-width: 100% !important;
+    flex: 1;
+  }
+
+}
+
+@media screen and (max-width: 480px){
+  .donate{
+    flex-direction: column-reverse;
+    padding: 10px;
+}
+ 
+  .engaging-message{
+    margin-top: 25px;
+
+  }
+
+  .lead-message{
+    margin-top: 40px;
+    font-size: 16px;
+  }
+  
+  .left{
+    margin: 20px auto;
+    max-width: 100% !important;
+  }
+  
+  .right{
+    margin: 20px auto;
+    max-width: 100% !important;
+  }
+
+}
+
 
  /*Stripe CSS */
 
-.StripeElement {
+ .StripeElement {
   box-sizing: border-box;
 
   height: 40px;
@@ -137,8 +174,4 @@ input{
 
 .StripeElement--invalid {
   border-color: #fa755a;
-}
-
-.sad-dog-image{
-  width: 100%;
 }
