@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CountriesService } from './countries.service';
+import { AuthService, Client } from '../auth.service';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   @ViewChild('f') shListForm: NgForm;
 
 
-  constructor(private countriesService: CountriesService) { }
+  constructor(private countriesService: CountriesService, 
+              private authService: AuthService) { }
 
   ngOnInit(): void {
     this.maxDate = new Date()
@@ -38,12 +40,25 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(form: NgForm){
-    console.log(form.value)
+    const client = new Client(
+      form.value['schoolName'],
+      form.value['schoolAcronym'],
+      form.value['email'],
+      form.value['firstName'],
+      form.value['lastName'],
+      form.value['phone'],
+      form.value['countryName'],
+      form.value['schoolSize']
+    );
+    
+    this.authService.registerClient(client);
 
   }
+
   onClear(){
     
   }
+
   ngOnDestroy(){
     this.subscription.unsubscribe()
   }
