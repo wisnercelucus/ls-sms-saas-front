@@ -54,7 +54,12 @@
 
         <mat-form-field>
             <mat-label>Choose an amount to give</mat-label>
-            <mat-select ngModel matInput name="amountSelected">
+            <mat-select 
+              ngModel 
+              matInput 
+              name="amountSelected"
+              (selectionChange)="onSelectionChanged($event)"
+              >
                 <mat-option 
                   *ngFor="let amountOption of amountOptions" 
                   [value]="amountOption.value">{{amountOption.name}}
@@ -75,6 +80,7 @@
           step="1" 
           ngModel
           placeholder="0"
+          [disabled] = "custumAmountIsSelected"
           >
         </mat-form-field>
       </div>
@@ -87,7 +93,7 @@
           <div id="card-errors" role="alert"></div>
       </div>
           <div class="card-actions">
-            <button type="submit" mat-raised-button class="btn-charge">Submit Donation</button>
+            <button type="submit" [disabled] ="!f.valid" mat-raised-button class="btn-charge">Submit Donation</button>
             <mat-error id="card-errors" role="alert" *ngIf="cardError">
                 <mat-icon style="color: #f44336">cancel</mat-icon>
                     &nbsp;{{ cardError }}

@@ -8,21 +8,28 @@ import { DonateService } from './donate.service';
   styleUrls: ['./donate.component.css']
 })
 export class DonateComponent implements OnInit, OnDestroy, AfterViewInit {
-  @ViewChild('cardInfo') cardInfo: ElementRef;
-  @ViewChild('f') donateForm: ElementRef;
-    _totalAmount: number;
-        card: any;
-        cardHandler = this.onChange.bind(this);
-        cardError: string;
-        amountOptions = []
-    constructor( private cd: ChangeDetectorRef, 
-                 private donateService: DonateService ) {
-            
+   @ViewChild('cardInfo') cardInfo: ElementRef;
+   @ViewChild('f') donateForm: ElementRef;
+    card: any;
+    cardHandler = this.onChange.bind(this);
+    cardError: string;
+    amountOptions = []
+    constructor( private cd: ChangeDetectorRef, private donateService: DonateService ) {}
+
+    donationObject = []
+    
+    custumAmountIsSelected = true;
+
+    onSelectionChanged({value}) {
+        if(value === 'custom') {
+            this.custumAmountIsSelected = false;
+        } else {
+            this.custumAmountIsSelected = true;
         }
+      }
+
 
   ngOnInit(): void {
-
-    this._totalAmount = 45;
     this.amountOptions =[
       {'value': '10', 'name': '$10 -- Good'},
       {'value': '25', 'name': '$25 -- Great'},
@@ -83,7 +90,12 @@ export class DonateComponent implements OnInit, OnDestroy, AfterViewInit {
         }
 
     onSuccess(token, form: NgForm) {
-      this.donateService.chargeCarte();
+        this.donationObject = [
+            {'stripeToken': token},
+            {'donor': form.value}
+        ]
+        this.donateService.chargeCarte(this.donationObject);
+        form.reset()
     }
 
     onError(error) {

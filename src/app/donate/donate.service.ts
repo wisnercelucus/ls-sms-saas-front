@@ -11,18 +11,15 @@ export class DonateService {
   });
   
   
-  donationsObject = [ 
-                      {'donor': {'full_name': 'Wisner', 'email':'wisnercelicus@gmail.com'}},
-                      {'card': 'card object'}
-                    ]
-
-  
-
   constructor(private http: HttpClient) { }
   
-  chargeCarte(){
-   const body = JSON.stringify(this.donationsObject);
-   this.http.post(this.baseUrl, body, {headers: this.headers}).subscribe();
+  chargeCarte(donationObject:any){
+   const body = JSON.stringify(donationObject);
+   this.http.post(this.baseUrl, body, {headers: this.headers}).subscribe(
+     resp =>{
+       console.log(resp);
+     }
+   );
   }
 
 }
