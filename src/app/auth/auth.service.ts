@@ -40,7 +40,11 @@ export class Client{
 })
 export class AuthService {
   subscrition: Subscription;
+  tenant = 'unap';
+
   baseUrl = 'http://demo.local:8000/prospect/api/register/';
+  tenantUrl = 'http://' + this.tenant + '.demo.local:8000/';
+
   headers = new HttpHeaders({
     'Content-Type': 'application/json'
   });
@@ -51,12 +55,17 @@ export class AuthService {
 
   registerClient(client: Client){
     const body = JSON.stringify(client);
-    this.http.post(this.baseUrl, body, {headers: this.headers}).subscribe(
-      resp =>{
-        console.log(resp);
-      }
-    );
+    return this.http.post(this.baseUrl, body, {headers: this.headers})
+  }
 
+  login(username:string, password:string){
+    const body = JSON.stringify(
+                {
+                  'username':username, 
+                  'password': password
+                });
+
+    return this.http.post(this.tenantUrl+ 'accounts/api/token/', body, {headers: this.headers});
   }
 
 

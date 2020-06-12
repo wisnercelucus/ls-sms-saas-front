@@ -1,6 +1,8 @@
 import { Component, OnInit, AfterViewInit, ChangeDetectorRef, ElementRef, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DonateService } from './donate.service';
+import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-donate',
@@ -14,11 +16,17 @@ export class DonateComponent implements OnInit, OnDestroy, AfterViewInit {
     cardHandler = this.onChange.bind(this);
     cardError: string;
     amountOptions = []
-    constructor( private cd: ChangeDetectorRef, private donateService: DonateService ) {}
+    subscription: Subscription;
+    constructor( private cd: ChangeDetectorRef, 
+                    private donateService: DonateService,
+                    private snackBar: MatSnackBar ) {}
 
     donationObject = []
     
     custumAmountIsSelected = true;
+    isLoading = false;
+    successMessage = '';
+    errorMessage = '';
 
     onSelectionChanged({value}) {
         if(value === 'custom') {
@@ -41,8 +49,13 @@ export class DonateComponent implements OnInit, OnDestroy, AfterViewInit {
             if (this.card) {
                 // We remove event listener here to keep memory clean
                 this.card.removeEventListener('change', this.cardHandler);
-                this.card.destroy();
+                this.card.destroy();  
             }
+            if(this.subscription){
+                this.subscription.unsubscribe();
+            }
+
+            
         }
     ngAfterViewInit() {
             this.initiateCardElement();
@@ -81,6 +94,7 @@ export class DonateComponent implements OnInit, OnDestroy, AfterViewInit {
         }
 
     async createStripeToken(form: NgForm) {
+            this.isLoading = true;
             const {token, error} = await stripe.createToken(this.card);
             if (token) {
                 this.onSuccess(token, form);
@@ -90,12 +104,35 @@ export class DonateComponent implements OnInit, OnDestroy, AfterViewInit {
         }
 
     onSuccess(token, form: NgForm) {
+
+        if(!form.valid){
+            return;
+        }
+
         this.donationObject = [
             {'stripeToken': token},
             {'donor': form.value}
         ]
-        this.donateService.chargeCarte(this.donationObject);
-        form.reset()
+        this.isLoading = true;
+        this.subscription = this.donateService.chargeCarte(this.donationObject).subscribe(
+            resp =>{
+              this.errorMessage = ''
+              this.successMessage = resp['message'];
+              this.isLoading = false;
+              this.snackBar.open(this.successMessage, 'Close', {
+                duration: 5000
+                });
+
+              form.resetForm();
+              this.card.destroy()
+              this.initiateCardElement()
+            },
+            err => {
+              this.successMessage = ''
+              this.errorMessage = err.error.message;
+              this.isLoading = false;
+            }
+          );
     }
 
     onError(error) {

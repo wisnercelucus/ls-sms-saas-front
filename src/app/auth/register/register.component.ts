@@ -51,7 +51,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
       form.value['schoolSize']
     );
     
-    this.authService.registerClient(client);
+    this.authService.registerClient(client).subscribe(
+      resp =>{
+        console.log(resp);
+      },
+      errorRes =>{
+        console.log(errorRes)
+      }
+    );
 
   }
 

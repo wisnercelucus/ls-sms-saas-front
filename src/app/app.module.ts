@@ -29,6 +29,7 @@ import { ParticlesModule } from 'ngx-particle';
 import { ParticlesComponent } from './welcome/particles/particles.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MinBannerComponent } from './welcome/min-banner/min-banner.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { MinBannerComponent } from './welcome/min-banner/min-banner.component';
     FaqComponent,
     ParticlesComponent,
     MinBannerComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,

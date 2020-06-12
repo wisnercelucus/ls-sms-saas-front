@@ -21,6 +21,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 const Materials = [
@@ -45,7 +46,8 @@ const Materials = [
   MatDialogModule,
   MatExpansionModule,
   MatBadgeModule,
-  MatDividerModule
+  MatDividerModule,
+  MatSnackBarModule
 ]
 
 

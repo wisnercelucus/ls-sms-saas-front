@@ -1,4 +1,5 @@
 <app-min-banner></app-min-banner>
+
 <section class="donate"> 
     <div class="engaging-message left">
       <div class="wrap-message">
@@ -13,6 +14,15 @@
       #f="ngForm"
       (ngSubmit)="createStripeToken(f)"
       >
+
+    <mat-toolbar *ngIf="errorMessage" class="alert-error">
+      <span>{{ errorMessage }}</span>
+    </mat-toolbar>
+
+    <mat-toolbar *ngIf="successMessage" class="alert-success">
+      <span>{{ successMessage }}</span>
+    </mat-toolbar>
+      
       <h1>One time donation.</h1>
       <div class="personal-information">
         <mat-form-field>
@@ -93,7 +103,9 @@
           <div id="card-errors" role="alert"></div>
       </div>
           <div class="card-actions">
-            <button type="submit" [disabled] ="!f.valid" mat-raised-button class="btn-charge">Submit Donation</button>
+            <button type="submit" [disabled] ="!f.valid" mat-raised-button class="btn-charge">
+            <span *ngIf="isLoading" class="loading-spinner"><app-loading-spinner></app-loading-spinner></span>
+            <span>Submit Donation</span></button>
             <mat-error id="card-errors" role="alert" *ngIf="cardError">
                 <mat-icon style="color: #f44336">cancel</mat-icon>
                     &nbsp;{{ cardError }}

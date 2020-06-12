@@ -76,6 +76,15 @@
   color: white;
   text-transform: uppercase;
   font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+}
+
+.btn-charge span{
+  display: inline-block;
+  height: 100% !important;
 }
 
 .text-white{
@@ -174,4 +183,13 @@
 
 .StripeElement--invalid {
   border-color: #fa755a;
+}
+
+.alert-error{
+  background-color: firebrick;
+  border-radius: 8px;
+}
+.alert-success{
+  background-color: rgb(131, 255, 131);
+  border-radius: 8px;
 }
