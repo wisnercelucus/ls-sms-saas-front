@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { FeedComponent } from './feed/feed.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ContactComponent } from './welcome/contact/contact.component';
 import { AboutComponent } from './welcome/about/about.component';
@@ -30,6 +29,9 @@ import { ParticlesComponent } from './welcome/particles/particles.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MinBannerComponent } from './welcome/min-banner/min-banner.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { AdminComponent } from './schools/admin/admin.component';
+import { UsersComponent } from './schools/users/users.component';
+import { ProfileComponent } from './schools/users/profile/profile.component';
 
 
 @NgModule({
@@ -37,7 +39,6 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    FeedComponent,
     WelcomeComponent,
     ContactComponent,
     AboutComponent,
@@ -55,6 +56,9 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     ParticlesComponent,
     MinBannerComponent,
     LoadingSpinnerComponent,
+    AdminComponent,
+    UsersComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

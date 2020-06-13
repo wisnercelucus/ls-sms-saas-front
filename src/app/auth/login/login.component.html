@@ -1,18 +1,70 @@
 <section class="login">
+
+    <form *ngIf="!hasInstanceUrl" 
+      [formGroup]="LoginFormGroup"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      fxLayoutGap="10px"
+      (ngSubmit)="onSubmitStepperForm()">
+      >
+    <mat-vertical-stepper #stepper>
+      <mat-step [stepControl]="LoginFormGroup">
+          <ng-template matStepLabel>Fill out your school instance name</ng-template>
+          <mat-form-field>
+            <mat-label>Instance Name</mat-label>
+            <input matInput placeholder="Ex. unifa" formControlName="instanceName" required>
+          </mat-form-field>
+          <div>
+            <button type="button" mat-button matStepperNext>Next</button>
+          </div>
+      </mat-step>
+
+    <mat-step [stepControl]="LoginFormGroup">
+        <ng-template matStepLabel>Fill out your login credentials</ng-template>
+      <div class="credentialsGroup" fxLayout="column">
+        <mat-form-field>
+          <mat-label>Username</mat-label>
+          <input matInput type="text" formControlName="userName" placeholder="username"
+                required>
+                <mat-hint>Please enter your username.</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input 
+            matInput 
+            formControlName="userPassword" 
+            placeholder="password"
+            type="password"
+                required>
+      <mat-hint>Please enter your password.</mat-hint>
+      <mat-error>Missing password.</mat-error>
+        </mat-form-field>
+      </div>
+        <div>
+          <button type="button" mat-button matStepperPrevious>Back</button>
+          <button type="submit" mat-button matStepperNext>Submit</button>
+        </div>
+
+    </mat-step>
+  </mat-vertical-stepper>
+  </form>
+
   <form
+    *ngIf="hasInstanceUrl"
     fxLayout="column"
     fxLayoutAlign="center center"
     fxLayoutGap="10px"
     [formGroup]="loginForm"
-    (ngSubmit)="onSubmit()">
+    (ngSubmit)="onSubmit()"
+    >
     <mat-form-field>
       <input
         type="text"
         matInput
         placeholder="Username"
         formControlName="username">
-      <mat-hint>Please enter a valid email.</mat-hint>
-      <mat-error>Invalid or missing email.</mat-error>
+      <mat-hint>Please enter your username.</mat-hint>
     </mat-form-field>
     <mat-form-field>
       <input

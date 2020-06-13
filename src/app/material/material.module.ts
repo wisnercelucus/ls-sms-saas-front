@@ -22,6 +22,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatStepperModule} from '@angular/material/stepper';
 
 
 const Materials = [
@@ -47,7 +48,8 @@ const Materials = [
   MatExpansionModule,
   MatBadgeModule,
   MatDividerModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatStepperModule
 ]
 
 

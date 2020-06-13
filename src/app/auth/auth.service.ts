@@ -1,49 +1,19 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-
-export class Client{
-  name: string;
-  short: string;
-  contact_email: string;
-  contact_fisrt_name: string;
-  contact_last_name: string;
-  contact_phone: string;
-  country: string;
-  school_size:string;
-  paid_until?:Date;
-  on_trial?: boolean;
-  created_on?: Date;
-
-  constructor(fullName:string, short:string, contactEmail:string, 
-              contactFirstName:string, contactLastName:string,
-              contactPhone:string, country:string, schoolSize:string, 
-              paidUntil?:Date, onTrial?:boolean, createdOn?:Date
-              ){
-    this.name = fullName;
-    this.short = short;
-    this.contact_email = contactEmail;
-    this.contact_fisrt_name = contactFirstName;
-    this.contact_last_name = contactLastName;
-    this.contact_phone = contactPhone;
-    this.country = country;
-    this.school_size = schoolSize;
-    this.paid_until = paidUntil;
-    this.on_trial = onTrial;
-
-  }
-}
-
+import {HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Subscription, Subject, throwError } from 'rxjs';
+import { Client } from './register/client.model';
+import { User } from '../schools/users/user.model';
+import {catchError, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   subscrition: Subscription;
-  tenant = 'unap';
+  user = new Subject<User>();
+
 
   baseUrl = 'http://demo.local:8000/prospect/api/register/';
-  tenantUrl = 'http://' + this.tenant + '.demo.local:8000/';
 
   headers = new HttpHeaders({
     'Content-Type': 'application/json'
@@ -51,21 +21,54 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-
-
   registerClient(client: Client){
     const body = JSON.stringify(client);
     return this.http.post(this.baseUrl, body, {headers: this.headers})
   }
 
-  login(username:string, password:string){
-    const body = JSON.stringify(
-                {
-                  'username':username, 
-                  'password': password
-                });
+  handleAutentication(username:string, email:string, password: string, token:string){
+    const user = new User(
+      email,
+      password,
+      token
+    );
 
-    return this.http.post(this.tenantUrl+ 'accounts/api/token/', body, {headers: this.headers});
+    this.user.next(user);
+  }
+
+
+  login(instanceName: string, username:string, password:string){
+    if(instanceName){
+     const tenant = instanceName;
+     const tenantUrl = 'http://' + tenant + '.demo.local:8000/';
+      const body = JSON.stringify(
+        {
+          'username':username, 
+          'password': password
+        });
+        return this.http.post(tenantUrl + 'accounts/api/token/', body, {headers: this.headers})
+        .pipe(
+          catchError( errorRes => this.handleError(errorRes)),
+          tap(resData =>{
+            this.handleAutentication(resData['username'], resData['email'], resData['password'], resData['token'])
+          })
+        )
+
+    }else{
+      return;
+    }
+  }
+
+  handleError(errorRes:HttpErrorResponse){
+    let errorMessage = "An error occured";
+    console.log(errorRes)
+    if(!errorRes.error || !errorRes.error.error.message){
+      return throwError(errorMessage);
+    }
+
+    errorMessage = errorRes.error.error.message;
+    return throwError(errorMessage);
+    
   }
 
 

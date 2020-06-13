@@ -1,6 +1,18 @@
 .login{
-    padding: 50px;
+    padding: 70px;
+    
 }
 mat-form-field{
     width: 400px;
 }
+
+
+/* STEPPER */
+
+.mat-stepper-vertical {
+    margin-top: 8px;
+  }
+  
+  .mat-form-field {
+    margin-top: 16px;
+  }

@@ -9,13 +9,19 @@
     <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
         <ul fxLayout fxLayoutGap="10px" class="nav-items">
 
+        
             <li class="nav-item">
-                <a (click) = "toPricing()">Pricing</a>
+                <a routerLink="/auth/login">Login</a>
             </li>
 
             <li class="nav-item">
                 <a routerLink="/auth/register">Register</a>
             </li>
+
+            <li class="nav-item">
+                <a (click) = "toPricing()">Pricing</a>
+            </li>
+
             <li class="nav-item">
                 <a (click) = "toAbout()">About Us</a>
             </li>
@@ -23,6 +29,7 @@
             <li class="nav-item">
                 <a (click) = "toContact()">Contact</a>
             </li>
+
             <li class="nav-item">
                 <a routerLink="/donors">Donors</a>
             </li>
@@ -32,7 +39,14 @@
                         Donate
                     </button>
                 </a>
-           <li class="nav-item">
+           </li>
+
+            <li class="nav-item" [matMenuTriggerFor]="menu">UserName</li>
+            <mat-menu #menu="matMenu">
+            <button mat-menu-item>Item 1</button>
+            <button mat-menu-item>Item 2</button>
+            </mat-menu>
+
         </ul>
     </div>
     <a routerLink="/donate" fxHide.gt-xs>
