@@ -1,22 +1,27 @@
-import { Component, OnInit, EventEmitter, Output} from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, EventEmitter, Output, OnDestroy} from '@angular/core';
+import { Subscription} from 'rxjs';
 import { Router} from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   @Output() sideNavToggle = new EventEmitter<void>();
-  isAuth=false;
+  isAuthenticated=false;
   subscription: Subscription;
-  constructor(private router: Router) { }
-  
-  timer: any;
-  ngOnInit(): void {
+  userSubs: Subscription;
 
-    
+
+  constructor(private router: Router, private authService: AuthService) { }
+  timer: any;
+
+  ngOnInit(): void {
+    this.userSubs = this.authService.user.subscribe(user=>{
+      this.isAuthenticated = !!user;
+    });
   }
 
   onToggleSiveNav(){
@@ -27,6 +32,12 @@ export class HeaderComponent implements OnInit {
   onLogout(){
 
   }
+  
+  ngOnDestroy(){
+    if (this.userSubs){
+      this.userSubs.unsubscribe();
+    }
+  }
 
   scrollTo(id:string){
     if(document.getElementById(id)){
@@ -35,7 +46,6 @@ export class HeaderComponent implements OnInit {
     }else{
       return;
     }
-
   }
 
   navigateTo(id:string, route:string){
@@ -63,29 +73,6 @@ export class HeaderComponent implements OnInit {
   }
   toContact(){
     this.navigateTo("contact", "/") 
-  }
-
-  onLoadStripe(){
-    if(document.readyState === "complete") {
-        console.log("Ready");
-       
-    }
-    else if(document.readyState === "interactive") {
-        // DOM ready! Images, frames, and other subresources are still downloading.
-        console.log("Interceptive")
-    }
-    else {
-        // Loading still in progress.
-        // To wait for it to complete, add "DOMContentLoaded" or "load" listeners.
-    
-        window.addEventListener("DOMContentLoaded", () => {
-          console.log("DOM Content Loaded")
-        });
-    
-        window.addEventListener("load", () => {
-          console.log("Fully loaded")
-        });
-    }
   }
 
 }

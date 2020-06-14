@@ -5,12 +5,14 @@ import { Client } from './register/client.model';
 import { User } from '../schools/users/user.model';
 import {catchError, tap} from 'rxjs/operators';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   subscrition: Subscription;
   user = new Subject<User>();
+  instance = new Subject<string>();
 
 
   baseUrl = 'http://demo.local:8000/prospect/api/register/';
@@ -36,6 +38,10 @@ export class AuthService {
     this.user.next(user);
   }
 
+  getSchema(instanceName:string){
+      const instance = instanceName;
+      this.instance.next(instance);
+  }
 
   login(instanceName: string, username:string, password:string){
     if(instanceName){
@@ -50,6 +56,7 @@ export class AuthService {
         .pipe(
           catchError( errorRes => this.handleError(errorRes)),
           tap(resData =>{
+            this.getSchema(tenant);
             this.handleAutentication(resData['username'], resData['email'], resData['password'], resData['token'])
           })
         )

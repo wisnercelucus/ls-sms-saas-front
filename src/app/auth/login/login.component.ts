@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.subsciption = this.authService.login(this.instanceName,this.loginForm.value.username, this.loginForm.value.password).subscribe(
       resp => {
+        console.log(resp)
         this.router.navigate(['/school/feed']);
       },
       err => {

@@ -1,0 +1,11 @@
+.feed{
+    padding-top: 70px;
+    display: flex;
+    margin-left: 20px;
+    margin-right: 10px;
+
+}
+
+.feed > div{
+    flex:1;
+}

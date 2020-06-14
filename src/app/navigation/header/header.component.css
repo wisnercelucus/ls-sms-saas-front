@@ -13,12 +13,13 @@ mat-sidenav{
 
 .nav-items{
     list-style: none;
-    padding: 0;
+    padding-right: 10px;
     margin: 0;
 }
 
 .nav-item{
     margin-left: 15px;
+    color: white;
 }
 .nav-item:hover{
     margin-left: 15px;
