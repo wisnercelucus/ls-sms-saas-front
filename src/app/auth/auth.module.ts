@@ -8,16 +8,14 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
-import { MinBannerComponent } from '../welcome/min-banner/min-banner.component';
 
 @NgModule({
     declarations:[
         AuthComponent,
         RegisterComponent,
-        LoginComponent,
-        MinBannerComponent
-        
+        LoginComponent        
     ],
+    
     imports:[
         SharedModule, 
         RouterModule, 
@@ -31,7 +29,6 @@ import { MinBannerComponent } from '../welcome/min-banner/min-banner.component';
         AuthComponent,
         RegisterComponent,
         LoginComponent,
-        MinBannerComponent,
         RouterModule, 
         FormsModule, 
         ReactiveFormsModule, 

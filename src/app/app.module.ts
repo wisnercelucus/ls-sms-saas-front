@@ -28,7 +28,8 @@ import { ProcessDonationComponent } from './donate/process-donation/process-dona
 import { SchoolsModule } from './schools/schools/schools.module';
 import { UsersModule } from './schools/users/users/users.module';
 import { AuthModule } from './auth/auth.module';
-
+import { SharedModule } from './shared/shared.module';
+import { AuthRoutingModule } from './auth/auth-routing.module';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,8 @@ import { AuthModule } from './auth/auth.module';
     FontAwesomeModule,
     SchoolsModule,
     UsersModule,
+    SharedModule,
+    AuthRoutingModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi:true}],
   bootstrap: [AppComponent]

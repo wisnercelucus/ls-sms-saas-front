@@ -4,27 +4,16 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { SchoolsComponent } from './schools/schools.component';
 import { DonorsComponent } from './donors/donors.component';
 import { DonateComponent } from './donate/donate.component';
-import { AuthComponent } from './auth/auth.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {path:'', component:WelcomeComponent},
   {path:'school', redirectTo: '/school/feed', pathMatch: 'full'},
   {path:'donors', component:DonorsComponent},
   {path:'donate', component:DonateComponent},
-
-  {path:'auth', component:AuthComponent, children:[
-    {path:'login', component: LoginComponent},
-    {path:'register', component: RegisterComponent},
-  ]},
-  
+  {path: 'auth', redirectTo:'/auth/login', pathMatch:'full'},  
   {path:':name', component:SchoolsComponent},
   
 ];
-
-
 
 @NgModule({
   imports: [
