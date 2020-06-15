@@ -21,6 +21,8 @@ export class FeedComponent implements OnInit, OnDestroy {
             console.log(instance);
           }
         })
+      }else{
+        return;
       }
     })
 
@@ -34,8 +36,6 @@ export class FeedComponent implements OnInit, OnDestroy {
     })
   }
   
-  
-
 
   ngOnDestroy(){
     if(this.instanceSub){

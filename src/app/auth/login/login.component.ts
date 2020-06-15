@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   instanceName = "";
   hasInstanceUrl = false;
   subsciption:Subscription;
+  errorMessage ="";
 
   constructor(private router:Router, private authService:AuthService, private _formBuilder: FormBuilder) {
     this.hasInstanceUrl = this.urlHasInstance();
@@ -54,11 +55,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.subsciption = this.authService.login(this.instanceName,this.loginForm.value.username, this.loginForm.value.password).subscribe(
       resp => {
-        console.log(resp)
-        this.router.navigate(['/school/feed']);
+        if(!this.authService.loginRedirectUrl){
+          this.router.navigate(['/school/accounts/profile']);
+        }
       },
       err => {
-        console.log(err);
+       this.errorMessage = err + ". Your email or password is invalid. If you see correct credentials contact your system administrator.";
       }
       
     )
@@ -76,7 +78,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             console.log(resp);
           },
           err => {
-            console.log(err);
+            this.errorMessage = err + ". Your school instance, email or password is invalid. If you see correct credentials contact your system administrator.";
           }
         )
       }
@@ -102,5 +104,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     if(this.subsciption){
       this.subsciption.unsubscribe()
     }
+  }
+
+  onHandleError(){
+    this.errorMessage = "";
+  }
+
+  onResetPassword(){
+    this.router.navigate(['school/accounts/password-reset']);
   }
 }

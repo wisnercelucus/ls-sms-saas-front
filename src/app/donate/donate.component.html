@@ -14,14 +14,17 @@
       #f="ngForm"
       (ngSubmit)="createStripeToken(f)"
       >
+      <!--
+      <mat-toolbar *ngIf="errorMessage" class="alert-error">
+        <span>{{ errorMessage }}</span>
+      </mat-toolbar>
 
-    <mat-toolbar *ngIf="errorMessage" class="alert-error">
-      <span>{{ errorMessage }}</span>
-    </mat-toolbar>
-
-    <mat-toolbar *ngIf="successMessage" class="alert-success">
-      <span>{{ successMessage }}</span>
-    </mat-toolbar>
+      <mat-toolbar *ngIf="successMessage" class="alert-success">
+        <span>{{ successMessage }}</span>
+      </mat-toolbar>
+    -->
+      <app-alert-dialog *ngIf="errorMessage" [message]="errorMessage" (close)="onHandleError()"></app-alert-dialog>
+      <app-alert-dialog *ngIf="successMessage" [message]="successMessage" (close)="onHandleSuccess()"></app-alert-dialog>
       
       <h1>One time donation.</h1>
       <div class="personal-information">

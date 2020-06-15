@@ -141,4 +141,14 @@ export class DonateComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     }
 
+    /*  Alert Dialog Controle   */
+
+    onHandleError(){
+        this.errorMessage ="";
+    }
+
+    onHandleSuccess(){
+        this.successMessage="";
+    }
+
 }

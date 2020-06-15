@@ -4,21 +4,17 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ContactComponent } from './welcome/contact/contact.component';
 import { AboutComponent } from './welcome/about/about.component';
-import { SchoolsComponent } from './schools/schools.component';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavComponent } from './navigation/sidenav/sidenav.component';
 import { MaterialModule } from './material/material.module';
 import { BannerComponent } from './welcome/banner/banner.component';
 import { DonorsComponent } from './donors/donors.component';
 import { DonateComponent } from './donate/donate.component';
-import { AuthComponent } from './auth/auth.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PricingComponent } from './welcome/pricing/pricing.component';
 import { TestimonialsComponent } from './welcome/testimonials/testimonials.component';
 import { FooterComponent } from './welcome/footer/footer.component';
@@ -27,53 +23,44 @@ import { FaqComponent } from './welcome/faq/faq.component';
 import { ParticlesModule } from 'ngx-particle';
 import { ParticlesComponent } from './welcome/particles/particles.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { MinBannerComponent } from './welcome/min-banner/min-banner.component';
-import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
-import { AdminComponent } from './schools/admin/admin.component';
-import { UsersComponent } from './schools/users/users.component';
-import { ProfileComponent } from './schools/users/profile/profile.component';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
+import { ProcessDonationComponent } from './donate/process-donation/process-donation.component';
+import { SchoolsModule } from './schools/schools/schools.module';
+import { UsersModule } from './schools/users/users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
     WelcomeComponent,
     ContactComponent,
     AboutComponent,
-    SchoolsComponent,
     HeaderComponent,
     SidenavComponent,
     BannerComponent,
     DonorsComponent,
     DonateComponent,
-    AuthComponent,
     PricingComponent,
     TestimonialsComponent,
     FooterComponent,
     FaqComponent,
     ParticlesComponent,
-    MinBannerComponent,
-    LoadingSpinnerComponent,
-    AdminComponent,
-    UsersComponent,
-    ProfileComponent,
+    ProcessDonationComponent,
   ],
   imports: [
+    AuthModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FormsModule,
     MaterialModule,
     HttpClientModule,
-    ReactiveFormsModule,
-   ParticlesModule,
-   FontAwesomeModule
-
-    
+    ParticlesModule,
+    FontAwesomeModule,
+    SchoolsModule,
+    UsersModule,
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
