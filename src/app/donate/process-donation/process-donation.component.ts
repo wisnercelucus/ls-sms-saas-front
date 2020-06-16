@@ -28,6 +28,8 @@ export class ProcessDonationComponent implements OnInit {
    isLoading = false;
    successMessage = '';
    errorMessage = '';
+   bannerText:{p:string, btn:string}
+   onDonatePage = true;
 
    onSelectionChanged({value}) {
        if(value === 'custom') {
@@ -45,6 +47,11 @@ export class ProcessDonationComponent implements OnInit {
      {'value': '45', 'name': '$45 -- Amazing'},
      {'value': 'custom', 'name': 'Custom amount'},
    ]
+
+   this.bannerText =
+   {'p': 'We need your help to make education affordable and accessible to everyone everywhere.',
+   'btn': 'Get involved'
+   }
  }
    ngOnDestroy() {
            if (this.card) {

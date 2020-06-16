@@ -5,12 +5,14 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { AuthenticatedGuard } from './authenticated.guard';
+import { PasswordResetConfirmComponent } from './password-reset-confirm/password-reset-confirm.component';
 
 const routes: Routes = [
     {path:'auth', component:AuthComponent, canActivate:[AuthenticatedGuard], children:[
         {path:'login', component: LoginComponent},
         {path:'register', component: RegisterComponent},
         {path:'password-reset', component:PasswordResetComponent},
+        {path:'password-reset/confirm/:token', component:PasswordResetConfirmComponent},
     ]},
 ]
 

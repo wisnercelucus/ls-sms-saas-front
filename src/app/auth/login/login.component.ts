@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   hasInstanceUrl = false;
   subsciption:Subscription;
   errorMessage ="";
+  bannerText:{p:string, btn:string}
 
   constructor(private router:Router, private authService:AuthService, private _formBuilder: FormBuilder) {
     this.hasInstanceUrl = this.urlHasInstance();
@@ -30,7 +31,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     }else{
       this.initiateLoginForm();
     }
-    
+
+    this.bannerText =
+    {'p': "Login to enjoy the great futures we've created for you.",
+    'btn': 'Get involved'
+   } 
     
   }
 

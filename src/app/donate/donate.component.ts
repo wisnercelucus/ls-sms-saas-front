@@ -10,8 +10,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./donate.component.css']
 })
 export class DonateComponent implements OnInit {
+
     constructor(){}
-    
+
     ngOnInit(){
 
     }

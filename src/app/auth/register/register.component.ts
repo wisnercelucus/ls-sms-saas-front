@@ -17,6 +17,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
   maxDate: Date;
   schoolSizes = []
   countries;
+
+  bannerText:{p:string, btn:string}
+
   @ViewChild('f') shListForm: NgForm;
 
 
@@ -37,7 +40,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
         this.countries = countriesApi;
       }
     );
-    
+
+    this.bannerText = 
+    {'p': "Start now! It's affordable, secure, and accessible everywhere at any time.",
+      'btn': 'Register'
+    }
+
   }
 
   onSubmit(form: NgForm){
