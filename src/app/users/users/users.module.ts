@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { UsersComponent } from '../users.component';
 import { ProfileComponent } from '../profile/profile.component';
-import { PasswordResetComponent } from '../password-reset/password-reset.component';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { PasswordChangeComponent } from '../password-change/password-change.component';
 
 @NgModule({
   declarations: [
     UsersComponent,
     ProfileComponent,
-    PasswordResetComponent,
-    PasswordResetComponent
+    PasswordChangeComponent
   ],
 
   imports: [
-    CommonModule,
-    RouterModule
-  ]
+    RouterModule,
+    SharedModule
+  ],
+  exports:[]
 })
 export class UsersModule { }

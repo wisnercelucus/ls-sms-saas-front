@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class MinBannerComponent implements OnInit {
   bannerText = {'p': '', 'btn': ''};
   onDonatePage = false;
+  onResetPassword = false;
   constructor() {
     this.updateBannerText(this.whereAmI());
    }
@@ -18,7 +19,7 @@ export class MinBannerComponent implements OnInit {
 
   updateBannerText(route:string): void{
     switch(route){
-      case '/donate':{
+      case '/donate/process':{
         this.bannerText =
           {'p': 'We need your help to make education affordable and accessible to everyone everywhere.',
           'btn': 'Get involved'
@@ -35,13 +36,22 @@ export class MinBannerComponent implements OnInit {
         break;
       }
 
-      case '/donors': {
+      case '/donate/donors': {
         this.bannerText =
            {'p': "Your generous donations help us make education what it was meant to be: accessible everywhere.",
            'btn': 'Get involved'
           } 
         break;
       }
+
+      case '/auth/password-reset': {
+        this.bannerText =
+           {'p': "Please provide your email address in the form bellow. We will help you recover your account.",
+           'btn': 'Get involved'
+          } 
+        break;
+      }
+
     }
   }
 

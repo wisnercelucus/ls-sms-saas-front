@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.subsciption = this.authService.login(this.instanceName,this.loginForm.value.username, this.loginForm.value.password).subscribe(
       resp => {
         if(!this.authService.loginRedirectUrl){
-          this.router.navigate(['/school/accounts/profile']);
+          this.router.navigate(['/accounts/profile']);
         }
       },
       err => {
@@ -110,7 +110,4 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.errorMessage = "";
   }
 
-  onResetPassword(){
-    this.router.navigate(['school/accounts/password-reset']);
-  }
 }

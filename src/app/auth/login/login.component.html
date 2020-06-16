@@ -54,7 +54,7 @@
 
     </mat-step>
   </mat-vertical-stepper>
-  <p>Forget your password? <a href="/school/accounts/password-reset">password reset</a></p>
+  <p>Forget your password? <a routerLink="/auth/password-reset">password reset</a></p>
   </form>
 
   <form
@@ -91,7 +91,7 @@
     <button type="submit" 
     mat-raised-button color="primary" 
     [disabled]="loginForm.invalid">Submit</button>
-    <p>Forget your password? <a routerLink ="/school/accounts/password-reset">password reset</a></p>
+    <p>Forget your password? <a routerLink="/auth/password-reset">password reset</a></p>
   </form>
   
 </section>

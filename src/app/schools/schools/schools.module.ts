@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { SchoolsComponent } from '../schools.component';
 import { AdminComponent } from '../admin/admin.component';
 import { RouterModule } from '@angular/router';

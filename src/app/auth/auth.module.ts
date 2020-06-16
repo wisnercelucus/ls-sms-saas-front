@@ -8,12 +8,14 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
 
 @NgModule({
     declarations:[
         AuthComponent,
         RegisterComponent,
-        LoginComponent        
+        LoginComponent,
+        PasswordResetComponent        
     ],
     
     imports:[
@@ -29,6 +31,7 @@ import { SharedModule } from '../shared/shared.module';
         AuthComponent,
         RegisterComponent,
         LoginComponent,
+        PasswordResetComponent,  
         RouterModule, 
         FormsModule, 
         ReactiveFormsModule, 

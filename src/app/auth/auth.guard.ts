@@ -24,12 +24,7 @@ export class AuthGuard implements CanActivate{
                 }else{
 
                     const previousUrl = state.url;
-                    if(previousUrl.includes("password-reset")){
-                        return this.router.createUrlTree([previousUrl]);
-                    }
-                    console.log(previousUrl);
                     this.authService.loginRedirectUrl = previousUrl;
-
                     return this.router.createUrlTree(['/auth/login']); 
                 }
             })

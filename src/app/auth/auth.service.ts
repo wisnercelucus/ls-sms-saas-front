@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Subscription, Subject, throwError, BehaviorSubject } from 'rxjs';
 import { Client } from './register/client.model';
-import { User } from '../schools/users/user.model';
 import {catchError, tap} from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { User } from '../users/user.model';
 
 
 @Injectable({
@@ -122,6 +122,9 @@ export class AuthService {
 
     return throwError(errorMessage);
     
+  }
+  isAuthenticated(){
+    return !!this.user
   }
 
 
