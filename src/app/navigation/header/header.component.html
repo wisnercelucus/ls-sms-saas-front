@@ -46,8 +46,10 @@
         <ul *ngIf="isAuthenticated" fxLayout fxLayoutGap="10px" class="nav-items">
             <li class="nav-item" [matMenuTriggerFor]="menu">UserName</li>
             <mat-menu #menu="matMenu">
-            <button mat-menu-item>Profile</button>
-            <button mat-menu-item>Admin</button>
+            <a routerLink="/accounts/profile"><button mat-menu-item>Profile</button></a>
+            <a routerLink="/school/admin"><button mat-menu-item>Admin</button></a>
+            <mat-divider></mat-divider>
+            <a routerLink="/accounts/password-change"><button mat-menu-item>Change password</button></a>
             <mat-divider></mat-divider>
             <button mat-menu-item (click)="onLogout()">Logout</button>
             </mat-menu>
