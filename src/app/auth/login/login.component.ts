@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms'
 import { AuthService } from '../auth.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-login',
@@ -14,15 +15,18 @@ export class LoginComponent implements OnInit, OnDestroy {
   LoginFormGroup: FormGroup;
 
   loginForm: FormGroup;
-  baseDomain = "domo.local";
-  instanceName = "";
+  baseDomain:string;
   hasInstanceUrl = false;
   subsciption:Subscription;
   errorMessage ="";
   bannerText:{p:string, btn:string}
 
-  constructor(private router:Router, private authService:AuthService, private _formBuilder: FormBuilder) {
+  constructor(private router:Router, 
+    private authService:AuthService, 
+    private _formBuilder: FormBuilder,
+    private appSerive:AppService) {
     this.hasInstanceUrl = this.urlHasInstance();
+    this.baseDomain = this.appSerive.BASE_DOMAIN;
   }
 
   ngOnInit() {
@@ -58,7 +62,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
   onSubmit() {
-    this.subsciption = this.authService.login(this.instanceName,this.loginForm.value.username, this.loginForm.value.password).subscribe(
+    
+    this.subsciption = this.authService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe(
       resp => {
         if(!this.authService.loginRedirectUrl){
           this.router.navigate(['/accounts/profile']);
@@ -66,8 +71,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       },
       err => {
        this.errorMessage = err + ". Your email or password is invalid. If you see correct credentials contact your system administrator.";
-      }
-      
+      } 
     )
   }
 
@@ -75,8 +79,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       if(!this.hasInstanceUrl){
         const instance = this.LoginFormGroup.value.instanceName;
         this.subsciption = this.authService.login(
-          instance, this.LoginFormGroup.value.userName, 
-          this.LoginFormGroup.value.userPassword)
+          this.LoginFormGroup.value.userName, 
+          this.LoginFormGroup.value.userPassword,
+          instance)
           
           .subscribe(
           resp => {
@@ -95,8 +100,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }else{
       const hostName = window.location.hostname.toString();
       const hostNameParts = hostName.split(".")
-      if(hostNameParts.length === 3){
-        this.instanceName = hostNameParts[0]
+      if(hostNameParts.length >= 3){
         return true;
 
       }else{

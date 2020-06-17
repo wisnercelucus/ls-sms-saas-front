@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Subscription, Subject, throwError, BehaviorSubject } from 'rxjs';
 import { Client } from './register/client.model';
-import {catchError, tap} from 'rxjs/operators';
+import {catchError, tap, take, map} from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { User } from '../users/user.model';
+import { AppService } from '../app.service';
 
 
 @Injectable({
@@ -13,9 +14,9 @@ import { User } from '../users/user.model';
 export class AuthService {
   subscrition: Subscription;
   user = new BehaviorSubject<User>(null);
-  instance = new Subject<string>();
   loginRedirectUrl = "";
-
+  instance:string;
+  baseDomain:string;
 
   baseUrl = 'http://demo.local:8000/prospect/api/register/';
 
@@ -23,7 +24,15 @@ export class AuthService {
     'Content-Type': 'application/json'
   });
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, 
+    private router: Router, 
+    private appService: AppService) { 
+
+  }
+
+  getTenantUrl(tenant:string): string{
+    return 'http://' + tenant + '.demo.local:8000/';
+  }
 
   registerClient(client: Client){
     const body = JSON.stringify(client);
@@ -41,20 +50,20 @@ export class AuthService {
     localStorage.setItem('userData', JSON.stringify(user))
   }
 
-  getSchema(instanceName:string){
-      const instance = instanceName;
-      this.instance.next(instance);
-  }
-
-  login(instanceName: string, username:string, password:string, redirectUrl?:string){
+  login(username:string, password:string, instance?:string, redirectUrl?:string){
+    if(!this.appService.instance && instance){
+      this.instance = instance;
+    }
+    
     if(redirectUrl){
       this.loginRedirectUrl = redirectUrl;
     }
 
-    if(instanceName){
-     const tenant = instanceName;
-     const tenantUrl = 'http://' + tenant + '.demo.local:8000/';
-    const body = JSON.stringify({
+    if(this.instance){
+     const tenant = this.instance;
+     const tenantUrl = this.getTenantUrl(tenant)
+
+     const body = JSON.stringify({
           'username':username, 
           'password': password
         });
@@ -63,7 +72,6 @@ export class AuthService {
               .pipe(
                 catchError( errorRes => this.handleError(errorRes)),
                 tap(resData =>{
-                  this.getSchema(tenant);
                   this.handleAutentication(resData['username'], resData['email'], resData['token'])
                   
                   if(this.loginRedirectUrl){
@@ -71,8 +79,7 @@ export class AuthService {
                   }
 
                 })
-              )
-
+             )
     }else{
       return;
     }
@@ -123,8 +130,50 @@ export class AuthService {
     return throwError(errorMessage);
     
   }
+
   isAuthenticated(){
     return !!this.user
+  }
+
+  /*--- Reset Password ---*/
+
+  resetPasswordRequest(email:string){
+    if(this.instance){
+      const tenant = this.instance;
+      const tenantUrl = this.getTenantUrl(tenant)
+    
+    const body = JSON.stringify({'email':email});
+    return this.http.post(tenantUrl + 'accounts/api/password_reset/', body, {headers:this.headers})
+
+    }else{
+      return;
+    }
+
+  }
+
+  validateToken(token:string){
+    if(this.instance){
+      const tenant = this.instance;
+      const tenantUrl = this.getTenantUrl(tenant)
+      const body = JSON.stringify({'token':token});
+
+      return this.http.post(tenantUrl + 'accounts/api/validate_token/', body, {headers:this.headers})
+
+    }
+    
+  }
+
+  resetPasswordConfirm(token:string, password:string){
+    if(this.instance){
+      const tenant = this.instance;
+      const tenantUrl = this.getTenantUrl(tenant)
+      
+      const body = JSON.stringify({'token': token, 'password': password});
+      return this.http.post(tenantUrl + 'accounts/api/password_reset/confirm/', body, {headers:this.headers})
+
+    }else{
+      return;
+    }
   }
 
 

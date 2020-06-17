@@ -14,7 +14,7 @@ export class MinBannerComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    console.log(this.bannerText)
+
   }
 
 
