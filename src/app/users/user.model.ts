@@ -3,7 +3,13 @@ export class User{
                 public username:string,
                 public email:string,
                 private _token:string,
-                private _tokenExpirationDate?: Date){
+                public image:string,
+                public is_staff:boolean,
+                public is_superuser:boolean,
+                public last_name:string,
+                public user_id:number,
+                public first_name:string
+                ){
     }
 
     get token(){

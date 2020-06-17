@@ -16,6 +16,7 @@ export class FeedService {
       });
 
       const baseUrl = 'http://'+ instance +'.demo.local:8000/';
+      
       return this.http.get(baseUrl + 'feed/api/posts/', {headers: headers});
     }
 }

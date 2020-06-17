@@ -8,7 +8,7 @@ import { PasswordChangeComponent } from './password-change/password-change.compo
 const routes: Routes = [
     {path: 'accounts', component:UsersComponent, canActivate:[AuthGuard],
         children:[
-            {path:'profile', component:ProfileComponent},
+            {path:':username/profile', component:ProfileComponent},
             {path:'password-change', component:PasswordChangeComponent}
         ]
     }

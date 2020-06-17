@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Subscription, Subject, throwError, BehaviorSubject } from 'rxjs';
 import { Client } from './register/client.model';
-import {catchError, tap, take, map} from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { User } from '../users/user.model';
-import { AppService } from '../app.service';
 
 
 @Injectable({
@@ -16,7 +15,7 @@ export class AuthService {
   user = new BehaviorSubject<User>(null);
   loginRedirectUrl = "";
   instance:string;
-  baseDomain:string;
+  tenantUrl:string;
 
   baseUrl = 'http://demo.local:8000/prospect/api/register/';
 
@@ -25,25 +24,33 @@ export class AuthService {
   });
 
   constructor(private http: HttpClient, 
-    private router: Router, 
-    private appService: AppService) { 
-
-  }
-
-  getTenantUrl(tenant:string): string{
-    return 'http://' + tenant + '.demo.local:8000/';
-  }
+    private router: Router) { }
 
   registerClient(client: Client){
     const body = JSON.stringify(client);
     return this.http.post(this.baseUrl, body, {headers: this.headers})
   }
 
-  handleAutentication(username:string, email:string, token:string){
+  handleAutentication(username:string, 
+                      email:string, 
+                      token:string,
+                      image:string,
+                      is_staff:boolean,
+                      is_superuser:boolean,
+                      last_name:string,
+                      user_id:number,
+                      first_name:string
+                      ){
     const user = new User(
       username,
       email,
-      token
+      token,
+      image,
+      is_staff,
+      is_superuser,
+      last_name,
+      user_id,
+      first_name
     );
 
     this.user.next(user);
@@ -51,7 +58,7 @@ export class AuthService {
   }
 
   login(username:string, password:string, instance?:string, redirectUrl?:string){
-    if(!this.appService.instance && instance){
+    if(!this.instance && instance){
       this.instance = instance;
     }
     
@@ -59,20 +66,26 @@ export class AuthService {
       this.loginRedirectUrl = redirectUrl;
     }
 
-    if(this.instance){
-     const tenant = this.instance;
-     const tenantUrl = this.getTenantUrl(tenant)
-
      const body = JSON.stringify({
           'username':username, 
           'password': password
         });
 
-        return this.http.post(tenantUrl + 'accounts/api/token/', body, {headers: this.headers})
+        return this.http.post(this.tenantUrl + '/accounts/api/token/', body, {headers: this.headers})
               .pipe(
                 catchError( errorRes => this.handleError(errorRes)),
                 tap(resData =>{
-                  this.handleAutentication(resData['username'], resData['email'], resData['token'])
+                  this.handleAutentication(
+                                            resData['username'], 
+                                            resData['email'], 
+                                            resData['token'],
+                                            this.tenantUrl + resData['image'],
+                                            resData['is_staff'],
+                                            resData['is_superuser'],
+                                            resData['last_name'],
+                                            resData['user_id'],
+                                            resData['first_name']
+                                            )
                   
                   if(this.loginRedirectUrl){
                     this.router.navigate([this.loginRedirectUrl])
@@ -80,22 +93,35 @@ export class AuthService {
 
                 })
              )
-    }else{
-      return;
-    }
+
   }
   
   autoLogin(){
     const userData: {
       username:string,
       email:string,
-      _token:string
+      _token:string,
+      image:string,
+      is_staff:boolean,
+      is_superuser:boolean,
+      last_name:string,
+      user_id:number,
+      first_name:string,
     } = JSON.parse(localStorage.getItem('userData'));
 
     if(!userData){
       return;
     }
-    const loadedUser = new User(userData.username, userData.email, userData._token);
+    const loadedUser = new User(userData.username, 
+                                userData.email, 
+                                userData._token,
+                                userData.image,
+                                userData.is_staff,
+                                userData.is_superuser,
+                                userData.last_name,
+                                userData.user_id,
+                                userData.first_name
+                                );
 
     if(loadedUser.token){
       this.user.next(loadedUser);
@@ -139,11 +165,9 @@ export class AuthService {
 
   resetPasswordRequest(email:string){
     if(this.instance){
-      const tenant = this.instance;
-      const tenantUrl = this.getTenantUrl(tenant)
-    
+   
     const body = JSON.stringify({'email':email});
-    return this.http.post(tenantUrl + 'accounts/api/password_reset/', body, {headers:this.headers})
+    return this.http.post(this.tenantUrl + '/accounts/api/password_reset/', body, {headers:this.headers})
 
     }else{
       return;
@@ -153,23 +177,21 @@ export class AuthService {
 
   validateToken(token:string){
     if(this.instance){
-      const tenant = this.instance;
-      const tenantUrl = this.getTenantUrl(tenant)
       const body = JSON.stringify({'token':token});
 
-      return this.http.post(tenantUrl + 'accounts/api/validate_token/', body, {headers:this.headers})
+      return this.http.post(this.tenantUrl + '/accounts/api/validate_token/', body, {headers:this.headers})
 
+    }else{
+      return;
     }
     
   }
 
   resetPasswordConfirm(token:string, password:string){
     if(this.instance){
-      const tenant = this.instance;
-      const tenantUrl = this.getTenantUrl(tenant)
-      
+     
       const body = JSON.stringify({'token': token, 'password': password});
-      return this.http.post(tenantUrl + 'accounts/api/password_reset/confirm/', body, {headers:this.headers})
+      return this.http.post(this.tenantUrl + '/accounts/api/password_reset/confirm/', body, {headers:this.headers})
 
     }else{
       return;

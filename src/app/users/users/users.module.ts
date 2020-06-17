@@ -16,6 +16,7 @@ import { PasswordChangeComponent } from '../password-change/password-change.comp
     RouterModule,
     SharedModule
   ],
+  
   exports:[]
 })
 export class UsersModule { }

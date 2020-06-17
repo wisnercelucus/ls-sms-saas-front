@@ -11,17 +11,19 @@ export class AuthenticatedGuard implements CanActivate {
 
     constructor(private authService: AuthService, private router: Router) { }
 
-    canActivate(): boolean | Promise<boolean> | Observable<boolean | UrlTree> {
+    canActivate(): boolean 
+                   | Promise<boolean> 
+                   | Observable<boolean | UrlTree> {
         return this.authService.user.pipe(
             take(1),
             map(user =>{
-               if(user){
+                if(user){
                 this.router.navigate(['/school/feed']);
                 return false;
-               }else{
-                   return true;
-               } 
-            }) 
+                }else{
+                    return true;
+                } 
+            })
         )
     }
 }
