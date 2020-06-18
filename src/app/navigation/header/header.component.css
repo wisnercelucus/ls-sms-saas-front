@@ -67,6 +67,16 @@ a:hover{
     flex:1;
 }
 
+.notification{
+    padding: 0px;
+    text-align: center;
+    padding-top: 7px;
+}
+
+.notification span{
+    font-size: 30px;
+}
+
 @media screen and (max-width: 599px){
     .site-logo{
         display: none;

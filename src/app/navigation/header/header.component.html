@@ -44,6 +44,10 @@
         </ul>
 
         <ul *ngIf="isAuthenticated" fxLayout fxLayoutGap="10px" class="nav-items">
+            <li class="nav-item notification">
+            <mat-icon matBadge="6" matBadgeColor="warn">notifications</mat-icon>
+            </li>
+
             <li class="nav-item handle-user" [matMenuTriggerFor]="menu">
                         <img class="avatar-xs" [src]="authenticateduser.image"> <span class="username"> {{authenticateduser.username }} </span>
             </li>
