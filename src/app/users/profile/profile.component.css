@@ -5,7 +5,9 @@
     padding-right: 10px;
     padding-bottom: 10px;
 }
-
+a{
+    text-decoration: none;
+}
 .profile-section .side-profile-menu-left{
     flex:1;
 }
@@ -77,6 +79,23 @@ ul li{
     border-radius: 25px;
 }
 
+.user-profile-community{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.user-profile-community a{
+    font-size: 14px;
+    font-weight: 500;
+    color:#494848;
+}
+
+
+.user-profile-community a:first-child{
+    margin-right: 20px;
+}
+
 
 .rights{
     background-color: #f1f1f1;
@@ -89,16 +108,6 @@ ul li{
     flex:2;
     margin-left: 20px;
     margin-right: 20px;
-}
-
-.profile-section .side-profile-menu-left h1{
-    font-size: 18px;
-    background-color: dodgerblue;
-    text-align: center;
-    width: 250px;
-    border-radius: 8px;
-    color:#fff;
-    font-weight: 800;
 }
 
 .avatar-xs-card{
@@ -121,6 +130,64 @@ ul li{
     border-radius: 100%;
     margin-top: -70px !important;
     z-index: 2;
+}
+
+.user-profile-detail{
+    margin-left: 105px;
+    margin-top: -63px;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+.user-profile-detail h1{
+    font-size: 18px;
+    color: #2c2c2c;
+    margin-bottom: 0px !important;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    text-align: left;
+}
+
+.user-profile-detail h1 a{
+    text-decoration: none;
+    color:dodgerblue;
+
+}
+
+.user-profile-bio{
+    display: flex;
+    flex-direction: column;
+}
+
+.user-profile-bio .birth-detail{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 10px;  
+    margin-top: 10px;  
+}
+
+.user-profile-bio .birth-detail span{
+  margin-right: 30px;
+  font-size: 15px;
+  font-weight: 400;
+  color:#555454;
+}
+
+.user-profile-bio .birth-detail span fa-icon{
+    color:#555454;
+}
+
+.user-profile-bio .birth-detail span:last-child{
+    margin-right: auto;
+  }
+
+.user-profile-detail h5{
+    font-size: 14px;
+    color: #5c5c5c;
+    margin-top: 0px !important;
+    padding: 0px !important;
+    text-align: left;
 }
 
 @media screen and (max-width: 1000px){
@@ -150,3 +217,12 @@ ul li{
     }
 
 }
+
+
+@media screen and (max-width: 359px){
+    .user-profile-detail h1{
+        font-size: 14px;
+    }
+
+}
+

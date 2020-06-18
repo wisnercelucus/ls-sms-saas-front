@@ -18,7 +18,6 @@ import { FaqComponent } from './welcome/faq/faq.component';
 
 import { ParticlesModule } from 'ngx-particle';
 import { ParticlesComponent } from './welcome/particles/particles.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { SchoolsModule } from './schools/schools/schools.module';
 import { UsersModule } from './users/users/users.module';
@@ -50,7 +49,6 @@ import { UsersRoutingModule } from './users/users-routing.module';
     BrowserAnimationsModule,
     HttpClientModule,
     ParticlesModule,
-    FontAwesomeModule,
     SchoolsModule,
     UsersModule,
     SharedModule,

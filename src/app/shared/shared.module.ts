@@ -32,6 +32,7 @@ import { FooterComponent } from './footer/footer.component';
             ReactiveFormsModule, 
             MaterialModule,
             CommonModule,
+            FontAwesomeModule
         ]
 }
 )
