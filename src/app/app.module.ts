@@ -19,8 +19,8 @@ import { FaqComponent } from './welcome/faq/faq.component';
 import { ParticlesModule } from 'ngx-particle';
 import { ParticlesComponent } from './welcome/particles/particles.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
-import { SchoolsModule } from './schools/schools/schools.module';
-import { UsersModule } from './users/users/users.module';
+import { SchoolsModule } from './schools/schools.module';
+import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 import { AuthRoutingModule } from './auth/auth-routing.module';
@@ -40,7 +40,7 @@ import { UsersRoutingModule } from './users/users-routing.module';
     PricingComponent,
     TestimonialsComponent,
     FaqComponent,
-    ParticlesComponent
+    ParticlesComponent,
   ],
   imports: [
     AuthModule,

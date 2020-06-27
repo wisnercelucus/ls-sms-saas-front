@@ -12,6 +12,8 @@ import { FeedTimelineComponent } from './feed-timeline/feed-timeline.component';
 import { FeedCopyrightComponent } from './feed-copyright/feed-copyright.component';
 import { UsersSuggestionsComponent } from './users-suggestions/users-suggestions.component';
 import { GroupsSuggestionsComponent } from './groups-suggestions/groups-suggestions.component';
+import { PublishModalFormComponent } from './publish-modal-form/publish-modal-form.component';
+import { FormDialogComponent } from './form-dialog/form-dialog.component';
 
 @NgModule({
     declarations:[
@@ -24,6 +26,8 @@ import { GroupsSuggestionsComponent } from './groups-suggestions/groups-suggesti
         FeedCopyrightComponent,
         UsersSuggestionsComponent,
         GroupsSuggestionsComponent,
+        PublishModalFormComponent,
+        FormDialogComponent,
     ],
 
     imports:[CommonModule, 
@@ -48,6 +52,7 @@ import { GroupsSuggestionsComponent } from './groups-suggestions/groups-suggesti
             FeedCopyrightComponent,
             UsersSuggestionsComponent,
             GroupsSuggestionsComponent,
+            PublishModalFormComponent,
         ]
 }
 )

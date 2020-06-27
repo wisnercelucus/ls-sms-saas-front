@@ -9,8 +9,73 @@
           <mat-card>
             <mat-card-content>
                 <mat-tab-group>
-                    <mat-tab label="Say something?"> Content 1 </mat-tab>
-                    <mat-tab label="Poll"> Content 2 </mat-tab>
+                    <mat-tab label="Say something?">
+                        <form class="post-form">
+                            <mat-form-field class="post-full-width">
+                                <mat-label>Post something to your timeline</mat-label>
+                                <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+                            </mat-form-field>
+                            <button class="publish" mat-raised-button type="submit">Post</button>
+                        </form>
+                    </mat-tab>
+                    <mat-tab label="Poll"> 
+                        <form class="poll-form" 
+                        [formGroup]="pollForm"
+                        (ngSubmit)="onSubmit()"
+                        >
+                            <mat-form-field class="poll-full-width">
+
+                                <mat-label>Ask a question?</mat-label>
+                                <textarea matInput 
+                                formControlName="question" 
+                                placeholder="Ex. what best between...?">
+                                </textarea>
+            
+                            </mat-form-field>
+
+                            <mat-form-field class="poll-full-width">
+                                <mat-label>Option</mat-label>
+                                <input matInput 
+                                    formControlName="option1" 
+                                    placeholder="Ex. Python">
+                            </mat-form-field>
+
+                            <mat-form-field class="poll-full-width">
+                                <mat-label>Option</mat-label>
+                                <input matInput
+                                    formControlName="option2"
+                                    placeholder="Ex. PHP">
+                            </mat-form-field>
+
+                            <div class="options-added" formArrayName="optionsAdded">
+                                <div class="form-group" 
+                                *ngFor="let optionCtrl of controls; let i = index" 
+                                [formGroupName]="i"
+                                >
+                                <mat-form-field class="poll-full-width">
+                                    <mat-label>Option</mat-label>
+                                    <input matInput class="inputAdded"
+                                        formControlName="option"
+                                        placeholder="Ex. PHP">
+                                </mat-form-field>
+                                <button class="option-remove-btn"
+                                type="button" 
+                                mat-raised-button
+                                (click)="onRemoveOption(i)"
+                                ><fa-icon [icon]="faMinusSquare"></fa-icon> Remove</button>
+                                </div>
+                            </div>
+
+                            <button 
+                                class="add-option" 
+                                mat-raised-button 
+                                type="button"
+                                (click)="onAddOption()"
+                                ><fa-icon [icon]="faPlus"></fa-icon> Add option</button>
+                            
+                            <button class="publish" mat-raised-button type="submit">Ask</button>
+                        </form>
+                    </mat-tab>
                 </mat-tab-group>
             </mat-card-content>
           </mat-card>

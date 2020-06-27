@@ -28,17 +28,6 @@ ul li{
     flex-wrap: wrap;
 }
 
-.user-profile-community a{
-    font-size: 14px;
-    font-weight: 500;
-    color:#494848;
-}
-
-
-.user-profile-community a:first-child{
-    margin-right: 20px;
-}
-
 .feed .side-profile-menu-right{
     flex:1;
 }
@@ -60,101 +49,51 @@ ul li{
     height: 25px;
     width: 25px;
 }
-.cover-profile{
-    height: 225px;
-    z-index: 1;
-}
-.user-profile-image{
-    width: 100px;
-    border-radius: 100%;
-    margin-top: -70px !important;
-    z-index: 2;
+.publish{
+    background-color: #673ab7;
+    color: white;
+    margin-top: 8px;
 }
 
-.user-profile-detail{
-    margin-left: 105px;
-    margin-top: -63px;
-    box-sizing: border-box;
-    padding: 0;
+.publish-form{
+    padding: 8px;
+}
+.post-form, .poll-form {
+    min-width: 100px;
+    width: 100%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+  
+.poll-form button{
+    margin-right: 8px;
 }
 
-.user-profile-detail h1{
-    font-size: 18px;
-    color: #2c2c2c;
-    margin-bottom: 0px !important;
-    padding-top: 0px !important;
-    padding-bottom: 0px !important;
-    text-align: left;
+.add-option{
+    background-color: fuchsia;
+    color: ghostwhite;
 }
 
-.user-profile-detail h1 a{
-    text-decoration: none;
-    color:dodgerblue;
-
+.poll-form button:last-child{
+    margin-right: 0px;
 }
 
-.user-profile-bio{
-    display: flex;
-    flex-direction: column;
-}
-
-.user-profile-bio .birth-detail{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-bottom: 10px;  
-    margin-top: 10px;  
-}
-
-.user-profile-bio .birth-detail span{
-  margin-right: 30px;
-  font-size: 15px;
-  font-weight: 400;
-  color:#555454;
-}
-
-.user-profile-bio .birth-detail span fa-icon{
-    color:#555454;
-}
-
-.user-profile-bio .birth-detail span:last-child{
-    margin-right: auto;
+.post-full-width, .poll-full-width {
+    width: 100%;
   }
 
-.user-profile-detail h5{
-    font-size: 14px;
-    color: #5c5c5c;
-    margin-top: 0px !important;
-    padding: 0px !important;
-    text-align: left;
+.form-group{
+display: flex;
+}
+
+.form-group button{
+    margin-left: 8px;
+    height: 35px !important;
+    background-color: firebrick;
+    color: ghostwhite;
 }
 
 
-.reaction fa-icon{
-    font-size: 20px;
-    color: dodgerblue;
-    margin-right: 15px;
-}
-
-.reaction fa-icon:last-child{
-    margin-right: 0px;
-}
-
-.rights{
-    display: flex;
-    border-radius: 8px;
-    background-color: #f1f1f1;
-}
-
-.rights ul{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-.rights ul li:last-child{
-    margin-right: 0px;
-}
 
 @media screen and (max-width: 1000px){
     .profile-section{

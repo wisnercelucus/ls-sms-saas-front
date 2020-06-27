@@ -7,10 +7,10 @@ import { AuthenticatedGuard } from './auth/authenticated.guard';
 const routes: Routes = [
   {path:'', component:WelcomeComponent, canActivate:[AuthenticatedGuard]},
   
-  {path:'school', redirectTo: '/school/feed', pathMatch: 'full'},
+  {path:'school', redirectTo: '/school', pathMatch: 'full'},
   {path:'donate', redirectTo: '/donate/process', pathMatch: 'full'},
   {path: 'auth', redirectTo:'/auth/login', pathMatch:'full'},
-  {path: 'accounts', redirectTo:'/accounts/profile', pathMatch:'full'},
+  {path: 'accounts', redirectTo:'/accounts/feed', pathMatch:'full'},
  
 ];
 

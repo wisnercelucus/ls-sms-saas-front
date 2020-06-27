@@ -7,7 +7,6 @@
       fxLayoutAlign="center center"
       fxLayoutGap="10px"
       (ngSubmit)="onSubmitStepperForm()">
-      >
     <app-alert-dialog *ngIf="errorMessage" 
       [message]="errorMessage" 
       (close)="onHandleError()">
@@ -55,7 +54,6 @@
 
     </mat-step>
   </mat-vertical-stepper>
-  <p>Forget your password? <a routerLink="/auth/password-reset">password reset</a></p>
   </form>
 
   <form

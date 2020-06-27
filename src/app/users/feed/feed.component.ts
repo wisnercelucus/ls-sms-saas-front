@@ -4,14 +4,9 @@ import { Subscription } from 'rxjs';
 import { FeedService } from './feed.service';
 import { AppService } from 'src/app/app.service';
 
-import { faBirthdayCake, 
-  faMapMarker, 
-  faThumbsUp, 
-  faShareAltSquare, 
-  faComment, 
-  faHeart,
- faSmile , 
- faUserCircle, faUsers, faHome, faUser} from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faMinusSquare
+} from '@fortawesome/free-solid-svg-icons';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 
 
 @Component({
@@ -20,20 +15,13 @@ import { faBirthdayCake,
   styleUrls: ['./feed.component.css']
 })
 export class FeedComponent implements OnInit, OnDestroy {
-  faBirthdayCake = faBirthdayCake;
-  faMapMarker = faMapMarker;
-  faThumbsUp = faThumbsUp;
-  faShareAltSquare = faShareAltSquare;
-  faComment = faComment;
-  faHeart = faHeart;
-  faSmile = faSmile;
-  faUserCircle = faUserCircle;
-  faUsers = faUsers;
-  faHome = faHome;
-  faUser = faUser;
+  faPlus=faPlus;
+  faMinusSquare=faMinusSquare;
 
   instanceSub: Subscription;
   userSubs: Subscription;
+  pollForm: FormGroup;
+  editMode=false;
 
   constructor(private authService: AuthService, 
     private feedService:FeedService,
@@ -41,7 +29,30 @@ export class FeedComponent implements OnInit, OnDestroy {
     ) { }
 
   ngOnInit(): void {
+    this.initForm();
+  }
 
+  initForm(){
+    let question = '';
+    let option1 = '';
+    let option2 = '';
+    let optionsAdded = new FormArray([])
+
+    this.pollForm = new FormGroup({
+      'question': new FormControl(question, Validators.required),
+      'option1': new FormControl(option1, Validators.required),
+      'option2': new FormControl(option2, Validators.required),
+      'optionsAdded':optionsAdded
+    })
+
+  }
+
+  get controls() {
+    return (<FormArray>this.pollForm.get('optionsAdded')).controls;
+  }
+
+  onSubmit(){
+    console.log(this.pollForm.value)
   }
 
   getPosts(instance:string){
@@ -51,6 +62,18 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
 
+  }
+
+  onAddOption(){
+    (<FormArray>this.pollForm.get('optionsAdded')).push(
+      new FormGroup({
+        'option': new FormControl(null, Validators.required)
+      })
+    )
+  }
+
+  onRemoveOption(index:number){
+    (<FormArray>this.pollForm.get('optionsAdded')).removeAt(index);
   }
 
 }

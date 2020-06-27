@@ -9,9 +9,9 @@
 
         <mat-card-content>
                 <ul>
-                    <li><a class="nav-link" href="javascript:void(0)">Publish</a></li>
-                    <li><a class="nav-link" href="javascript:void(0)"><fa-icon [icon]="faHome"></fa-icon> Home</a></li>
-                    <li><a class="nav-link" href="javascript:void(0)"><fa-icon [icon]="faUser"></fa-icon> Profile</a></li>
+                    <li (click)="openDialog()"><a class="nav-link" (click)="openDialog()">Publish</a></li>
+                    <li><a class="nav-link" (click)="navigateTo('/accounts/feed')"><fa-icon [icon]="faHome"></fa-icon> Home</a></li>
+                    <li><a class="nav-link" ><fa-icon [icon]="faUser"></fa-icon> Profile</a></li>
                     <li><a class="nav-link" href="javascript:void(0)"><fa-icon [icon]="faShareAltSquare"></fa-icon> Posts and shares</a></li>
                     <li><a class="nav-link" href="javascript:void(0)"><fa-icon [icon]="faHeart"></fa-icon> Likes and replies</a></li>
                     <mat-divider></mat-divider>

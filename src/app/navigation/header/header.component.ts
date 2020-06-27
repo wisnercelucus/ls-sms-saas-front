@@ -3,6 +3,7 @@ import { Subscription} from 'rxjs';
 import { Router} from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { User } from 'src/app/users/user.model';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-header',
@@ -16,12 +17,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   userSubs: Subscription;
   authenticateduser:User;
   image:string;
+  instance:string;
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService, private appService:AppService) { }
   timer: any;
 
   ngOnInit(): void {
-    this.userSubs = this.authService.user.subscribe(user=>{
+      this.urlHasInstance();
+      
+      this.userSubs = this.authService.user.subscribe(user=>{
       this.isAuthenticated = !!user;
       if(this.isAuthenticated){
         this.authenticateduser = new User(
@@ -90,5 +94,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
   toContact(){
     this.navigateTo("contact", "/") 
   }
+  urlHasInstance(){
+    if(window.location.hostname === this.appService.BASE_DOMAIN){
+      this.instance=null;
+      return false;
+
+    }else{
+      const hostName = window.location.hostname.toString();
+      const hostNameParts = hostName.split(".")
+      if(hostNameParts.length >= 3){
+        this.instance =  hostNameParts.reverse()[2]
+        return true;
+      }else{
+        return;
+      } 
+    }
+  }
+
+
 
 }

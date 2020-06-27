@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { faBirthdayCake, 
   faMapMarker, 
   faThumbsUp, 
@@ -7,6 +7,10 @@ import { faBirthdayCake,
   faHeart,
  faSmile , 
  faUserCircle, faUsers, faHome, faUser} from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { PublishModalFormComponent } from '../publish-modal-form/publish-modal-form.component';
+import { Subscription } from 'rxjs';
 
  
 @Component({
@@ -14,7 +18,7 @@ import { faBirthdayCake,
   templateUrl: './feed-side-menu.component.html',
   styleUrls: ['./feed-side-menu.component.css']
 })
-export class FeedSideMenuComponent implements OnInit {
+export class FeedSideMenuComponent implements OnInit, OnDestroy {
   faBirthdayCake = faBirthdayCake;
   faMapMarker = faMapMarker;
   faThumbsUp = faThumbsUp;
@@ -27,9 +31,29 @@ export class FeedSideMenuComponent implements OnInit {
   faHome = faHome;
   faUser = faUser;
   
-  constructor() { }
+  subscrition:Subscription;
+
+  constructor(private router:Router,
+    public dialog: MatDialog
+    ) { }
 
   ngOnInit(): void {
   }
+  ngOnDestroy(){
+    if(this.subscrition){
+      this.subscrition.unsubscribe()
+    }
+  }
+  navigateTo(path:string){
+    this.router.navigate([path])
+  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(PublishModalFormComponent, {
+      width: '500px',
+    });
 
+    this.subscrition = dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 }

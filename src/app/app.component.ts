@@ -46,7 +46,9 @@ export class AppComponent implements OnInit {
              this.appService.PROTOCOL 
              + this.instance + "." 
              + this.appService.BASE_DOMAIN 
-             + ":" + this.appService.API_PORT
+             + ":" + this.appService.API_PORT;
+    
+    this.appService.instance = this.instance;
 
     this.authService.instance = this.instance;
     this.authService.tenantUrl = this.appService.TENANT_URL;
@@ -55,7 +57,5 @@ export class AppComponent implements OnInit {
     this.usersService.tenantUrl = this.appService.TENANT_URL;
     
   }
-
-  
 
 }

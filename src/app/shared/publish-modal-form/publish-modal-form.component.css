@@ -1,0 +1,17 @@
+.post-form{
+    min-width: 100px;
+    width: 100%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+
+.post-form .post-full-width{
+    width: 100%;
+}
+
+.publish{
+    background-color: #673ab7;
+    color: white;
+    margin-top: 8px;
+}

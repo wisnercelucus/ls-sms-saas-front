@@ -33,7 +33,7 @@ ul li{
 }
 
 .side-menu-card mat-card-content ul li:first-child{
-    background-color: dodgerblue;
+    background-color: #673ab7;
     border-radius: 25px;
     text-align: center;
     color: white !important;
@@ -46,7 +46,7 @@ ul li{
 }
 
 .side-menu-card mat-card-content ul li:first-child:hover{
-    background-color: dodgerblue;
+    background-color: #673ab7;
     color: white !important;
     box-shadow: 0 0 5px rgba(0,0,0, 0.3);
 }
