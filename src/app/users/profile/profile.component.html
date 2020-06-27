@@ -28,12 +28,10 @@
         </mat-card>
         <br>
         <div class="rights">
-                    <ul>
-                        <li>Confidentiality</li>
-                        <li>Terms</li>
-                        <li>Conditions</li>
-                        <li>&copy; LS SMS 2020 &middot; All rights reserved.</li>
-                    </ul>
+            <ul>
+                <li>Confidentiality &middot; Terms &middot; Conditions</li>
+                <li class="copyright">&copy; LS SMS 2020 &middot; All rights reserved.</li>
+            </ul>
         </div>
     </div>
 
@@ -50,8 +48,8 @@
                 <div class="user-profile-bio">
 
                 <div class="birth-detail">
-                    <span><fa-icon [icon]="faMapMarker"></fa-icon> From: Port-au-Prince</span>
-                    <span><fa-icon [icon]="faBirthdayCake"></fa-icon> Born: Feb. 26, 1989</span>
+                    <span><fa-icon [icon]="faMapMarker"></fa-icon> From Port-au-Prince</span>
+                    <span><fa-icon [icon]="faBirthdayCake"></fa-icon> Born Feb. 26, 1989</span>
                 </div>
 
                 <p class="description">Qualitative and quantitative data analyst.  Skilled in Python and R for data analysis. Monitoring and Evaluation Officer at Living Water International.I am a passionate developer from Haiti. I speak Python, TypeSript, Java and Apex.</p>
@@ -75,7 +73,6 @@
                     <mat-card-title>Shiba Inu</mat-card-title>
                     <mat-card-subtitle>Dog Breed</mat-card-subtitle>
                 </mat-card-header>
-                <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
                 <mat-card-content>
                     <p>
                     The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
@@ -83,15 +80,19 @@
                     bred for hunting.
                     </p>
                 </mat-card-content>
+                <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+                
                 <mat-card-actions>
-                <button mat-button [matMenuTriggerFor]="aboveMenu"><fa-icon [icon]="faThumbsUp"></fa-icon> LIKE</button>
+                    <button mat-button [matMenuTriggerFor]="aboveMenu"><fa-icon [icon]="faThumbsUp"></fa-icon> LIKE</button>
                     <mat-menu #aboveMenu="matMenu" yPosition="above">
-                    <button mat-menu-item><fa-icon [icon]="faThumbsUp"></fa-icon></button>
-                    <button mat-menu-item><fa-icon [icon]="faSmile"></fa-icon></button>
-                    <button mat-menu-item><fa-icon [icon]="faHeart"></fa-icon></button>
-                </mat-menu>
-            <button mat-button><fa-icon [icon]="faComment"></fa-icon> COMMENT</button>
-            <button mat-button><fa-icon [icon]="faShareAltSquare"></fa-icon> SHARE</button>
+                        <span class="reaction" mat-menu-item>
+                            <button mat-button><fa-icon [icon]="faThumbsUp"></fa-icon> </button>
+                            <button mat-button><fa-icon [icon]="faSmile"></fa-icon> </button>
+                            <button mat-button><fa-icon [icon]="faHeart"></fa-icon> </button>
+                        </span>
+                    </mat-menu>
+                    <button mat-button><fa-icon [icon]="faComment"></fa-icon> COMMENT</button>
+                    <button mat-button><fa-icon [icon]="faShareAltSquare"></fa-icon> SHARE</button>
                 </mat-card-actions>
             </mat-card>
                 <br>
@@ -103,7 +104,6 @@
             <mat-card-title>Shiba Inu</mat-card-title>
             <mat-card-subtitle>Dog Breed</mat-card-subtitle>
         </mat-card-header>
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
         <mat-card-content>
             <p>
             The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
@@ -111,15 +111,18 @@
             bred for hunting.
             </p>
         </mat-card-content>
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
                 <mat-card-actions>
-                <button mat-button [matMenuTriggerFor]="aboveMenu"><fa-icon [icon]="faThumbsUp"></fa-icon> LIKE</button>
+                    <button mat-button [matMenuTriggerFor]="aboveMenu"><fa-icon [icon]="faThumbsUp"></fa-icon> LIKE</button>
                     <mat-menu #aboveMenu="matMenu" yPosition="above">
-                    <button mat-menu-item><fa-icon [icon]="faThumbsUp"></fa-icon></button>
-                    <button mat-menu-item><fa-icon [icon]="faSmile"></fa-icon></button>
-                    <button mat-menu-item><fa-icon [icon]="faHeart"></fa-icon></button>
-                </mat-menu>
-            <button mat-button><fa-icon [icon]="faComment"></fa-icon> COMMENT</button>
-            <button mat-button><fa-icon [icon]=" faShareAltSquare"></fa-icon> SHARE</button>
+                        <span class="reaction" mat-menu-item>
+                            <button mat-button><fa-icon [icon]="faThumbsUp"></fa-icon> </button>
+                            <button mat-button><fa-icon [icon]="faSmile"></fa-icon> </button>
+                            <button mat-button><fa-icon [icon]="faHeart"></fa-icon> </button>
+                        </span>
+                    </mat-menu>
+                    <button mat-button><fa-icon [icon]="faComment"></fa-icon> COMMENT</button>
+                    <button mat-button><fa-icon [icon]="faShareAltSquare"></fa-icon> SHARE</button>
                 </mat-card-actions>
         </mat-card>
 
@@ -186,18 +189,14 @@
                     <li>Users</li>
                 </ul>
         </mat-card-content>
-        <mat-card-actions>
-            <div class="rights">
-                    <ul>
-                        <li>Confidentiality</li>
-                        <li>Terms</li>
-                        <li>Conditions</li>
-                        <li>&copy; LS SMS 2020 &middot; All rights reserved.</li>
-                    </ul>
-            </div>
-        </mat-card-actions>
         </mat-card>
-
+        <br>
+            <div class="rights">
+                <ul>
+                    <li>Confidentiality &middot; Terms &middot; Conditions</li>
+                    <li class="copyright">&copy; LS SMS 2020 &middot; All rights reserved.</li>
+                </ul>
+            </div>
         </div>
 
     </div>

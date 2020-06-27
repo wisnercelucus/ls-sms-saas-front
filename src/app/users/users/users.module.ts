@@ -4,12 +4,14 @@ import { ProfileComponent } from '../profile/profile.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PasswordChangeComponent } from '../password-change/password-change.component';
+import { FeedComponent } from '../feed/feed.component';
 
 @NgModule({
   declarations: [
     UsersComponent,
     ProfileComponent,
-    PasswordChangeComponent
+    PasswordChangeComponent,
+    FeedComponent
   ],
 
   imports: [

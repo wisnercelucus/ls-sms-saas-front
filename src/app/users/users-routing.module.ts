@@ -4,12 +4,14 @@ import { AuthGuard } from '../auth/auth.guard';
 import { UsersComponent } from './users.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
+import { FeedComponent } from './feed/feed.component';
 
 const routes: Routes = [
     {path: 'accounts', component:UsersComponent, canActivate:[AuthGuard],
         children:[
-            {path:':username/profile', component:ProfileComponent},
-            {path:'password-change', component:PasswordChangeComponent}
+            {path:'feed', component:FeedComponent},
+            {path:'password-change', component:PasswordChangeComponent},
+            {path:':username', component:ProfileComponent},
         ]
     }
 ]
