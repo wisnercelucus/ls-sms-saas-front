@@ -7,6 +7,11 @@ import { MaterialModule } from '../material/material.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MinBannerComponent } from './min-banner/min-banner.component';
 import { FooterComponent } from './footer/footer.component';
+import { FeedSideMenuComponent } from './feed-side-menu/feed-side-menu.component';
+import { FeedTimelineComponent } from './feed-timeline/feed-timeline.component';
+import { FeedCopyrightComponent } from './feed-copyright/feed-copyright.component';
+import { UsersSuggestionsComponent } from './users-suggestions/users-suggestions.component';
+import { GroupsSuggestionsComponent } from './groups-suggestions/groups-suggestions.component';
 
 @NgModule({
     declarations:[
@@ -14,6 +19,11 @@ import { FooterComponent } from './footer/footer.component';
         LoadingSpinnerComponent,
         MinBannerComponent,
         FooterComponent,
+        FeedSideMenuComponent,
+        FeedTimelineComponent,
+        FeedCopyrightComponent,
+        UsersSuggestionsComponent,
+        GroupsSuggestionsComponent,
     ],
 
     imports:[CommonModule, 
@@ -32,7 +42,12 @@ import { FooterComponent } from './footer/footer.component';
             ReactiveFormsModule, 
             MaterialModule,
             CommonModule,
-            FontAwesomeModule
+            FontAwesomeModule,
+            FeedSideMenuComponent,
+            FeedTimelineComponent,
+            FeedCopyrightComponent,
+            UsersSuggestionsComponent,
+            GroupsSuggestionsComponent,
         ]
 }
 )

@@ -1,0 +1,28 @@
+    <mat-card class="side-menu-card">
+        <mat-card-header>
+            <div mat-card-avatar>
+                <img class="avatar-xs-card" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+            </div>
+            <mat-card-title>Wisner Celucus</mat-card-title>
+            <mat-card-subtitle>Developer</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+                <ul>
+                    <li><a class="nav-link" href="javascript:void(0)">Publish</a></li>
+                    <li><a class="nav-link" href="javascript:void(0)"><fa-icon [icon]="faHome"></fa-icon> Home</a></li>
+                    <li><a class="nav-link" href="javascript:void(0)"><fa-icon [icon]="faUser"></fa-icon> Profile</a></li>
+                    <li><a class="nav-link" href="javascript:void(0)"><fa-icon [icon]="faShareAltSquare"></fa-icon> Posts and shares</a></li>
+                    <li><a class="nav-link" href="javascript:void(0)"><fa-icon [icon]="faHeart"></fa-icon> Likes and replies</a></li>
+                    <mat-divider></mat-divider>
+                    <li><a class="nav-link" href="javascript:void(0)">Followers</a></li>
+                    <li><a class="nav-link" href="javascript:void(0)">Following</a></li>
+                     <mat-divider></mat-divider>
+                    <li><a class="nav-link" href="javascript:void(0)"><fa-icon [icon]="faUsers"></fa-icon> Groups</a></li>
+                    <li><a class="nav-link" href="javascript:void(0)"><fa-icon [icon]="faUserCircle"></fa-icon> Users</a></li>
+                </ul>
+        </mat-card-content>
+
+        </mat-card>
+        <br>
+        <app-feed-copyright></app-feed-copyright>

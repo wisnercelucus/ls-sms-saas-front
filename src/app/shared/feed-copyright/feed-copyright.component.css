@@ -1,0 +1,28 @@
+a{
+    text-decoration: none;
+}
+
+ul{
+    list-style: none;
+    padding: 0px !important;
+
+}
+ul li{
+    list-style: none;
+}
+
+.rights{
+    display: flex;
+    border-radius: 8px;
+    background-color: #f1f1f1;
+}
+
+.rights ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.rights ul li:last-child{
+    margin-right: 0px;
+}

@@ -1,38 +1,6 @@
 <section class="profile-section">
     <div class="side-profile-menu-left">
-    <mat-card class="side-menu-card">
-        <mat-card-header>
-            <div mat-card-avatar>
-                <img class="avatar-xs-card" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-            </div>
-            <mat-card-title>Wisner Celucus</mat-card-title>
-            <mat-card-subtitle>Developer</mat-card-subtitle>
-        </mat-card-header>
-
-        <mat-card-content>
-                <ul>
-                    <li><a class="nav-link" href="javascript:void(0)">Publish</a></li>
-                    <li><a class="nav-link" href="javascript:void(0)"><fa-icon [icon]="faHome"></fa-icon> Home</a></li>
-                    <li><a class="nav-link" href="javascript:void(0)"><fa-icon [icon]="faUser"></fa-icon> Profile</a></li>
-                    <li><a class="nav-link" href="javascript:void(0)"><fa-icon [icon]="faShareAltSquare"></fa-icon> Posts and shares</a></li>
-                    <li><a class="nav-link" href="javascript:void(0)"><fa-icon [icon]="faHeart"></fa-icon> Likes and replies</a></li>
-                    <mat-divider></mat-divider>
-                    <li><a class="nav-link" href="javascript:void(0)">Followers</a></li>
-                    <li><a class="nav-link" href="javascript:void(0)">Following</a></li>
-                     <mat-divider></mat-divider>
-                    <li><a class="nav-link" href="javascript:void(0)"><fa-icon [icon]="faUsers"></fa-icon> Groups</a></li>
-                    <li><a class="nav-link" href="javascript:void(0)"><fa-icon [icon]="faUserCircle"></fa-icon> Users</a></li>
-                </ul>
-        </mat-card-content>
-
-        </mat-card>
-        <br>
-        <div class="rights">
-            <ul>
-                <li>Confidentiality &middot; Terms &middot; Conditions</li>
-                <li class="copyright">&copy; LS SMS 2020 &middot; All rights reserved.</li>
-            </ul>
-        </div>
+    <app-feed-side-menu></app-feed-side-menu>
     </div>
 
     <div class="main-content">
@@ -64,141 +32,17 @@
           </mat-card>
         </div>
         <br>
-        <div class="user-activities">
-            <mat-card class="example-card">
-                <mat-card-header>
-                    <div mat-card-avatar class="example-header-image">
-                        <img class="avatar-xs-card" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-                    </div>
-                    <mat-card-title>Shiba Inu</mat-card-title>
-                    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                    <p>
-                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                    A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                    bred for hunting.
-                    </p>
-                </mat-card-content>
-                <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-                
-                <mat-card-actions>
-                    <button mat-button [matMenuTriggerFor]="aboveMenu"><fa-icon [icon]="faThumbsUp"></fa-icon> LIKE</button>
-                    <mat-menu #aboveMenu="matMenu" yPosition="above">
-                        <span class="reaction" mat-menu-item>
-                            <button mat-button><fa-icon [icon]="faThumbsUp"></fa-icon> </button>
-                            <button mat-button><fa-icon [icon]="faSmile"></fa-icon> </button>
-                            <button mat-button><fa-icon [icon]="faHeart"></fa-icon> </button>
-                        </span>
-                    </mat-menu>
-                    <button mat-button><fa-icon [icon]="faComment"></fa-icon> COMMENT</button>
-                    <button mat-button><fa-icon [icon]="faShareAltSquare"></fa-icon> SHARE</button>
-                </mat-card-actions>
-            </mat-card>
-                <br>
-        <mat-card class="example-card">
-        <mat-card-header>
-            <div mat-card-avatar class="example-header-image">
-                <img class="avatar-xs-card" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-            </div>
-            <mat-card-title>Shiba Inu</mat-card-title>
-            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <p>
-            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-            bred for hunting.
-            </p>
-        </mat-card-content>
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-                <mat-card-actions>
-                    <button mat-button [matMenuTriggerFor]="aboveMenu"><fa-icon [icon]="faThumbsUp"></fa-icon> LIKE</button>
-                    <mat-menu #aboveMenu="matMenu" yPosition="above">
-                        <span class="reaction" mat-menu-item>
-                            <button mat-button><fa-icon [icon]="faThumbsUp"></fa-icon> </button>
-                            <button mat-button><fa-icon [icon]="faSmile"></fa-icon> </button>
-                            <button mat-button><fa-icon [icon]="faHeart"></fa-icon> </button>
-                        </span>
-                    </mat-menu>
-                    <button mat-button><fa-icon [icon]="faComment"></fa-icon> COMMENT</button>
-                    <button mat-button><fa-icon [icon]="faShareAltSquare"></fa-icon> SHARE</button>
-                </mat-card-actions>
-        </mat-card>
 
-
-        </div>
+        <app-feed-timeline></app-feed-timeline>
 
     </div>
 
     <div class="side-profile-menu-right">
-        <div class="following-suggestions">
-        
-        <mat-card>
-        <h3>Colleagues you may want to follow</h3>
-        <mat-card-header>
-            <div mat-card-avatar>
-                <img class="avatar-xs-card" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-            </div>
-            <mat-card-title>Wisner Celucus</mat-card-title>
-            <mat-card-subtitle>Developer</mat-card-subtitle>
-        </mat-card-header>
-
-        <mat-card-actions>
-            <a mat-raised-button color="primary" href="javascript:void(0)">Follow</a>
-        </mat-card-actions>
-
-        <mat-card-header>
-            <div mat-card-avatar>
-                <img class="avatar-xs-card" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-            </div>
-            <mat-card-title>Wisner Celucus</mat-card-title>
-            <mat-card-subtitle>Developer</mat-card-subtitle>
-        </mat-card-header>
-
-        <mat-card-actions>
-            <a mat-raised-button color="primary" href="javascript:void(0)">Follow</a>
-        </mat-card-actions>
-
-
-        </mat-card>
-        </div>
+        <app-users-suggestions></app-users-suggestions>
         <br>
-        <div class="group-suggtions">
-
-        <mat-card>
-            <mat-card-header>
-                <div mat-card-avatar>
-                    <img class="avatar-xs-card" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-                </div>
-                <mat-card-title>Wisner Celucus</mat-card-title>
-                <mat-card-subtitle>Developer</mat-card-subtitle>
-            </mat-card-header>
-
-        <mat-card-content>
-                <ul>
-                    <li>Home</li>
-                    <li>Profile</li>
-                    <li>Posts and shares</li>
-                    <li>Likes and replies</li>
-                    <div></div>
-                    <li>Followers</li>
-                    <li>Following</li>
-                    <div></div>
-                    <li>Groups</li>
-                    <li>Users</li>
-                </ul>
-        </mat-card-content>
-        </mat-card>
+        <app-groups-suggestions></app-groups-suggestions>
         <br>
-            <div class="rights">
-                <ul>
-                    <li>Confidentiality &middot; Terms &middot; Conditions</li>
-                    <li class="copyright">&copy; LS SMS 2020 &middot; All rights reserved.</li>
-                </ul>
-            </div>
-        </div>
-
+        <app-feed-copyright></app-feed-copyright>
     </div>
 
 </section>

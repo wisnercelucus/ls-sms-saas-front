@@ -1,13 +1,33 @@
 <section class="feed">
-    <div class="left-col">
-        <h1>Side menu</h1>
-    </div>
-    <div class="timelime">
-        <h1>Timeline</h1>
+    <div class="side-profile-menu-left">
+    <app-feed-side-menu></app-feed-side-menu>
     </div>
 
-    <div class="right-col">
-        <h1>Poll and so</h1>
+    <div class="main-content">
+
+        <div class="publish-form">
+          <mat-card>
+            <mat-card-content>
+                <mat-tab-group>
+                    <mat-tab label="Say something?"> Content 1 </mat-tab>
+                    <mat-tab label="Poll"> Content 2 </mat-tab>
+                </mat-tab-group>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <br>
+        
+        <app-feed-timeline></app-feed-timeline>
+
+    </div>
+
+    <div class="side-profile-menu-right">
+        <app-users-suggestions></app-users-suggestions>
+        <br>
+        <app-groups-suggestions></app-groups-suggestions>
+        <br>
+        <app-feed-copyright></app-feed-copyright>
     </div>
 
 </section>
+
