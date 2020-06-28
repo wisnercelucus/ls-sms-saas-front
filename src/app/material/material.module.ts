@@ -23,7 +23,9 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatStepperModule} from '@angular/material/stepper';
-
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 const Materials = [
   MatButtonModule,
@@ -49,7 +51,10 @@ const Materials = [
   MatBadgeModule,
   MatDividerModule,
   MatSnackBarModule,
-  MatStepperModule
+  MatStepperModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
 ]
 
 

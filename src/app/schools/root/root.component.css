@@ -1,3 +1,85 @@
 .school-root{
-    padding-top: 70px;
+    padding-top: 50px;
+    display: flex;
+}
+
+.main-content{
+    padding-top: 20px !important; 
+}
+.school-root .side-menu{
+    flex: 1;
+    padding: 5px;
+    width: 280px;
+    max-width: 280px;
+}
+
+.school-root .main-content{
+    padding: 5px;
+    flex:3;
+}
+
+table {
+    width: 100%;
+}
+
+.data-table{
+    margin-top: 50px;
+}
+.table-actions{
+    display: flex;
+    flex-direction: row;
+    background-color: #1ce;
+    border-radius: 5px 5px 0px 0px;
+    color: white;
+    padding-top: 10px;
+    padding-left: 17px;
+}
+
+.table-actions mat-form-field{
+    flex: 1;
+    padding-right: 8px;
+    background-color: #1ce;
+    color: white;
+}
+
+.table-actions mat-form-field mat-label{
+    color:white;
+}
+
+.table-actions mat-paginator {
+    flex: 3;
+    background-color: #1ce;
+    color: white;
+}
+
+ul{
+    list-style: none;
+    padding: 0px !important;
+
+}
+ul li{
+    list-style: none;
+}
+
+.side-menu mat-card{
+    border-radius: 0px !important;
+}
+
+mat-card-content ul li{
+    list-style: none;
+
+}
+mat-expansion-panel ul li{
+    padding: 10px;
+    
+}
+mat-card-content ul li a{
+    text-decoration: none;
+    color: #272727;
+    width: 100%;
+    height: 100%;
+}
+
+mat-card-content ul li:hover{
+    cursor: pointer;
 }

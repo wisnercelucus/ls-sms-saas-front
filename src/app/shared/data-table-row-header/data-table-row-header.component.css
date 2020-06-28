@@ -1,0 +1,19 @@
+div{
+    padding-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+}
+div .add-btn{
+    background-color: dodgerblue;
+    color: white;
+}
+
+div h4{
+    flex: 1;
+}
+
+div whitespace{
+    flex: 3;
+}

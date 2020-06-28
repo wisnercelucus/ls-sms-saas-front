@@ -14,6 +14,7 @@ import { UsersSuggestionsComponent } from './users-suggestions/users-suggestions
 import { GroupsSuggestionsComponent } from './groups-suggestions/groups-suggestions.component';
 import { PublishModalFormComponent } from './publish-modal-form/publish-modal-form.component';
 import { FormDialogComponent } from './form-dialog/form-dialog.component';
+import { DataTableRowHeaderComponent } from './data-table-row-header/data-table-row-header.component';
 
 @NgModule({
     declarations:[
@@ -28,6 +29,7 @@ import { FormDialogComponent } from './form-dialog/form-dialog.component';
         GroupsSuggestionsComponent,
         PublishModalFormComponent,
         FormDialogComponent,
+        DataTableRowHeaderComponent,
     ],
 
     imports:[CommonModule, 
@@ -53,6 +55,7 @@ import { FormDialogComponent } from './form-dialog/form-dialog.component';
             UsersSuggestionsComponent,
             GroupsSuggestionsComponent,
             PublishModalFormComponent,
+            DataTableRowHeaderComponent,
         ]
 }
 )

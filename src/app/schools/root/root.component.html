@@ -1,3 +1,259 @@
 <section class="school-root">
-    <h1>School Root</h1>
+
+    <div class="side-menu">
+        <mat-card>
+            <mat-card-content>
+                <ul>
+                    <li>
+
+                        <mat-accordion>
+                            <mat-expansion-panel (opened)="panelOpenState = true"
+                                                (closed)="panelOpenState = false">
+                                <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Students
+                                </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <ul>
+                                    <li>
+                                        <a mat-raised-button class="nav-link" 
+                                            [routerLink]="['/school', 'tab', 'students']"
+                                            >View all</a>
+                                    </li>
+                                    <li>
+                                    <a mat-raised-button class="nav-link" href="javascript:void(0)">Add new</a>
+                                    </li>
+                                    <li>
+                                    <a mat-raised-button class="nav-link" href="javascript:void(0)">Filter</a>
+                                    </li>
+                                </ul>
+                            </mat-expansion-panel>
+
+                            <mat-expansion-panel (opened)="panelOpenState = true"
+                                                (closed)="panelOpenState = false">
+                                <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Attendances
+                                </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <ul>
+                                    <li>
+                                        <a mat-raised-button class="nav-link" href="javascript:void(0)">View all</a>
+                                    </li>
+                                    <li>
+                                    <a mat-raised-button class="nav-link" href="javascript:void(0)">Add new</a>
+                                    </li>
+                                    <li>
+                                    <a mat-raised-button class="nav-link" href="javascript:void(0)">Filter</a>
+                                    </li>
+                                </ul>
+                            </mat-expansion-panel>
+
+                            <mat-expansion-panel (opened)="panelOpenState = true"
+                                                (closed)="panelOpenState = false">
+                                <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Exam marks
+                                </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <ul>
+                                    <li>
+                                        <a mat-raised-button class="nav-link" href="javascript:void(0)">View all</a>
+                                    </li>
+                                    <li>
+                                    <a mat-raised-button class="nav-link" href="javascript:void(0)">Add new</a>
+                                    </li>
+                                    <li>
+                                    <a mat-raised-button class="nav-link" href="javascript:void(0)">Filter</a>
+                                    </li>
+                                </ul>
+                            </mat-expansion-panel>
+
+                            <mat-expansion-panel (opened)="panelOpenState = true"
+                                                (closed)="panelOpenState = false">
+                                <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Parents
+                                </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <ul>
+                                    <li>
+                                        <a mat-raised-button class="nav-link" href="javascript:void(0)">View all</a>
+                                    </li>
+                                    <li>
+                                    <a mat-raised-button class="nav-link" href="javascript:void(0)">Add new</a>
+                                    </li>
+                                    <li>
+                                    <a mat-raised-button class="nav-link" href="javascript:void(0)">Filter</a>
+                                    </li>
+                                </ul>
+                            </mat-expansion-panel>
+
+                            <mat-expansion-panel (opened)="panelOpenState = true"
+                                                (closed)="panelOpenState = false">
+                                <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Courses
+                                </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <ul>
+                                    <li>
+                                        <a mat-raised-button class="nav-link" href="javascript:void(0)">View all</a>
+                                    </li>
+                                    <li>
+                                    <a mat-raised-button class="nav-link" href="javascript:void(0)">Add new</a>
+                                    </li>
+                                    <li>
+                                    <a mat-raised-button class="nav-link" href="javascript:void(0)">Filter</a>
+                                    </li>
+                                </ul>
+                            </mat-expansion-panel>
+
+                            <mat-expansion-panel (opened)="panelOpenState = true"
+                                                (closed)="panelOpenState = false">
+                                <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Grades
+                                </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <ul>
+                                    <li>
+                                        <a mat-raised-button class="nav-link" href="javascript:void(0)">View all</a>
+                                    </li>
+                                    <li>
+                                    <a mat-raised-button class="nav-link" href="javascript:void(0)">Add new</a>
+                                    </li>
+                                    <li>
+                                    <a mat-raised-button class="nav-link" href="javascript:void(0)">Filter</a>
+                                    </li>
+                                </ul>
+                            </mat-expansion-panel>
+
+                            <mat-expansion-panel (opened)="panelOpenState = true"
+                                                (closed)="panelOpenState = false">
+                                <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Terms
+                                </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <ul>
+                                    <li>
+                                        <a mat-raised-button class="nav-link" href="javascript:void(0)">View all</a>
+                                    </li>
+                                    <li>
+                                    <a mat-raised-button class="nav-link" href="javascript:void(0)">Add new</a>
+                                    </li>
+                                    <li>
+                                    <a mat-raised-button class="nav-link" href="javascript:void(0)">Filter</a>
+                                    </li>
+                                </ul>
+                            </mat-expansion-panel>
+
+                            <mat-expansion-panel (opened)="panelOpenState = true"
+                                                (closed)="panelOpenState = false">
+                                <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Academic years
+                                </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <ul>
+                                    <li>
+                                        <a mat-raised-button class="nav-link" href="javascript:void(0)">View all</a>
+                                    </li>
+                                    <li>
+                                    <a mat-raised-button class="nav-link" href="javascript:void(0)">Add new</a>
+                                    </li>
+                                    <li>
+                                    <a mat-raised-button class="nav-link" href="javascript:void(0)">Filter</a>
+                                    </li>
+                                </ul>
+                            </mat-expansion-panel>
+                            <mat-expansion-panel (opened)="panelOpenState = true"
+                                                (closed)="panelOpenState = false">
+                                <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Payments
+                                </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <ul>
+                                    <li>
+                                        <a mat-raised-button class="nav-link" href="javascript:void(0)">View all</a>
+                                    </li>
+                                    <li>
+                                    <a mat-raised-button class="nav-link" href="javascript:void(0)">Add new</a>
+                                    </li>
+                                    <li>
+                                    <a mat-raised-button class="nav-link" href="javascript:void(0)">Filter</a>
+                                    </li>
+                                </ul>
+                            </mat-expansion-panel>
+
+                           <mat-expansion-panel (opened)="panelOpenState = true"
+                                                (closed)="panelOpenState = false">
+                                <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Bulk actions
+                                </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <ul>
+                                    <li>
+                                        <a mat-raised-button class="nav-link" href="javascript:void(0)">Mass import</a>
+                                    </li>
+                                    <li>
+                                    <a mat-raised-button class="nav-link" href="javascript:void(0)">Mass export</a>
+                                    </li>
+                                </ul>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </li>
+                </ul>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div class="main-content">
+        <div class="row-header">
+            <app-data-table-row-header [entityName]="entityName"></app-data-table-row-header>
+        </div>
+
+        <div class="data-table">
+            <div class="table-actions">
+                <mat-form-field>
+                    <mat-label>Search</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+                </mat-form-field>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            </div>
+                <table mat-table matSort [dataSource]="dataSource"  class="mat-elevation-z8">
+                <!-- Position Column -->
+                <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="weight">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Weight </th>
+                <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="symbol">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </th>
+                <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            </div>
+    </div>
+
 </section>

@@ -16,6 +16,7 @@ const routes: Routes = [
         {path:'information', component:InformationComponent},
         {path:'dashboard', component:DashboardComponent},
         {path:'admin', component:AdminComponent},
+        {path:'tab/:name', component:RootComponent},
       ]
     }
 ]

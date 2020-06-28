@@ -12,7 +12,9 @@ import { InformationComponent } from './information/information.component';
   declarations: [
     SchoolsComponent,
     AdminComponent, 
-    RootComponent, DashboardComponent, InformationComponent
+    RootComponent, 
+    DashboardComponent, 
+    InformationComponent
   ],
   imports: [
     SharedModule,
