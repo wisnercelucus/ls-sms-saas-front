@@ -7,15 +7,32 @@ div{
 
 }
 div .add-btn{
-    background-color: dodgerblue;
+    background-color: #474b7a;
     color: white;
     height: 40px;
 }
 
-div h4{
+div .status-data{
     flex: 1;
+    background-color: #474b7a;
+    padding: 10px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
 }
 
-div whitespace{
+div .status-data h4{
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.entity-info{
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+div .whitespace{
     flex: 3;
 }

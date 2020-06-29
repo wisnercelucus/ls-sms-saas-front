@@ -1,11 +1,12 @@
-table {
-    width: 100%;
+.data-table{
+  background-color: #272953;
+  border-radius: 3px 3px 0px 0px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
 }
-
 .table-actions{
     display: flex;
     flex-direction: row;
-    background-color: #2a3f54;
+    background-color: #474b7a;
     border-radius: 5px 5px 0px 0px;
     color: white;
     padding-top: 10px;
@@ -15,7 +16,7 @@ table {
 .table-actions mat-form-field{
     flex: 1;
     padding-right: 8px;
-    background-color:  #2a3f54;
+    background-color:  #474b7a;
     color: white;
 }
 
@@ -25,7 +26,7 @@ table {
 
 .table-actions mat-paginator {
     flex: 3;
-    background-color: #2a3f54;
+    background-color:#474b7a;
     color: white;
 }
 
@@ -37,13 +38,16 @@ table {
   table {
     width: 100%;
   }
-  
+  th {
+    font-size: 14px;
+    color:rgb(10, 10, 10);
+  }
+
   th, td{
     padding-left: 8px;
   }
 
-  td.mat-column-star {
-    width: 20px;
+  th.mat-column-star, td.mat-column-star {
     padding-right: 8px;
   }
   
@@ -56,8 +60,13 @@ table {
     padding-left: 8px;
   }
 
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
 
-  .mat-table-sticky:first-child {
+tr:hover {background-color: #cecbcb;}
+
+.mat-table-sticky:first-child {
     border-right: 1px solid #e0e0e0;
   }
   

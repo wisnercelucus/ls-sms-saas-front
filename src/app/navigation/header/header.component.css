@@ -55,6 +55,16 @@ a:hover{
     justify-content: space-around;
 }
 
+.handle-icon{
+    display: flex;
+}
+.handle-icon mat-icon{
+    margin-top: 3px;
+    font-size: 25px;
+    margin-right: 5px;
+    
+}
+
 .handle-user .username{
     flex: 1;
 }

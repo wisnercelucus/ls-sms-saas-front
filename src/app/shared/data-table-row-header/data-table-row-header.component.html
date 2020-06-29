@@ -1,5 +1,9 @@
 <div>
-    <h4>Total number of {{ entityName }}: {{ total }}</h4>
+    <div class="status-data">
+        <h4>{{ total }}</h4>
+        <p class="entity-info">{{ entityName }}</p>
+    </div>
+    
     <div class="whitespace"></div>
     <button mat-raised-button class="add-btn"><fa-icon [icon]="faPlus"></fa-icon> Add {{ entityName }}</button>
 </div>

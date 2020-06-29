@@ -1,10 +1,13 @@
 .school-root{
     padding-top: 50px;
     display: flex;
+    background-color: #272953;
+    color: white;
 }
 
 .main-content{
     padding-top: 20px !important; 
+    
 }
 .school-root .side-menu{
     flex: 1;
@@ -15,6 +18,7 @@
 
 .school-root .main-content{
     padding: 5px;
+    padding-right:12px;
     flex:3;
 }
 
@@ -30,7 +34,7 @@ ul li{
 
 .side-menu mat-card{
     border-radius: 0px !important;
-    background-color: #2a3f54;
+    background-color: #272953;
 }
 
 mat-card-content ul li{
@@ -44,16 +48,16 @@ mat-expansion-panel ul li{
 
 
 mat-expansion-panel{
-    background-color: #2a3f54;
+    background-color: #474b7a;
 }
 
 mat-expansion-panel mat-expansion-panel-header{
-    background-color: #2a3f54;
+    background-color: #474b7a;
     color: white;
 }
 
 mat-expansion-panel mat-expansion-panel-header:hover{
-    background-color: #2a3f54;
+    background-color: #474b7a;
 }
 
 mat-expansion-panel mat-expansion-panel-header mat-panel-title{
@@ -86,10 +90,14 @@ mat-card-content ul li:hover{
     padding: 4px;
     border-radius: 3px;
     margin-left: 5px;
+    margin-bottom: 8px;
 }
 
 @media screen and (max-width:1000px){
     .school-root .side-menu{
         display: none;
+    }
+    .school-root .main-content{
+        padding:12px;
     }
   }

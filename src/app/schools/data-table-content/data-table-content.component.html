@@ -3,7 +3,7 @@
             <app-data-table-row-header [entityName]="entityName" [total]="total"></app-data-table-row-header>
         </div>
 
-        <div class="data-table">
+    <div class="data-table">
        <div class="table-actions">
                 <mat-form-field>
                     <mat-label>Search</mat-label>
@@ -46,6 +46,7 @@
                 <td mat-cell *matCellDef="let element"> {{element.id}} </td>
                 </ng-container>
 
+                <span>
                 <!-- LastName Column -->
                 <ng-container matColumnDef="last_name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
@@ -88,7 +89,8 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
                 <td mat-cell *matCellDef="let element"> {{element.email}} </td>
                 </ng-container>
-
+                </span>
+                
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>

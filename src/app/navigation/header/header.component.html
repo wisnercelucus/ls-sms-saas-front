@@ -44,25 +44,23 @@
         </ul>
 
         <ul *ngIf="isAuthenticated" fxLayout fxLayoutGap="10px" class="nav-items">
-           
-            <li class="nav-item">
-                <a routerLink="/accounts/feed">Feed</a>
-            </li>
-
-            <li class="nav-item handle-user" [matMenuTriggerFor]="menu1">
-                Manage
-            </li>
-            <mat-menu #menu1="matMenu">
-            <a [routerLink]="['/school']"><button mat-menu-item>Entities</button></a>
-            <a [routerLink]="['/school/dashboard']"><button mat-menu-item>Dasboard</button></a>
-            <a routerLink="/school/admin"><button mat-menu-item>Admin</button></a>
-            <mat-divider></mat-divider>
-            <a routerLink="/school/information"><button mat-menu-item>School information</button></a>
-            </mat-menu>
-
             <li class="nav-item notification">
                 <mat-icon matBadge="6" matBadgeColor="warn">notifications</mat-icon>
             </li>
+
+            <li class="nav-item">
+                <a routerLink="/accounts/feed"><span class="handle-icon">
+                <mat-icon>dynamic_feed</mat-icon></span>
+                </a>
+            </li>
+
+            <li class="nav-item" [matMenuTriggerFor]="menu1">
+                <span class="handle-icon"><mat-icon>storage</mat-icon> Data center</span>
+            </li>
+            <mat-menu #menu1="matMenu">
+            <a [routerLink]="['/school']"><button mat-menu-item>Entities</button></a>
+            <a [routerLink]="['/school/dashboard']"><button mat-menu-item>Import/Export</button></a>
+            </mat-menu>
 
             <li class="nav-item handle-user" [matMenuTriggerFor]="menu">
                         <img class="avatar-xs" [src]="authenticateduser.image"> <span class="username"> {{authenticateduser.username }} </span>
@@ -74,6 +72,16 @@
             <a routerLink="/accounts/settings"><button mat-menu-item>Settings</button></a>
             <mat-divider></mat-divider>
             <button mat-menu-item (click)="onLogout()">Logout</button>
+            </mat-menu>
+
+            <li class="nav-item" [matMenuTriggerFor]="menu2">
+                <span class="handle-icon"><mat-icon>admin_panel_settings</mat-icon>Admin portal</span>
+            </li>
+            <mat-menu #menu2="matMenu">
+            <a [routerLink]="['/school/dashboard']"><button mat-menu-item>Dasboard</button></a>
+            <a routerLink="/school/admin"><button mat-menu-item>Admin</button></a>
+            <mat-divider></mat-divider>
+            <a routerLink="/school/information"><button mat-menu-item>School information</button></a>
             </mat-menu>
 
         </ul>
