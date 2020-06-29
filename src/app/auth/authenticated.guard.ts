@@ -18,7 +18,7 @@ export class AuthenticatedGuard implements CanActivate {
             take(1),
             map(user =>{
                 if(user){
-                this.router.navigate(['/school/feed']);
+                this.router.navigate(['/school']);
                 return false;
                 }else{
                     return true;

@@ -231,6 +231,9 @@
     </div>
     
     <div class="main-content">
+        <div class="placeholder" *ngIf="atSchoolRoot">
+            <h1>Perform an action to the left...</h1>
+        </div>
         <router-outlet></router-outlet>
     </div>
 </section>

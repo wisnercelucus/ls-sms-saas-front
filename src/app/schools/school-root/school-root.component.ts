@@ -1,26 +1,56 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, OnDestroy} from '@angular/core';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Event, NavigationStart, NavigationEnd } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-school-root',
   templateUrl: './school-root.component.html',
   styleUrls: ['./school-root.component.css']
 })
-export class SchoolRootComponent implements OnInit {
-  tabName=false;
+export class SchoolRootComponent implements OnInit, OnDestroy {
+
   panelOpenState = false; 
-  constructor(private router:Router, private route: ActivatedRoute) {}
+  atSchoolRoot=false;
+  subscription:Subscription;
+
+  constructor(private router:Router, private route: ActivatedRoute) {
+    this.subscription = this.router.events.subscribe(
+      (event: Event) => {
+        if(event instanceof NavigationStart){
+
+        }
+        if(event instanceof NavigationEnd){
+          if(window.location.pathname != '/school'){
+              this.atSchoolRoot = false;
+          }else{
+            this.atSchoolRoot = true;
+          }
+          
+        }
+      }
+    )
+
+    
+  }
   
 
   ngOnInit(): void { 
-    
+    this.atSchoolRoot = window.location.pathname === '/school'? true : false;
+  }
+  ngOnDestroy(){
+
+  }
+
+  ngAfterViewInt(){
+
   }
 
   getSelectedtab(tabName:string){
       if(tabName){
-        this.tabName=true;
         this.router.navigate(['/school', 'tab', tabName])
+      }else{
+        return;
       }
   }
 

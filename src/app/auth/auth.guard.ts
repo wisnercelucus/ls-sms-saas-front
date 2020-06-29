@@ -20,6 +20,7 @@ export class AuthGuard implements CanActivate{
             map(user => {
                 const isAuthenticated = !!user;
                 if(isAuthenticated){
+                    //console.log(route.toString())
                     return true;
                 }else{
 
