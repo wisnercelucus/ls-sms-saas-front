@@ -3,20 +3,22 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../auth/auth.guard';
 import { SchoolsComponent } from './schools.component';
 import { AdminComponent } from './admin/admin.component';
-import { RootComponent } from './root/root.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { InformationComponent } from './information/information.component';
+import { SchoolRootComponent } from './school-root/school-root.component';
+import { DataTableContentComponent } from './data-table-content/data-table-content.component';
 
 
 const routes: Routes = [
     {path:'school', component:SchoolsComponent, 
       canActivate:[AuthGuard], 
       children:[
-        {path:'', component:RootComponent},
+        {path:'', component:SchoolRootComponent, children:[
+              {path:'tab/:name', component:DataTableContentComponent}
+        ]},
         {path:'information', component:InformationComponent},
         {path:'dashboard', component:DashboardComponent},
         {path:'admin', component:AdminComponent},
-        {path:'tab/:name', component:RootComponent},
       ]
     }
 ]
@@ -26,5 +28,5 @@ const routes: Routes = [
     exports:[RouterModule]
 })
 export class SchoolRoutingModule{
-
+  
 }

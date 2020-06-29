@@ -8,6 +8,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 })
 export class DataTableRowHeaderComponent implements OnInit {
   @Input() entityName:string;
+  @Input() total:number;
   faPlus = faPlus;
   
   constructor() { }

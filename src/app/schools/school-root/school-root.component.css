@@ -18,39 +18,6 @@
     flex:3;
 }
 
-table {
-    width: 100%;
-}
-
-.data-table{
-    margin-top: 50px;
-}
-.table-actions{
-    display: flex;
-    flex-direction: row;
-    background-color: #1ce;
-    border-radius: 5px 5px 0px 0px;
-    color: white;
-    padding-top: 10px;
-    padding-left: 17px;
-}
-
-.table-actions mat-form-field{
-    flex: 1;
-    padding-right: 8px;
-    background-color: #1ce;
-    color: white;
-}
-
-.table-actions mat-form-field mat-label{
-    color:white;
-}
-
-.table-actions mat-paginator {
-    flex: 3;
-    background-color: #1ce;
-    color: white;
-}
 
 ul{
     list-style: none;
@@ -63,16 +30,41 @@ ul li{
 
 .side-menu mat-card{
     border-radius: 0px !important;
+    background-color: #2a3f54;
 }
 
 mat-card-content ul li{
     list-style: none;
 
 }
+
 mat-expansion-panel ul li{
     padding: 10px;
-    
 }
+
+mat-expansion-panel{
+    background-color: #2a3f54;
+}
+
+mat-expansion-panel mat-expansion-panel-header{
+    background-color: #2a3f54;
+    color: white;
+}
+
+mat-expansion-panel mat-expansion-panel-header:hover{
+    background-color: #2a3f54;
+}
+
+mat-expansion-panel mat-expansion-panel-header mat-panel-title{
+    color: white;
+}
+
+mat-expansion-panel mat-expansion-panel-header:hover mat-panel-title{
+    color: white;
+
+}
+
+
 mat-card-content ul li a{
     text-decoration: none;
     color: #272727;

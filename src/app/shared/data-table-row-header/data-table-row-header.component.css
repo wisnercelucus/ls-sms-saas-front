@@ -3,11 +3,13 @@ div{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    padding-bottom: 30px;
 
 }
 div .add-btn{
     background-color: dodgerblue;
     color: white;
+    height: 40px;
 }
 
 div h4{
