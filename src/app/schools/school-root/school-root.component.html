@@ -72,6 +72,26 @@
                                                 (closed)="panelOpenState = false">
                                 <mat-expansion-panel-header>
                                 <mat-panel-title>
+                                    Teachers
+                                </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <ul>
+                                    <li>
+                                        <a mat-raised-button class="nav-link" (click)="getSelectedtab('teachers')">View all</a>
+                                    </li>
+                                    <li>
+                                    <a mat-raised-button class="nav-link" href="javascript:void(0)">Add new</a>
+                                    </li>
+                                    <li>
+                                    <a mat-raised-button class="nav-link" href="javascript:void(0)">Filter</a>
+                                    </li>
+                                </ul>
+                            </mat-expansion-panel>
+
+                            <mat-expansion-panel (opened)="panelOpenState = true"
+                                                (closed)="panelOpenState = false">
+                                <mat-expansion-panel-header>
+                                <mat-panel-title>
                                     Parents
                                 </mat-panel-title>
                                 </mat-expansion-panel-header>
@@ -211,10 +231,6 @@
     </div>
     
     <div class="main-content">
-        <div class="displayIfNothing" *ngIf="!tabName">
-            <h1>Select an ation to the left</h1>
-        </div>
-
         <router-outlet></router-outlet>
     </div>
 </section>

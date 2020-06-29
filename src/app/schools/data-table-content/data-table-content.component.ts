@@ -6,7 +6,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { ActivatedRoute, Router, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 import {Event as ngEvent } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Student } from './entities.model';
+import { Student, Attendance, Teacher, Course, Operation, Payment, Grade, Term, Parent, ExamMark } from './entities.model';
 
 @Component({
   selector: 'app-data-table-content',
@@ -26,6 +26,7 @@ export class DataTableContentComponent implements OnInit, OnDestroy {
   gradesSelected=false;
   operationsSelected=false;
   marksSelected=false;
+  teachersSelected=false;
 
   tabName = false;
   entityName:string;
@@ -75,9 +76,10 @@ export class DataTableContentComponent implements OnInit, OnDestroy {
                 this.gradesSelected=false;
                 this.operationsSelected=false;
                 this.marksSelected=false;
+                this.teachersSelected=false;
                 this.initialLizetableOnNav('students', 
                 new MatTableDataSource<Student>(STUDENT_DATA),
-                ['star','last_name', 'first_name', 'id', 'sex', 'address']);
+                ['star', 'id', 'last_name', 'first_name', 'sex', 'city', 'address', 'phone', 'email']);
             break;
           }
           case 'attendances':{
@@ -90,9 +92,10 @@ export class DataTableContentComponent implements OnInit, OnDestroy {
               this.gradesSelected=false;
               this.operationsSelected=false;
               this.marksSelected=false;
+              this.teachersSelected=false;
               this.initialLizetableOnNav('attendances', 
-              new MatTableDataSource<Student>(ATTENDANCE_DATA),
-              ['star','name', 'position', 'weight', 'symbol']);
+              new MatTableDataSource<Attendance>(ATTENDANCE_DATA),
+              ['star','id', 'date', 'attended', 'remarks']);
           break;
           }
     
@@ -106,12 +109,30 @@ export class DataTableContentComponent implements OnInit, OnDestroy {
             this.gradesSelected=false;
             this.operationsSelected=false;
             this.marksSelected=false;
+            this.teachersSelected=false;
             this.initialLizetableOnNav('parents', 
-            new MatTableDataSource<Student>(ATTENDANCE_DATA),
-            ['star','name', 'position', 'weight', 'symbol']);
+            new MatTableDataSource<Parent>(PARENT_DATA),
+            ['star', 'id', 'last_name', 'first_name', 'sex', 'city', 'address', 'phone', 'email']);
         break;
         }
         
+        case 'teachers':{
+          this.teachersSelected=true;
+          this.parentsSelected=false;
+          this.attendancesSelected = false;
+          this.studentsSelected = false;
+          this.coursesSelected=false;
+          this.termsSelected=false;
+          this.paymentsSelected=false;
+          this.gradesSelected=false;
+          this.operationsSelected=false;
+          this.marksSelected=false;
+          this.initialLizetableOnNav('teachers', 
+          new MatTableDataSource<Teacher>(TEACHER_DATA),
+          ['star', 'id', 'last_name', 'first_name', 'sex', 'city', 'address', 'phone', 'email']);
+      break;
+      }
+
         case 'marks':{
           this.marksSelected=true;
           this.parentsSelected=false;
@@ -122,9 +143,10 @@ export class DataTableContentComponent implements OnInit, OnDestroy {
           this.paymentsSelected=false;
           this.gradesSelected=false;
           this.operationsSelected=false;
+          this.teachersSelected=false;
           this.initialLizetableOnNav('exams marks', 
-          new MatTableDataSource<Student>(ATTENDANCE_DATA),
-          ['star','name', 'position', 'weight', 'symbol']);
+          new MatTableDataSource<ExamMark>(MARK_DATA),
+          ['star','id', 'date', 'mark']);
         break;
       }
     
@@ -138,9 +160,10 @@ export class DataTableContentComponent implements OnInit, OnDestroy {
         this.paymentsSelected=false;
         this.gradesSelected=false;
         this.operationsSelected=false;
+        this.teachersSelected=false;
         this.initialLizetableOnNav('terms', 
-        new MatTableDataSource<Student>(ATTENDANCE_DATA),
-        ['star','name', 'position', 'weight', 'symbol']);
+        new MatTableDataSource<Term>(TERM_DATA),
+        ['star','id', 'name']);
       break;
       }
     
@@ -154,9 +177,10 @@ export class DataTableContentComponent implements OnInit, OnDestroy {
         this.coursesSelected=false;
         this.paymentsSelected=false;
         this.gradesSelected=false;
+        this.teachersSelected=false;
         this.initialLizetableOnNav('academic year', 
-        new MatTableDataSource<Student>(ATTENDANCE_DATA),
-        ['star','name', 'position', 'weight', 'symbol']);
+        new MatTableDataSource<Operation>(OPERATION_DATA),
+        ['star','id', 'name']);
       break;
       }
     
@@ -170,9 +194,10 @@ export class DataTableContentComponent implements OnInit, OnDestroy {
         this.studentsSelected = false;
         this.coursesSelected=false;
         this.gradesSelected=false;
+        this.teachersSelected=false;
         this.initialLizetableOnNav('payments', 
-        new MatTableDataSource<Student>(ATTENDANCE_DATA),
-        ['star','name', 'position', 'weight', 'symbol']);
+        new MatTableDataSource<Payment>(PAYMENT_DATA),
+        ['star','id', 'date', 'amount', 'remark']);
       break;
       }
     
@@ -186,9 +211,10 @@ export class DataTableContentComponent implements OnInit, OnDestroy {
         this.attendancesSelected = false;
         this.studentsSelected = false;
         this.gradesSelected=false;
+        this.teachersSelected=false;
         this.initialLizetableOnNav('courses', 
-        new MatTableDataSource<Student>(ATTENDANCE_DATA),
-        ['star','name', 'position', 'weight', 'symbol']);
+        new MatTableDataSource<Course>(COURSE_DATA),
+        ['star','id', 'name', 'code', 'description', 'base', 'coefficient']);
       break;
       }
     
@@ -202,9 +228,10 @@ export class DataTableContentComponent implements OnInit, OnDestroy {
         this.attendancesSelected = false;
         this.studentsSelected = false;
         this.coursesSelected=false;
+        this.teachersSelected=false;
         this.initialLizetableOnNav('grades', 
-        new MatTableDataSource<Student>(ATTENDANCE_DATA),
-        ['star','name', 'position', 'weight', 'symbol']);
+        new MatTableDataSource<Grade>(GRADE_DATA),
+        ['star','id', 'name', 'description']);
       break;
     
       }
@@ -215,7 +242,7 @@ export class DataTableContentComponent implements OnInit, OnDestroy {
     this.onInitializetable();
 }
   initialLizetableOnNav(tab:string, 
-    datasource:MatTableDataSource<Student>, 
+    datasource:MatTableDataSource<any>, 
     columns:string[]){
   
     if(tab){
@@ -260,9 +287,43 @@ export class DataTableContentComponent implements OnInit, OnDestroy {
 
 
 const STUDENT_DATA: Student[] = [
-  {id:0, last_name:'Celucus', first_name:'Wisner', sex:'Male', address:"Clercine 12"},
+  {id:0, last_name:'Celucus', first_name:'Wisner', sex:'Male', address:"Clercine 12", phone:33511661, email:'wcelucus@gmail.com', city:'Tabarre'},
+  {id:1, last_name:'Badeau', first_name:'Fanfan', sex:'Male', address:"Clercine 14", phone:37017727, email:'alexy@gmail.com', city:'Petion Ville'},
 ];
 
 
-const ATTENDANCE_DATA: Student[] = [];
+const ATTENDANCE_DATA: Attendance[] = [
+  {id:0, date:new Date(), attended:true, remarks:"On time"},
+];
 
+const TEACHER_DATA: Teacher[] = [
+  {id:1, last_name:'Badeau', first_name:'Fanfan', sex:'Male', address:"Clercine 14", phone:37017727, email:'alexy@gmail.com', city:'Petion Ville'},
+];
+
+const COURSE_DATA: Course[] = [
+  {id:0, name:'English compostion I', code:'Eng001', description:'Entry level course.', base:10, coefficient:3},
+];
+
+const TERM_DATA: Term[] = [
+  {id:0, name:'First Control'}
+];
+
+const GRADE_DATA: Grade[] = [
+  {id:0, name:'First Grade', description:'Entry level course.'}
+];
+
+const PAYMENT_DATA: Payment[] = [
+  {id:0, date:new Date(), amount:575, remark:'Second versement'}
+];
+
+const OPERATION_DATA: Operation[] = [
+  {id:0, name:'Academic Year 2020'}
+];
+
+const PARENT_DATA: Parent[] = [
+  {id:1, last_name:'Badeau', first_name:'Fanfan', sex:'Male', address:"Clercine 14", phone:37017727, email:'alexy@gmail.com', city:'Petion Ville'},
+];
+
+const MARK_DATA: ExamMark[] = [
+  {id:0, date:new Date(), mark:89}
+];

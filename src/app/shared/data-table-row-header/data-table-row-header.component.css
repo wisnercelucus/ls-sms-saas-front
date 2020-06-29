@@ -3,7 +3,7 @@ div{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    padding-bottom: 30px;
+    padding-bottom: 15px;
 
 }
 div .add-btn{

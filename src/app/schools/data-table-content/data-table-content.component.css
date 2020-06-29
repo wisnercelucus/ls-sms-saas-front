@@ -2,9 +2,6 @@ table {
     width: 100%;
 }
 
-.data-table{
-    margin-top: 50px;
-}
 .table-actions{
     display: flex;
     flex-direction: row;
@@ -32,7 +29,7 @@ table {
     color: white;
 }
 
-.example-container {
+.table-container {
     width: min(1300px, 100%);
     overflow: auto;
   }
@@ -41,13 +38,18 @@ table {
     width: 100%;
   }
   
+  th, td{
+    padding-left: 8px;
+  }
+
   td.mat-column-star {
     width: 20px;
     padding-right: 8px;
   }
   
-  th.mat-column-position, td.mat-column-position {
+  th.mat-column-id, td.mat-column-id {
     padding-left: 8px;
+    width: 30px !important;
   }
 
   th.mat-column-name, td.mat-column-name {
@@ -61,10 +63,4 @@ table {
   
   .mat-table-sticky:last-child {
     border-left: 1px solid #e0e0e0;
-  }
-
-  @media screen and (max-width:1000px){
-    .school-root .side-menu{
-        display: none;
-    }
   }

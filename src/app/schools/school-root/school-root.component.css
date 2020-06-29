@@ -75,3 +75,9 @@ mat-card-content ul li a{
 mat-card-content ul li:hover{
     cursor: pointer;
 }
+
+@media screen and (max-width:1000px){
+    .school-root .side-menu{
+        display: none;
+    }
+  }
