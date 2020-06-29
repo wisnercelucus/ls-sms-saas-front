@@ -27,6 +27,7 @@ import { AuthRoutingModule } from './auth/auth-routing.module';
 import { DonateModule } from './donate/donate.module';
 import { DonateRoutingModule } from './donate/donate-routing.module';
 import { UsersRoutingModule } from './users/users-routing.module';
+import { ForumComponent } from './forum/forum.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { UsersRoutingModule } from './users/users-routing.module';
     TestimonialsComponent,
     FaqComponent,
     ParticlesComponent,
+    ForumComponent,
   ],
   imports: [
     AuthModule,
