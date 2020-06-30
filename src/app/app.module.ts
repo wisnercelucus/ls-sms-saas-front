@@ -27,7 +27,8 @@ import { AuthRoutingModule } from './auth/auth-routing.module';
 import { DonateModule } from './donate/donate.module';
 import { DonateRoutingModule } from './donate/donate-routing.module';
 import { UsersRoutingModule } from './users/users-routing.module';
-import { ForumComponent } from './forum/forum.component';
+import { ForumModule } from './forum/forum.module';
+import { ForumRoutingModule } from './forum/forum.routing';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,6 @@ import { ForumComponent } from './forum/forum.component';
     TestimonialsComponent,
     FaqComponent,
     ParticlesComponent,
-    ForumComponent,
   ],
   imports: [
     AuthModule,
@@ -57,7 +57,9 @@ import { ForumComponent } from './forum/forum.component';
     AuthRoutingModule,
     DonateModule,
     DonateRoutingModule,
-    UsersRoutingModule
+    UsersRoutingModule,
+    ForumModule,
+    ForumRoutingModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi:true}],
   bootstrap: [AppComponent]

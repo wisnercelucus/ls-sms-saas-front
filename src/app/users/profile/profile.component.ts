@@ -7,6 +7,9 @@ import { faBirthdayCake,
           faHeart,
          faSmile , 
          faUserCircle, faUsers, faHome, faUser} from '@fortawesome/free-solid-svg-icons';
+import { UsersService } from '../users.service';
+import { User } from '../user.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -25,11 +28,32 @@ export class ProfileComponent implements OnInit {
   faUsers = faUsers;
   faHome = faHome;
   faUser = faUser;
-
-
-  constructor() { }
+  
+  loginUser:User;
+  loginUserSub:Subscription;
+  
+  constructor(private userService:UsersService) { }
 
   ngOnInit(): void {
+    this.getLogingUser()
   }
+
+  getLogingUser(){
+    this.loginUserSub = this.userService.getMyProfile().subscribe(
+      user=>{
+        if(user){
+          this.loginUser = new User(user['username'],
+                          user['email'], 
+                          user['image'],
+                          user['is_staff'],
+                          user['is_superuser'],
+                          user['last_name'],
+                          user['id'],
+                          user['first_name']);
+        }
+
+      }
+    );
+}
 
 }

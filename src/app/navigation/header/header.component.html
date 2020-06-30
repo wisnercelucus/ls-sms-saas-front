@@ -93,7 +93,7 @@
 
 
             <li class="nav-item handle-user" [matMenuTriggerFor]="menu">
-                        <img class="avatar-xs" [src]="authenticateduser.image"> <span class="username"> {{authenticateduser.username }} </span>
+                        <img class="avatar-xs" *ngIf="loginUser" [src]="loginUser.image"> <span class="username"> {{ loginUser.username }} </span>
             </li>
             <mat-menu #menu="matMenu">
             <a [routerLink]="['/accounts', authenticateduser.username]"><button mat-menu-item>Profile</button></a>

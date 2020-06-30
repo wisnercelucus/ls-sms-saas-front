@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Subscription, Subject, throwError, BehaviorSubject } from 'rxjs';
+import { Subscription, throwError, BehaviorSubject } from 'rxjs';
 import { Client } from './register/client.model';
 import {catchError, tap} from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { User } from '../users/user.model';
+import { AuthUser } from '../users/user.model';
 
 
 @Injectable({
@@ -12,7 +12,7 @@ import { User } from '../users/user.model';
 })
 export class AuthService {
   subscrition: Subscription;
-  user = new BehaviorSubject<User>(null);
+  authUser = new BehaviorSubject<AuthUser>(null);
   loginRedirectUrl = "";
   instance:string;
   tenantUrl:string;
@@ -34,27 +34,15 @@ export class AuthService {
   handleAutentication(username:string, 
                       email:string, 
                       token:string,
-                      image:string,
-                      is_staff:boolean,
-                      is_superuser:boolean,
-                      last_name:string,
-                      user_id:number,
-                      first_name:string
                       ){
-    const user = new User(
+    const authUser = new AuthUser(
       username,
       email,
-      token,
-      image,
-      is_staff,
-      is_superuser,
-      last_name,
-      user_id,
-      first_name
+      token
     );
 
-    this.user.next(user);
-    localStorage.setItem('userData', JSON.stringify(user))
+    this.authUser.next(authUser);
+    localStorage.setItem('authUserData', JSON.stringify(authUser))
   }
 
   login(username:string, password:string, instance?:string, redirectUrl?:string){
@@ -78,13 +66,7 @@ export class AuthService {
                   this.handleAutentication(
                                             resData['username'], 
                                             resData['email'], 
-                                            resData['token'],
-                                            this.tenantUrl + resData['image'],
-                                            resData['is_staff'],
-                                            resData['is_superuser'],
-                                            resData['last_name'],
-                                            resData['user_id'],
-                                            resData['first_name']
+                                            resData['token']
                                             )
                   
                   if(this.loginRedirectUrl){
@@ -97,34 +79,23 @@ export class AuthService {
   }
   
   autoLogin(){
-    const userData: {
+    const authUserData: {
       username:string,
       email:string,
-      _token:string,
-      image:string,
-      is_staff:boolean,
-      is_superuser:boolean,
-      last_name:string,
-      user_id:number,
-      first_name:string,
-    } = JSON.parse(localStorage.getItem('userData'));
+      _token:string
+    } = JSON.parse(localStorage.getItem('authUserData'));
 
-    if(!userData){
+    if(!authUserData){
       return;
     }
-    const loadedUser = new User(userData.username, 
-                                userData.email, 
-                                userData._token,
-                                userData.image,
-                                userData.is_staff,
-                                userData.is_superuser,
-                                userData.last_name,
-                                userData.user_id,
-                                userData.first_name
-                                );
+    const loadedUser = new AuthUser(
+      authUserData.username, 
+      authUserData.email, 
+      authUserData._token
+    );
 
     if(loadedUser.token){
-      this.user.next(loadedUser);
+      this.authUser.next(loadedUser);
     }else{
       return;
     }
@@ -132,9 +103,9 @@ export class AuthService {
 
 
   logout(){
-    if(this.user){
-      this.user.next(null);
-      localStorage.removeItem('userData');
+    if(this.authUser){
+      this.authUser.next(null);
+      localStorage.removeItem('authUserData');
       this.router.navigate(['/auth/login']);
 
     }else{
@@ -158,7 +129,7 @@ export class AuthService {
   }
 
   isAuthenticated(){
-    return !!this.user
+    return !!this.authUser
   }
 
   /*--- Reset Password ---*/

@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, Event, NavigationStart, NavigationEnd } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { AppService } from './app.service';
 import { UsersService } from './users/users.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
 
   showLoadingSpinner = false;
   instance:string;
+  userSubs:Subscription;
 
   constructor(private router: Router, 
               private authService: AuthService,
@@ -41,6 +43,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void{
     this.authService.autoLogin();
+    
 
     this.appService.TENANT_URL = 
              this.appService.PROTOCOL 
@@ -56,6 +59,11 @@ export class AppComponent implements OnInit {
     this.usersService.instance = this.instance;
     this.usersService.tenantUrl = this.appService.TENANT_URL;
     
+  }
+  ngOnDestroy(){
+    if(this.userSubs){
+      this.userSubs.unsubscribe()
+    }
   }
 
 }

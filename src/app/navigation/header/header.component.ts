@@ -2,8 +2,9 @@ import { Component, OnInit, EventEmitter, Output, OnDestroy} from '@angular/core
 import { Subscription} from 'rxjs';
 import { Router} from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
-import { User } from 'src/app/users/user.model';
+import { User, AuthUser } from 'src/app/users/user.model';
 import { AppService } from 'src/app/app.service';
+import { UsersService } from 'src/app/users/users.service';
 
 @Component({
   selector: 'app-header',
@@ -15,47 +16,78 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated=false;
   subscription: Subscription;
   userSubs: Subscription;
-  authenticateduser:User;
+  loginUserSub:Subscription;
+  authenticateduser:AuthUser;
   image:string;
   instance:string;
+  loginUser:User;
 
-  constructor(private router: Router, private authService: AuthService, private appService:AppService) { }
+  constructor(private router: Router, 
+              private authService: AuthService, 
+              private appService:AppService, private userService:UsersService) { }
+
   timer: any;
 
   ngOnInit(): void {
       this.urlHasInstance();
       
-      this.userSubs = this.authService.user.subscribe(user=>{
+      this.userSubs = this.authService.authUser.subscribe(user=>{
       this.isAuthenticated = !!user;
       if(this.isAuthenticated){
-        this.authenticateduser = new User(
+        this.authenticateduser = new AuthUser(
           user.username,
           user.email,
-          user.token,
-          user.image,
-          user.is_staff,
-          user.is_superuser,
-          user.last_name,
-          user.user_id,
-          user.first_name
+          user.token
         );
+
+        this.getLogingUser();
+
       }
 
     });
+
   }
+
+  ngAfterViewInit(){
+    if(!this.loginUser){
+        this.getLogingUser();
+    }
+  }
+
+  getLogingUser(){
+      this.loginUserSub = this.userService.getMyProfile().subscribe(
+        user=>{
+          if(user){
+            this.loginUser = new User(user['username'],
+                            user['email'], 
+                            user['image'],
+                            user['is_staff'],
+                            user['is_superuser'],
+                            user['last_name'],
+                            user['id'],
+                            user['first_name']);
+          }
+
+        }
+      );
+  }
+
 
   onToggleSiveNav(){
     this.sideNavToggle.emit()
-
   }
 
   onLogout(){
     this.authService.logout();
+    this.userService.loginUser.next(null);
   }
   
   ngOnDestroy(){
     if (this.userSubs){
       this.userSubs.unsubscribe();
+    }
+    if(this.loginUserSub){
+      this.loginUserSub.unsubscribe()
     }
   }
 
@@ -94,6 +126,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   toContact(){
     this.navigateTo("contact", "/") 
   }
+
   urlHasInstance(){
     if(window.location.hostname === this.appService.BASE_DOMAIN){
       this.instance=null;

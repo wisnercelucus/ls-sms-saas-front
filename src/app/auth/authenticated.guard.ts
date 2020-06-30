@@ -14,7 +14,7 @@ export class AuthenticatedGuard implements CanActivate {
     canActivate(): boolean 
                    | Promise<boolean> 
                    | Observable<boolean | UrlTree> {
-        return this.authService.user.pipe(
+        return this.authService.authUser.pipe(
             take(1),
             map(user =>{
                 if(user){

@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { PublishModalFormComponent } from '../publish-modal-form/publish-modal-form.component';
 import { Subscription } from 'rxjs';
+import { UsersService } from 'src/app/users/users.service';
+import { User } from 'src/app/users/user.model';
 
  
 @Component({
@@ -32,21 +34,51 @@ export class FeedSideMenuComponent implements OnInit, OnDestroy {
   faUser = faUser;
   
   subscrition:Subscription;
+  loginUser:User;
+  loginUserSub:Subscription;
 
   constructor(private router:Router,
-    public dialog: MatDialog
+    public dialog: MatDialog, private userService:UsersService
     ) { }
 
   ngOnInit(): void {
+    this.getLogingUser();
   }
+
+  ngAfterViewInit(){
+      
+  }
+
+  getLogingUser(){
+      this.loginUserSub = this.userService.getMyProfile().subscribe(
+        user=>{
+          if(user){
+            this.loginUser = new User(user['username'],
+                            user['email'], 
+                            user['image'],
+                            user['is_staff'],
+                            user['is_superuser'],
+                            user['last_name'],
+                            user['id'],
+                            user['first_name']);
+            console.log(this.loginUser)
+          }
+
+        }
+      );
+  }
+
+
   ngOnDestroy(){
     if(this.subscrition){
       this.subscrition.unsubscribe()
     }
   }
+  
   navigateTo(path:string){
     this.router.navigate([path])
   }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(PublishModalFormComponent, {
       width: '500px',
