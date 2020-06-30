@@ -3,6 +3,7 @@
   border-radius: 3px 3px 0px 0px;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
 }
+
 .table-actions{
     display: flex;
     flex-direction: row;
@@ -30,14 +31,11 @@
     color: white;
 }
 
-.table-container {
-    width: min(1300px, 100%);
-    overflow: auto;
-  }
   
   table {
     width: 100%;
   }
+
   th {
     font-size: 14px;
     color:rgb(10, 10, 10);

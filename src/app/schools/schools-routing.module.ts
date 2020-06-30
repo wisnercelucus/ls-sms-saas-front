@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { InformationComponent } from './information/information.component';
 import { SchoolRootComponent } from './school-root/school-root.component';
 import { DataTableContentComponent } from './data-table-content/data-table-content.component';
+import { EntitiesFormsComponent } from './entities-forms/entities-forms.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
       canActivate:[AuthGuard], 
       children:[
         {path:'', component:SchoolRootComponent, children:[
-              {path:'tab/:name', component:DataTableContentComponent}
+              {path:'tab/:name', component:DataTableContentComponent},
+              {path:':name/add', component:EntitiesFormsComponent}
         ]},
         {path:'information', component:InformationComponent},
         {path:'dashboard', component:DashboardComponent},

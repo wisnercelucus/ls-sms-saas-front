@@ -1,5 +1,4 @@
 <section class="school-root">
-
     <div class="side-menu">
         <mat-card>
             <mat-card-content>
@@ -20,7 +19,7 @@
                                             >View all</a>
                                     </li>
                                     <li>
-                                    <a mat-raised-button class="nav-link" href="javascript:void(0)">Add new</a>
+                                        <a mat-raised-button class="nav-link" [routerLink]="['/school', 'students', 'add']">Add new</a>
                                     </li>
                                     <li>
                                     <a mat-raised-button class="nav-link" href="javascript:void(0)">Filter</a>
@@ -233,7 +232,9 @@
         <div class="placeholder" *ngIf="atSchoolRoot">
             <h1>Perform an action to the left...</h1>
         </div>
+        <div>
         <router-outlet></router-outlet>
+        </div>
     </div>
 </section>
 

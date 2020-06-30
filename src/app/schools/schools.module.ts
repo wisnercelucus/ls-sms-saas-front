@@ -8,6 +8,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { InformationComponent } from './information/information.component';
 import { SchoolRootComponent } from './school-root/school-root.component';
 import { DataTableContentComponent } from './data-table-content/data-table-content.component';
+import { EntitiesFormsComponent } from './entities-forms/entities-forms.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { DataTableContentComponent } from './data-table-content/data-table-conte
     DashboardComponent, 
     InformationComponent, 
     SchoolRootComponent,
-    DataTableContentComponent
+    DataTableContentComponent,
+    EntitiesFormsComponent
   ],
   imports: [
     SharedModule,

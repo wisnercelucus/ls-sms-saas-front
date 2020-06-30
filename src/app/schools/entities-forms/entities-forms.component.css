@@ -1,0 +1,117 @@
+.entity-form{
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+form{
+    flex:2;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
+    color:black;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 4px;
+}
+
+.instruction{
+    background-color: #474b7a;
+    border-radius: 4px;
+    padding: 10px;
+    flex-wrap: wrap;
+    width: 250px;
+    max-width: 250px;
+}
+
+.heading{
+    color: #0ec54e;
+    font-size: 26px;
+    font-weight: 800;
+}
+
+.group-field-section-heading{
+    text-align: center;
+    padding: 8px;
+    background-color:#474b7a;
+    border-radius: 4px;
+    color: white;
+    font-size: 18px;
+}
+
+
+.group-column-field{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+mat-form-field{
+    color: black !important;
+}
+.group-row-field{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+.group-row-field mat-form-field{
+    flex: 1;
+}
+
+.group-row-field .space{
+    content:"";
+    width: 20px;
+}
+
+.group-row-field .gap{
+    content:"";
+    flex:1;
+}
+
+
+.form-actions button{
+    margin-right: 8px;
+}
+
+.form-actions button:last-child{
+    margin-right: 0px;
+}
+
+.date-piker{
+    background-color: white !important;
+}
+@media screen and (max-width:600px){
+    form{
+        flex-direction: column;
+        flex-wrap: wrap;
+        flex: 1;
+    }
+
+    .heading{
+        margin-bottom: 40px;
+    }
+    .group-field-section-heading{
+        margin-bottom: 40px;
+    }
+    .instruction{
+        display: none;
+    }
+    .group-row-field{
+        flex-direction: column;
+        margin-top: 0px;
+    }
+    .group-row-field mat-form-field{
+       margin-bottom: 30px;
+    }
+    
+    .group-row-field .space{
+        display: none;
+    }
+
+}

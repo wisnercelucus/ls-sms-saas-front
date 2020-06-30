@@ -288,7 +288,11 @@ export class DataTableContentComponent implements OnInit, OnDestroy {
 
 const STUDENT_DATA: Student[] = [
   {id:0, last_name:'Celucus', first_name:'Wisner', sex:'Male', address:"Clercine 12", phone:33511661, email:'wcelucus@gmail.com', city:'Tabarre'},
-  {id:1, last_name:'Badeau', first_name:'Fanfan', sex:'Male', address:"Clercine 14", phone:37017727, email:'alexy@gmail.com', city:'Petion Ville'},
+  {id:1, last_name:'Francois', first_name:'Fanfan', sex:'Male', address:"Delmans 14", phone:38017727, email:'alexy@gmail.com', city:'Petion Ville'},
+  {id:2, last_name:'Gabeau', first_name:'Daniel', sex:'Male', address:"Laboule 42", phone:39017727, email:'alexy@gmail.com', city:'Petion Ville'},
+  {id:3, last_name:'Ducatel', first_name:'Roselaure', sex:'Female', address:"Cap 14", phone:34017727, email:'alexy@gmail.com', city:'Petion Ville'},
+  {id:4, last_name:'Jean', first_name:'Janine', sex:'Female', address:"Aquin 14", phone:32017727, email:'alexy@gmail.com', city:'Petion Ville'},
+  {id:5, last_name:'Badeau', first_name:'Job', sex:'Male', address:"Clercine 14", phone:320017727, email:'alexy@gmail.com', city:'Petion Ville'},
 ];
 
 

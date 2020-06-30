@@ -1,18 +1,18 @@
-div{
-    padding-top: 30px;
+.header-row{
     display: flex;
+    padding-top: 30px;
     flex-direction: row;
     justify-content: space-around;
     padding-bottom: 15px;
-
 }
-div .add-btn{
+
+.header-row .add-btn{
     background-color: #474b7a;
     color: white;
     height: 40px;
 }
 
-div .status-data{
+.header-row .status-data{
     flex: 1;
     background-color: #474b7a;
     padding: 10px;
@@ -23,7 +23,7 @@ div .status-data{
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
 }
 
-div .status-data h4{
+.header-row .status-data h4{
     font-size: 25px;
     font-weight: 800;
 }
@@ -33,6 +33,18 @@ div .status-data h4{
     font-weight: 600;
 }
 
-div .whitespace{
+.header-row .whitespace{
     flex: 3;
+}
+
+@media screen and (max-width:100px){
+    .header-row{
+        flex-direction: column;
+    }
+   
+    .header-row .whitespace{
+        flex:1;
+        display: none;
+    }
+
 }

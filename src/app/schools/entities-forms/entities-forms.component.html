@@ -1,0 +1,144 @@
+<section class="entity-form">
+    <form
+        #f="ngForm" 
+        (ngSubmit)="onSubmit(f)">
+
+        <h1 class="heading">Add Student</h1>
+
+        <div class="group-column-field">
+            <h4 class="group-field-section-heading">General information</h4>
+
+            <div class="group-row-field">
+                <mat-form-field>
+                    <mat-label>First Name</mat-label>
+                    <input type="text" 
+                        matInput 
+                        placeholder="Ex. John" 
+                        ngModel 
+                        name="firstName"
+                        required
+                        ngModel
+                        >
+                </mat-form-field>
+                <div class="space"></div>
+                <mat-form-field>
+                    <mat-label>Last Name</mat-label>
+                    <input type="text" 
+                        matInput 
+                        placeholder="Ex. Doe" 
+                        ngModel 
+                        name="lastName"
+                        required
+                        ngModel
+                        >
+                </mat-form-field>
+            </div>
+            <div class="group-row-field">
+                <mat-form-field>
+                    <mat-label>Sex</mat-label>
+                    <mat-select  ngModel name="sex" required>
+                        <mat-option *ngFor="let s of sexes" [value]="s">{{s}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="space"></div>
+                <mat-form-field>
+                    <mat-label>Birth date</mat-label>
+                    <input  matInput [matDatepicker]="picker1" name="birthDate" required ngModel>
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="group-row-field">
+                <mat-form-field>
+                    <mat-label>Address</mat-label>
+                    <input type="text" 
+                        matInput 
+                        placeholder="Ex. #12, santo 4" 
+                        ngModel 
+                        name="address"
+                        required
+                        ngModel
+                        >
+                </mat-form-field>
+                <div class="space"></div>
+                <mat-form-field>
+                    <mat-label>City</mat-label>
+                    <input type="text" 
+                        matInput 
+                        placeholder="Ex. Croix-des-Bouquets" 
+                        ngModel 
+                        name="city"
+                        required
+                        ngModel
+                        >
+                </mat-form-field>
+            </div>
+            <div class="group-row-field">
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input type="email" 
+                        matInput 
+                        placeholder="Ex. example@domain.ext" 
+                        ngModel 
+                        name="email"
+                        email
+                        required
+                        #emailInput="ngModel"
+                        >
+                        <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid.</mat-error>
+                        <mat-error *ngIf="emailInput.hasError('required')">Field must not be empty.</mat-error>
+                </mat-form-field>
+                    <div class="space"></div>
+                <mat-form-field>
+                    <mat-label>Phone (home)</mat-label>
+                    <input type="number" 
+                        matInput 
+                        placeholder="Ex. +50933511661" 
+                        ngModel 
+                        name="phoneHome"
+                        required
+                        ngModel
+                        >
+                </mat-form-field>
+                    <div class="space"></div>
+                <mat-form-field>
+
+                    <mat-label>Phone (mobile)</mat-label>
+                    <input type="number" 
+                        matInput 
+                        placeholder="Ex. +50933511661" 
+                        ngModel 
+                        name="phoneMobile"
+                        ngModel
+                        >
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="group-column-field">
+            <div class="group-row-field">
+                <mat-form-field>
+                    <mat-label>Enrolment date</mat-label>
+                    <input matInput [matDatepicker]="picker" name="enrolmentDate" ngModel>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <div class="space"></div>
+
+                <div class="gap"></div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="button" mat-raised-button [disabled]="f.invalid">cancel</button>
+            <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Save</button>
+        </div>
+
+    </form>
+
+    <div class="instruction">
+        <h4> Form instructions</h4>
+        <p>Fill all required field to enable the save button.</p>
+    </div>
+</section>
