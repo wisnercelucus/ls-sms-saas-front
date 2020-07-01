@@ -5,6 +5,16 @@ import { Client } from './register/client.model';
 import {catchError, tap} from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthUser } from '../users/user.model';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../store/app.reducer';
+
+interface AuthResponseData{
+  'token':string;
+  'user_id':number
+  'email':string;
+  'username':string;
+
+}
 
 
 @Injectable({
@@ -24,7 +34,8 @@ export class AuthService {
   });
 
   constructor(private http: HttpClient, 
-    private router: Router) { }
+    private router: Router,
+    private store:Store) { }
 
   registerClient(client: Client){
     const body = JSON.stringify(client);
@@ -59,7 +70,7 @@ export class AuthService {
           'password': password
         });
 
-        return this.http.post(this.tenantUrl + '/accounts/api/token/', body, {headers: this.headers})
+        return this.http.post<AuthResponseData>(this.tenantUrl + '/accounts/api/token/', body, {headers: this.headers})
               .pipe(
                 catchError( errorRes => this.handleError(errorRes)),
                 tap(resData =>{

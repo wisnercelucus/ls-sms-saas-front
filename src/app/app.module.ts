@@ -29,6 +29,9 @@ import { DonateRoutingModule } from './donate/donate-routing.module';
 import { UsersRoutingModule } from './users/users-routing.module';
 import { ForumModule } from './forum/forum.module';
 import { ForumRoutingModule } from './forum/forum.routing';
+import {StoreModule} from '@ngrx/store';
+import * as fromApp from './store/app.reducer';
+
 
 @NgModule({
   declarations: [
@@ -48,6 +51,7 @@ import { ForumRoutingModule } from './forum/forum.routing';
     AuthModule,
     BrowserModule,
     AppRoutingModule,
+    StoreModule.forRoot(fromApp.appReducer),
     BrowserAnimationsModule,
     HttpClientModule,
     ParticlesModule,
@@ -59,7 +63,7 @@ import { ForumRoutingModule } from './forum/forum.routing';
     DonateRoutingModule,
     UsersRoutingModule,
     ForumModule,
-    ForumRoutingModule
+    ForumRoutingModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi:true}],
   bootstrap: [AppComponent]
