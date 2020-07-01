@@ -35,7 +35,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, 
     private router: Router,
-    private store:Store) { }
+    private store:Store<fromApp.AppState>) { }
 
   registerClient(client: Client){
     const body = JSON.stringify(client);
