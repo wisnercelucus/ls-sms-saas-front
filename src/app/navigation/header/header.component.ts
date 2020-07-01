@@ -21,6 +21,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   image:string;
   instance:string;
   loginUser:User;
+  testUserSub:Subscription;
+  Logsubsciption:Subscription;
 
   constructor(private router: Router, 
               private authService: AuthService, 
@@ -40,17 +42,32 @@ export class HeaderComponent implements OnInit, OnDestroy {
           user.token
         );
 
-        this.getLogingUser();
-
+        //this.getLogingUser();
+        this.Logsubsciption = this.userService.getMyProfile().subscribe(
+          res=>{
+            console.log(res);
+          }
+        );
       }
 
     });
+    
+    this.testUserSub = this.userService.loginUser.subscribe(
+      user=>{
+        this.loginUser = user;
+        //console.log(this.loginUser)
+      }
+    )
 
   }
 
   ngAfterViewInit(){
     if(!this.loginUser){
-        this.getLogingUser();
+      this.testUserSub = this.userService.loginUser.subscribe(
+        user=>{
+          this.loginUser = user;
+        }
+      )
     }
   }
 

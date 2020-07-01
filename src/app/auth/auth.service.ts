@@ -26,7 +26,7 @@ export class AuthService {
   loginRedirectUrl = "";
   instance:string;
   tenantUrl:string;
-
+  userSubscription:Subscription;
   baseUrl = 'http://demo.local:8000/prospect/api/register/';
 
   headers = new HttpHeaders({
@@ -79,7 +79,7 @@ export class AuthService {
                                             resData['email'], 
                                             resData['token']
                                             )
-                  
+
                   if(this.loginRedirectUrl){
                     this.router.navigate([this.loginRedirectUrl])
                   }
@@ -118,6 +118,9 @@ export class AuthService {
       this.authUser.next(null);
       localStorage.removeItem('authUserData');
       this.router.navigate(['/auth/login']);
+      if(this.userSubscription){
+        this.userSubscription.unsubscribe()
+      }
 
     }else{
       return;

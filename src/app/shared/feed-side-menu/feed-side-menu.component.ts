@@ -42,7 +42,12 @@ export class FeedSideMenuComponent implements OnInit, OnDestroy {
     ) { }
 
   ngOnInit(): void {
-    this.getLogingUser();
+    //this.getLogingUser();
+    this.userService.loginUser.subscribe(
+      user=>{
+        this.loginUser = user;
+      }
+    )
   }
 
   ngAfterViewInit(){

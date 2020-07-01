@@ -4,6 +4,7 @@ import { AuthService } from '../auth.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { AppService } from 'src/app/app.service';
+import { UsersService } from 'src/app/users/users.service';
 
 @Component({
   selector: 'app-login',
@@ -18,13 +19,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   baseDomain:string;
   hasInstanceUrl = false;
   subsciption:Subscription;
+  Logsubsciption:Subscription;
   errorMessage ="";
   bannerText:{p:string, btn:string}
 
   constructor(private router:Router, 
     private authService:AuthService, 
     private _formBuilder: FormBuilder,
-    private appSerive:AppService) {
+    private appSerive:AppService, private usersService:UsersService) {
     this.hasInstanceUrl = this.urlHasInstance();
     this.baseDomain = this.appSerive.BASE_DOMAIN;
   }
@@ -65,6 +67,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     
     this.subsciption = this.authService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe(
       resp => {
+
         if(!this.authService.loginRedirectUrl){
           this.router.navigate(['/accounts/feed']);
         }
@@ -113,6 +116,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     if(this.subsciption){
       this.subsciption.unsubscribe()
     }
+    if(this.Logsubsciption){
+      this.Logsubsciption.unsubscribe();
+    }
+    console.log("destroy login")
   }
 
   onHandleError(){
