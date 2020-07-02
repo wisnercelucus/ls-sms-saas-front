@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, Input, OnDestroy } from '@angular/core';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MatDialogRef} from '@angular/material/dialog';
 import { UsersService } from 'src/app/users/users.service';
 import { Subscription } from 'rxjs';
 

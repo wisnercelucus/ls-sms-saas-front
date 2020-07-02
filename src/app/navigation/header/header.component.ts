@@ -5,6 +5,9 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { User, AuthUser } from 'src/app/users/user.model';
 import { AppService } from 'src/app/app.service';
 import { UsersService } from 'src/app/users/users.service';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../store/app.reducer';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -26,14 +29,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router, 
               private authService: AuthService, 
-              private appService:AppService, private userService:UsersService) { }
+              private appService:AppService, 
+              private userService:UsersService,
+              private store:Store<fromApp.AppState>) { }
 
   timer: any;
 
   ngOnInit(): void {
       this.urlHasInstance();
       
-      this.userSubs = this.authService.authUser.subscribe(user=>{
+      this.userSubs = this.store.select('auth').pipe(
+        map(
+          authState =>{
+            return authState.authUser;
+          }
+        ),
+      )
+      .subscribe(user=>{
       this.isAuthenticated = !!user;
       if(this.isAuthenticated){
         this.authenticateduser = new AuthUser(
@@ -45,7 +57,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         //this.getLogingUser();
         this.Logsubsciption = this.userService.getMyProfile().subscribe(
           res=>{
-            console.log(res);
+            //console.log(res);
           }
         );
       }
@@ -96,7 +108,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onLogout(){
     this.authService.logout();
-    this.userService.loginUser.next(null);
   }
   
   ngOnDestroy(){

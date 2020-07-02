@@ -5,6 +5,9 @@ import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { AppService } from 'src/app/app.service';
 import { UsersService } from 'src/app/users/users.service';
+import * as fromApp from '../../store/app.reducer';
+import { Store } from '@ngrx/store';
+import * as AuthActions from '../store/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +29,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(private router:Router, 
     private authService:AuthService, 
     private _formBuilder: FormBuilder,
-    private appSerive:AppService, private usersService:UsersService) {
+    private appSerive:AppService, private usersService:UsersService,
+    private store:Store<fromApp.AppState>) {
     this.hasInstanceUrl = this.urlHasInstance();
     this.baseDomain = this.appSerive.BASE_DOMAIN;
   }
@@ -65,7 +69,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     
-    this.subsciption = this.authService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe(
+    /*this.subsciption = this.authService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe(
       resp => {
 
         if(!this.authService.loginRedirectUrl){
@@ -75,7 +79,12 @@ export class LoginComponent implements OnInit, OnDestroy {
       err => {
        this.errorMessage = err + ". Your email or password is invalid. If you see correct credentials contact your system administrator.";
       } 
-    )
+    )*/
+    
+    this.store.dispatch(new AuthActions.LoginStart(
+      {username:this.loginForm.value.username, password:this.loginForm.value.password}
+    ))
+
   }
 
   onSubmitStepperForm(){

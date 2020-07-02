@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { AuthUser } from '../users/user.model';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../store/app.reducer';
+import * as AuthActions from './store/auth.actions';
 
 interface AuthResponseData{
   'token':string;
@@ -22,11 +23,10 @@ interface AuthResponseData{
 })
 export class AuthService {
   subscrition: Subscription;
-  authUser = new BehaviorSubject<AuthUser>(null);
+  //authUser = new BehaviorSubject<AuthUser>(null);
   loginRedirectUrl = "";
   instance:string;
   tenantUrl:string;
-  userSubscription:Subscription;
   baseUrl = 'http://demo.local:8000/prospect/api/register/';
 
   headers = new HttpHeaders({
@@ -52,7 +52,10 @@ export class AuthService {
       token
     );
 
-    this.authUser.next(authUser);
+    //this.authUser.next(authUser);
+    this.store.dispatch(new AuthActions.Login(
+      {username:username, email:email,token:token}
+    ))
     localStorage.setItem('authUserData', JSON.stringify(authUser))
   }
 
@@ -106,7 +109,11 @@ export class AuthService {
     );
 
     if(loadedUser.token){
-      this.authUser.next(loadedUser);
+      //this.authUser.next(loadedUser);
+      this.store.dispatch(
+        new AuthActions.Login({username:loadedUser.username, email:loadedUser.email, token: loadedUser.token}
+        )
+      )
     }else{
       return;
     }
@@ -114,17 +121,10 @@ export class AuthService {
 
 
   logout(){
-    if(this.authUser){
-      this.authUser.next(null);
+      //this.authUser.next(null);
       localStorage.removeItem('authUserData');
+      this.store.dispatch(new AuthActions.Logout())
       this.router.navigate(['/auth/login']);
-      if(this.userSubscription){
-        this.userSubscription.unsubscribe()
-      }
-
-    }else{
-      return;
-    }
   }
 
   autoLogout(){
@@ -140,10 +140,6 @@ export class AuthService {
 
     return throwError(errorMessage);
     
-  }
-
-  isAuthenticated(){
-    return !!this.authUser
   }
 
   /*--- Reset Password ---*/

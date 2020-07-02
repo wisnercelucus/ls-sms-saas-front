@@ -31,6 +31,8 @@ import { ForumModule } from './forum/forum.module';
 import { ForumRoutingModule } from './forum/forum.routing';
 import {StoreModule} from '@ngrx/store';
 import * as fromApp from './store/app.reducer';
+import {EffectsModule} from '@ngrx/effects';
+import { AuthEffects } from './auth/store/auth.effects';
 
 
 @NgModule({
@@ -52,6 +54,7 @@ import * as fromApp from './store/app.reducer';
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(fromApp.appReducer),
+    EffectsModule.forRoot([AuthEffects]),
     BrowserAnimationsModule,
     HttpClientModule,
     ParticlesModule,
