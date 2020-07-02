@@ -26,6 +26,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   errorMessage ="";
   bannerText:{p:string, btn:string}
 
+  isLoading:boolean;
+
   constructor(private router:Router, 
     private authService:AuthService, 
     private _formBuilder: FormBuilder,
@@ -45,7 +47,14 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.bannerText =
     {'p': "Login to enjoy the great futures we've created for you.",
     'btn': 'Get involved'
-   } 
+   }
+   
+   this.store.select('auth').subscribe(
+      authState=>{
+        this.isLoading = authState.loading;
+        this.errorMessage = authState.authError;
+      }
+   )
     
   }
 
@@ -68,19 +77,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
   onSubmit() {
-    
-    /*this.subsciption = this.authService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe(
-      resp => {
-
-        if(!this.authService.loginRedirectUrl){
-          this.router.navigate(['/accounts/feed']);
-        }
-      },
-      err => {
-       this.errorMessage = err + ". Your email or password is invalid. If you see correct credentials contact your system administrator.";
-      } 
-    )*/
-    
+     
     this.store.dispatch(new AuthActions.LoginStart(
       {username:this.loginForm.value.username, password:this.loginForm.value.password}
     ))
@@ -128,7 +125,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     if(this.Logsubsciption){
       this.Logsubsciption.unsubscribe();
     }
-    console.log("destroy login")
   }
 
   onHandleError(){

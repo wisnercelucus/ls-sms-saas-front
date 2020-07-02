@@ -1,6 +1,6 @@
 import {Actions, ofType, Effect} from '@ngrx/effects';
 import * as AuthActions from './auth.actions';
-import { switchMap, catchError, map} from 'rxjs/operators';
+import { switchMap, catchError, map, tap} from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
@@ -34,16 +34,22 @@ export class AuthEffects{
             body, {headers: this.headers}
             ).pipe( 
                 map(resData=>{
-                    return of(new AuthActions.Login({
+                    return new AuthActions.Login({
                         username:resData['username'],
                         email:resData['email'],
                         token:resData['token']
-                    }))
+                    })
                 }),
                 catchError(
-                    error=>{
-                        //Error handling. Always return a non died observable.
-                        return of()
+                    errorRes=>{
+                        let errorMessage = "An error occured";
+                        console.log(errorRes);
+                        if(errorRes.error.message.non_field_errors[0]){
+                          errorMessage = errorRes.error.message.non_field_errors[0];
+                          return of(new AuthActions.LoginFail(errorMessage));
+                        }
+                    
+                        return of(new AuthActions.LoginFail(errorMessage))
                     }
                 )
             )
@@ -51,6 +57,17 @@ export class AuthEffects{
     )
 
     );
+    
+    @Effect({dispatch:false})
+    authSuccess = this.actions$.pipe(ofType(AuthActions.LOGIN),
+    tap(()=>{
+        if(!this.authService.loginRedirectUrl){
+            this.router.navigate(['/school'])
+        }else{
+            this.router.navigate([this.authService.loginRedirectUrl])
+        }
+    }
+    ));
 
     constructor(private actions$:Actions, private http: HttpClient, private router:Router, private authService:AuthService){
         this.tenantUrl = 'http://fdsa.demo.local:8000';

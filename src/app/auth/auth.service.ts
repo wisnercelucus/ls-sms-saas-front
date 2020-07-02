@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Subscription, throwError, BehaviorSubject } from 'rxjs';
+import { Subscription, throwError } from 'rxjs';
 import { Client } from './register/client.model';
 import {catchError, tap} from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -17,13 +17,11 @@ interface AuthResponseData{
 
 }
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   subscrition: Subscription;
-  //authUser = new BehaviorSubject<AuthUser>(null);
   loginRedirectUrl = "";
   instance:string;
   tenantUrl:string;
@@ -37,10 +35,12 @@ export class AuthService {
     private router: Router,
     private store:Store<fromApp.AppState>) { }
 
+
   registerClient(client: Client){
     const body = JSON.stringify(client);
     return this.http.post(this.baseUrl, body, {headers: this.headers})
   }
+
 
   handleAutentication(username:string, 
                       email:string, 
@@ -52,7 +52,6 @@ export class AuthService {
       token
     );
 
-    //this.authUser.next(authUser);
     this.store.dispatch(new AuthActions.Login(
       {username:username, email:email,token:token}
     ))
@@ -109,7 +108,6 @@ export class AuthService {
     );
 
     if(loadedUser.token){
-      //this.authUser.next(loadedUser);
       this.store.dispatch(
         new AuthActions.Login({username:loadedUser.username, email:loadedUser.email, token: loadedUser.token}
         )
@@ -120,10 +118,9 @@ export class AuthService {
   }
 
 
-  logout(){
-      //this.authUser.next(null);
-      localStorage.removeItem('authUserData');
+  logout(){   
       this.store.dispatch(new AuthActions.Logout())
+      localStorage.removeItem('authUserData');
       this.router.navigate(['/auth/login']);
   }
 
