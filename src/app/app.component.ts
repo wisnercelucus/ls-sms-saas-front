@@ -5,6 +5,10 @@ import { AppService } from './app.service';
 import { UsersService } from './users/users.service';
 import { Subscription } from 'rxjs';
 
+import * as fromApp from './store/app.reducer';
+import { Store } from '@ngrx/store';
+import * as AuthActions from './auth/store/auth.actions';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,7 +23,8 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private router: Router, 
               private authService: AuthService,
               private appService:AppService,
-              private usersService:UsersService) {
+              private usersService:UsersService,
+              private store:Store<fromApp.AppState>) {
     this.urlHasInstance();
    
   }
@@ -42,8 +47,8 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void{
-    this.authService.autoLogin();
-    
+    //this.authService.autoLogin();
+    this.store.dispatch(new AuthActions.AutoLogin());
 
     this.appService.TENANT_URL = 
              this.appService.PROTOCOL 

@@ -22,9 +22,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   baseDomain:string;
   hasInstanceUrl = false;
   subsciption:Subscription;
-  Logsubsciption:Subscription;
   errorMessage ="";
   bannerText:{p:string, btn:string}
+  storeSub:Subscription;
 
   isLoading:boolean;
 
@@ -122,13 +122,14 @@ export class LoginComponent implements OnInit, OnDestroy {
     if(this.subsciption){
       this.subsciption.unsubscribe()
     }
-    if(this.Logsubsciption){
-      this.Logsubsciption.unsubscribe();
+
+    if(this.storeSub){
+      this.storeSub.unsubscribe()
     }
   }
 
   onHandleError(){
-    this.errorMessage = "";
+    this.store.dispatch(new AuthActions.ClearError())
   }
 
 }
