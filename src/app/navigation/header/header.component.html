@@ -46,7 +46,7 @@
             </li>
 
             <li class="nav-item">
-                <a routerLink="/accounts/feed"><span class="handle-icon">
+                <a routerLink="/feed"><span class="handle-icon">
                 <mat-icon>dynamic_feed</mat-icon></span>
                 </a>
             </li>
@@ -91,7 +91,7 @@
                         <img class="avatar-xs" *ngIf="loginUser" [src]="loginUser.image" title="{{ loginUser.username }}"> <span class="username"></span>
             </li>
             <mat-menu #menu="matMenu">
-            <a [routerLink]="['/accounts', authenticateduser.username]"><button mat-menu-item>Profile</button></a>
+            <a *ngIf="loginUser" (click) = "getUserData(loginUser.username)"><button mat-menu-item>Profile</button></a>
             <mat-divider></mat-divider>
             <a routerLink="/accounts/password-change"><button mat-menu-item>Change password</button></a>
             <a routerLink="/accounts/settings"><button mat-menu-item>Settings</button></a>

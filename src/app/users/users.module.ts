@@ -4,7 +4,6 @@ import { ProfileComponent } from './profile/profile.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PasswordChangeComponent } from './password-change/password-change.component';
-import { FeedComponent } from './feed/feed.component';
 import { SettingsComponent } from './settings/settings.component';
 import { GroupsComponent } from './groups/groups.component';
 
@@ -13,7 +12,6 @@ import { GroupsComponent } from './groups/groups.component';
     UsersComponent,
     ProfileComponent,
     PasswordChangeComponent,
-    FeedComponent,
     SettingsComponent,
     GroupsComponent
   ],

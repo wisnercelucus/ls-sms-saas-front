@@ -8,7 +8,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MinBannerComponent } from './min-banner/min-banner.component';
 import { FooterComponent } from './footer/footer.component';
 import { FeedSideMenuComponent } from './feed-side-menu/feed-side-menu.component';
-import { FeedTimelineComponent } from './feed-timeline/feed-timeline.component';
 import { FeedCopyrightComponent } from './feed-copyright/feed-copyright.component';
 import { UsersSuggestionsComponent } from './users-suggestions/users-suggestions.component';
 import { GroupsSuggestionsComponent } from './groups-suggestions/groups-suggestions.component';
@@ -23,7 +22,6 @@ import { DataTableRowHeaderComponent } from './data-table-row-header/data-table-
         MinBannerComponent,
         FooterComponent,
         FeedSideMenuComponent,
-        FeedTimelineComponent,
         FeedCopyrightComponent,
         UsersSuggestionsComponent,
         GroupsSuggestionsComponent,
@@ -50,7 +48,6 @@ import { DataTableRowHeaderComponent } from './data-table-row-header/data-table-
             CommonModule,
             FontAwesomeModule,
             FeedSideMenuComponent,
-            FeedTimelineComponent,
             FeedCopyrightComponent,
             UsersSuggestionsComponent,
             GroupsSuggestionsComponent,

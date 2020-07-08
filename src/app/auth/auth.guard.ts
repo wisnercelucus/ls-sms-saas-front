@@ -27,10 +27,8 @@ export class AuthGuard implements CanActivate{
             map(user => {
                 const isAuthenticated = !!user;
                 if(isAuthenticated){
-                    //console.log(route.toString())
                     return true;
                 }else{
-
                     const previousUrl = state.url;
                     this.authService.loginRedirectUrl = previousUrl;
                     return this.router.createUrlTree(['/auth/login']); 

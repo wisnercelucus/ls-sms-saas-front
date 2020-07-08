@@ -10,6 +10,7 @@ import { faBirthdayCake,
 import { UsersService } from '../users.service';
 import { User } from '../user.model';
 import { Subscription } from 'rxjs';
+import { Post } from 'src/app/feed/post.model';
 
 @Component({
   selector: 'app-profile',
@@ -31,6 +32,7 @@ export class ProfileComponent implements OnInit {
   
   loginUser:User;
   loginUserSub:Subscription;
+  postList:Post[];
   
   constructor(private userService:UsersService) { }
 

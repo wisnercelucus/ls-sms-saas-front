@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { take, map } from 'rxjs/operators';
 
 @Injectable({
     providedIn:'root'
@@ -13,9 +12,14 @@ export class AppService{
     API_PORT="8000"
     FRONT_PORT="4200"
 
-    TENANT_URL:string;
+    TENANT_URL = new BehaviorSubject<string>(null);
 
     constructor(){
+        
+    }
+
+    setTenantUrl(url){
+        this.TENANT_URL.next(url);
     }
 
 }

@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 import * as fromApp from '../../store/app.reducer';
 import { map } from 'rxjs/operators';
 import * as AuthActions from '../../auth/store/auth.actions';
+import { FeedService } from 'src/app/feed/feed.service';
 
 @Component({
   selector: 'app-header',
@@ -28,13 +29,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
   testUserSub:Subscription;
   Logsubsciption:Subscription;
 
+  postsSub:Subscription;
+
   constructor(private router: Router, 
               private authService: AuthService, 
               private appService:AppService, 
               private userService:UsersService,
-              private store:Store<fromApp.AppState>) { }
+              private store:Store<fromApp.AppState>,
+              private feedService:FeedService) { }
 
   timer: any;
+
+  getUserData(username:string){   
+    if(username){
+      this.postsSub =  this.feedService.getUserPost(username).subscribe();
+      this.router.navigate(['/accounts', username])
+    }
+  }
 
   ngOnInit(): void {
       this.urlHasInstance();
@@ -61,6 +72,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
             //console.log(res);
           }
         );
+
       }
 
     });
@@ -117,7 +129,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.userSubs.unsubscribe();
     }
     if(this.loginUserSub){
-      this.loginUserSub.unsubscribe()
+      this.loginUserSub.unsubscribe();
+    }
+    if(this.postsSub){
+      this.postsSub.unsubscribe();
     }
   }
 

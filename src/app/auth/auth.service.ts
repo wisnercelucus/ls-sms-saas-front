@@ -53,7 +53,7 @@ export class AuthService {
     );
 
     this.store.dispatch(new AuthActions.Login(
-      {username:username, email:email,token:token}
+      {username:username, email:email,token:token, redirect:true}
     ))
     localStorage.setItem('authUserData', JSON.stringify(authUser))
   }
@@ -109,7 +109,7 @@ export class AuthService {
 
     if(loadedUser.token){
       this.store.dispatch(
-        new AuthActions.Login({username:loadedUser.username, email:loadedUser.email, token: loadedUser.token}
+        new AuthActions.Login({username:loadedUser.username, email:loadedUser.email, token: loadedUser.token, redirect: false}
         )
       )
     }else{

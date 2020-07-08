@@ -10,7 +10,7 @@
             <mat-card-content>
                  <img *ngIf="loginUser" class="user-profile-image" [src]="loginUser.image">
                 <div class="user-profile-detail">
-                    <h1 class="user-name">{{ loginUser.first_name + ' ' + loginUser.last_name}}</h1>
+                    <h1 class="user-name" *ngIf="loginUser" >{{ loginUser.first_name + ' ' + loginUser.last_name}}</h1>
                     <h5 class="user-title">Developer</h5>
                 </div>
                 <div class="user-profile-bio">
@@ -32,8 +32,8 @@
           </mat-card>
         </div>
         <br>
-
-        <app-feed-timeline></app-feed-timeline>
+        
+        <router-outlet></router-outlet>
 
     </div>
 

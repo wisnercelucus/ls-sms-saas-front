@@ -2,11 +2,12 @@ import {Actions, ofType, Effect} from '@ngrx/effects';
 import * as AuthActions from './auth.actions';
 import { switchMap, catchError, map, tap} from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { of } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
+import { of, Subscription } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { AuthUser } from 'src/app/users/user.model';
+import { AppService } from 'src/app/app.service';
 
 
 interface AuthResponseData{
@@ -28,7 +29,8 @@ const handleAuthentication = (
     return new AuthActions.Login({
         username: username,
         email: email,
-        token: token
+        token: token,
+        redirect:true
     });
     };
 
@@ -71,6 +73,9 @@ export class AuthEffects{
     authLogin = this.actions$.pipe(
         ofType(AuthActions.LOGIN_START),
         switchMap((authData: AuthActions.LoginStart)=>{
+          if(!this.tenantUrl){
+            return;
+          }
             const body= {username:authData.payload.username, password:authData.payload.password}
             return this.http.post<AuthResponseData>(this.tenantUrl + '/accounts/api/token/', 
             body, {headers: this.headers}
@@ -96,12 +101,15 @@ export class AuthEffects{
     
     @Effect({dispatch:false})
     authRedirect = this.actions$.pipe(ofType(AuthActions.LOGIN),
-    tap(()=>{
+    tap((authSuccess:AuthActions.Login)=>{
+      if(authSuccess.payload.redirect){
         if(!this.authService.loginRedirectUrl){
-            this.router.navigate(['/school'])
-        }else{
-            this.router.navigate([this.authService.loginRedirectUrl])
-        }
+          this.router.navigate(['/school'])
+      }else{
+          this.router.navigate([this.authService.loginRedirectUrl])
+      }
+      }
+
     }
     ));
 
@@ -112,6 +120,9 @@ export class AuthEffects{
         //this.authService.clearLogoutTimer();
         localStorage.removeItem('userData');
         this.router.navigate(['/auth/login']);
+        if(this.subscrition){
+          this.subscrition.unsubscribe();
+        }
       })
     );
 
@@ -144,7 +155,8 @@ export class AuthEffects{
           return new AuthActions.Login({
             username: loadedUser.username,
             email: loadedUser.email,
-            token: loadedUser.token
+            token: loadedUser.token,
+            redirect:false
           });
   
           // const expirationDuration =
@@ -156,9 +168,15 @@ export class AuthEffects{
       })
     );
   
+    tenantUrl1:string;
+    subscrition:Subscription;
 
-
-    constructor(private actions$:Actions, private http: HttpClient, private router:Router, private authService:AuthService){
-        this.tenantUrl = 'http://fdsa.demo.local:8000';
+    constructor(private actions$:Actions, private http: HttpClient, private router:Router, private appService:AppService, private authService:AuthService, private route:ActivatedRoute){
+      this.subscrition = this.appService.TENANT_URL.subscribe(
+        url=>{
+          this.tenantUrl = url;
+        }
+      )
+      //this.tenantUrl = 'http://fdsa.demo.local:8000';
     }
 }

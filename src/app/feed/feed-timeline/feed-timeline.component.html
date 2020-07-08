@@ -1,0 +1,97 @@
+    <div class="user-activities" *ngIf="!dataSource">
+    Loading...
+    </div>
+
+    <div class="user-activities" *ngIf="dataSource">
+            <mat-card class="post-card" *ngFor="let post of dataSource">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image">
+                        <img class="avatar-xs-card" [src]="post.user.image" alt="{{ 'Photo of ' + post.user.username }}">
+                    </div>
+                    <mat-card-title><a class="user-link" (click)="getUserData(post.user.username)">{{ post.user.first_name + ' ' + post.user.last_name }}</a></mat-card-title>
+                    <mat-card-subtitle>Developer</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>
+                        {{post.content}}
+                    </p>
+                </mat-card-content>
+                <img mat-card-image *ngIf="post.image" src="post.image" alt="Photo of a Shiba Inu">
+                
+                <mat-card-actions>
+                    <button mat-button [matMenuTriggerFor]="aboveMenu"><fa-icon [icon]="faThumbsUp"></fa-icon> LIKE</button>
+                    <mat-menu #aboveMenu="matMenu" yPosition="above">
+                        <span class="reaction" mat-menu-item>
+                            <button mat-button><fa-icon [icon]="faThumbsUp"></fa-icon> </button>
+                            <button mat-button><fa-icon [icon]="faSmile"></fa-icon> </button>
+                            <button mat-button><fa-icon [icon]="faHeart"></fa-icon> </button>
+                        </span>
+                    </mat-menu>
+                    <button mat-button><fa-icon [icon]="faComment"></fa-icon> COMMENT</button>
+                    <button mat-button><fa-icon [icon]="faShareAltSquare"></fa-icon> SHARE</button>
+                </mat-card-actions>
+                <div class="comment-form-handler">
+                    <form class="comment-form">
+                        <div class="form-row">
+                        <div mat-card-avatar class="comment-user-avatar">
+                            <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image" alt="Photo of a Shiba Inu">
+                        </div>
+                        <div class="editable" id="commentDiv" contenteditable data-placeholder="Ex. that is a great...">
+                            <!--<textarea class="comment-input" placeholder="Ex. It makes me feel..." name="commentValue" #commentInput></textarea>-->
+                        </div>
+                        <button class="publish" mat-raised-button type="submit">Post</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="comment-thread" *ngIf="post.total_comments">
+                    <div class class="comment-box">
+                        <div mat-card-avatar class="comment-user-avatar">
+                            <img class="avatar-xs-card" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+                        </div>
+                        <p class="comment-text">I think that is a really good post.
+The COVID-19 cases are increasing rapidly in Haiti main cities. The cases registered as of the writing date of the report are as follow: 3538 total cases, 3640 active cases 54 death and 24 recovered.  
+The economy is highly impacted by the general situation caused by the novel corona virus. The prices continue to escalate and the local currency is in accelerating depreciation.</p>
+
+                    </div>
+
+                    <div class="inner-comment-thread">
+                        <div class class="comment-box">
+                            <div mat-card-avatar class="comment-user-avatar">
+                                <img class="avatar-xs-card" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+                            </div>
+                            <p class="comment-text">I think that is a really good post.
+The COVID-19 cases are increasing rapidly in Haiti main cities. The cases registered as of the writing date of the report are as follow: 3538 total cases, 3640 active cases 54 death and 24 recovered.  
+The economy is highly impacted by the general situation caused by the novel corona virus. The prices continue to escalate and the local currency is in accelerating depreciation.</p>
+                        </div>
+                        <div class class="comment-box">
+                            <div mat-card-avatar class="comment-user-avatar">
+                                <img class="avatar-xs-card" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+                            </div>
+                            <p class="comment-text">I think that is a really good post.
+The COVID-19 cases are increasing rapidly in Haiti main cities. The cases registered as of the writing date of the report are as follow: 3538 total cases, 3640 active cases 54 death and 24 recovered.  
+The economy is highly impacted by the general situation caused by the novel corona virus. The prices continue to escalate and the local currency is in accelerating depreciation.</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </mat-card>
+     </div>
+
+<script>
+
+    const ele = document.getElementById('commentDiv');
+    const placeholder = ele.getAttribute('data-placeholder');
+
+    // Set the placeholder as initial content if it's empty
+    (ele.innerHTML === '') && (ele.innerHTML = placeholder);
+
+    ele.addEventListener('focus', function(e) {
+        const value = e.target.innerHTML;
+        value === placeholder && (e.target.innerHTML = '');
+    });
+
+    ele.addEventListener('blur', function(e) {
+        const value = e.target.innerHTML;
+        value === '' && (e.target.innerHTML = placeholder);
+    });
+</script>

@@ -3,14 +3,14 @@
             <div mat-card-avatar>
                 <img *ngIf="loginUser" class="avatar-xs-card" [src]="loginUser.image" alt="{{loginUser.first_name + ' ' + loginUser.last_name + ' profile picture'}}">
             </div>
-            <mat-card-title>{{ loginUser.first_name + ' ' + loginUser.last_name }}</mat-card-title>
+            <mat-card-title *ngIf="loginUser">{{ loginUser.first_name + ' ' + loginUser.last_name }}</mat-card-title>
             <mat-card-subtitle>Developer</mat-card-subtitle>
         </mat-card-header>
 
         <mat-card-content>
                 <ul>
                     <li (click)="openDialog()"><a class="nav-link" (click)="openDialog()">Publish</a></li>
-                    <li (click)="navigateTo('/accounts/feed')"><a class="nav-link" (click)="navigateTo('/accounts/feed')"><fa-icon [icon]="faHome"></fa-icon> Home</a></li>
+                    <li (click)="navigateTo('/feed')"><a class="nav-link" (click)="navigateTo('/feed')"><fa-icon [icon]="faHome"></fa-icon> Home</a></li>
                     <li (click)="navigateTo('/accounts/' + loginUser.username)"><a class="nav-link" (click)="navigateTo('/accounts/' + loginUser.username)"><fa-icon [icon]="faUser"></fa-icon> Profile</a></li>
                     <li><a class="nav-link" href="javascript:void(0)"><fa-icon [icon]="faShareAltSquare"></fa-icon> Posts and shares</a></li>
                     <li><a class="nav-link" href="javascript:void(0)"><fa-icon [icon]="faHeart"></fa-icon> Likes and replies</a></li>

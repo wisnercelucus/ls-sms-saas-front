@@ -66,7 +66,6 @@ export class FeedSideMenuComponent implements OnInit, OnDestroy {
                             user['last_name'],
                             user['id'],
                             user['first_name']);
-            console.log(this.loginUser)
           }
 
         }

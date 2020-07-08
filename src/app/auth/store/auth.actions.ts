@@ -44,6 +44,7 @@ export class Login implements Action{
             username:string,
             email:string,
             token:string,
+            redirect:boolean
         }
     ){} 
 }

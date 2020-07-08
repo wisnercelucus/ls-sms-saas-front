@@ -10,10 +10,10 @@
             <mat-card-content>
                 <mat-tab-group>
                     <mat-tab label="Say something?">
-                        <form class="post-form">
+                        <form class="post-form" (ngSubmit)="onSubmitPost(f)" #f="ngForm">
                             <mat-form-field class="post-full-width">
                                 <mat-label>Post something to your timeline</mat-label>
-                                <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+                                <textarea name="content" ngModel matInput placeholder="Ex. It makes me feel..."></textarea>
                             </mat-form-field>
                             <button class="publish" mat-raised-button type="submit">Post</button>
                         </form>
@@ -82,7 +82,7 @@
         </div>
         <br>
         
-        <app-feed-timeline></app-feed-timeline>
+        <router-outlet></router-outlet>
 
     </div>
 

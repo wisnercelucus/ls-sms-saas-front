@@ -33,6 +33,8 @@ import {StoreModule} from '@ngrx/store';
 import * as fromApp from './store/app.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import { AuthEffects } from './auth/store/auth.effects';
+import { FeedRoutingModule } from './feed/feed.routing';
+import { FeedModule } from './feed/feed.module';
 
 
 @NgModule({
@@ -48,7 +50,9 @@ import { AuthEffects } from './auth/store/auth.effects';
     TestimonialsComponent,
     FaqComponent,
     ParticlesComponent,
+
   ],
+
   imports: [
     AuthModule,
     BrowserModule,
@@ -67,6 +71,8 @@ import { AuthEffects } from './auth/store/auth.effects';
     UsersRoutingModule,
     ForumModule,
     ForumRoutingModule,
+    FeedRoutingModule,
+    FeedModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi:true}],
   bootstrap: [AppComponent]

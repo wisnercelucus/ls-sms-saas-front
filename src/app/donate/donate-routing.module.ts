@@ -7,7 +7,7 @@ import { AuthenticatedGuard } from '../auth/authenticated.guard';
 
 
 const routes: Routes = [
-    {path:'donate', component:DonateComponent, children:[
+    {path:'donate', component:DonateComponent, canActivate:[AuthenticatedGuard], children:[
         {path:'process', component:ProcessDonationComponent},
         {path:'donors', component:DonorsComponent},  
     ]}
