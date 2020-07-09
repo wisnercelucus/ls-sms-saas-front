@@ -3,6 +3,7 @@
    background-color: #021e38;
     position: fixed;
     z-index: 5;
+    width: 99%;
 }
 mat-sidenav-container, mat-sidenav-content, mat-sidenav{
     height: 100%;

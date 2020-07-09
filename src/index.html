@@ -18,6 +18,25 @@
       const stripe   = Stripe('pk_test_FKVFWKITQGi5PMsdh6pvSYFK00x5t32pYi');
       const elements = stripe.elements();
     </script>
+
+<script>
+function rezizable(id){
+var textarea = document.getElementById(id);
+
+textarea.addEventListener('keydown', autosize);
+
+  function autosize(){
+    var el = this;
+    setTimeout(function(){
+      el.style.cssText = 'height:auto; padding:0';
+      el.style.cssText = 'height:' + el.scrollHeight + 'px';
+    },0);
+
+  }
+}
+
+
+</script>
   
 </body>
 </html>

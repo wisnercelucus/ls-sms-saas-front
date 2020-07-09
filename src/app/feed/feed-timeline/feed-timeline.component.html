@@ -3,7 +3,7 @@
     </div>
 
     <div class="user-activities" *ngIf="dataSource">
-            <mat-card class="post-card" *ngFor="let post of dataSource">
+            <mat-card class="post-card" *ngFor="let post of dataSource; let i = index">
                 <mat-card-header>
                     <div mat-card-avatar class="example-header-image">
                         <img class="avatar-xs-card" [src]="post.user.image" alt="{{ 'Photo of ' + post.user.username }}">
@@ -16,7 +16,7 @@
                         {{post.content}}
                     </p>
                 </mat-card-content>
-                <img mat-card-image *ngIf="post.image" src="post.image" alt="Photo of a Shiba Inu">
+                <img mat-card-image *ngIf="post.image" [src]="post.image" alt="post.id">
                 
                 <mat-card-actions>
                     <button mat-button [matMenuTriggerFor]="aboveMenu"><fa-icon [icon]="faThumbsUp"></fa-icon> LIKE</button>
@@ -30,50 +30,128 @@
                     <button mat-button><fa-icon [icon]="faComment"></fa-icon> COMMENT</button>
                     <button mat-button><fa-icon [icon]="faShareAltSquare"></fa-icon> SHARE</button>
                 </mat-card-actions>
+
                 <div class="comment-form-handler">
-                    <form class="comment-form">
+                    <form class="comment-form" (ngSubmit)="submitComment(f1)" #f1="ngForm">
                         <div class="form-row">
                         <div mat-card-avatar class="comment-user-avatar">
-                            <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image" alt="Photo of a Shiba Inu">
+                            <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image" alt="{{loginUser.username}}}">
                         </div>
-                        <div class="editable" id="commentDiv" contenteditable data-placeholder="Ex. that is a great...">
+                        <input type="hidden" ngModel = "post" name='content_type' ngValue='post'>
+                        <input type="hidden" [ngModel] = "post.id" name='object_id' [value]="post.id">
+                        <mat-form-field class="comment-form-content-box">
+                            <textarea id="{{'comment-content' + i}}" (click)="rezizable('comment-content' + i)" name="content" ngModel matInput placeholder="Leave a comment..."></textarea>    
+                        </mat-form-field>  
                             <!--<textarea class="comment-input" placeholder="Ex. It makes me feel..." name="commentValue" #commentInput></textarea>-->
-                        </div>
-                        <button class="publish" mat-raised-button type="submit">Post</button>
+
+                        <button class="post-comment" type="submit"
+                             matRipple
+                            [matRippleCentered]="centered"
+                            [matRippleDisabled]="disabled"
+                            [matRippleUnbounded]="unbounded"
+                            [matRippleRadius]="radius"
+                            [matRippleColor]="color"
+                        >
+                            <span class="material-icons">arrow_forward_ios</span>
+                        </button>
                         </div>
                     </form>
                 </div>
-                <div class="comment-thread" *ngIf="post.total_comments">
-                    <div class class="comment-box">
-                        <div mat-card-avatar class="comment-user-avatar">
-                            <img class="avatar-xs-card" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-                        </div>
-                        <p class="comment-text">I think that is a really good post.
-The COVID-19 cases are increasing rapidly in Haiti main cities. The cases registered as of the writing date of the report are as follow: 3538 total cases, 3640 active cases 54 death and 24 recovered.  
-The economy is highly impacted by the general situation caused by the novel corona virus. The prices continue to escalate and the local currency is in accelerating depreciation.</p>
 
-                    </div>
+                <div class="wrap-comment" *ngIf="post.total_comments">
+                    <div class="comment-thread" *ngFor="let comment of post.comments; let j = index">
+                        <div class class="comment-box">
+                            <div class="comment-content-box">
+                                <div mat-card-avatar class="comment-user-avatar">
+                                    <img class="avatar-xs-card-comment" *ngIf="tenantUrl" src="{{ tenantUrl + comment.user.image }}" alt="Photo of a Shiba Inu">
+                                </div>
+                                <p class="comment-text">{{comment.content}}</p>
+                            </div>
+                            <div class="comment-actions">
+                                <button mat-button>Like</button>
+                                <button mat-button>Reply</button>
+                            </div>
 
-                    <div class="inner-comment-thread">
-                        <div class class="comment-box">
-                            <div mat-card-avatar class="comment-user-avatar">
-                                <img class="avatar-xs-card" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+                            <div class="comment-form-handler comment-reply-form-handler">
+                                <form class="comment-form" (ngSubmit)="submitComment(f2)" #f2="ngForm">
+                                    <div class="form-row">
+                                    <div mat-card-avatar class="comment-user-avatar">
+                                        <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image" alt="{{loginUser.username}}}">
+                                    </div>
+                                    <input type="hidden" [ngModel] = "comment.id" name='parent_id'>
+                                    <input type="hidden" ngModel = "post" name='content_type'>
+                                    <input type="hidden" [ngModel] = "post.id" name='object_id'>
+                                    <mat-form-field class="comment-form-content-box">
+                                        <textarea id="{{'comment-content' + i + j}}" (click)="rezizable('comment-content' + i + j)" name="content" ngModel matInput placeholder="Leave a reply..."></textarea>    
+                                    </mat-form-field>  
+                                        <!--<textarea class="comment-input" placeholder="Ex. It makes me feel..." name="commentValue" #commentInput></textarea>-->
+
+                                    <button class="post-comment" type="submit"
+                                        matRipple
+                                        [matRippleCentered]="centered"
+                                        [matRippleDisabled]="disabled"
+                                        [matRippleUnbounded]="unbounded"
+                                        [matRippleRadius]="radius"
+                                        [matRippleColor]="color"
+                                    >
+                                        <span class="material-icons">arrow_forward_ios</span>
+                                    </button>
+                                    </div>
+                                </form>
                             </div>
-                            <p class="comment-text">I think that is a really good post.
-The COVID-19 cases are increasing rapidly in Haiti main cities. The cases registered as of the writing date of the report are as follow: 3538 total cases, 3640 active cases 54 death and 24 recovered.  
-The economy is highly impacted by the general situation caused by the novel corona virus. The prices continue to escalate and the local currency is in accelerating depreciation.</p>
+
+
                         </div>
-                        <div class class="comment-box">
-                            <div mat-card-avatar class="comment-user-avatar">
-                                <img class="avatar-xs-card" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+
+                        <div class="wrap-inner-comment"  *ngIf="comment.reply_count">
+                            <div class="inner-comment-thread" *ngFor="let reply of comment.replies; let k = index">
+                        
+                                <div class class="comment-box">
+                                    <div class="comment-content-box">
+                                        <div mat-card-avatar class="comment-user-avatar">
+                                            <img class="avatar-xs-card-comment" *ngIf="tenantUrl" src="{{ tenantUrl + reply.user.image }}" alt="Photo of a Shiba Inu">
+                                         </div>
+                                    <p class="comment-text">{{reply.content}}</p>
+                                </div>
+                                <div class="comment-actions">
+                                    <button mat-button>Like</button>
+                                    <button mat-button>Reply</button>
+                                </div>
+
+                            <div class="comment-form-handler comment-reply-form-handler">
+                                <form class="comment-form" (ngSubmit)="submitComment(f3)" #f3="ngForm">
+                                    <div class="form-row">
+                                    <div mat-card-avatar class="comment-user-avatar">
+                                        <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image" alt="{{loginUser.username}}}">
+                                    </div>
+                                    <input type="hidden" [ngModel] = "comment.id" name='parent_id'>
+                                    <input type="hidden" ngModel = "post" name='content_type'>
+                                    <input type="hidden" [ngModel] = "post.id" name='object_id'>
+                                    <mat-form-field class="comment-form-content-box">
+                                        <textarea id="{{'comment-content' + i + j + k}}" (click)="rezizable('comment-content' + i + j + k)" name="content" ngModel matInput placeholder="Leave a reply..."></textarea>    
+                                    </mat-form-field>  
+                                        <!--<textarea class="comment-input" placeholder="Ex. It makes me feel..." name="commentValue" #commentInput></textarea>-->
+
+                                    <button class="post-comment" type="submit"
+                                        matRipple
+                                        [matRippleCentered]="centered"
+                                        [matRippleDisabled]="disabled"
+                                        [matRippleUnbounded]="unbounded"
+                                        [matRippleRadius]="radius"
+                                        [matRippleColor]="color"
+                                    >
+                                        <span class="material-icons">arrow_forward_ios</span>
+                                    </button>
+                                    </div>
+                                </form>
                             </div>
-                            <p class="comment-text">I think that is a really good post.
-The COVID-19 cases are increasing rapidly in Haiti main cities. The cases registered as of the writing date of the report are as follow: 3538 total cases, 3640 active cases 54 death and 24 recovered.  
-The economy is highly impacted by the general situation caused by the novel corona virus. The prices continue to escalate and the local currency is in accelerating depreciation.</p>
+
+
+                            </div>
                         </div>
                     </div>
-                    
                 </div>
+            </div>
             </mat-card>
      </div>
 

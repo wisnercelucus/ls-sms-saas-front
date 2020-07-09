@@ -26,6 +26,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import {MatRippleModule} from '@angular/material/core';
 
 const Materials = [
   MatButtonModule,
@@ -55,6 +56,7 @@ const Materials = [
   MatTableModule,
   MatPaginatorModule,
   MatSortModule,
+  MatRippleModule,
 ]
 
 

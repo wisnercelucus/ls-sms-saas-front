@@ -1,5 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthService } from 'src/app/auth/auth.service';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FeedService} from './feed.service';
 
@@ -19,7 +18,7 @@ import { UsersService } from '../users/users.service';
 export class FeedComponent implements OnInit, OnDestroy {
   faPlus=faPlus;
   faMinusSquare=faMinusSquare;
-
+  @ViewChild('form') form: ElementRef;
 
   instanceSub: Subscription;
   userSubs: Subscription;
@@ -29,6 +28,8 @@ export class FeedComponent implements OnInit, OnDestroy {
   editMode=false;
   loginUserSub:Subscription;
   loginUser:User;
+
+  selectedFile:File = null;
 
   constructor(
     private feedService:FeedService, private usersService:UsersService
@@ -43,12 +44,32 @@ export class FeedComponent implements OnInit, OnDestroy {
   }
 
   onSubmitPost(form:NgForm){
-    const post:Post = {content:form.value.content}
-    this.postCreateSub = this.feedService.createPost(post).subscribe(
-      res=>{
-        form.reset();
-      }
-    );
+
+    if(!this.selectedFile){
+      const post:Post = {content:form.value.content}
+
+      this.postCreateSub = this.feedService.createPost(post).subscribe(
+        res=>{
+          form.reset();
+        }
+      );
+
+    }else{
+      const fd = new FormData(this.form.nativeElement);
+      //console.log();
+
+      fd.append('image', this.selectedFile.name);
+
+      this.postCreateSub = this.feedService.createPost(fd).subscribe(
+        res=>{
+          form.reset();
+        },
+        err=>{
+          console.log(err)
+        }
+      );
+    }
+    
   }
 
   getLogingUser(){
@@ -114,6 +135,11 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   onRemoveOption(index:number){
     (<FormArray>this.pollForm.get('optionsAdded')).removeAt(index);
+  }
+
+  onFileSelected(event:any){
+      this.selectedFile = <File>event.target.files[0];
+      console.log(this.selectedFile.name);
   }
 
 }

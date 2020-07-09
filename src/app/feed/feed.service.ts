@@ -25,14 +25,15 @@ export class FeedService {
     return this._refreshNeeded;
   }
     
-   createPost(data:Post){
+   createPost(data:any){
       const body = data;
 
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
       });
+
       if(this.tenantUrl){
-        return this.http.post<Post>(this.tenantUrl + '/feed/api/post/create/create_url/', body, {headers: headers}).pipe(
+        return this.http.post<Post>(this.tenantUrl + '/feed/api/post/create/create_url/', body).pipe(
           tap(p =>{
               this._refreshNeeded.next();          
           })
@@ -40,6 +41,28 @@ export class FeedService {
       }else{
         return;
       }
+   }
+
+
+   postComment(comment:{content:string, content_type:string, object_id:number}){
+    const body= comment;
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+  
+    
+
+    if(this.tenantUrl){
+      return this.http.post(this.tenantUrl + '/feed/comments/api/create/', body , {headers: headers}).pipe(
+        tap(res=>{
+          this._refreshNeeded.next();
+        })
+      );
+    }else{
+      return;
+    }
+
    }
   
   getUserPost(username:string){

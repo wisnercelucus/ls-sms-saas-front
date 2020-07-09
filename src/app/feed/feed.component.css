@@ -34,8 +34,8 @@ ul li{
 
 .feed .main-content{
     flex:2;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 25px;
+    margin-right: 25px;
 }
 
 .avatar-xs-card{
@@ -58,6 +58,9 @@ ul li{
 .publish-form{
     padding: 8px;
 }
+
+
+
 .post-form, .poll-form {
     min-width: 100px;
     width: 100%;
@@ -83,7 +86,8 @@ ul li{
   }
 
 .form-group{
-display: flex;
+    display: flex;
+    margin-bottom: 15px;
 }
 
 .form-group button{
@@ -93,6 +97,21 @@ display: flex;
     color: ghostwhite;
 }
 
+.form-group .file-choose{
+    color: #0ec54e;
+    background-color: #fff;
+}
+
+.form-group .select-image-btn{
+    height: 30px !important;
+    cursor: pointer;
+    font-size: 30px;
+    color: #0ec54e;
+}  
+
+.post-content{
+    resize:vertical;
+}
 
 
 @media screen and (max-width: 1000px){
@@ -121,12 +140,24 @@ display: flex;
         display: none;
     }
 
+    .feed .main-content{
+        flex:1;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
 }
 
 
 @media screen and (max-width: 359px){
     .user-profile-detail h1{
         font-size: 14px;
+    }
+
+    .feed .main-content{
+        flex:1;
+        margin-left: 2px;
+        margin-right: 2px;
     }
 
 }

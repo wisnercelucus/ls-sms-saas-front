@@ -9,8 +9,8 @@ export interface Comment{
     date_display?:string;
     timesince?:string;
     url?:string;
-    content_type?:string;
-    object_id?:number;
+    content_type:string;
+    object_id:number;
     reply_count?:number;
     did_like?:boolean;
     likes?:number;
