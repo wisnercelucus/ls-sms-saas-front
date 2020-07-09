@@ -44,15 +44,13 @@ export class FeedService {
    }
 
 
-   postComment(comment:{content:string, content_type:string, object_id:number}){
+   postComment(comment:any){
     const body= comment;
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
   
-    
-
     if(this.tenantUrl){
       return this.http.post(this.tenantUrl + '/feed/comments/api/create/', body , {headers: headers}).pipe(
         tap(res=>{

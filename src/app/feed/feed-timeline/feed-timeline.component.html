@@ -5,19 +5,45 @@
     <div class="user-activities" *ngIf="dataSource">
             <mat-card class="post-card" *ngFor="let post of dataSource; let i = index">
                 <mat-card-header>
-                    <div mat-card-avatar class="example-header-image">
-                        <img class="avatar-xs-card" [src]="post.user.image" alt="{{ 'Photo of ' + post.user.username }}">
-                    </div>
+                        <div mat-card-avatar class="card-header-image">
+                            <img class="avatar-xs-card" [src]="post.user.image" alt="{{ 'Photo of ' + post.user.username }}">
+                        </div>
                     <mat-card-title><a class="user-link" (click)="getUserData(post.user.username)">{{ post.user.first_name + ' ' + post.user.last_name }}</a></mat-card-title>
                     <mat-card-subtitle>Developer</mat-card-subtitle>
+                        <button class="post-sub-menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Post sub-menu">
+                        <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                        <button mat-menu-item>
+                            <mat-icon>create</mat-icon>
+                            <span>Edit</span>
+                        </button>
+                        <button mat-menu-item>
+                            <mat-icon>security</mat-icon>
+                            <span>Change privacy</span>
+                        </button>
+                        <button mat-menu-item>
+                            <mat-icon>report</mat-icon>
+                            <span>Report this post</span>
+                        </button>
+                        <mat-divider></mat-divider>
+                        <button mat-menu-item>
+                            <mat-icon>delete_outline</mat-icon>
+                            <span>Delete</span>
+                        </button>
+                        </mat-menu>
                 </mat-card-header>
                 <mat-card-content>
                     <p>
                         {{post.content}}
                     </p>
+                    <div class="post-stat">
+                        <span>{{ post.likes + ' ' }}Likes</span>
+                        <span>{{ post.total_comments + ' ' }}Comments</span>
+                    </div>
                 </mat-card-content>
                 <img mat-card-image *ngIf="post.image" [src]="post.image" alt="post.id">
-                
+                <mat-divider></mat-divider>
                 <mat-card-actions>
                     <button mat-button [matMenuTriggerFor]="aboveMenu"><fa-icon [icon]="faThumbsUp"></fa-icon> LIKE</button>
                     <mat-menu #aboveMenu="matMenu" yPosition="above">
@@ -27,11 +53,11 @@
                             <button mat-button><fa-icon [icon]="faHeart"></fa-icon> </button>
                         </span>
                     </mat-menu>
-                    <button mat-button><fa-icon [icon]="faComment"></fa-icon> COMMENT</button>
+                    <button mat-button (click)="onToggleCommentForm('comment-form' + i)"><fa-icon [icon]="faComment"></fa-icon> COMMENT</button>
                     <button mat-button><fa-icon [icon]="faShareAltSquare"></fa-icon> SHARE</button>
                 </mat-card-actions>
 
-                <div class="comment-form-handler">
+                <div class="comment-form-handler hide" id = "{{ 'comment-form' + i }}">
                     <form class="comment-form" (ngSubmit)="submitComment(f1)" #f1="ngForm">
                         <div class="form-row">
                         <div mat-card-avatar class="comment-user-avatar">
@@ -65,14 +91,18 @@
                                 <div mat-card-avatar class="comment-user-avatar">
                                     <img class="avatar-xs-card-comment" *ngIf="tenantUrl" src="{{ tenantUrl + comment.user.image }}" alt="Photo of a Shiba Inu">
                                 </div>
-                                <p class="comment-text">{{comment.content}}</p>
+                                <p class="comment-text">
+                                <a class="user-link" (click)="getUserData(comment.user.username)"> <span class="comment-user">{{ comment.user.first_name + ' ' + comment.user.last_name }}</span></a>
+                                <br>
+                                {{comment.content}}
+                                </p>
                             </div>
                             <div class="comment-actions">
                                 <button mat-button>Like</button>
-                                <button mat-button>Reply</button>
+                                <button mat-button (click)="onToggleCommentForm('comment-form' + i + j)">Reply</button>
                             </div>
 
-                            <div class="comment-form-handler comment-reply-form-handler">
+                            <div class="comment-form-handler comment-reply-form-handler hide" id="{{'comment-form' + i + j}}">
                                 <form class="comment-form" (ngSubmit)="submitComment(f2)" #f2="ngForm">
                                     <div class="form-row">
                                     <div mat-card-avatar class="comment-user-avatar">
@@ -111,14 +141,18 @@
                                         <div mat-card-avatar class="comment-user-avatar">
                                             <img class="avatar-xs-card-comment" *ngIf="tenantUrl" src="{{ tenantUrl + reply.user.image }}" alt="Photo of a Shiba Inu">
                                          </div>
-                                    <p class="comment-text">{{reply.content}}</p>
+                                    <p class="comment-text">
+                                    <a class="user-link" (click)="getUserData(reply.user.username)"> <span class="comment-user">{{ reply.user.first_name + ' ' + reply.user.last_name }}</span></a>
+                                    <br>
+                                    {{reply.content}}
+                                    </p>
                                 </div>
                                 <div class="comment-actions">
                                     <button mat-button>Like</button>
-                                    <button mat-button>Reply</button>
+                                    <button (click)="onToggleCommentForm('comment-form' + i + j + k)" mat-button>Reply</button>
                                 </div>
 
-                            <div class="comment-form-handler comment-reply-form-handler">
+                            <div id="{{'comment-form' + i + j + k }}" class="comment-form-handler comment-reply-form-handler hide">
                                 <form class="comment-form" (ngSubmit)="submitComment(f3)" #f3="ngForm">
                                     <div class="form-row">
                                     <div mat-card-avatar class="comment-user-avatar">

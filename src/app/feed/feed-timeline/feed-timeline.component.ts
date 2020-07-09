@@ -45,6 +45,7 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
 
   username:string;
   
+  toggleCommentForm:false;
 
   centered = false;
   disabled = false;
@@ -143,20 +144,32 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   }
 
   submitComment(form:NgForm){
-      const comment = {content:form.value.content, content_type:form.value.content_type, object_id:form.value.object_id}
-      this.createCommentSub = this.feedService.postComment(comment).subscribe(
-        res =>{
-          console.log(res)
-        },
-        err=>{
-          console.log(err)
-        }
-      )
+      if(!form.value.parent_id){
+        //const comment = {content:form.value.content, content_type:form.value.content_type, object_id:form.value.object_id}
+        this.createCommentSub = this.feedService.postComment(form.value).subscribe(
+          res =>{
+            console.log(res)
+          },
+          err=>{
+            console.log(err)
+          }
+        )
+      }else{
+        //const comment = {content:form.value.content, content_type:form.value.content_type, object_id:form.value.object_id}
+        this.createCommentSub = this.feedService.postComment(form.value).subscribe(
+          res =>{
+            console.log(res)
+          },
+          err=>{
+            console.log(err)
+          }
+        )
+      }
   }
 
 
   rezizable(id:string){
-    var textarea = document.getElementById(id);
+    let textarea = document.getElementById(id);
 
     textarea.addEventListener('keydown', autosize);
     
@@ -168,5 +181,12 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
         },0);
     
       }
+  }
+
+
+  onToggleCommentForm(id:string){
+    let element = document.getElementById(id);
+    element.classList.remove('hide')
+    element.classList.add("fadeIn")
   }
 }

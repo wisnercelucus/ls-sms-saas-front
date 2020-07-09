@@ -4,6 +4,7 @@
     width: 50px;
 }
 
+
 .user-link{
     text-decoration: none;
     cursor: pointer;
@@ -60,7 +61,12 @@
     flex:2;
     background-color: #f1f1f1;
     border-radius: 5px;
+    padding: 4px;
 }
+
+.hide{
+    display:none;
+  }
 
 
 .comment-box .comment-reply-form-handler{
@@ -71,12 +77,16 @@
 
 .comment-box .comment-actions{
     display: flex;
+    margin-left: 40px;
 }
 
 .comment-box .comment-actions button{
     margin-right: 15px;
 }
 
+.comment-user{
+  font-weight: 570;  
+}
 .comment-box .comment-actions button:last-child{
     margin-right: 0px;
 }
@@ -147,6 +157,69 @@
     margin-left: 9px;
     margin-right: 9px;
 }
+
+
+mat-card-header{
+    position: relative;
+}
+.post-sub-menu{
+    margin-top: -8px;
+    position: absolute;
+    right:0px;
+    top:0px;
+}
+
+.post-stat{
+    display:flex;
+    padding:6px;
+}
+
+.post-stat span{
+    font-size: 12px;
+}
+.post-stat span:first-child{
+    margin-right: 20px;
+}
+
+.fadeIn {
+    animation: fadein 2s;
+    -moz-animation: fadein 2s; /* Firefox */
+    -webkit-animation: fadein 2s; /* Safari and Chrome */
+    -o-animation: fadein 2s; /* Opera */
+}
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 
 
 @media screen and (max-width: 500px){
