@@ -9,7 +9,7 @@
                             <img class="avatar-xs-card" [src]="post.user.image" alt="{{ 'Photo of ' + post.user.username }}">
                         </div>
                     <mat-card-title><a class="user-link" (click)="getUserData(post.user.username)">{{ post.user.first_name + ' ' + post.user.last_name }}</a></mat-card-title>
-                    <mat-card-subtitle>Developer</mat-card-subtitle>
+                    <mat-card-subtitle>Developer &middot; {{ post.timesince}}</mat-card-subtitle>
                         <button class="post-sub-menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Post sub-menu">
                         <mat-icon>more_vert</mat-icon>
                         </button>
@@ -37,24 +37,25 @@
                     <p>
                         {{post.content}}
                     </p>
-                    <div class="post-stat">
+                <img mat-card-image *ngIf="post.image" [src]="post.image" alt="post.id">
+                    <div class="post-stat" id="{{'post'+ post.id}}">
                         <span>{{ post.likes + ' ' }}Likes</span>
                         <span>{{ post.total_comments + ' ' }}Comments</span>
                     </div>
                 </mat-card-content>
-                <img mat-card-image *ngIf="post.image" [src]="post.image" alt="post.id">
+                
                 <mat-divider></mat-divider>
                 <mat-card-actions>
-                    <button mat-button [matMenuTriggerFor]="aboveMenu"><fa-icon [icon]="faThumbsUp"></fa-icon> LIKE</button>
+                    <button id="{{'post-like-button'+ post.id}}" [class]="post.did_like? 'did_like': '' " mat-button [matMenuTriggerFor]="aboveMenu"><fa-icon [icon]="faThumbsUp"></fa-icon> Like</button>
                     <mat-menu #aboveMenu="matMenu" yPosition="above">
                         <span class="reaction" mat-menu-item>
-                            <button mat-button><fa-icon [icon]="faThumbsUp"></fa-icon> </button>
+                            <button (click) = "onLikePost(post.id)" mat-button><fa-icon [icon]="faThumbsUp"></fa-icon> </button>
                             <button mat-button><fa-icon [icon]="faSmile"></fa-icon> </button>
                             <button mat-button><fa-icon [icon]="faHeart"></fa-icon> </button>
                         </span>
                     </mat-menu>
-                    <button mat-button (click)="onToggleCommentForm('comment-form' + i)"><fa-icon [icon]="faComment"></fa-icon> COMMENT</button>
-                    <button mat-button><fa-icon [icon]="faShareAltSquare"></fa-icon> SHARE</button>
+                    <button mat-button (click)="onToggleCommentForm('comment-form' + i)"><fa-icon [icon]="faComment"></fa-icon> Comment</button>
+                    <button mat-button><fa-icon [icon]="faShareAltSquare"></fa-icon> Share</button>
                 </mat-card-actions>
 
                 <div class="comment-form-handler hide" id = "{{ 'comment-form' + i }}">

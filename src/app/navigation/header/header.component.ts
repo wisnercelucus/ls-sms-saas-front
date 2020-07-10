@@ -10,6 +10,7 @@ import * as fromApp from '../../store/app.reducer';
 import { map } from 'rxjs/operators';
 import * as AuthActions from '../../auth/store/auth.actions';
 import { FeedService } from 'src/app/feed/feed.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-header',

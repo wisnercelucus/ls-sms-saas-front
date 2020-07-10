@@ -42,6 +42,7 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   routerSubscription:Subscription;
   postsSub:Subscription;
   createCommentSub:Subscription;
+  postLikeSub:Subscription;
 
   username:string;
   
@@ -141,6 +142,10 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
     if(this.createCommentSub){
       this.createCommentSub.unsubscribe()
     }
+
+    if(this.postLikeSub){
+      this.postLikeSub.unsubscribe()
+    }
   }
 
   submitComment(form:NgForm){
@@ -183,10 +188,33 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
       }
   }
 
-
   onToggleCommentForm(id:string){
     let element = document.getElementById(id);
     element.classList.remove('hide')
     element.classList.add("fadeIn")
+  }
+
+  onLikePost(id:number){
+      this.postLikeSub =  this.feedService.likePost(+id).subscribe(
+        res=>{
+
+          let element = document.getElementById("post"+id);
+          element.removeChild(element.children[0])
+          let span = document.createElement("span");
+          span.innerHTML = res['likes'] + " Likes"
+          span.style.marginRight = "20px"
+          element.prepend(span)
+
+          if(res['liked']){
+            document.getElementById("post-like-button"+id).classList.add("did_like"); 
+          }else{
+            document.getElementById("post-like-button"+id).classList.remove("did_like");
+          }
+        },
+        err =>{
+          console.log(err)
+        }
+
+        )
   }
 }

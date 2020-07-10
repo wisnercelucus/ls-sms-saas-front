@@ -49,7 +49,13 @@ export class UsersService {
           )
         this.loginUser.next(user)
 
-      })
+      },
+        (err:HttpErrorResponse)=> {
+          if(err.error.detail == "Token has expired"){
+            this.authService.logout()
+          }
+        }
+      )
    )
   }
 

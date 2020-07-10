@@ -181,6 +181,10 @@ mat-card-header{
     margin-right: 20px;
 }
 
+.did_like{
+    color: dodgerblue;
+}
+
 .fadeIn {
     animation: fadein 2s;
     -moz-animation: fadein 2s; /* Firefox */

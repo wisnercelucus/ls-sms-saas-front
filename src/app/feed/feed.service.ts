@@ -99,5 +99,19 @@ export class FeedService {
       }
       
     }
+
+
+    likePost(id:number){
+
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+      });
+
+      if(this.tenantUrl){
+        return this.http.get(this.tenantUrl + '/feed/api/post/' + id + '/like/', {headers: headers}).pipe();
+      }else{
+        return;
+      }
+    }
 }
 
