@@ -34,8 +34,7 @@
                         </mat-menu>
                 </mat-card-header>
                 <mat-card-content>
-                    <p>
-                        {{post.content}}
+                    <p class="post-paragraph" [innerHTML]= "post.content">
                     </p>
                 <img mat-card-image *ngIf="post.image" [src]="post.image" alt="post.id">
                     <div class="post-stat" id="{{'post'+ post.id}}">
@@ -46,14 +45,7 @@
                 
                 <mat-divider></mat-divider>
                 <mat-card-actions>
-                    <button id="{{'post-like-button'+ post.id}}" [class]="post.did_like? 'did_like': '' " mat-button [matMenuTriggerFor]="aboveMenu"><fa-icon [icon]="faThumbsUp"></fa-icon> Like</button>
-                    <mat-menu #aboveMenu="matMenu" yPosition="above">
-                        <span class="reaction" mat-menu-item>
-                            <button (click) = "onLikePost(post.id)" mat-button><fa-icon [icon]="faThumbsUp"></fa-icon> </button>
-                            <button mat-button><fa-icon [icon]="faSmile"></fa-icon> </button>
-                            <button mat-button><fa-icon [icon]="faHeart"></fa-icon> </button>
-                        </span>
-                    </mat-menu>
+                    <button id="{{'post-like-button'+ post.id}}" (click) = "onLikePost(post.id)"  [class]="post.did_like? 'did_like': '' " mat-button><fa-icon [icon]="faThumbsUp"></fa-icon> Like</button>
                     <button mat-button (click)="onToggleCommentForm('comment-form' + i)"><fa-icon [icon]="faComment"></fa-icon> Comment</button>
                     <button mat-button><fa-icon [icon]="faShareAltSquare"></fa-icon> Share</button>
                 </mat-card-actions>
@@ -189,22 +181,3 @@
             </div>
             </mat-card>
      </div>
-
-<script>
-
-    const ele = document.getElementById('commentDiv');
-    const placeholder = ele.getAttribute('data-placeholder');
-
-    // Set the placeholder as initial content if it's empty
-    (ele.innerHTML === '') && (ele.innerHTML = placeholder);
-
-    ele.addEventListener('focus', function(e) {
-        const value = e.target.innerHTML;
-        value === placeholder && (e.target.innerHTML = '');
-    });
-
-    ele.addEventListener('blur', function(e) {
-        const value = e.target.innerHTML;
-        value === '' && (e.target.innerHTML = placeholder);
-    });
-</script>
