@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   subsciption:Subscription;
   errorMessage ="";
   bannerText:{p:string, btn:string}
-  storeSub:Subscription;
 
   isLoading:boolean;
 
@@ -121,10 +120,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if(this.subsciption){
       this.subsciption.unsubscribe()
-    }
-
-    if(this.storeSub){
-      this.storeSub.unsubscribe()
     }
   }
 

@@ -74,6 +74,9 @@ export class FeedSideMenuComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(){
+    if(this.loginUserSub){
+      this.loginUserSub.unsubscribe()
+    }
     if(this.subscrition){
       this.subscrition.unsubscribe()
     }

@@ -39,7 +39,9 @@ export class SchoolRootComponent implements OnInit, OnDestroy {
     this.atSchoolRoot = window.location.pathname === '/school'? true : false;
   }
   ngOnDestroy(){
-
+      if(this.subscription){
+        this.subscription.unsubscribe();
+      }
   }
 
   ngAfterViewInt(){

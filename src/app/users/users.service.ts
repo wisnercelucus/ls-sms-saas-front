@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subscription, BehaviorSubject } from 'rxjs';
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { AppService } from '../app.service';
 import { User } from './user.model';
 import { tap } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
@@ -25,8 +23,7 @@ export class UsersService {
   });
 
   constructor(private http: HttpClient, 
-    private router: Router, 
-    private appService: AppService, private authService:AuthService) { 
+    private authService:AuthService) { 
 
   }
 
@@ -52,7 +49,9 @@ export class UsersService {
       },
         (err:HttpErrorResponse)=> {
           if(err.error.detail == "Token has expired"){
+            this.loginUser.unsubscribe()
             this.authService.logout()
+            
           }
         }
       )

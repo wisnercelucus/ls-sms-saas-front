@@ -36,6 +36,7 @@
                 <mat-card-content>
                     <p class="post-paragraph" [innerHTML]= "post.content">
                     </p>
+
                 <img mat-card-image *ngIf="post.image" [src]="post.image" alt="post.id">
                     <div class="post-stat" id="{{'post'+ post.id}}">
                         <span>{{ post.likes + ' ' }}Likes</span>

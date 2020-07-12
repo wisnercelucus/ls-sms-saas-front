@@ -13,6 +13,7 @@ import { Client } from './client.model';
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   subscription: Subscription;
+  authSub:Subscription;
   editMode = false;
   maxDate: Date;
   schoolSizes = []
@@ -60,7 +61,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       form.value['schoolSize']
     );
     
-    this.authService.registerClient(client).subscribe(
+    this.authSub = this.authService.registerClient(client).subscribe(
       resp =>{
         console.log(resp);
       },
@@ -76,7 +77,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    this.subscription.unsubscribe()
+    if(this.authSub){
+      this.authSub.unsubscribe()
+    }
+    if(this.subscription){
+      this.subscription.unsubscribe()
+    }
+    
   }
 
 }

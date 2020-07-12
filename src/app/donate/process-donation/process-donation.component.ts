@@ -18,6 +18,7 @@ export class ProcessDonationComponent implements OnInit {
    cardError: string;
    amountOptions = []
    subscription: Subscription;
+   
    constructor( private cd: ChangeDetectorRef, 
                    private donateService: DonateService,
                    private snackBar: MatSnackBar ) {}

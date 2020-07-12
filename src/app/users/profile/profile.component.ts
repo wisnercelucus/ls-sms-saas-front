@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { faBirthdayCake, 
           faMapMarker, 
           faThumbsUp, 
@@ -17,7 +17,7 @@ import { Post } from 'src/app/feed/post.model';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
   faBirthdayCake = faBirthdayCake;
   faMapMarker = faMapMarker;
   faThumbsUp = faThumbsUp;
@@ -62,6 +62,12 @@ export class ProfileComponent implements OnInit {
 
       }
     );
+}
+
+ngOnDestroy(){
+  if(this.loginUserSub){
+    this.loginUserSub.unsubscribe();
+  }
 }
 
 }

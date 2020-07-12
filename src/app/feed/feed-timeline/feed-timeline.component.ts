@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { faBirthdayCake, 
   faMapMarker, 
   faThumbsUp, 
@@ -22,6 +22,7 @@ import { AppService } from 'src/app/app.service';
   styleUrls: ['./feed-timeline.component.css']
 })
 export class FeedTimelineComponent implements OnInit, OnDestroy {
+
   faBirthdayCake = faBirthdayCake;
   faMapMarker = faMapMarker;
   faThumbsUp = faThumbsUp;
@@ -67,7 +68,8 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.updateHashLinks();
+    
+
     this.appService.TENANT_URL.subscribe(
       url => {
           this.tenantUrl = url;
@@ -130,7 +132,7 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   }
 
   ngAfterViewInit(){
-    
+
   }
 
   ngOnDestroy(){
@@ -194,21 +196,6 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
     element.classList.remove('hide')
     element.classList.add("fadeIn")
   }
-
-
-  updateHashLinks(){
-    //var elements = document.getElementsByClassName("post-paragraph");
-    const elements = document.querySelectorAll(".post-paragraph");
-    console.log(elements);
-     /*$(".card-body-content").each(function(data){
-        var hashtagRegex = /(^|\s)#([\w\d-]+)/g
-        var htmlreplace = $(this).html()
-        var newText = htmlreplace.replace(hashtagRegex, "$1<a href='/feed/tags/$2/'>#$2</a>")
-        $(this).html(newText)
-    })*/
-  }
-
-
 
   onLikePost(id:number){
       this.postLikeSub =  this.feedService.likePost(+id).subscribe(

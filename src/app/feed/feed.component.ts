@@ -8,6 +8,7 @@ import { FormGroup, FormControl, Validators, FormArray, NgForm } from '@angular/
 import { Post } from './post.model';
 import { User } from '../users/user.model';
 import { UsersService } from '../users/users.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,19 +21,22 @@ export class FeedComponent implements OnInit, OnDestroy {
   faMinusSquare=faMinusSquare;
   @ViewChild('form') form: ElementRef;
 
-  instanceSub: Subscription;
-  userSubs: Subscription;
   postsSub:Subscription;
   postCreateSub:Subscription;
+  loginUserSub:Subscription;
+
   pollForm: FormGroup;
   editMode=false;
-  loginUserSub:Subscription;
+
   loginUser:User;
+  username:string;
 
   selectedFile:File = null;
 
   constructor(
-    private feedService:FeedService, private usersService:UsersService
+    private feedService:FeedService, 
+    private usersService:UsersService, 
+    private router:Router
     ) { }
 
   ngOnInit(): void {
@@ -40,13 +44,39 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.getLogingUser();
   }
 
+
+  getUserData(username:string){   
+    if(username){
+      this.postsSub =  this.feedService.getUserPost(this.username).subscribe();
+      this.router.navigate(['/accounts', username])
+    }
+  }
+
+
   ngAfterViewInit(){
   }
+
+  updateHashLinks(text:string){
+      let hashtagRegex = /(^|\s)#([\w\d-]+)/g
+      let htmlreplace = text
+      let newText = htmlreplace.replace(hashtagRegex, "$1<a href='/feed/tags/$2/'>#$2</a>")
+      return newText   
+  }
+
+  updateUsernameLinks(text:string){
+    let usernameRegex = /(^|\s)@([\w\d-]+)/g
+    let htmlreplace = text
+    let newText = htmlreplace.replace(usernameRegex, "$1<a href='/accounts/$2/'>$2</a>")
+    return newText   
+}
 
   onSubmitPost(form:NgForm){
 
     if(!this.selectedFile){
-      const post:Post = {content:form.value.content}
+      let newContent = this.updateHashLinks(form.value.content);
+      newContent = this.updateUsernameLinks(newContent);
+
+      const post:Post = {content:newContent}
 
       this.postCreateSub = this.feedService.createPost(post).subscribe(
         res=>{
@@ -56,8 +86,6 @@ export class FeedComponent implements OnInit, OnDestroy {
 
     }else{
       const fd = new FormData(this.form.nativeElement);
-      //console.log();
-
       fd.append('image', this.selectedFile.name);
 
       this.postCreateSub = this.feedService.createPost(fd).subscribe(
@@ -122,6 +150,9 @@ export class FeedComponent implements OnInit, OnDestroy {
     }
     if(this.postCreateSub){
       this.postCreateSub.unsubscribe()
+    }
+    if(this.loginUserSub){
+      this.loginUserSub.unsubscribe();
     }
   }
 

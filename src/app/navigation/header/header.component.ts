@@ -20,16 +20,19 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class HeaderComponent implements OnInit, OnDestroy {
   @Output() sideNavToggle = new EventEmitter<void>();
   isAuthenticated=false;
-  subscription: Subscription;
-  userSubs: Subscription;
-  loginUserSub:Subscription;
+
+
+
   authenticateduser:AuthUser;
   image:string;
   instance:string;
   loginUser:User;
+
+  subscription: Subscription;
+  userSubs: Subscription;
+  loginUserSub:Subscription;
   testUserSub:Subscription;
   Logsubsciption:Subscription;
-
   postsSub:Subscription;
 
   constructor(private router: Router, 
@@ -135,6 +138,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if(this.postsSub){
       this.postsSub.unsubscribe();
     }
+
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    }
+
+    if(this.testUserSub){
+      this.testUserSub.unsubscribe();
+    }
+    if(this.Logsubsciption){
+      this.Logsubsciption.unsubscribe();
+    }
+
   }
 
   scrollTo(id:string){

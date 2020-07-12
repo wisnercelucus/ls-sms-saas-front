@@ -7,13 +7,18 @@ import { Router } from '@angular/router';
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.css']
 })
-export class SidenavComponent implements OnInit {
+export class SidenavComponent implements OnInit, OnDestroy {
   @Output() sideNavClose = new EventEmitter<void>();
   isAuth=false;
   authSubscription: Subscription;
   timer: any;
 
   constructor(private router: Router) { }
+  ngOnDestroy(): void {
+    if(this.authSubscription){
+      this.authSubscription.unsubscribe();
+    }
+  }
 
   ngOnInit(): void {
   }
