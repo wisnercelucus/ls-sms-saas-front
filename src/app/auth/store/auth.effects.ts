@@ -1,6 +1,6 @@
 import {Actions, ofType, Effect} from '@ngrx/effects';
 import * as AuthActions from './auth.actions';
-import { switchMap, catchError, map, tap, take} from 'rxjs/operators';
+import { switchMap, catchError, map, tap} from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { of, Subscription } from 'rxjs';
@@ -120,6 +120,9 @@ export class AuthEffects{
         //this.authService.clearLogoutTimer();
         localStorage.removeItem('userData');
         this.router.navigate(['/auth/login']);
+        if(this.subscrition){
+          this.subscrition.unsubscribe();
+        }
       })
     );
 
@@ -166,13 +169,14 @@ export class AuthEffects{
     );
   
     tenantUrl1:string;
+    subscrition:Subscription;
 
     constructor(private actions$:Actions, private http: HttpClient, private router:Router, private appService:AppService, private authService:AuthService, private route:ActivatedRoute){
-      this.appService.TENANT_URL.pipe(
-        take(1),
-        map(url=>{
-          this.tenantUrl=url;
-        })
+      this.subscrition = this.appService.TENANT_URL.subscribe(
+        url=>{
+          this.tenantUrl = url;
+        }
       )
+      //this.tenantUrl = 'http://fdsa.demo.local:8000';
     }
 }
