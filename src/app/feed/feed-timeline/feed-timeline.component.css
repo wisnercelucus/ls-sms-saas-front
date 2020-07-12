@@ -113,6 +113,9 @@
     padding: 6px;
 }
 
+a{
+    text-decoration: none;
+}
 .comment-form .form-row .comment-user-avatar {
     margin-right: 15px;
 }
@@ -128,14 +131,14 @@
 
 .publish{
     margin-left: 7px;
-    background-color: #673ab7;
+    background-color: dodgerblue;
     height: 40px;
     max-height: 40px;
     color: white;
 }
 
 .post-comment{
-    background-color: #673ab7;
+    background-color: dodgerblue;
     height: 36px;
     max-height: 36px !important;
     color: white;
@@ -184,6 +187,93 @@ mat-card-header{
 .did_like{
     color: dodgerblue;
 }
+
+.poll-status-handler{
+    display: flex;
+    margin-bottom: 20px;
+    height: 20px;
+    max-height: 20px;
+}
+
+.poll-status-handler span{
+    margin-right: 10px;
+    border-radius: 4px;
+    background-color: dodgerblue;
+    width: 55px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 580;
+    color:rgb(255, 255, 255);
+}
+
+.poll-option{
+    margin-top: 30px;
+}
+
+.poll-option .vote-results{
+    padding: 10px;
+    border-radius: 6px;
+
+}
+
+.poll-option .vote-results .voted-option{
+    padding: 8px;
+    position: relative;
+    min-height: 25px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.poll-option .vote-results .voted-option .overlay,
+.poll-option .vote-results .voted-option .option-value{
+    position: absolute;
+    height: 100%;
+    top:0;
+    left:0;
+    border-radius: 4px; 
+}
+
+.poll-option .vote-results .voted-option .overlay{
+    background-color: #35ba9d;
+    width: 40%; 
+}
+
+.poll-option .vote-results .voted-option .option-value{
+    z-index: 4;
+    width: 100%;
+    background-color: #f1f1f181;
+    padding-left: 8px;
+}
+
+.poll-option .vote-results .voted-option:last-child{
+    margin-bottom: 0px;
+}
+
+.poll-status-handler span.poll-voted {
+    background-color: #0ec54e;
+}
+
+.poll-status-handler span.post-type {
+    background-color: fuchsia;
+}
+
+.poll-status-handler span.poll-status-close{
+    background-color: #fd602f;
+}
+
+.poll-status-handler span:last-child{
+    margin-right: 0px;
+}
+
+.submit-vote{
+    background-color: dodgerblue;
+    color: white;
+}
+
+
+
 
 .fadeIn {
     animation: fadein 2s;

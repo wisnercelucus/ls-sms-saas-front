@@ -113,5 +113,19 @@ export class FeedService {
         return;
       }
     }
+
+    askPollQuestion(data:any){
+      const body = data;
+
+      if(this.tenantUrl){
+        return this.http.post<{status:string}>(this.tenantUrl + '/feed/api/poll/create/', body).pipe(
+          tap(p =>{
+            this._refreshNeeded.next();          
+          })
+        );
+      }else{
+        return;
+      }
+    }
 }
 

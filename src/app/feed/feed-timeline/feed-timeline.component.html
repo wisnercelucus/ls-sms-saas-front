@@ -34,10 +34,67 @@
                         </mat-menu>
                 </mat-card-header>
                 <mat-card-content>
-                    <p class="post-paragraph" [innerHTML]= "post.content">
+                
+                    <p *ngIf="!post.poll" class="post-paragraph" [innerHTML]= "post.content">
                     </p>
+                    
+                    <div class="wrap-voted-post" *ngIf="post.poll">
+                        <div class="poll-status-handler">
+                            <span class="post-type">
+                                    <fa-icon [icon]="faChartBar"></fa-icon> poll
+                            </span>
 
-                <img mat-card-image *ngIf="post.image" [src]="post.image" alt="post.id">
+                            <span class="poll-voted" *ngIf="post.did_vote">
+                                <fa-icon [icon]="faCheckSquare"></fa-icon> voted
+                            </span>
+                            <span  class="poll-status-open" *ngIf="post.poll.is_open">
+                                <fa-icon [icon]="faSpinner"></fa-icon> open
+                            </span>
+                            <span  class="poll-status-close" *ngIf="!post.poll.is_open">
+                                <fa-icon [icon]="faTimesCircle"></fa-icon> closed
+                            </span>
+                        </div>
+
+                        <p class="post-paragraph" [innerHTML]= "post.content">
+                        </p>
+                        <mat-divider></mat-divider>
+                    </div>
+
+                    <div class="poll-option" *ngIf="post.poll">
+                        
+                        <div class="vote-results" *ngIf="post.did_vote">
+                            <div class="voted-option" *ngFor="let opt of post.poll.options">
+                                <div class="overlay">
+                                </div>
+                                <div class="option-value">
+                                    <p>{{opt.value}}</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="vote-form-container" *ngIf="!post.did_vote">
+                        <form [formGroup]="options" (ngSubmit)="submitVote()">
+                            <div>
+                                <mat-radio-group [formControl]="floatLabelControl">
+                                <p *ngFor="let opt of post.poll.options">
+                                    <mat-radio-button value="{{opt.id}}">
+                                        {{opt.value}}
+                                    </mat-radio-button>
+                                </p>
+                                </mat-radio-group>
+                            </div>
+                            <button type="submit" mat-raised-button class="submit-vote">Vote</button>
+                        </form>
+                        </div>
+
+
+
+
+                    </div>
+
+                    <img mat-card-image *ngIf="post.image" [src]="post.image" alt="post.id">
+                    
                     <div class="post-stat" id="{{'post'+ post.id}}">
                         <span>{{ post.likes + ' ' }}Likes</span>
                         <span>{{ post.total_comments + ' ' }}Comments</span>

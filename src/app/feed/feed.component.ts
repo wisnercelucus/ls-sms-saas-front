@@ -24,6 +24,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   postsSub:Subscription;
   postCreateSub:Subscription;
   loginUserSub:Subscription;
+  pollCreateSub:Subscription;
 
   pollForm: FormGroup;
   editMode=false;
@@ -66,7 +67,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   updateUsernameLinks(text:string){
     let usernameRegex = /(^|\s)@([\w\d-]+)/g
     let htmlreplace = text
-    let newText = htmlreplace.replace(usernameRegex, "$1<a href='/accounts/$2/'>$2</a>")
+    let newText = htmlreplace.replace(usernameRegex, "$1<a style='text-decoration:none' href='/accounts/$2/'>$2</a>")
     return newText   
 }
 
@@ -86,6 +87,13 @@ export class FeedComponent implements OnInit, OnDestroy {
 
     }else{
       const fd = new FormData(this.form.nativeElement);
+      
+      const content = this.updateHashLinks(fd.get("content").toString());
+
+      const newContent = this.updateUsernameLinks(content);
+
+      fd.set("content", newContent);
+
       fd.append('image', this.selectedFile.name);
 
       this.postCreateSub = this.feedService.createPost(fd).subscribe(
@@ -124,12 +132,14 @@ export class FeedComponent implements OnInit, OnDestroy {
     let question = '';
     let option1 = '';
     let option2 = '';
+    let open_until: Date;
     let optionsAdded = new FormArray([])
 
     this.pollForm = new FormGroup({
       'question': new FormControl(question, Validators.required),
       'option1': new FormControl(option1, Validators.required),
       'option2': new FormControl(option2, Validators.required),
+      "open_until": new FormControl(open_until, Validators.required),
       'optionsAdded':optionsAdded
     })
 
@@ -140,8 +150,12 @@ export class FeedComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(){
-    console.log(this.pollForm.value)
-    
+    this.pollCreateSub = this.feedService.askPollQuestion(this.pollForm.value)
+    .subscribe(
+      res=>{
+        this.pollForm.reset()
+      }
+    );
   }
 
   ngOnDestroy(){
@@ -153,6 +167,9 @@ export class FeedComponent implements OnInit, OnDestroy {
     }
     if(this.loginUserSub){
       this.loginUserSub.unsubscribe();
+    }
+    if(this.pollCreateSub){
+      this.pollCreateSub.unsubscribe()
     }
   }
 
@@ -170,7 +187,6 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   onFileSelected(event:any){
       this.selectedFile = <File>event.target.files[0];
-      console.log(this.selectedFile.name);
   }
 
 }

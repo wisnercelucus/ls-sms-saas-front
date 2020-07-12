@@ -5,7 +5,11 @@ import { faBirthdayCake,
   faShareAltSquare, 
   faComment, 
   faHeart,
- faSmile , 
+ faSmile, 
+ faChartBar,
+ faCheckSquare,
+ faTimesCircle,
+ faSpinner,
  faUserCircle, faUsers, faHome, faUser} from '@fortawesome/free-solid-svg-icons';
 import { Post } from 'src/app/feed/post.model';
 import { FeedService } from '../feed.service';
@@ -13,7 +17,7 @@ import { Subscription } from 'rxjs';
 import {  Router, ActivatedRoute } from '@angular/router';
 import { UsersService } from 'src/app/users/users.service';
 import { User } from 'src/app/users/user.model';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { AppService } from 'src/app/app.service';
 
 @Component({
@@ -34,6 +38,12 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   faUsers = faUsers;
   faHome = faHome;
   faUser = faUser;
+  faChartBar = faChartBar;
+  faCheckSquare = faCheckSquare;
+  faTimesCircle = faTimesCircle;
+  faSpinner = faSpinner;
+
+
   dataSource:Post[];
   loginUserSub:Subscription;
   loginUser:User;
@@ -56,8 +66,17 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   radius: number;
   color: string;
   tenantUrl:string;
+  
+  options: FormGroup;
 
-  constructor( private feedService:FeedService, private route:ActivatedRoute, private router:Router, private usersService:UsersService, private appService:AppService) {}
+  //hideRequiredControl = new FormControl(false);
+  floatLabelControl = new FormControl("option");
+
+  constructor( fb: FormBuilder, private feedService:FeedService, private route:ActivatedRoute, private router:Router, private usersService:UsersService, private appService:AppService) {
+    this.options = fb.group({
+      floatLabel: this.floatLabelControl,
+    });
+  }
 
   getUserData(username:string){   
     if(username){
@@ -68,9 +87,7 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    
-
-    this.appService.TENANT_URL.subscribe(
+     this.appService.TENANT_URL.subscribe(
       url => {
           this.tenantUrl = url;
       }
@@ -219,5 +236,9 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
         }
 
         )
+  }
+
+  submitVote(){
+    console.log(this.options.value)
   }
 }
