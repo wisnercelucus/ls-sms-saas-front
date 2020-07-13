@@ -43,8 +43,6 @@ export class FeedComponent implements OnInit, OnDestroy {
     ) { }
 
   ngOnInit(): void {
-    const r  = this.linkifyService.linkify("For help with GitHub.com, please email support@github.com")
-    console.log(r)
     this.initForm();
     this.getLogingUser();
   }
@@ -78,10 +76,12 @@ export class FeedComponent implements OnInit, OnDestroy {
   onSubmitPost(form:NgForm){
 
     if(!this.selectedFile){
-      //let newContent = this.updateHashLinks(form.value.content);
-      //newContent = this.updateUsernameLinks(newContent);
+      const r  = this.linkifyService.linkify(form.value.content);
 
-      const post:Post = {content:form.value.content}
+      let newContent = this.updateHashLinks(r);
+      newContent = this.updateUsernameLinks(newContent);
+
+      const post:Post = {content:newContent}
 
       this.postCreateSub = this.feedService.createPost(post).subscribe(
         res=>{
@@ -91,12 +91,12 @@ export class FeedComponent implements OnInit, OnDestroy {
 
     }else{
       const fd = new FormData(this.form.nativeElement);
-      
-      //const content = this.updateHashLinks(fd.get("content").toString());
+      const r  = this.linkifyService.linkify(fd.get("content").toString())
+      const content = this.updateHashLinks(r);
 
-      //const newContent = this.updateUsernameLinks(content);
+      const newContent = this.updateUsernameLinks(content);
 
-      //fd.set("content", newContent);
+      fd.set("content", newContent);
 
       fd.append('image', this.selectedFile.name);
 

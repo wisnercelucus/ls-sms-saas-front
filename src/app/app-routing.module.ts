@@ -10,7 +10,7 @@ const routes: Routes = [
   {path:'school', redirectTo: '/school', pathMatch: 'full'},
   {path:'donate', redirectTo: '/donate/process', pathMatch: 'full'},
   {path: 'auth', redirectTo:'/auth/login', pathMatch:'full'},
-  {path: 'accounts', redirectTo:'/accounts/feed', pathMatch:'full'},
+  {path: 'accounts', redirectTo:'/accounts/all', pathMatch:'full'},
   {path: 'forums', redirectTo:'/forums', pathMatch:'full'},
  
 ];

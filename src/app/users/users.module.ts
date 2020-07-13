@@ -6,6 +6,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import { SettingsComponent } from './settings/settings.component';
 import { GroupsComponent } from './groups/groups.component';
+import { UsersListComponent } from './users-list/users-list.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { GroupsComponent } from './groups/groups.component';
     ProfileComponent,
     PasswordChangeComponent,
     SettingsComponent,
-    GroupsComponent
+    GroupsComponent,
+    UsersListComponent
   ],
 
   imports: [

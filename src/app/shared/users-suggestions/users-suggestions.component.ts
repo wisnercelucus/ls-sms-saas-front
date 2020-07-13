@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsersService } from 'src/app/users/users.service';
 
 @Component({
   selector: 'app-users-suggestions',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsersSuggestionsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private usersService:UsersService) { }
 
   ngOnInit(): void {
   }

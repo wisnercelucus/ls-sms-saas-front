@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subscription, BehaviorSubject } from 'rxjs';
+import { Subscription, BehaviorSubject, Subject } from 'rxjs';
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { User } from './user.model';
 import { tap } from 'rxjs/operators';
@@ -17,6 +17,7 @@ export class UsersService {
   tenantUrl:string;
   
   loginUser = new BehaviorSubject<User>(null);
+  usersList = new Subject<User[]>();
 
   headers = new HttpHeaders({
     'Content-Type': 'application/json'
@@ -48,13 +49,64 @@ export class UsersService {
 
       },
         (err:HttpErrorResponse)=> {
-          if(err.error.detail == "Token has expired"){
-            this.loginUser.unsubscribe()
-            this.authService.logout()
-            
+          (err:HttpErrorResponse)=> {
+            this.handleError(err);
           }
         }
       )
+   )
+  }
+
+
+
+  followUser(data:any){
+
+    if(!this.instance){
+      return;
+    }
+
+    const body = data;
+
+
+    return this.http.post<User[]>(this.tenantUrl + '/accounts/api/follow/', body).pipe(
+      tap(
+        (res:User[])=>{
+            console.log(res)
+        },
+
+        (err:HttpErrorResponse)=> {
+          this.handleError(err);
+        }
+      )  
+   )
+  }
+
+  handleError(err:HttpErrorResponse){
+    if(err.error.detail == "Token has expired"){
+      this.loginUser.unsubscribe()
+      this.authService.logout() 
+    }
+  }
+
+  getUsersList(){
+
+    if(!this.instance){
+      return;
+    }
+
+
+    return this.http.get<User[]>(this.tenantUrl + '/accounts/api/users/', {headers:this.headers}).pipe(
+      tap(
+        (res:User[])=>{
+            this.usersList.next(res)
+        },
+
+        (err:HttpErrorResponse)=> {
+          (err:HttpErrorResponse)=> {
+            this.handleError(err);
+          }
+        }
+      )  
    )
   }
 
@@ -63,7 +115,17 @@ export class UsersService {
       return;
     }
     const body = {'old_password':oldPassword, 'new_password':newPassword}
-    return this.http.put(this.tenantUrl + '/accounts/api/password_change/', body, {headers:this.headers})
+    return this.http.put(this.tenantUrl + '/accounts/api/password_change/', body, {headers:this.headers}).pipe(
+      tap(res=>{
+
+      },
+      (err:HttpErrorResponse)=>{
+        (err:HttpErrorResponse)=> {
+          this.handleError(err);
+        }
+      }
+      )
+    )
   }
 
   

@@ -7,15 +7,17 @@ import { PasswordChangeComponent } from './password-change/password-change.compo
 import { SettingsComponent } from './settings/settings.component';
 import { GroupsComponent } from './groups/groups.component';
 import { FeedTimelineComponent } from '../feed/feed-timeline/feed-timeline.component';
+import { UsersListComponent } from './users-list/users-list.component';
 
 const routes: Routes = [
     {path: 'accounts', component:UsersComponent, canActivate:[AuthGuard],
         children:[
+            {path:'all', component:UsersListComponent},
             {path:'groups', component:GroupsComponent},
             {path:'settings', component:SettingsComponent},
             {path:'password-change', component:PasswordChangeComponent},
             {path:':username', component:ProfileComponent, children:[
-                {path:'', component:FeedTimelineComponent }
+                {path:'', component:FeedTimelineComponent },
             ]},
         ]
     }

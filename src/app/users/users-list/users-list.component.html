@@ -1,0 +1,38 @@
+
+<section class="users-list">
+    <div class="side-profile-menu-left">
+    <app-feed-side-menu></app-feed-side-menu>
+    </div>
+
+    <div class="main-content">
+        <div *ngIf="usersList">
+
+            <h3>All users: {{ usersList.length }}</h3>
+        
+            <mat-card *ngFor="let user of usersList">
+                <mat-card-header>
+                    <div mat-card-avatar>
+                        <img class="avatar-xs-card" *ngIf="user.image" [src]="user.image" alt="user.username">
+                    </div>
+                    <mat-card-title><a class="user-link" [routerLink]="['/accounts', user.username]">{{ user.first_name + ' ' + user.last_name}}</a></mat-card-title>
+                    <mat-card-subtitle>Developer</mat-card-subtitle>
+                </mat-card-header>
+        
+                <mat-card-actions>
+                    <a mat-raised-button class="follow-btn" (click)="onFollowUser(user.username)">Follow</a>
+                </mat-card-actions>
+    
+            </mat-card>
+    
+        </div>
+    </div>
+
+    <div class="side-profile-menu-right">
+        <app-users-suggestions></app-users-suggestions>
+        <br>
+        <app-groups-suggestions></app-groups-suggestions>
+        <br>
+        <app-feed-copyright></app-feed-copyright>
+    </div>
+
+</section>
