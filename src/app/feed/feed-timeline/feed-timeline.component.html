@@ -62,34 +62,66 @@
 
                     <div class="poll-option" *ngIf="post.poll">
                         
-                        <div class="vote-results" *ngIf="post.did_vote">
-                            <div class="voted-option" *ngFor="let opt of post.poll.options">
-                                <div class="overlay">
+                        <div   class="vote-results" *ngIf="post.did_vote">
+
+                            <span id="poll-{{post.poll.id}}">
+                                <div class="voted-option" *ngFor="let opt of post.poll.options">
+                                    <div style="width:{{opt.percent_vote}}" class="overlay">
+                                    </div>
+                                    <div class="option-value">
+                                        <p>{{opt.value}}</p>
+                                    </div>
                                 </div>
-                                <div class="option-value">
-                                    <p>{{opt.value}}</p>
+                                <button *ngIf="post.poll.is_open" mat-raised-button (click)="onChangeVote('poll-' + post.poll.id, 'form-poll-'+ post.poll.id)" type="button">Change vote</button>
+                            </span>
+
+                        <div id="form-poll-{{post.poll.id}}"  class="change-vote-container remove" *ngIf="post.did_vote">
+
+                        <form  (ngSubmit)="changeVote(form, 'form-poll-'+ post.poll.id)"
+                        #form ="ngForm"
+                        >
+
+                                <input type="hidden" [ngModel]="post.id" name="postId" required>
+                                <input type="hidden" [ngModel]="post.poll.id" name="pollId" required>
+                                <div>
+                                    <mat-radio-group ngModel name="option" required>
+                                    <div class="option-value">
+                                        <p class="option-to-vote" *ngFor="let opt of post.poll.options">
+                                            <mat-radio-button value="{{opt.id}}">
+                                                {{opt.value}}
+                                            </mat-radio-button>
+                                        </p>
+                                    </div>
+                                    </mat-radio-group>
                                 </div>
-                            </div>
+                            <button type="submit" mat-raised-button class="submit-vote" [disabled]="form.invalid">Change vote</button>
+                        </form>
+                        </div>
+
                         </div>
 
 
                         <div class="vote-form-container" *ngIf="!post.did_vote">
-                        <form [formGroup]="options" (ngSubmit)="submitVote()">
-                            <div>
-                                <mat-radio-group [formControl]="floatLabelControl">
-                                <p *ngFor="let opt of post.poll.options">
-                                    <mat-radio-button value="{{opt.id}}">
-                                        {{opt.value}}
-                                    </mat-radio-button>
-                                </p>
-                                </mat-radio-group>
-                            </div>
-                            <button type="submit" mat-raised-button class="submit-vote">Vote</button>
+                        <form  (ngSubmit)="submitVote(form)"
+                        #form ="ngForm"
+                        >
+
+                                <input type="hidden" [ngModel]="post.id" name="postId" required>
+                                <input type="hidden" [ngModel]="post.poll.id" name="pollId" required>
+                                <div>
+                                    <mat-radio-group ngModel name="option" required>
+                                    <div class="option-value">
+                                        <p class="option-to-vote" *ngFor="let opt of post.poll.options">
+                                            <mat-radio-button value="{{opt.id}}">
+                                                {{opt.value}}
+                                            </mat-radio-button>
+                                        </p>
+                                    </div>
+                                    </mat-radio-group>
+                                </div>
+                            <button type="submit" mat-raised-button class="submit-vote" [disabled]="form.invalid">Vote</button>
                         </form>
                         </div>
-
-
-
 
                     </div>
 

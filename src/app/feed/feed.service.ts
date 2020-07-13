@@ -127,5 +127,35 @@ export class FeedService {
         return;
       }
     }
+
+    votePoll(data:any){
+      const body = data;
+
+      if(this.tenantUrl){
+        return this.http.post<{status:string}>(this.tenantUrl + '/feed/api/poll/vote/', body).pipe(
+          tap(p =>{
+            this._refreshNeeded.next(); 
+            //console.log(p)         
+          })
+        );
+      }else{
+        return;
+      }
+    }
+
+    changeVotePoll(data:any){
+      const body = data;
+
+      if(this.tenantUrl){
+        return this.http.post<{status:string}>(this.tenantUrl + '/feed/api/poll/vote/change/', body).pipe(
+          tap(p =>{
+            this._refreshNeeded.next();         
+          })
+        );
+      }else{
+        return;
+      }
+    }
+
 }
 

@@ -17,7 +17,7 @@ import { Subscription } from 'rxjs';
 import {  Router, ActivatedRoute } from '@angular/router';
 import { UsersService } from 'src/app/users/users.service';
 import { User } from 'src/app/users/user.model';
-import { NgForm, FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { AppService } from 'src/app/app.service';
 
 @Component({
@@ -45,7 +45,7 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
 
 
   dataSource:Post[];
-  loginUserSub:Subscription;
+  
   loginUser:User;
 
   feedSub:Subscription;
@@ -53,7 +53,10 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   routerSubscription:Subscription;
   postsSub:Subscription;
   createCommentSub:Subscription;
+  loginUserSub:Subscription;
   postLikeSub:Subscription;
+  votePollSub:Subscription;
+  changeVoteSub:Subscription;
 
   username:string;
   
@@ -66,17 +69,23 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   radius: number;
   color: string;
   tenantUrl:string;
-  
-  options: FormGroup;
 
-  //hideRequiredControl = new FormControl(false);
-  floatLabelControl = new FormControl("option");
+  constructor(private feedService:FeedService, private route:ActivatedRoute, private router:Router, private usersService:UsersService, private appService:AppService) {
 
-  constructor( fb: FormBuilder, private feedService:FeedService, private route:ActivatedRoute, private router:Router, private usersService:UsersService, private appService:AppService) {
-    this.options = fb.group({
-      floatLabel: this.floatLabelControl,
-    });
   }
+
+/*
+  initiateVoteForm(){
+    let postId:number;
+    let fb: FormBuilder;
+    let option:any;
+
+    this.voteForm= new FormGroup({
+      'question': new FormControl(postId, Validators.required),
+      'option': new FormControl(option, Validators.required)
+    })
+
+  }*/
 
   getUserData(username:string){   
     if(username){
@@ -166,6 +175,14 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
     if(this.postLikeSub){
       this.postLikeSub.unsubscribe()
     }
+
+    if(this.votePollSub){
+      this.votePollSub.unsubscribe()
+    }
+
+    if(this.changeVoteSub){
+      this.changeVoteSub.unsubscribe()
+    }
   }
 
   submitComment(form:NgForm){
@@ -238,7 +255,36 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
         )
   }
 
-  submitVote(){
-    console.log(this.options.value)
+  onChangeVote(id:string, id2:string){
+    let element = document.getElementById(id);
+    let element2 = document.getElementById(id2);
+    element.style.display="none";
+    element2.classList.remove("remove");
+    element2.classList.add('fadeIn');
+  }
+
+  changeVote(form:NgForm, id:string){
+    let element = document.getElementById(id);
+
+    this.changeVoteSub = this.feedService.changeVotePoll(form.value).subscribe(
+      res=>{
+        //element.classList.add("remove")
+      }
+    )
+    
+  }
+
+  submitVote(form:NgForm){
+    if(!form.value['postId']){
+      return
+    }
+    if(!form.value['pollId']){
+      return
+    }
+    if(!form.value['option']){
+      return
+    }
+
+    this.votePollSub = this.feedService.votePoll(form.value).subscribe();
   }
 }

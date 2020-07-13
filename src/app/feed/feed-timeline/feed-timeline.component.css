@@ -219,7 +219,7 @@ mat-card-header{
 .poll-option .vote-results .voted-option{
     padding: 8px;
     position: relative;
-    min-height: 25px;
+    height: 25px;
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
@@ -237,7 +237,6 @@ mat-card-header{
 
 .poll-option .vote-results .voted-option .overlay{
     background-color: #35ba9d;
-    width: 40%; 
 }
 
 .poll-option .vote-results .voted-option .option-value{
@@ -272,8 +271,21 @@ mat-card-header{
     color: white;
 }
 
+.vote-form-container{
+    width: 100%;
+}
+.option-value p{
+    margin-top: 11px;
+}
 
+.option-value .option-to-vote mat-radio-button{
+    display: flex;
+    flex-grow: inherit;
+}
 
+.remove{
+    display: none;
+}
 
 .fadeIn {
     animation: fadein 2s;
