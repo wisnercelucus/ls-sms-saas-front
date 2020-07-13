@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgxLinkifyjsModule } from 'ngx-linkifyjs';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -57,6 +58,12 @@ import { FeedModule } from './feed/feed.module';
     AuthModule,
     BrowserModule,
     AppRoutingModule,
+    NgxLinkifyjsModule.forRoot(
+      {
+        enableHash: false,
+        enableMention: false
+      }
+    ),
     StoreModule.forRoot(fromApp.appReducer),
     EffectsModule.forRoot([AuthEffects]),
     BrowserAnimationsModule,

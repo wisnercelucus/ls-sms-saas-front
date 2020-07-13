@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { FeedComponent } from './feed.component';
 import { FeedTimelineComponent } from './feed-timeline/feed-timeline.component';
+import { NgxLinkifyjsModule } from 'ngx-linkifyjs';
 
 @NgModule({
     declarations:[
@@ -15,6 +16,7 @@ import { FeedTimelineComponent } from './feed-timeline/feed-timeline.component';
              SharedModule,
              CommonModule,
              RouterModule,
+             NgxLinkifyjsModule
             ],
     }
 )

@@ -9,6 +9,7 @@ import { Post } from './post.model';
 import { User } from '../users/user.model';
 import { UsersService } from '../users/users.service';
 import { Router } from '@angular/router';
+import {NgxLinkifyjsService, Link, LinkType} from 'ngx-linkifyjs';
 
 
 @Component({
@@ -37,10 +38,13 @@ export class FeedComponent implements OnInit, OnDestroy {
   constructor(
     private feedService:FeedService, 
     private usersService:UsersService, 
-    private router:Router
+    private router:Router,
+    public linkifyService: NgxLinkifyjsService
     ) { }
 
   ngOnInit(): void {
+    const r  = this.linkifyService.linkify("For help with GitHub.com, please email support@github.com")
+    console.log(r)
     this.initForm();
     this.getLogingUser();
   }
@@ -74,10 +78,10 @@ export class FeedComponent implements OnInit, OnDestroy {
   onSubmitPost(form:NgForm){
 
     if(!this.selectedFile){
-      let newContent = this.updateHashLinks(form.value.content);
-      newContent = this.updateUsernameLinks(newContent);
+      //let newContent = this.updateHashLinks(form.value.content);
+      //newContent = this.updateUsernameLinks(newContent);
 
-      const post:Post = {content:newContent}
+      const post:Post = {content:form.value.content}
 
       this.postCreateSub = this.feedService.createPost(post).subscribe(
         res=>{
@@ -88,11 +92,11 @@ export class FeedComponent implements OnInit, OnDestroy {
     }else{
       const fd = new FormData(this.form.nativeElement);
       
-      const content = this.updateHashLinks(fd.get("content").toString());
+      //const content = this.updateHashLinks(fd.get("content").toString());
 
-      const newContent = this.updateUsernameLinks(content);
+      //const newContent = this.updateUsernameLinks(content);
 
-      fd.set("content", newContent);
+      //fd.set("content", newContent);
 
       fd.append('image', this.selectedFile.name);
 
