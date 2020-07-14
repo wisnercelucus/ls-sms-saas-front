@@ -9,10 +9,11 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./users-list.component.css']
 })
 export class UsersListComponent implements OnInit, OnDestroy {
-
+  loginUserSub:Subscription;
   usersList:User[];
   usersListSub:Subscription;
   followUserSub:Subscription;
+  loginUser:User;
 
   constructor(private usersService:UsersService) { }
   ngOnDestroy(): void {
@@ -23,21 +24,38 @@ export class UsersListComponent implements OnInit, OnDestroy {
     if(this.followUserSub){
       this.followUserSub.unsubscribe()
     }
+
+    if(this.loginUserSub){
+      this.loginUserSub.unsubscribe()
+    }
   }
 
   ngOnInit(): void {
+
     this.usersListSub = this.usersService.getUsersList().subscribe(
       res=>{
         this.usersList = res;
       }
     )
+
+    this.loginUserSub = this.usersService.loginUser.subscribe(
+      user=>{
+        this.loginUser = user
+      }
+        
+    )
   }
 
-  onFollowUser(username:string){
+  onFollowUser(username:string,  id:string){
     this.followUserSub = this.usersService.followUser({username:username})
     .subscribe(
       res=>{
-        console.log(res)
+        let el =  document.getElementById(id)
+        if(res['is_following']){
+          el.innerText = "Following"
+        }else{
+          el.innerText = "Follow"
+        }
       }
     )
   }

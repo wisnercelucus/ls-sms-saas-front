@@ -49,9 +49,9 @@ export class UsersService {
 
       },
         (err:HttpErrorResponse)=> {
-          (err:HttpErrorResponse)=> {
+          
             this.handleError(err);
-          }
+          
         }
       )
    )
@@ -71,7 +71,7 @@ export class UsersService {
     return this.http.post<User[]>(this.tenantUrl + '/accounts/api/follow/', body).pipe(
       tap(
         (res:User[])=>{
-            console.log(res)
+            //console.log(res)
         },
 
         (err:HttpErrorResponse)=> {
@@ -102,9 +102,9 @@ export class UsersService {
         },
 
         (err:HttpErrorResponse)=> {
-          (err:HttpErrorResponse)=> {
+        
             this.handleError(err);
-          }
+          
         }
       )  
    )
@@ -120,9 +120,9 @@ export class UsersService {
 
       },
       (err:HttpErrorResponse)=>{
-        (err:HttpErrorResponse)=> {
+    
           this.handleError(err);
-        }
+        
       }
       )
     )

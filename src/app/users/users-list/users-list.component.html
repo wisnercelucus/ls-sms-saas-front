@@ -9,7 +9,7 @@
 
             <h3>All users: {{ usersList.length }}</h3>
         
-            <mat-card *ngFor="let user of usersList">
+            <mat-card class="user-detail" *ngFor="let user of usersList">
                 <mat-card-header>
                     <div mat-card-avatar>
                         <img class="avatar-xs-card" *ngIf="user.image" [src]="user.image" alt="user.username">
@@ -17,9 +17,10 @@
                     <mat-card-title><a class="user-link" [routerLink]="['/accounts', user.username]">{{ user.first_name + ' ' + user.last_name}}</a></mat-card-title>
                     <mat-card-subtitle>Developer</mat-card-subtitle>
                 </mat-card-header>
-        
-                <mat-card-actions>
-                    <a mat-raised-button class="follow-btn" (click)="onFollowUser(user.username)">Follow</a>
+                
+
+                <mat-card-actions *ngIf="loginUser">
+                    <a *ngIf="user.username != loginUser.username" mat-raised-button id="{{'user-' + user.id }}" class="follow-btn" (click)="onFollowUser(user.username, 'user-' + user.id)"> {{ user.is_followed ? "Following" : "Follow"}}</a>
                 </mat-card-actions>
     
             </mat-card>

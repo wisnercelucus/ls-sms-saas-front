@@ -47,7 +47,9 @@ ul li{
     height: 25px;
     width: 25px;
 }
-
+.user-detail{
+    margin-bottom: 10px !important;
+}
 .follow-btn{
     background-color: dodgerblue;
     color: white;

@@ -19,7 +19,7 @@
                     <li><a class="nav-link" href="javascript:void(0)">Following</a></li>
                      <mat-divider></mat-divider>
                     <li><a class="nav-link" href="javascript:void(0)"><fa-icon [icon]="faUsers"></fa-icon> Groups</a></li>
-                    <li><a class="nav-link" href="javascript:void(0)"><fa-icon [icon]="faUserCircle"></fa-icon> Users</a></li>
+                    <li (click)="navigateTo('/accounts/all')"><a class="nav-link" (click)="navigateTo('/accounts/all')"><fa-icon [icon]="faUserCircle"></fa-icon> Users</a></li>
                 </ul>
         </mat-card-content>
 
