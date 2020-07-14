@@ -130,13 +130,14 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
     this.loginUserSub = this.usersService.getMyProfile().subscribe(
       user=>{
         if(user){
-          this.loginUser = new User(user['username'],
+          this.loginUser = new User(
+                          user['id'],
+                          user['username'],
                           user['email'], 
                           user['image'],
                           user['is_staff'],
                           user['is_superuser'],
                           user['last_name'],
-                          user['id'],
                           user['first_name']);
         }
 
@@ -197,7 +198,7 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
         //const comment = {content:form.value.content, content_type:form.value.content_type, object_id:form.value.object_id}
         this.createCommentSub = this.feedService.postComment(form.value).subscribe(
           res =>{
-            console.log(res)
+            //console.log(res)
           },
           err=>{
             console.log(err)
@@ -207,7 +208,7 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
         //const comment = {content:form.value.content, content_type:form.value.content_type, object_id:form.value.object_id}
         this.createCommentSub = this.feedService.postComment(form.value).subscribe(
           res =>{
-            console.log(res)
+            //console.log(res)
           },
           err=>{
             console.log(err)

@@ -354,8 +354,8 @@
                     </div>
 
                     <div class="poll-option" *ngIf="post.parent.poll">
-                                                
-                        <div   class="vote-results" *ngIf="!post.did_vote && !post.parent.poll.is_open">
+
+                        <div   class="vote-results" *ngIf="!post.parent.poll.poll_voters.includes(loginUser.id) && !post.parent.poll.is_open">
 
                             <span id="polls-{{post.parent.poll.id}}">
                                 <div class="voted-option" *ngFor="let opt of post.parent.poll.options">
@@ -371,7 +371,7 @@
 
 
                         
-                        <div   class="vote-results" *ngIf="post.did_vote && post.parent.poll.is_open">
+                        <div   class="vote-results" *ngIf="post.parent.poll.poll_voters.includes(loginUser.id) && post.parent.poll.is_open">
 
                             <span id="polls-{{post.parent.poll.id}}">
                                 <div class="voted-option" *ngFor="let opt of post.parent.poll.options">
@@ -384,7 +384,7 @@
                                 <button *ngIf="post.parent.poll.is_open" mat-raised-button (click)="onChangeVote('polls-' + post.parent.poll.id, 'form-polls-'+ post.parent.poll.id)" type="button">Change vote</button>
                             </span>
 
-                            <div id="form-polls-{{post.parent.poll.id}}"  class="change-vote-container remove" *ngIf="post.did_vote">
+                            <div id="form-polls-{{post.parent.poll.id}}"  class="change-vote-container remove" *ngIf="post.parent.poll.poll_voters.includes(loginUser.id)">
 
                                 <form  (ngSubmit)="changeVote(form, 'form-polls-'+ post.parent.poll.id)"
                                 #form ="ngForm"
@@ -410,7 +410,7 @@
                         </div>
 
 
-                        <div class="vote-form-container" *ngIf="!post.did_vote && post.parent.poll.is_open">
+                        <div class="vote-form-container" *ngIf="!post.parent.poll.poll_voters.includes(loginUser.id) && post.parent.poll.is_open">
                             <form  (ngSubmit)="submitVote(form)"
                             #form ="ngForm"
                             >
@@ -576,13 +576,6 @@
                 </div>
                 </div>
             </span>
-
-
-
-
-
-
-
 
         </mat-card>
      </div>

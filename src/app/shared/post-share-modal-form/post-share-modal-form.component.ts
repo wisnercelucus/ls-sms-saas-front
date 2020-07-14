@@ -55,7 +55,8 @@ export class PostShareModalFormComponent implements OnInit, OnDestroy {
     this.sharePostSub = this.feedService.sharePost(form.value)
     .subscribe(
       res=>{
-        console.log(res)
+        //console.log(res)
+        this.dialogRef.close()
       }
     )
   }

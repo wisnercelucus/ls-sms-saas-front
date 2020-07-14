@@ -16,13 +16,13 @@ export class AuthUser{
 
 export class User{
     constructor(
+                public id:number,
                 public username:string,
                 public email:string,
                 public image:string,
                 public is_staff:boolean,
                 public is_superuser:boolean,
                 public last_name:string,
-                public user_id:number,
                 public first_name:string
                 ){}
 }

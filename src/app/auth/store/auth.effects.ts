@@ -82,7 +82,7 @@ export class AuthEffects{
             ).pipe( 
                 map(resData=>{
                     return handleAuthentication(
-                         resData['username'],
+                            resData['username'],
                             resData['email'],
                             resData['token']
                     )

@@ -36,13 +36,13 @@ export class UsersService {
     return this.http.get(this.tenantUrl + '/accounts/api/me/', {headers:this.headers}).pipe(
       tap(resData =>{
         const user = new User(
+          resData['id'],
           resData['username'], 
           resData['email'], 
           resData['image'],
           resData['is_staff'],
           resData['is_superuser'],
           resData['last_name'],
-          resData['id'],
           resData['first_name']
           )
         this.loginUser.next(user)

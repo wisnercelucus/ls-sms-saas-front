@@ -164,7 +164,7 @@ export class FeedService {
       if(this.tenantUrl){
         return this.http.post<{status:string}>(this.tenantUrl + '/feed/api/post/share/', body).pipe(
           tap(p =>{
-            //this._refreshNeeded.next();       
+            this._refreshNeeded.next();       
           })
         );
       }else{

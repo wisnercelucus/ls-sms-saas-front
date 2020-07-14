@@ -50,13 +50,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.loginUserSub = this.userService.getMyProfile().subscribe(
       user=>{
         if(user){
-          this.loginUser = new User(user['username'],
+          this.loginUser = new User(
+                          user['id'],
+                          user['username'],
                           user['email'], 
                           user['image'],
                           user['is_staff'],
                           user['is_superuser'],
                           user['last_name'],
-                          user['id'],
                           user['first_name']);
         }
 
