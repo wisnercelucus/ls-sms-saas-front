@@ -337,7 +337,7 @@
                                     <fa-icon [icon]="faChartBar"></fa-icon> poll
                             </span>
 
-                            <span class="poll-voted" *ngIf="post.did_vote">
+                            <span class="poll-voted" *ngIf="post.parent.poll.poll_voters.includes(loginUser.id)">
                                 <fa-icon [icon]="faCheckSquare"></fa-icon> voted
                             </span>
                             <span  class="poll-status-open" *ngIf="post.parent.poll.is_open">
