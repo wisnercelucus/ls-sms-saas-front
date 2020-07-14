@@ -36,13 +36,12 @@ export class FeedSideMenuComponent implements OnInit, OnDestroy {
   subscrition:Subscription;
   loginUser:User;
   loginUserSub:Subscription;
-
+ 
   constructor(private router:Router,
     public dialog: MatDialog, private userService:UsersService
     ) { }
 
   ngOnInit(): void {
-    //this.getLogingUser();
     this.userService.loginUser.subscribe(
       user=>{
         this.loginUser = user;
@@ -92,7 +91,6 @@ export class FeedSideMenuComponent implements OnInit, OnDestroy {
     });
 
     this.subscrition = dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 }

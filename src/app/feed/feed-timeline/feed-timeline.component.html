@@ -4,6 +4,8 @@
 
     <div class="user-activities" *ngIf="dataSource">
             <mat-card class="post-card" *ngFor="let post of dataSource; let i = index">
+            
+            <span *ngIf="!post.parent">
                 <mat-card-header>
                         <div mat-card-avatar class="card-header-image">
                             <img class="avatar-xs-card" [src]="post.user.image" alt="{{ 'Photo of ' + post.user.username }}">
@@ -61,8 +63,27 @@
                     </div>
 
                     <div class="poll-option" *ngIf="post.poll">
+
+
+
+                                                
+                        <div   class="vote-results" *ngIf="!post.did_vote && !post.poll.is_open">
+
+                            <span id="poll-{{post.poll.id}}">
+                                <div class="voted-option" *ngFor="let opt of post.poll.options">
+                                    <div style="width:{{opt.percent_vote}}" class="overlay">
+                                    </div>
+                                    <div class="option-value">
+                                        <p>{{opt.value}}</p>
+                                    </div>
+                                </div>
+                                <button *ngIf="post.poll.is_open" mat-raised-button (click)="onChangeVote('poll-' + post.poll.id, 'form-poll-'+ post.poll.id)" type="button">Change vote</button>
+                            </span>
+                        </div>
+
+
                         
-                        <div   class="vote-results" *ngIf="post.did_vote">
+                        <div   class="vote-results" *ngIf="post.did_vote && post.poll.is_open">
 
                             <span id="poll-{{post.poll.id}}">
                                 <div class="voted-option" *ngFor="let opt of post.poll.options">
@@ -75,52 +96,52 @@
                                 <button *ngIf="post.poll.is_open" mat-raised-button (click)="onChangeVote('poll-' + post.poll.id, 'form-poll-'+ post.poll.id)" type="button">Change vote</button>
                             </span>
 
-                        <div id="form-poll-{{post.poll.id}}"  class="change-vote-container remove" *ngIf="post.did_vote">
+                            <div id="form-poll-{{post.poll.id}}"  class="change-vote-container remove" *ngIf="post.did_vote">
 
-                        <form  (ngSubmit)="changeVote(form, 'form-poll-'+ post.poll.id)"
-                        #form ="ngForm"
-                        >
+                                <form  (ngSubmit)="changeVote(form, 'form-poll-'+ post.poll.id)"
+                                #form ="ngForm"
+                                >
 
-                                <input type="hidden" [ngModel]="post.id" name="postId" required>
-                                <input type="hidden" [ngModel]="post.poll.id" name="pollId" required>
-                                <div>
-                                    <mat-radio-group ngModel name="option" required>
-                                    <div class="option-value">
-                                        <p class="option-to-vote" *ngFor="let opt of post.poll.options">
-                                            <mat-radio-button value="{{opt.id}}">
-                                                {{opt.value}}
-                                            </mat-radio-button>
-                                        </p>
-                                    </div>
-                                    </mat-radio-group>
-                                </div>
-                            <button type="submit" mat-raised-button class="submit-vote" [disabled]="form.invalid">Change vote</button>
-                        </form>
+                                        <input type="hidden" [ngModel]="post.id" name="postId" required>
+                                        <input type="hidden" [ngModel]="post.poll.id" name="pollId" required>
+                                        <div>
+                                            <mat-radio-group ngModel name="option" required>
+                                            <div class="option-value">
+                                                <p class="option-to-vote" *ngFor="let opt of post.poll.options">
+                                                    <mat-radio-button value="{{opt.id}}">
+                                                        {{opt.value}}
+                                                    </mat-radio-button>
+                                                </p>
+                                            </div>
+                                            </mat-radio-group>
+                                        </div>
+                                    <button type="submit" mat-raised-button class="submit-vote" [disabled]="form.invalid">Change vote</button>
+                                </form>
+                            </div>
+
                         </div>
 
-                        </div>
 
+                        <div class="vote-form-container" *ngIf="!post.did_vote && post.poll.is_open">
+                            <form  (ngSubmit)="submitVote(form)"
+                            #form ="ngForm"
+                            >
 
-                        <div class="vote-form-container" *ngIf="!post.did_vote">
-                        <form  (ngSubmit)="submitVote(form)"
-                        #form ="ngForm"
-                        >
-
-                                <input type="hidden" [ngModel]="post.id" name="postId" required>
-                                <input type="hidden" [ngModel]="post.poll.id" name="pollId" required>
-                                <div>
-                                    <mat-radio-group ngModel name="option" required>
-                                    <div class="option-value">
-                                        <p class="option-to-vote" *ngFor="let opt of post.poll.options">
-                                            <mat-radio-button value="{{opt.id}}">
-                                                {{opt.value}}
-                                            </mat-radio-button>
-                                        </p>
+                                    <input type="hidden" [ngModel]="post.id" name="postId" required>
+                                    <input type="hidden" [ngModel]="post.poll.id" name="pollId" required>
+                                    <div>
+                                        <mat-radio-group ngModel name="option" required>
+                                        <div class="option-value">
+                                            <p class="option-to-vote" *ngFor="let opt of post.poll.options">
+                                                <mat-radio-button value="{{opt.id}}">
+                                                    {{opt.value}}
+                                                </mat-radio-button>
+                                            </p>
+                                        </div>
+                                        </mat-radio-group>
                                     </div>
-                                    </mat-radio-group>
-                                </div>
-                            <button type="submit" mat-raised-button class="submit-vote" [disabled]="form.invalid">Vote</button>
-                        </form>
+                                <button type="submit" mat-raised-button class="submit-vote" [disabled]="form.invalid">Vote</button>
+                            </form>
                         </div>
 
                     </div>
@@ -137,7 +158,7 @@
                 <mat-card-actions>
                     <button id="{{'post-like-button'+ post.id}}" (click) = "onLikePost(post.id)"  [class]="post.did_like? 'did_like': '' " mat-button><fa-icon [icon]="faThumbsUp"></fa-icon> Like</button>
                     <button mat-button (click)="onToggleCommentForm('comment-form' + i)"><fa-icon [icon]="faComment"></fa-icon> Comment</button>
-                    <button mat-button><fa-icon [icon]="faShareAltSquare"></fa-icon> Share</button>
+                    <button mat-button (click)="openDialog(post)"><fa-icon [icon]="faShareAltSquare"></fa-icon> Share</button>
                 </mat-card-actions>
 
                 <div class="comment-form-handler hide" id = "{{ 'comment-form' + i }}">
@@ -172,7 +193,7 @@
                         <div class class="comment-box">
                             <div class="comment-content-box">
                                 <div mat-card-avatar class="comment-user-avatar">
-                                    <img class="avatar-xs-card-comment" *ngIf="tenantUrl" src="{{ tenantUrl + comment.user.image }}" alt="Photo of a Shiba Inu">
+                                    <img class="avatar-xs-card-comment" *ngIf="tenantUrl" src="{{ tenantUrl + comment.user.image }}" alt="{{comment.user.username}}">
                                 </div>
                                 <p class="comment-text">
                                 <a class="user-link" (click)="getUserData(comment.user.username)"> <span class="comment-user">{{ comment.user.first_name + ' ' + comment.user.last_name }}</span></a>
@@ -197,8 +218,7 @@
                                     <mat-form-field class="comment-form-content-box">
                                         <textarea id="{{'comment-content' + i + j}}" (click)="rezizable('comment-content' + i + j)" name="content" ngModel matInput placeholder="Leave a reply..."></textarea>    
                                     </mat-form-field>  
-                                        <!--<textarea class="comment-input" placeholder="Ex. It makes me feel..." name="commentValue" #commentInput></textarea>-->
-
+                                       
                                     <button class="post-comment" type="submit"
                                         matRipple
                                         [matRippleCentered]="centered"
@@ -247,8 +267,246 @@
                                     <mat-form-field class="comment-form-content-box">
                                         <textarea id="{{'comment-content' + i + j + k}}" (click)="rezizable('comment-content' + i + j + k)" name="content" ngModel matInput placeholder="Leave a reply..."></textarea>    
                                     </mat-form-field>  
-                                        <!--<textarea class="comment-input" placeholder="Ex. It makes me feel..." name="commentValue" #commentInput></textarea>-->
+                                        
+                                    <button class="post-comment" type="submit"
+                                        matRipple
+                                        [matRippleCentered]="centered"
+                                        [matRippleDisabled]="disabled"
+                                        [matRippleUnbounded]="unbounded"
+                                        [matRippleRadius]="radius"
+                                        [matRippleColor]="color"
+                                    >
+                                        <span class="material-icons">arrow_forward_ios</span>
+                                    </button>
+                                    </div>
+                                </form>
+                            </div>
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </span>
+
+
+            <span *ngIf="post.parent">
+                <div class="post-share-detail">
+                    <p><fa-icon [icon]="faShare"></fa-icon> {{ post.user.first_name + ' ' + post.user.last_name }} {{post.timesince}}.</p>
+                    <p *ngIf="post.new_content">{{post.new_content}}</p>
+                </div>
+
+                <mat-card-header>
+                        <div mat-card-avatar class="card-header-image">
+                            <img class="avatar-xs-card" [src]="post.parent.user.image" alt="{{ 'Photo of ' + post.parent.user.username }}">
+                            <button class="post-sub-menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Post sub-menu">
+                                <mat-icon>more_vert</mat-icon>
+                                </button>
+                                <mat-menu #menu="matMenu">
+                                <button mat-menu-item>
+                                    <mat-icon>create</mat-icon>
+                                    <span>Edit</span>
+                                </button>
+                                <button mat-menu-item>
+                                    <mat-icon>security</mat-icon>
+                                    <span>Change privacy</span>
+                                </button>
+                                <button mat-menu-item>
+                                    <mat-icon>report</mat-icon>
+                                    <span>Report this post</span>
+                                </button>
+                                <mat-divider></mat-divider>
+                                <button mat-menu-item>
+                                    <mat-icon>delete_outline</mat-icon>
+                                    <span>Delete</span>
+                                </button>
+                                </mat-menu>
+                        </div>
+                    <mat-card-title><a class="user-link" (click)="getUserData(post.parent.user.username)">{{ post.parent.user.first_name + ' ' + post.parent.user.last_name }}</a></mat-card-title>
+                    <mat-card-subtitle>Developer &middot; {{ post.parent.timesince}}</mat-card-subtitle>
+
+                </mat-card-header>
+                <mat-card-content>
+                
+                    <p *ngIf="!post.parent.poll" class="post-paragraph" [innerHTML]= "post.parent.content">
+                    </p>
+                    
+                    <div class="wrap-voted-post" *ngIf="post.parent.poll">
+                        <div class="poll-status-handler">
+                            <span class="post-type">
+                                    <fa-icon [icon]="faChartBar"></fa-icon> poll
+                            </span>
+
+                            <span class="poll-voted" *ngIf="post.did_vote">
+                                <fa-icon [icon]="faCheckSquare"></fa-icon> voted
+                            </span>
+                            <span  class="poll-status-open" *ngIf="post.parent.poll.is_open">
+                                <fa-icon [icon]="faSpinner"></fa-icon> open
+                            </span>
+                            <span  class="poll-status-close" *ngIf="!post.parent.poll.is_open">
+                                <fa-icon [icon]="faTimesCircle"></fa-icon> closed
+                            </span>
+                        </div>
+
+                        <p class="post-paragraph" [innerHTML]= "post.parent.content">
+                        </p>
+                        <mat-divider></mat-divider>
+                    </div>
+
+                    <div class="poll-option" *ngIf="post.parent.poll">
+                                                
+                        <div   class="vote-results" *ngIf="!post.did_vote && !post.parent.poll.is_open">
+
+                            <span id="polls-{{post.parent.poll.id}}">
+                                <div class="voted-option" *ngFor="let opt of post.parent.poll.options">
+                                    <div style="width:{{opt.percent_vote}}" class="overlay">
+                                    </div>
+                                    <div class="option-value">
+                                        <p>{{opt.value}}</p>
+                                    </div>
+                                </div>
+                                <button *ngIf="post.parent.poll.is_open" mat-raised-button (click)="onChangeVote('polls-' + post.parent.poll.id, 'form-polls-'+ post.parent.poll.id)" type="button">Change vote</button>
+                            </span>
+                        </div>
+
+
+                        
+                        <div   class="vote-results" *ngIf="post.did_vote && post.parent.poll.is_open">
+
+                            <span id="polls-{{post.parent.poll.id}}">
+                                <div class="voted-option" *ngFor="let opt of post.parent.poll.options">
+                                    <div style="width:{{opt.percent_vote}}" class="overlay">
+                                    </div>
+                                    <div class="option-value">
+                                        <p>{{opt.value}}</p>
+                                    </div>
+                                </div>
+                                <button *ngIf="post.parent.poll.is_open" mat-raised-button (click)="onChangeVote('polls-' + post.parent.poll.id, 'form-polls-'+ post.parent.poll.id)" type="button">Change vote</button>
+                            </span>
+
+                            <div id="form-polls-{{post.parent.poll.id}}"  class="change-vote-container remove" *ngIf="post.did_vote">
+
+                                <form  (ngSubmit)="changeVote(form, 'form-polls-'+ post.parent.poll.id)"
+                                #form ="ngForm"
+                                >
+
+                                        <input type="hidden" [ngModel]="post.parent.id" name="postId" required>
+                                        <input type="hidden" [ngModel]="post.parent.poll.id" name="pollId" required>
+                                        <div>
+                                            <mat-radio-group ngModel name="option" required>
+                                            <div class="option-value">
+                                                <p class="option-to-vote" *ngFor="let opt of post.parent.poll.options">
+                                                    <mat-radio-button value="{{opt.id}}">
+                                                        {{opt.value}}
+                                                    </mat-radio-button>
+                                                </p>
+                                            </div>
+                                            </mat-radio-group>
+                                        </div>
+                                    <button type="submit" mat-raised-button class="submit-vote" [disabled]="form.invalid">Change vote</button>
+                                </form>
+                            </div>
+
+                        </div>
+
+
+                        <div class="vote-form-container" *ngIf="!post.did_vote && post.parent.poll.is_open">
+                            <form  (ngSubmit)="submitVote(form)"
+                            #form ="ngForm"
+                            >
+
+                                    <input type="hidden" [ngModel]="post.parent.id" name="postId" required>
+                                    <input type="hidden" [ngModel]="post.parent.poll.id" name="pollId" required>
+                                    <div>
+                                        <mat-radio-group ngModel name="option" required>
+                                        <div class="option-value">
+                                            <p class="option-to-vote" *ngFor="let opt of post.parent.poll.options">
+                                                <mat-radio-button value="{{opt.id}}">
+                                                    {{opt.value}}
+                                                </mat-radio-button>
+                                            </p>
+                                        </div>
+                                        </mat-radio-group>
+                                    </div>
+                                <button type="submit" mat-raised-button class="submit-vote" [disabled]="form.invalid">Vote</button>
+                            </form>
+                        </div>
+
+                    </div>
+
+                    <img mat-card-image *ngIf="post.image" [src]="post.image" alt="post.id">
+                    
+                    <div class="post-stat" id="{{'post'+ post.id}}">
+                        <span>{{ post.likes + ' ' }}Likes</span>
+                        <span>{{ post.total_comments + ' ' }}Comments</span>
+                    </div>
+                </mat-card-content>
+                
+                <mat-divider></mat-divider>
+                <mat-card-actions>
+                    <button id="{{'post-like-button'+ post.id}}" (click) = "onLikePost(post.id)"  [class]="post.did_like? 'did_like': '' " mat-button><fa-icon [icon]="faThumbsUp"></fa-icon> Like</button>
+                    <button mat-button (click)="onToggleCommentForm('comment-form' + i)"><fa-icon [icon]="faComment"></fa-icon> Comment</button>
+                    <button mat-button (click)="openDialog(post)"><fa-icon [icon]="faShareAltSquare"></fa-icon> Share</button>
+                </mat-card-actions>
+
+                <div class="comment-form-handler hide" id = "{{ 'comment-form' + i }}">
+                    <form class="comment-form" (ngSubmit)="submitComment(f1)" #f1="ngForm">
+                        <div class="form-row">
+                        <div mat-card-avatar class="comment-user-avatar">
+                            <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image" alt="{{loginUser.username}}}">
+                        </div>
+                        <input type="hidden" ngModel = "post" name='content_type' ngValue='post'>
+                        <input type="hidden" [ngModel] = "post.id" name='object_id' [value]="post.id">
+                        <mat-form-field class="comment-form-content-box">
+                            <textarea id="{{'comment-content' + i}}" (click)="rezizable('comment-content' + i)" name="content" ngModel matInput placeholder="Leave a comment..."></textarea>    
+                        </mat-form-field>  
+                            <!--<textarea class="comment-input" placeholder="Ex. It makes me feel..." name="commentValue" #commentInput></textarea>-->
+
+                        <button class="post-comment" type="submit"
+                             matRipple
+                            [matRippleCentered]="centered"
+                            [matRippleDisabled]="disabled"
+                            [matRippleUnbounded]="unbounded"
+                            [matRippleRadius]="radius"
+                            [matRippleColor]="color"
+                        >
+                            <span class="material-icons">arrow_forward_ios</span>
+                        </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="wrap-comment" *ngIf="post.total_comments">
+                    <div class="comment-thread" *ngFor="let comment of post.comments; let j = index">
+                        <div class class="comment-box">
+                            <div class="comment-content-box">
+                                <div mat-card-avatar class="comment-user-avatar">
+                                    <img class="avatar-xs-card-comment" *ngIf="tenantUrl" src="{{ tenantUrl + comment.user.image }}" alt="{{comment.user.username}}">
+                                </div>
+                                <p class="comment-text">
+                                <a class="user-link" (click)="getUserData(comment.user.username)"> <span class="comment-user">{{ comment.user.first_name + ' ' + comment.user.last_name }}</span></a>
+                                <br>
+                                {{comment.content}}
+                                </p>
+                            </div>
+                            <div class="comment-actions">
+                                <button mat-button>Like</button>
+                                <button mat-button (click)="onToggleCommentForm('comment-form' + i + j)">Reply</button>
+                            </div>
+
+                            <div class="comment-form-handler comment-reply-form-handler hide" id="{{'comment-form' + i + j}}">
+                                <form class="comment-form" (ngSubmit)="submitComment(f2)" #f2="ngForm">
+                                    <div class="form-row">
+                                    <div mat-card-avatar class="comment-user-avatar">
+                                        <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image" alt="{{loginUser.username}}}">
+                                    </div>
+                                    <input type="hidden" [ngModel] = "comment.id" name='parent_id'>
+                                    <input type="hidden" ngModel = "post" name='content_type'>
+                                    <input type="hidden" [ngModel] = "post.id" name='object_id'>
+                                    <mat-form-field class="comment-form-content-box">
+                                        <textarea id="{{'comment-content' + i + j}}" (click)="rezizable('comment-content' + i + j)" name="content" ngModel matInput placeholder="Leave a reply..."></textarea>    
+                                    </mat-form-field>  
+                                       
                                     <button class="post-comment" type="submit"
                                         matRipple
                                         [matRippleCentered]="centered"
@@ -264,10 +522,67 @@
                             </div>
 
 
+                        </div>
+
+                        <div class="wrap-inner-comment"  *ngIf="comment.reply_count">
+                            <div class="inner-comment-thread" *ngFor="let reply of comment.replies; let k = index">
+                        
+                                <div class class="comment-box">
+                                    <div class="comment-content-box">
+                                        <div mat-card-avatar class="comment-user-avatar">
+                                            <img class="avatar-xs-card-comment" *ngIf="tenantUrl" src="{{ tenantUrl + reply.user.image }}" alt="Photo of a Shiba Inu">
+                                         </div>
+                                    <p class="comment-text">
+                                    <a class="user-link" (click)="getUserData(reply.user.username)"> <span class="comment-user">{{ reply.user.first_name + ' ' + reply.user.last_name }}</span></a>
+                                    <br>
+                                    {{reply.content}}
+                                    </p>
+                                </div>
+                                <div class="comment-actions">
+                                    <button mat-button>Like</button>
+                                    <button (click)="onToggleCommentForm('comment-form' + i + j + k)" mat-button>Reply</button>
+                                </div>
+
+                            <div id="{{'comment-form' + i + j + k }}" class="comment-form-handler comment-reply-form-handler hide">
+                                <form class="comment-form" (ngSubmit)="submitComment(f3)" #f3="ngForm">
+                                    <div class="form-row">
+                                    <div mat-card-avatar class="comment-user-avatar">
+                                        <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image" alt="{{loginUser.username}}}">
+                                    </div>
+                                    <input type="hidden" [ngModel] = "comment.id" name='parent_id'>
+                                    <input type="hidden" ngModel = "post" name='content_type'>
+                                    <input type="hidden" [ngModel] = "post.id" name='object_id'>
+                                    <mat-form-field class="comment-form-content-box">
+                                        <textarea id="{{'comment-content' + i + j + k}}" (click)="rezizable('comment-content' + i + j + k)" name="content" ngModel matInput placeholder="Leave a reply..."></textarea>    
+                                    </mat-form-field>  
+                                        
+                                    <button class="post-comment" type="submit"
+                                        matRipple
+                                        [matRippleCentered]="centered"
+                                        [matRippleDisabled]="disabled"
+                                        [matRippleUnbounded]="unbounded"
+                                        [matRippleRadius]="radius"
+                                        [matRippleColor]="color"
+                                    >
+                                        <span class="material-icons">arrow_forward_ios</span>
+                                    </button>
+                                    </div>
+                                </form>
+                            </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            </mat-card>
+                </div>
+            </span>
+
+
+
+
+
+
+
+
+        </mat-card>
      </div>

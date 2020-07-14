@@ -14,6 +14,7 @@ import { GroupsSuggestionsComponent } from './groups-suggestions/groups-suggesti
 import { PublishModalFormComponent } from './publish-modal-form/publish-modal-form.component';
 import { FormDialogComponent } from './form-dialog/form-dialog.component';
 import { DataTableRowHeaderComponent } from './data-table-row-header/data-table-row-header.component';
+import { PostShareModalFormComponent } from './post-share-modal-form/post-share-modal-form.component';
 
 @NgModule({
     declarations:[
@@ -28,6 +29,7 @@ import { DataTableRowHeaderComponent } from './data-table-row-header/data-table-
         PublishModalFormComponent,
         FormDialogComponent,
         DataTableRowHeaderComponent,
+        PostShareModalFormComponent,
     ],
 
     imports:[CommonModule, 

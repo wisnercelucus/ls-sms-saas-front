@@ -10,7 +10,7 @@ import { faBirthdayCake,
  faCheckSquare,
  faTimesCircle,
  faSpinner,
- faUserCircle, faUsers, faHome, faUser} from '@fortawesome/free-solid-svg-icons';
+ faUserCircle, faUsers, faHome, faUser, faShare} from '@fortawesome/free-solid-svg-icons';
 import { Post } from 'src/app/feed/post.model';
 import { FeedService } from '../feed.service';
 import { Subscription } from 'rxjs';
@@ -19,6 +19,8 @@ import { UsersService } from 'src/app/users/users.service';
 import { User } from 'src/app/users/user.model';
 import { NgForm } from '@angular/forms';
 import { AppService } from 'src/app/app.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PostShareModalFormComponent } from 'src/app/shared/post-share-modal-form/post-share-modal-form.component';
 
 @Component({
   selector: 'app-feed-timeline',
@@ -42,6 +44,7 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   faCheckSquare = faCheckSquare;
   faTimesCircle = faTimesCircle;
   faSpinner = faSpinner;
+  faShare = faShare
 
 
   dataSource:Post[];
@@ -57,6 +60,7 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   postLikeSub:Subscription;
   votePollSub:Subscription;
   changeVoteSub:Subscription;
+  subscrition:Subscription;
 
   username:string;
   
@@ -70,7 +74,7 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   color: string;
   tenantUrl:string;
 
-  constructor(private feedService:FeedService, private route:ActivatedRoute, private router:Router, private usersService:UsersService, private appService:AppService) {
+  constructor(public dialog: MatDialog, private feedService:FeedService, private route:ActivatedRoute, private router:Router, private usersService:UsersService, private appService:AppService) {
 
   }
 
@@ -183,6 +187,9 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
     if(this.changeVoteSub){
       this.changeVoteSub.unsubscribe()
     }
+    if(this.subscrition){
+      this.subscrition.unsubscribe()
+    }
   }
 
   submitComment(form:NgForm){
@@ -287,4 +294,18 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
 
     this.votePollSub = this.feedService.votePoll(form.value).subscribe();
   }
+
+  openDialog(post:Post): void {
+    const dialogRef = this.dialog.open(PostShareModalFormComponent, {
+      width: '500px',
+
+      data: {
+        "post": post
+      }
+    });
+
+    this.subscrition = dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
 }

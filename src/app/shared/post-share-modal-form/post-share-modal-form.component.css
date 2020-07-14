@@ -1,4 +1,4 @@
-.post-form{
+.post-share-form{
     min-width: 100px;
     width: 100%;
     padding-top: 8px;
@@ -6,7 +6,7 @@
 }
 
 
-.post-form .post-full-width{
+.post-share-form .post-full-width{
     width: 100%;
 }
 

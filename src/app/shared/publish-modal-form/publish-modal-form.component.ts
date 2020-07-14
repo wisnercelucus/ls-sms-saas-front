@@ -1,7 +1,8 @@
-import { Component, OnInit, Inject, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
 import { UsersService } from 'src/app/users/users.service';
 import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-publish-modal-form',
@@ -9,7 +10,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./publish-modal-form.component.css']
 })
 export class PublishModalFormComponent implements OnDestroy{
-  @Input() username:string;
+  username:string;
   sub:Subscription;
   
 
