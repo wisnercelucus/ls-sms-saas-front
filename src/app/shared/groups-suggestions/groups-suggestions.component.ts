@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./groups-suggestions.component.css']
 })
 export class GroupsSuggestionsComponent implements OnInit {
-
+  groupList="";
+  
   constructor() { }
 
   ngOnInit(): void {

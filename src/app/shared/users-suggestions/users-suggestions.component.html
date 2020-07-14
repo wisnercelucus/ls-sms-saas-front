@@ -2,6 +2,8 @@
         
         <mat-card>
         <h3>Colleagues you may want to follow</h3>
+
+        <div *ngIf="usersList">
         <mat-card-header>
             <div mat-card-avatar>
                 <img class="avatar-xs-card" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
@@ -25,7 +27,10 @@
         <mat-card-actions>
             <a mat-raised-button class="follow-btn" href="javascript:void(0)">Follow</a>
         </mat-card-actions>
-
+        </div>
+        <div *ngIf="!usersList">
+            <p>No user suggestions for now.</p>
+        </div>
 
         </mat-card>
         </div>

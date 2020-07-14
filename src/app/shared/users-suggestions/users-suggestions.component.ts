@@ -7,7 +7,7 @@ import { UsersService } from 'src/app/users/users.service';
   styleUrls: ['./users-suggestions.component.css']
 })
 export class UsersSuggestionsComponent implements OnInit {
-
+  usersList="";
   constructor(private usersService:UsersService) { }
 
   ngOnInit(): void {
