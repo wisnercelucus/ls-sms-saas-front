@@ -14,15 +14,28 @@ export class AuthUser{
         }
 }
 
-export class User{
-    constructor(
-                public id:number,
-                public username:string,
-                public email:string,
-                public image:string,
-                public is_staff:boolean,
-                public is_superuser:boolean,
-                public last_name:string,
-                public first_name:string
-                ){}
+export interface User{
+    id:number;
+    username:string;
+    email:string;
+    image:string;
+    is_staff:boolean;
+    is_superuser:boolean;
+    last_name:string;
+    first_name:string;
+    default_image:string;
+            
 }
+
+export interface UserProfile{
+    is_student:boolean;
+    is_support_staff:boolean;
+    is_school_admin:boolean;
+    is_teacher:boolean;
+    cover_image:string;
+    id:number;
+    user:User;
+    updated_by:User,
+    default_cover:string
+}
+

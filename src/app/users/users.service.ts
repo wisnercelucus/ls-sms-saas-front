@@ -33,20 +33,9 @@ export class UsersService {
       return;
     }
 
-    return this.http.get(this.tenantUrl + '/accounts/api/me/', {headers:this.headers}).pipe(
+    return this.http.get<User>(this.tenantUrl + '/accounts/api/me/', {headers:this.headers}).pipe(
       tap(resData =>{
-        const user = new User(
-          resData['id'],
-          resData['username'], 
-          resData['email'], 
-          resData['image'],
-          resData['is_staff'],
-          resData['is_superuser'],
-          resData['last_name'],
-          resData['first_name']
-          )
-        this.loginUser.next(user)
-
+        this.loginUser.next(resData)
       },
         (err:HttpErrorResponse)=> {
           

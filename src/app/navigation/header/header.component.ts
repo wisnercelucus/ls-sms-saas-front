@@ -84,7 +84,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.testUserSub = this.userService.loginUser.subscribe(
       user=>{
         this.loginUser = user;
-        //console.log(this.loginUser)
       }
     )
 
@@ -92,29 +91,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngAfterViewInit(){
     if(!this.loginUser){
-      this.testUserSub = this.userService.loginUser.subscribe(
-        user=>{
-          this.loginUser = user;
-        }
-      )
+
+      this.getLogingUser()
     }
   }
 
   getLogingUser(){
       this.loginUserSub = this.userService.getMyProfile().subscribe(
         user=>{
-          if(user){
-            this.loginUser = new User(
-                            user['id'],
-                            user['username'],
-                            user['email'], 
-                            user['image'],
-                            user['is_staff'],
-                            user['is_superuser'],
-                            user['last_name'],
-                            user['first_name']);
-          }
-
+            this.loginUser = user;
         }
       );
   }
