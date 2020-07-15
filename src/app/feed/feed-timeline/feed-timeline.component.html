@@ -82,7 +82,22 @@
                         </div>
 
 
+                        <div   class="vote-results" *ngIf="post.did_vote && !post.poll.is_open">
+
+                            <span id="poll-{{post.poll.id}}">
+                                <div class="voted-option" *ngFor="let opt of post.poll.options">
+                                    <div style="width:{{opt.percent_vote}}" class="overlay">
+                                    </div>
+                                    <div class="option-value">
+                                        <p>{{opt.value}}</p>
+                                    </div>
+                                </div>
+                                <button *ngIf="post.poll.is_open" mat-raised-button (click)="onChangeVote('poll-' + post.poll.id, 'form-poll-'+ post.poll.id)" type="button">Change vote</button>
+                            </span>
+                        </div>
                         
+
+
                         <div   class="vote-results" *ngIf="post.did_vote && post.poll.is_open">
 
                             <span id="poll-{{post.poll.id}}">
@@ -369,6 +384,21 @@
                             </span>
                         </div>
 
+
+
+                        <div   class="vote-results" *ngIf="post.parent.poll.poll_voters.includes(loginUser.id) && !post.parent.poll.is_open">
+
+                            <span id="polls-{{post.parent.poll.id}}">
+                                <div class="voted-option" *ngFor="let opt of post.parent.poll.options">
+                                    <div style="width:{{opt.percent_vote}}" class="overlay">
+                                    </div>
+                                    <div class="option-value">
+                                        <p>{{opt.value}}</p>
+                                    </div>
+                                </div>
+                                <button *ngIf="post.parent.poll.is_open" mat-raised-button (click)="onChangeVote('polls-' + post.parent.poll.id, 'form-polls-'+ post.parent.poll.id)" type="button">Change vote</button>
+                            </span>
+                        </div>
 
                         
                         <div   class="vote-results" *ngIf="post.parent.poll.poll_voters.includes(loginUser.id) && post.parent.poll.is_open">
