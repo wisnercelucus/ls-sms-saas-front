@@ -294,33 +294,33 @@
                 <div class="post-share-detail">
                     <p><fa-icon [icon]="faShare"></fa-icon> {{ post.user.first_name + ' ' + post.user.last_name }} {{post.timesince}}.</p>
                     <p *ngIf="post.new_content">{{post.new_content}}</p>
+                    <button class="post-sub-menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Post sub-menu">
+                        <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                        <button mat-menu-item>
+                            <mat-icon>create</mat-icon>
+                            <span>Edit</span>
+                        </button>
+                        <button mat-menu-item>
+                            <mat-icon>security</mat-icon>
+                            <span>Change privacy</span>
+                        </button>
+                        <button mat-menu-item>
+                            <mat-icon>report</mat-icon>
+                            <span>Report this post</span>
+                        </button>
+                        <mat-divider></mat-divider>
+                        <button mat-menu-item>
+                            <mat-icon>delete_outline</mat-icon>
+                            <span>Delete</span>
+                        </button>
+                        </mat-menu>
                 </div>
 
                 <mat-card-header>
                         <div mat-card-avatar class="card-header-image">
                             <img class="avatar-xs-card" [src]="post.parent.user.image ? post.parent.user.image : post.parent.user.default_image" alt="{{ 'Photo of ' + post.parent.user.username }}">
-                            <button class="post-sub-menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Post sub-menu">
-                                <mat-icon>more_vert</mat-icon>
-                                </button>
-                                <mat-menu #menu="matMenu">
-                                <button mat-menu-item>
-                                    <mat-icon>create</mat-icon>
-                                    <span>Edit</span>
-                                </button>
-                                <button mat-menu-item>
-                                    <mat-icon>security</mat-icon>
-                                    <span>Change privacy</span>
-                                </button>
-                                <button mat-menu-item>
-                                    <mat-icon>report</mat-icon>
-                                    <span>Report this post</span>
-                                </button>
-                                <mat-divider></mat-divider>
-                                <button mat-menu-item>
-                                    <mat-icon>delete_outline</mat-icon>
-                                    <span>Delete</span>
-                                </button>
-                                </mat-menu>
                         </div>
                     <mat-card-title><a class="user-link" (click)="getUserData(post.parent.user.username)">{{ post.parent.user.first_name + ' ' + post.parent.user.last_name }}</a></mat-card-title>
                     <mat-card-subtitle>Developer &middot; {{ post.parent.timesince}}</mat-card-subtitle>

@@ -4,6 +4,7 @@
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 10px;
+    position: relative;
 }
 a{
     text-decoration: none;
@@ -20,6 +21,16 @@ ul li{
 
 .feed .side-profile-menu-left{
     flex:1;
+    position: fixed;
+    top: 70px;
+    left: 0;
+}
+
+.feed .side-profile-menu-right{
+    flex:1;
+    position: fixed;
+    top: 70px;
+    right: 10px;
 }
 
 .user-profile-community{
@@ -28,14 +39,10 @@ ul li{
     flex-wrap: wrap;
 }
 
-.feed .side-profile-menu-right{
-    flex:1;
-}
 
 .feed .main-content{
-    flex:2;
-    margin-left: 25px;
-    margin-right: 25px;
+    width: 800px;
+    margin: 0 auto;
 }
 
 .avatar-xs-card{
@@ -112,7 +119,78 @@ ul li{
 }
 
 
-@media screen and (max-width: 1000px){
+
+@media screen and (min-width: 1490px)
+and (max-width: 1760px)
+{
+ .main-content {
+     max-width: 650px;
+ }
+
+ .side-profile-menu-left,.side-profile-menu-right{
+     width: 400px;
+ }
+
+}
+
+@media screen and (min-width: 1470px)
+and (max-width: 1489px)
+{
+ .main-content {
+     max-width: 650px;
+ }
+
+ .side-profile-menu-left,.side-profile-menu-right{
+     width: 380px;
+ }
+
+}
+
+
+
+@media screen and (min-width: 1335px)
+and (max-width: 1469px)
+{
+ .main-content {
+     max-width: 650px;
+ }
+
+ .side-profile-menu-left,.side-profile-menu-right{
+     width: 315px;
+ }
+
+}
+
+@media screen and (min-width: 1300px)
+and (max-width: 1334px)
+{
+ .main-content {
+     max-width: 650px;
+ }
+
+ .side-profile-menu-left,.side-profile-menu-right{
+     width: 300px;
+ }
+
+}
+
+
+
+@media screen and (min-width: 1215px)
+and (max-width: 1333px)
+{
+ .main-content {
+     max-width: 650px;
+ }
+
+ .side-profile-menu-left,.side-profile-menu-right{
+     width: 270px;
+ }
+
+}
+
+
+@media screen and (max-width: 1214px){
     .profile-section{
         flex-direction: column;
     }
@@ -122,6 +200,21 @@ ul li{
     }
     .side-profile-menu-left,.side-profile-menu-right{
         display: none;
+    }
+
+    .feed .main-content{
+
+        margin: 0 auto;
+        display: flex;
+        max-width: max(320px, 100%);
+        flex-direction: column;
+    }
+    .publish-form{
+        max-width: max( 320px, 100%);
+    }
+
+    .news-feed{
+        max-width: max( 320px, 100%);
     }
 
 }
@@ -139,9 +232,19 @@ ul li{
     }
 
     .feed .main-content{
-        flex:1;
+
         margin-left: 5px;
         margin-right: 5px;
+        display: flex;
+        max-width: max(320px, 100%);
+        flex-direction: column;
+    }
+    .publish-form{
+        max-width: max( 320px, 100%);
+    }
+
+    .news-feed{
+        max-width: max( 320px, 100%);
     }
 
 }
@@ -156,6 +259,12 @@ ul li{
         flex:1;
         margin-left: 2px;
         margin-right: 2px;
+    }
+    .publish-form{
+        flex: 1;
+    }
+    .news-feed{
+        flex: 1;
     }
 
 }

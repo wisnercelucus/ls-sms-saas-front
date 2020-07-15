@@ -166,7 +166,7 @@ mat-card-header{
     position: relative;
 }
 .post-sub-menu{
-    margin-top: -8px;
+    margin-top: 8px;
     position: absolute;
     right:0px;
     top:0px;
