@@ -14,6 +14,18 @@ export class AuthUser{
         }
 }
 
+
+export interface UserProfile{
+    is_student:boolean;
+    is_support_staff:boolean;
+    is_school_admin:boolean;
+    is_teacher:boolean;
+    cover_image:string;
+    id:number;
+    updated_by:User,
+    default_cover:string
+}
+
 export interface User{
     id:number;
     username:string;
@@ -26,17 +38,5 @@ export interface User{
     default_image:string;
     user_profile:UserProfile;
             
-}
-
-export interface UserProfile{
-    is_student:boolean;
-    is_support_staff:boolean;
-    is_school_admin:boolean;
-    is_teacher:boolean;
-    cover_image:string;
-    id:number;
-    user:User;
-    updated_by:User,
-    default_cover:string
 }
 
