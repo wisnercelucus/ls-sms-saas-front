@@ -292,7 +292,7 @@
 
             <span *ngIf="post.parent">
                 <div class="post-share-detail">
-                    <p><fa-icon [icon]="faShare"></fa-icon> {{ post.user.first_name + ' ' + post.user.last_name }} {{post.timesince}}.</p>
+                    <p><a class="user-link" (click)="getUserData(post.user.username)"><fa-icon [icon]="faShare"></fa-icon> {{ post.user.first_name + ' ' + post.user.last_name }}</a> &middot; {{post.timesince}}.</p>
                     <p *ngIf="post.new_content">{{post.new_content}}</p>
                     <button class="post-sub-menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Post sub-menu">
                         <mat-icon>more_vert</mat-icon>
