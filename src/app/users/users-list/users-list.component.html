@@ -12,7 +12,7 @@
             <mat-card class="user-detail" *ngFor="let user of usersList">
                 <mat-card-header>
                     <div mat-card-avatar>
-                        <img class="avatar-xs-card" *ngIf="user.image" [src]="user.image" alt="user.username">
+                        <img class="avatar-xs-card" [src]="user.image? user.image: user.default_image" alt="{{user.username}}">
                     </div>
                     <mat-card-title><a class="user-link" [routerLink]="['/accounts', user.username]">{{ user.first_name + ' ' + user.last_name}}</a></mat-card-title>
                     <mat-card-subtitle>Developer</mat-card-subtitle>

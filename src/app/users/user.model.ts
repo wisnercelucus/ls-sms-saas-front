@@ -24,6 +24,7 @@ export interface User{
     last_name:string;
     first_name:string;
     default_image:string;
+    user_profile:UserProfile;
             
 }
 

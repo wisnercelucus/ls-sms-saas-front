@@ -88,7 +88,7 @@
 
 
             <li class="nav-item handle-user" [matMenuTriggerFor]="menu">
-                        <img class="avatar-xs" *ngIf="loginUser" [src]="loginUser.image" title="{{ loginUser.username }}"> <span class="username"></span>
+                        <img class="avatar-xs" *ngIf="loginUser" [src]="loginUser.image ? loginUser.image : loginUser.default_image" title="{{ loginUser.username }}"> <span class="username"></span>
             </li>
             <mat-menu #menu="matMenu">
             <a *ngIf="loginUser" (click) = "getUserData(loginUser.username)"><button mat-menu-item>Profile</button></a>

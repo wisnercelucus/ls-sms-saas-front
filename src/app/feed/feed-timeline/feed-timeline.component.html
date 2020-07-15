@@ -8,7 +8,7 @@
             <span *ngIf="!post.parent">
                 <mat-card-header>
                         <div mat-card-avatar class="card-header-image">
-                            <img class="avatar-xs-card" [src]="post.user.image" alt="{{ 'Photo of ' + post.user.username }}">
+                            <img class="avatar-xs-card" [src]="post.user.image? post.user.image : post.user.default_image " alt="{{ 'Photo of ' + post.user.username }}">
                         </div>
                     <mat-card-title><a class="user-link" (click)="getUserData(post.user.username)">{{ post.user.first_name + ' ' + post.user.last_name }}</a></mat-card-title>
                     <mat-card-subtitle>Developer &middot; {{ post.timesince}}</mat-card-subtitle>
@@ -165,7 +165,7 @@
                     <form class="comment-form" (ngSubmit)="submitComment(f1)" #f1="ngForm">
                         <div class="form-row">
                         <div mat-card-avatar class="comment-user-avatar">
-                            <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image" alt="{{loginUser.username}}}">
+                            <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image ? loginUser.image : loginUser.default_image" alt="{{loginUser.username}}">
                         </div>
                         <input type="hidden" ngModel = "post" name='content_type' ngValue='post'>
                         <input type="hidden" [ngModel] = "post.id" name='object_id' [value]="post.id">
@@ -193,7 +193,7 @@
                         <div class class="comment-box">
                             <div class="comment-content-box">
                                 <div mat-card-avatar class="comment-user-avatar">
-                                    <img class="avatar-xs-card-comment" *ngIf="tenantUrl" src="{{ tenantUrl + comment.user.image }}" alt="{{comment.user.username}}">
+                                    <img class="avatar-xs-card-comment" *ngIf="tenantUrl" [src]=" comment.user.image ? tenantUrl + comment.user.image : comment.user.default_image" alt="{{comment.user.username}}">
                                 </div>
                                 <p class="comment-text">
                                 <a class="user-link" (click)="getUserData(comment.user.username)"> <span class="comment-user">{{ comment.user.first_name + ' ' + comment.user.last_name }}</span></a>
@@ -210,7 +210,7 @@
                                 <form class="comment-form" (ngSubmit)="submitComment(f2)" #f2="ngForm">
                                     <div class="form-row">
                                     <div mat-card-avatar class="comment-user-avatar">
-                                        <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image" alt="{{loginUser.username}}}">
+                                        <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image? loginUser.image : loginUser.default_image" alt="{{loginUser.username}}}">
                                     </div>
                                     <input type="hidden" [ngModel] = "comment.id" name='parent_id'>
                                     <input type="hidden" ngModel = "post" name='content_type'>
@@ -242,7 +242,7 @@
                                 <div class class="comment-box">
                                     <div class="comment-content-box">
                                         <div mat-card-avatar class="comment-user-avatar">
-                                            <img class="avatar-xs-card-comment" *ngIf="tenantUrl" src="{{ tenantUrl + reply.user.image }}" alt="Photo of a Shiba Inu">
+                                            <img class="avatar-xs-card-comment" *ngIf="tenantUrl" src="{{ reply.user.image ? tenantUrl +  reply.user.image : reply.user.default_image }}" alt="Photo of a Shiba Inu">
                                          </div>
                                     <p class="comment-text">
                                     <a class="user-link" (click)="getUserData(reply.user.username)"> <span class="comment-user">{{ reply.user.first_name + ' ' + reply.user.last_name }}</span></a>
@@ -259,7 +259,7 @@
                                 <form class="comment-form" (ngSubmit)="submitComment(f3)" #f3="ngForm">
                                     <div class="form-row">
                                     <div mat-card-avatar class="comment-user-avatar">
-                                        <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image" alt="{{loginUser.username}}}">
+                                        <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image? loginUser.image : loginUser.default_image" alt="{{loginUser.username}}">
                                     </div>
                                     <input type="hidden" [ngModel] = "comment.id" name='parent_id'>
                                     <input type="hidden" ngModel = "post" name='content_type'>
@@ -298,7 +298,7 @@
 
                 <mat-card-header>
                         <div mat-card-avatar class="card-header-image">
-                            <img class="avatar-xs-card" [src]="post.parent.user.image" alt="{{ 'Photo of ' + post.parent.user.username }}">
+                            <img class="avatar-xs-card" [src]="post.parent.user.image ? post.parent.user.image : post.parent.user.default_image" alt="{{ 'Photo of ' + post.parent.user.username }}">
                             <button class="post-sub-menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Post sub-menu">
                                 <mat-icon>more_vert</mat-icon>
                                 </button>
@@ -453,7 +453,7 @@
                     <form class="comment-form" (ngSubmit)="submitComment(f1)" #f1="ngForm">
                         <div class="form-row">
                         <div mat-card-avatar class="comment-user-avatar">
-                            <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image" alt="{{loginUser.username}}}">
+                            <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image? loginUser.image : loginUser.default_image" alt="{{loginUser.username}}">
                         </div>
                         <input type="hidden" ngModel = "post" name='content_type' ngValue='post'>
                         <input type="hidden" [ngModel] = "post.id" name='object_id' [value]="post.id">
@@ -481,7 +481,7 @@
                         <div class class="comment-box">
                             <div class="comment-content-box">
                                 <div mat-card-avatar class="comment-user-avatar">
-                                    <img class="avatar-xs-card-comment" *ngIf="tenantUrl" src="{{ tenantUrl + comment.user.image }}" alt="{{comment.user.username}}">
+                                    <img class="avatar-xs-card-comment" *ngIf="tenantUrl" src="{{ comment.user.image ? tenantUrl + comment.user.image : comment.user.default_image}}" alt="{{comment.user.username}}">
                                 </div>
                                 <p class="comment-text">
                                 <a class="user-link" (click)="getUserData(comment.user.username)"> <span class="comment-user">{{ comment.user.first_name + ' ' + comment.user.last_name }}</span></a>
@@ -498,7 +498,7 @@
                                 <form class="comment-form" (ngSubmit)="submitComment(f2)" #f2="ngForm">
                                     <div class="form-row">
                                     <div mat-card-avatar class="comment-user-avatar">
-                                        <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image" alt="{{loginUser.username}}}">
+                                        <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image? loginUser.image : loginUser.default_image" alt="{{loginUser.username}}">
                                     </div>
                                     <input type="hidden" [ngModel] = "comment.id" name='parent_id'>
                                     <input type="hidden" ngModel = "post" name='content_type'>
@@ -530,7 +530,7 @@
                                 <div class class="comment-box">
                                     <div class="comment-content-box">
                                         <div mat-card-avatar class="comment-user-avatar">
-                                            <img class="avatar-xs-card-comment" *ngIf="tenantUrl" src="{{ tenantUrl + reply.user.image }}" alt="Photo of a Shiba Inu">
+                                            <img class="avatar-xs-card-comment" *ngIf="tenantUrl" src="{{ reply.user.image ? tenantUrl + reply.user.image: reply.user.default_image }}" alt="{{reply.user.username}}">
                                          </div>
                                     <p class="comment-text">
                                     <a class="user-link" (click)="getUserData(reply.user.username)"> <span class="comment-user">{{ reply.user.first_name + ' ' + reply.user.last_name }}</span></a>
@@ -547,7 +547,7 @@
                                 <form class="comment-form" (ngSubmit)="submitComment(f3)" #f3="ngForm">
                                     <div class="form-row">
                                     <div mat-card-avatar class="comment-user-avatar">
-                                        <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image" alt="{{loginUser.username}}}">
+                                        <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image? loginUser.image : loginUser.default_image" alt="{{loginUser.username}}">
                                     </div>
                                     <input type="hidden" [ngModel] = "comment.id" name='parent_id'>
                                     <input type="hidden" ngModel = "post" name='content_type'>

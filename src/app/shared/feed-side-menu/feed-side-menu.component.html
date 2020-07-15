@@ -1,7 +1,7 @@
     <mat-card class="side-menu-card">
         <mat-card-header>
             <div mat-card-avatar>
-                <img *ngIf="loginUser" class="avatar-xs-card" [src]="loginUser.image" alt="{{loginUser.first_name + ' ' + loginUser.last_name + ' profile picture'}}">
+                <img *ngIf="loginUser" class="avatar-xs-card" [src]="loginUser.image? loginUser.image : loginUser.default_image" alt="{{loginUser.first_name + ' ' + loginUser.last_name + ' profile picture'}}">
             </div>
             <mat-card-title *ngIf="loginUser">{{ loginUser.first_name + ' ' + loginUser.last_name }}</mat-card-title>
             <mat-card-subtitle>Developer</mat-card-subtitle>
