@@ -13,7 +13,14 @@
     flex:1;
     top:70px;
     left: 0;
+    bottom: 5px;
+    overflow: hidden;
 }
+
+.profile-section .side-profile-menu-left:hover{
+    overflow-y: scroll;
+}
+
 
 .profile-section .side-profile-menu-right{
     position: fixed;

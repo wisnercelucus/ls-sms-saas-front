@@ -18,7 +18,6 @@
                     <mat-card-subtitle>Developer</mat-card-subtitle>
                 </mat-card-header>
                 
-
                 <mat-card-actions *ngIf="loginUser">
                     <a *ngIf="user.username != loginUser.username" mat-raised-button id="{{'user-' + user.id }}" class="follow-btn" (click)="onFollowUser(user.username, 'user-' + user.id)"> {{ user.is_followed ? "Following" : "Follow"}}</a>
                 </mat-card-actions>

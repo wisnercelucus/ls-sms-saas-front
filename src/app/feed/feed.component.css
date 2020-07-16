@@ -24,7 +24,14 @@ ul li{
     position: fixed;
     top: 70px;
     left: 0;
+    bottom: 5px;
+    overflow:hidden;
 }
+
+.feed .side-profile-menu-left:hover{
+    overflow-y:scroll;
+}
+
 
 .feed .side-profile-menu-right{
     flex:1;
