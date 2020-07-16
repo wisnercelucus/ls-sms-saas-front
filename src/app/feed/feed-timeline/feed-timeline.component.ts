@@ -73,6 +73,7 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   color: string;
 
   tenantUrl:string;
+  deletePostSub: Subscription;
 
   constructor(public dialog: MatDialog, private feedService:FeedService, private route:ActivatedRoute, private router:Router, private usersService:UsersService, private appService:AppService) {
 
@@ -129,6 +130,11 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
     this.router.navigate(['/post', id])
   }
   
+  deletePost(id:number){
+    this.deletePostSub = this.feedService.deletePost(id).subscribe()
+  }
+
+
   getLogingUser(){
     this.loginUserSub = this.usersService.loginUser.subscribe(
       user=>{
@@ -184,6 +190,10 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
     }
     if(this.subscrition){
       this.subscrition.unsubscribe()
+    }
+
+    if(this.deletePostSub){
+      this.deletePostSub.unsubscribe()
     }
   }
 

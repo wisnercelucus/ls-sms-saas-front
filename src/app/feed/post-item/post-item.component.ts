@@ -69,6 +69,7 @@ export class PostItemComponent implements OnInit {
   color: string;
   
   tenantUrl:string;
+  deletePostSub: Subscription;
 
 
   constructor(public dialog: MatDialog, private appService: AppService, private usersService: UsersService, private feedService:FeedService, private router:Router, private route: ActivatedRoute) { }
@@ -76,7 +77,7 @@ export class PostItemComponent implements OnInit {
   getPost(id:number){
     this.router.navigate(['/post', id])
   }
-  
+
   getUserData(username:string){   
     if(username){
       this.postsSub =  this.feedService.getUserPost(username).subscribe();
@@ -110,6 +111,10 @@ export class PostItemComponent implements OnInit {
      }
  }
 
+ deletePost(id:number){
+  this.deletePostSub = this.feedService.deletePost(id).subscribe()
+  this.router.navigate(['/feed'])
+}
  ngOnDestroy(){
    if(this.feedSub){
      this.feedSub.unsubscribe()
@@ -119,6 +124,9 @@ export class PostItemComponent implements OnInit {
    }
    if(this.createCommentSub){
      this.createCommentSub.unsubscribe()
+   }
+   if(this.deletePostSub){
+    this.deletePostSub.unsubscribe()
    }
 
    if(this.postLikeSub){

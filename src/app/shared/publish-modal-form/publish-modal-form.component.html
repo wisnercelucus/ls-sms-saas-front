@@ -1,13 +1,99 @@
-    <h1 mat-dialog-title>Hi, {{username}}</h1>
+    <h1 mat-dialog-title *ngIf="loginUser">Hi, {{loginUser.username}}</h1>
     <div mat-dialog-content>
-        <form class="post-form">
-            <mat-form-field class="post-full-width">
-                <mat-label>Post something to your timeline</mat-label>
-                <textarea matInput placeholder="Ex. It makes me feel..."
-                ></textarea>
-            </mat-form-field>
-            <button class="publish" mat-raised-button type="submit">Post</button>
-        </form>
+        <div class="publish-form">
+          <mat-card>
+            <mat-card-content>
+                <mat-tab-group>
+                    <mat-tab label="Say something?">
+                        <form enctype="multipart/form-data" class="post-form" (ngSubmit)="onSubmitPost(f)" #f="ngForm" #form>
+                            <mat-form-field class="post-full-width">
+                                <mat-label>Post something to your timeline</mat-label>
+                                <textarea id="post-content" onclick="rezizable('post-content')" class="post-content" name="content" ngModel matInput placeholder="Ex. It makes me feel..."></textarea>
+                            </mat-form-field>
+                        <input style="display:none" (change)="onFileSelected($event)" name="image" type="file" accept="image/x-png,image/gif,image/jpeg" #imageInput>
+                        <div class="form-group">
+                            <button (click)="imageInput.click()" class="file-choose" mat-raised-button type="button"><span class="select-image-btn material-icons">insert_photo</span>Add photo(s)</button>
+                            <button class="file-choose" mat-raised-button type="button"><span class="material-icons">attach_file</span>Attach file(s)</button>
+                        </div>
+                            <button class="publish" mat-raised-button type="submit">Publish</button>
+                        </form>
+                    </mat-tab>
+                    <mat-tab label="Poll"> 
+                        <form class="poll-form" 
+                        [formGroup]="pollForm"
+                        (ngSubmit)="onSubmit()"
+                        >
+                            <mat-form-field class="poll-full-width">
+
+                                <mat-label>Ask a question?</mat-label>
+                                <textarea matInput 
+                                id="poll-question" onclick="rezizable('poll-question')"
+                                formControlName="question" 
+                                placeholder="Ex. what best between...?">
+                                </textarea>
+            
+                            </mat-form-field>
+
+                            <mat-form-field class="poll-full-width">
+                                <mat-label>Open until</mat-label>
+                                <input  matInput [matDatepicker]="picker1" formControlName="open_until" ngModel>
+                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                            </mat-form-field>
+
+                            <mat-form-field class="poll-full-width">
+                                <mat-label>Option</mat-label>
+                                <input matInput 
+                                    formControlName="option1" 
+                                    placeholder="Ex. Python">
+                            </mat-form-field>
+
+                            <mat-form-field class="poll-full-width">
+                                <mat-label>Option</mat-label>
+                                <input matInput
+                                    formControlName="option2"
+                                    placeholder="Ex. PHP">
+                            </mat-form-field>
+
+                            <div class="options-added" formArrayName="optionsAdded">
+                                <div class="form-group" 
+                                *ngFor="let optionCtrl of controls; let i = index" 
+                                [formGroupName]="i"
+                                >
+                                <mat-form-field class="poll-full-width">
+                                    <mat-label>Option</mat-label>
+                                    <input matInput class="inputAdded"
+                                        formControlName="option"
+                                        placeholder="Ex. PHP">
+                                </mat-form-field>
+                                <button class="option-remove-btn"
+                                type="button" 
+                                mat-raised-button
+                                (click)="onRemoveOption(i)"
+                                ><fa-icon [icon]="faMinusSquare"></fa-icon> Remove</button>
+                                </div>
+                            </div>
+
+                            <button 
+                                class="add-option" 
+                                mat-raised-button 
+                                type="button"
+                                (click)="onAddOption()"
+                                ><fa-icon [icon]="faPlus"></fa-icon> Add option</button>
+                            
+                            <button class="publish" mat-raised-button type="submit">Ask</button>
+                        </form>
+                    </mat-tab>
+                </mat-tab-group>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+
+
+
+
     </div>
+
 
 

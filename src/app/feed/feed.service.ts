@@ -117,9 +117,6 @@ export class FeedService {
       
     }
 
-
-
-
     likePost(id:number){
 
       const headers = new HttpHeaders({
@@ -128,6 +125,24 @@ export class FeedService {
 
       if(this.tenantUrl){
         return this.http.get(this.tenantUrl + '/feed/api/post/' + id + '/like/', {headers: headers}).pipe();
+      }else{
+        return;
+      }
+    }
+
+    deletePost(id:number){
+
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+      });
+
+      if(this.tenantUrl){
+        return this.http.delete(this.tenantUrl + '/feed/api/post/' + id + '/delete/', {headers: headers}).pipe(
+          tap(res=>{
+            console.log(res)
+            this._refreshNeeded.next()
+          })
+        );
       }else{
         return;
       }

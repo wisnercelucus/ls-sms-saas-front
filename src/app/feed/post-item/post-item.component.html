@@ -12,11 +12,11 @@
                         <mat-icon>more_vert</mat-icon>
                         </button>
                         <mat-menu #menu="matMenu">
-                        <button mat-menu-item>
+                        <button *ngIf="post.is_owned" mat-menu-item>
                             <mat-icon>create</mat-icon>
                             <span>Edit</span>
                         </button>
-                        <button mat-menu-item>
+                        <button *ngIf="post.is_owned" mat-menu-item>
                             <mat-icon>security</mat-icon>
                             <span>Change privacy</span>
                         </button>
@@ -25,7 +25,7 @@
                             <span>Report this post</span>
                         </button>
                         <mat-divider></mat-divider>
-                        <button mat-menu-item>
+                        <button *ngIf="post.is_owned" (click) ="deletePost(post.id)" mat-menu-item>
                             <mat-icon>delete_outline</mat-icon>
                             <span>Delete</span>
                         </button>
@@ -308,11 +308,11 @@
                         <mat-icon>more_vert</mat-icon>
                         </button>
                         <mat-menu #menu="matMenu">
-                        <button mat-menu-item>
+                        <button *ngIf="post.is_owned" mat-menu-item>
                             <mat-icon>create</mat-icon>
                             <span>Edit</span>
                         </button>
-                        <button mat-menu-item>
+                        <button *ngIf="post.is_owned" mat-menu-item>
                             <mat-icon>security</mat-icon>
                             <span>Change privacy</span>
                         </button>
@@ -321,7 +321,7 @@
                             <span>Report this post</span>
                         </button>
                         <mat-divider></mat-divider>
-                        <button mat-menu-item>
+                        <button *ngIf="post.is_owned" (click) ="deletePost(post.id)" mat-menu-item>
                             <mat-icon>delete_outline</mat-icon>
                             <span>Delete</span>
                         </button>

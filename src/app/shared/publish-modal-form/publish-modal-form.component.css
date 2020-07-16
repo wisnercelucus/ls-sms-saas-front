@@ -10,8 +10,61 @@
     width: 100%;
 }
 
+
 .publish{
     background-color: dodgerblue;
     color: white;
     margin-top: 8px;
 }
+
+.publish-form{
+    padding: 8px;
+}
+
+.post-form, .poll-form {
+    min-width: 100px;
+    width: 100%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+  
+.poll-form button{
+    margin-right: 8px;
+}
+
+.add-option{
+    background-color: fuchsia;
+    color: ghostwhite;
+}
+
+.poll-form button:last-child{
+    margin-right: 0px;
+}
+
+.post-full-width, .poll-full-width {
+    width: 100%;
+  }
+
+.form-group{
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.form-group button{
+    margin-left: 8px;
+    height: 35px !important;
+    background-color: firebrick;
+    color: ghostwhite;
+}
+
+.form-group .file-choose{
+    color: #0ec54e;
+    background-color: #fff;
+}
+
+.form-group .select-image-btn{
+    height: 30px !important;
+    cursor: pointer;
+    font-size: 30px;
+    color: #0ec54e;
+}  

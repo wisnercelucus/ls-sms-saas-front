@@ -8,7 +8,7 @@
         <mat-card class="post-card" *ngFor="let post of dataSource; let i = index">
             
             <span *ngIf="!post.parent">
-            <a (click) = "getPost(post.id)">
+            
                 <mat-card-header>
                         <div mat-card-avatar class="card-header-image">
                             <img class="avatar-xs-card" [src]="post.user.image? post.user.image : post.user.default_image " alt="{{ 'Photo of ' + post.user.username }}">
@@ -19,11 +19,11 @@
                         <mat-icon>more_vert</mat-icon>
                         </button>
                         <mat-menu #menu="matMenu">
-                        <button mat-menu-item>
+                        <button *ngIf="post.is_owned" mat-menu-item>
                             <mat-icon>create</mat-icon>
                             <span>Edit</span>
                         </button>
-                        <button mat-menu-item>
+                        <button *ngIf="post.is_owned" mat-menu-item>
                             <mat-icon>security</mat-icon>
                             <span>Change privacy</span>
                         </button>
@@ -32,18 +32,18 @@
                             <span>Report this post</span>
                         </button>
                         <mat-divider></mat-divider>
-                        <button mat-menu-item>
+                        <button *ngIf="post.is_owned" (click) = "deletePost(post.id)" mat-menu-item>
                             <mat-icon>delete_outline</mat-icon>
                             <span>Delete</span>
                         </button>
                         </mat-menu>
                 </mat-card-header>
-                </a>
-                <mat-card-content>
                 
+                <mat-card-content>
+                <a (click) = "getPost(post.id)">
                     <p *ngIf="!post.poll" class="post-paragraph" [innerHTML]= "post.content">
                     </p>
-                    
+                </a>    
                     <div class="wrap-voted-post" *ngIf="post.poll">
                         <div class="poll-status-handler">
                             <span class="post-type">
@@ -60,9 +60,10 @@
                                 <fa-icon [icon]="faTimesCircle"></fa-icon> closed
                             </span>
                         </div>
-
-                        <p class="post-paragraph" [innerHTML]= "post.content">
-                        </p>
+                        <a (click) = "getPost(post.id)">
+                            <p class="post-paragraph" [innerHTML]= "post.content">
+                            </p>
+                        </a>
                         <mat-divider></mat-divider>
                     </div>
 
@@ -165,7 +166,7 @@
 
                     </div>
 
-                    <img mat-card-image *ngIf="post.image" [src]="post.image" alt="post.id">
+                    <img mat-card-image *ngIf="post.image" [src]="post.image" alt="{{post.id}}">
                     
                     <div class="post-stat" id="{{'post'+ post.id}}">
                         <span>{{ post.likes + ' ' }}Likes</span>
@@ -261,7 +262,7 @@
                                 <div class class="comment-box">
                                     <div class="comment-content-box">
                                         <div mat-card-avatar class="comment-user-avatar">
-                                            <img class="avatar-xs-card-comment" *ngIf="tenantUrl" src="{{ reply.user.image ? tenantUrl +  reply.user.image : reply.user.default_image }}" alt="Photo of a Shiba Inu">
+                                            <img class="avatar-xs-card-comment" *ngIf="tenantUrl" src="{{ reply.user.image ? tenantUrl +  reply.user.image : reply.user.default_image }}" alt="{{reply.user.username}}">
                                          </div>
                                     <p class="comment-text">
                                     <a class="user-link" (click)="getUserData(reply.user.username)"> <span class="comment-user">{{ reply.user.first_name + ' ' + reply.user.last_name }}</span></a>
@@ -313,17 +314,18 @@
                 <div class="post-share-detail">
 
                     <a (click) = "getPost(post.id)">
-                    <p><a class="user-link" (click)="getUserData(post.user.username)"><fa-icon [icon]="faShare"></fa-icon> {{ post.user.first_name + ' ' + post.user.last_name }}</a> &middot; {{post.timesince}}.</p>
-                    <p *ngIf="post.new_content">{{post.new_content}}</p>
+                        <p><a class="user-link" (click)="getUserData(post.user.username)"><fa-icon [icon]="faShare"></fa-icon> {{ post.user.first_name + ' ' + post.user.last_name }}</a> &middot; {{post.timesince}}.</p>
+                        <p *ngIf="post.new_content">{{post.new_content}}</p>
+                     </a>
                     <button class="post-sub-menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Post sub-menu">
                         <mat-icon>more_vert</mat-icon>
                         </button>
                         <mat-menu #menu="matMenu">
-                        <button mat-menu-item>
+                        <button *ngIf="post.is_owned" mat-menu-item>
                             <mat-icon>create</mat-icon>
                             <span>Edit</span>
                         </button>
-                        <button mat-menu-item>
+                        <button *ngIf="post.is_owned" mat-menu-item>
                             <mat-icon>security</mat-icon>
                             <span>Change privacy</span>
                         </button>
@@ -332,15 +334,15 @@
                             <span>Report this post</span>
                         </button>
                         <mat-divider></mat-divider>
-                        <button mat-menu-item>
+                        <button *ngIf="post.is_owned" (click) = "deletePost(post.id)" mat-menu-item>
                             <mat-icon>delete_outline</mat-icon>
                             <span>Delete</span>
                         </button>
                         </mat-menu>
-                    </a>
+                   
                 </div>
 
-            <a (click) = "getPost(post.parent.id)">
+            
                 <mat-card-header>
                         <div mat-card-avatar class="card-header-image">
                             <img class="avatar-xs-card" [src]="post.parent.user.image ? post.parent.user.image : post.parent.user.default_image" alt="{{ 'Photo of ' + post.parent.user.username }}">
@@ -349,12 +351,12 @@
                     <mat-card-subtitle>Developer &middot; {{ post.parent.timesince}}</mat-card-subtitle>
 
                 </mat-card-header>
-            </a>
+            
                 <mat-card-content>
-                
+                <a (click) = "getPost(post.parent.id)">
                     <p *ngIf="!post.parent.poll" class="post-paragraph" [innerHTML]= "post.parent.content">
                     </p>
-                    
+                </a>
                     <div class="wrap-voted-post" *ngIf="post.parent.poll">
                         <div class="poll-status-handler">
                             <span class="post-type">
@@ -371,9 +373,10 @@
                                 <fa-icon [icon]="faTimesCircle"></fa-icon> closed
                             </span>
                         </div>
-
+                    <a (click) = "getPost(post.parent.id)">
                         <p class="post-paragraph" [innerHTML]= "post.parent.content">
                         </p>
+                    </a>
                         <mat-divider></mat-divider>
                     </div>
 
@@ -473,7 +476,7 @@
 
                     </div>
 
-                    <img mat-card-image *ngIf="post.parent.image" [src]="post.parent.image" alt="post.id">
+                    <img mat-card-image *ngIf="post.parent.image" [src]="post.parent.image" alt="{{post.id}}">
                     
                     <div class="post-stat" id="{{'post'+ post.id}}">
                         <span>{{ post.likes + ' ' }}Likes</span>

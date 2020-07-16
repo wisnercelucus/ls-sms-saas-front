@@ -9,7 +9,7 @@ import { Post } from './post.model';
 import { User } from '../users/user.model';
 import { UsersService } from '../users/users.service';
 import { Router } from '@angular/router';
-import {NgxLinkifyjsService, Link, LinkType} from 'ngx-linkifyjs';
+import {NgxLinkifyjsService} from 'ngx-linkifyjs';
 
 
 @Component({

@@ -31,3 +31,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 #cat /proc/sys/fs/inotify/max_user_watches
 
 #fs.inotify.max_user_watches=524288
+
+#to review
+https://medium.com/engineering-on-the-incline/reloading-current-route-on-click-angular-5-1a1bfc740ab2

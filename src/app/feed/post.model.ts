@@ -19,4 +19,5 @@ export interface Post{
     comments?:Comment[];
     poll?:Poll;
     did_vote?:boolean;
+    is_owned?: boolean;
 }
