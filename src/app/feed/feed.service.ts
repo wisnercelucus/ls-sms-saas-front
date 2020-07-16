@@ -100,6 +100,25 @@ export class FeedService {
       
     }
 
+    getPost(id:number){
+
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+      });
+
+      if(this.tenantUrl){
+        return this.http.get<Post>(this.tenantUrl + '/feed/api/post/' + id, {headers: headers}).pipe(
+          tap(res=>{
+          })
+        );
+        }else{
+          return;
+        }
+      
+    }
+
+
+
 
     likePost(id:number){
 

@@ -5,15 +5,16 @@ export interface Option{
     user?:User;
     value:string;
     votes?:number;
-    voters?:any;
-    percent_vote:string;
+    voters?:number[];
+    percent_vote?:string;
 }
 export interface Poll{
     id?:number;
     user?:User;
     question:string;
-    poll_voters?:any;
+    poll_voters?:number[];
     options?:Option[];
     url?:string;
-    number_of_vote?:number;
+    is_open?:boolean;
+    number_of_vote?:number;  
 }

@@ -5,6 +5,7 @@ export interface Post{
     id?:number;
     user?:User;
     content:string;
+    new_content?:string;
     created_at?:Date;
     date_display?:string;
     total_comments?:number;
@@ -17,4 +18,5 @@ export interface Post{
     redirect_?:string;
     comments?:Comment[];
     poll?:Poll;
+    did_vote?:boolean;
 }

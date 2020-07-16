@@ -7,6 +7,9 @@
 mat-card-header:hover{
     cursor: pointer;
 }
+.post-share-detail:hover{
+    cursor: pointer;
+}
 
 .user-link{
     text-decoration: none;
@@ -156,9 +159,7 @@ a{
     cursor: pointer;
 
 }
-.post-share-detail:hover{
-    cursor: pointer;
-}
+
 
 .post-card{
     margin-bottom: 15px !important;

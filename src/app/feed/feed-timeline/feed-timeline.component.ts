@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { faBirthdayCake, 
   faMapMarker, 
   faThumbsUp, 
@@ -69,9 +69,9 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   centered = false;
   disabled = false;
   unbounded = false;
-
   radius: number;
   color: string;
+
   tenantUrl:string;
 
   constructor(public dialog: MatDialog, private feedService:FeedService, private route:ActivatedRoute, private router:Router, private usersService:UsersService, private appService:AppService) {
@@ -124,8 +124,11 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
     }
 
   }
-
-
+  
+  getPost(id:number){
+    this.router.navigate(['/post', id])
+  }
+  
   getLogingUser(){
     this.loginUserSub = this.usersService.loginUser.subscribe(
       user=>{
