@@ -165,8 +165,9 @@
                         </div>
 
                     </div>
-
+                    <a (click) = "getPost(post.id)">
                     <img mat-card-image *ngIf="post.image" [src]="post.image" alt="{{post.id}}">
+                    </a>
                     
                     <div class="post-stat" id="{{'post'+ post.id}}">
                         <span>{{ post.likes + ' ' }}Likes</span>
@@ -475,8 +476,12 @@
                         </div>
 
                     </div>
+                    
+                    <a (click) = "getPost(post.parent.id)">
 
-                    <img mat-card-image *ngIf="post.parent.image" [src]="post.parent.image" alt="{{post.id}}">
+                    <img mat-card-image *ngIf="post.parent.image" [src]="post.parent.image" alt="{{post.parent.id}}">
+                    
+                    </a>
                     
                     <div class="post-stat" id="{{'post'+ post.id}}">
                         <span>{{ post.likes + ' ' }}Likes</span>
