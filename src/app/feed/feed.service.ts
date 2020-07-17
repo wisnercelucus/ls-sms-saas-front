@@ -149,15 +149,12 @@ export class FeedService {
     }
 
 
-    updatePost(data:any){
+    updatePost(data:any, id:number){
       const body = data;
-
-      let id = data['post_id']
 
       if(this.tenantUrl){
         return this.http.put(this.tenantUrl + '/feed/api/post/' + id + '/update/', body).pipe(
           tap(res=>{
-            console.log(res)
             this._refreshNeeded.next()
           })
         );

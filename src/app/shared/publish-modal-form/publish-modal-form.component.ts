@@ -124,6 +124,10 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
     
   }
 
+  onFileSelected(event:any){
+    this.selectedFile = <File>event.target.files[0];
+  }
+
   getLogingUser(){
     this.loginUserSub = this.usersService.loginUser.subscribe(
       user=>{
@@ -191,9 +195,6 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
     (<FormArray>this.pollForm.get('optionsAdded')).removeAt(index);
   }
 
-  onFileSelected(event:any){
-      this.selectedFile = <File>event.target.files[0];
-  }
   closeDialog(){
     this.dialogRef.close()
   }
@@ -218,11 +219,10 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
       let newContent = this.updateHashLinks(r);
       newContent = this.updateUsernameLinks(newContent);
 
-      const post:any = {content:newContent, new_content: newC, post_id:post_id}
+      const post:any = {content:newContent, has_new_content: newC, post_id:post_id, has_no_picture:true}
 
-      this.postUpdateSub = this.feedService.updatePost(post).subscribe(
+      this.postUpdateSub = this.feedService.updatePost(post, post_id).subscribe(
         res=>{
-          form.reset();
           this.dialogRef.close()
         }
       );
@@ -238,7 +238,7 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
 
       fd.append('image', this.selectedFile.name);
 
-      this.postUpdateSub = this.feedService.updatePost(fd).subscribe(
+      this.postUpdateSub = this.feedService.updatePost(fd,  +fd.get("post_id")).subscribe(
         res=>{
           form.reset();
           this.dialogRef.close()

@@ -185,6 +185,7 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   onFileSelected(event:any){
       this.selectedFile = <File>event.target.files[0];
+      //console.log(this.selectedFile)
   }
 
 }
