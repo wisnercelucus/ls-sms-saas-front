@@ -33,7 +33,7 @@ export class FeedService {
       });
 
       if(this.tenantUrl){
-        return this.http.post<Post>(this.tenantUrl + '/feed/api/post/create/create_url/', body).pipe(
+        return this.http.post<Post>(this.tenantUrl + '/feed/api/post/create/', body).pipe(
           tap(p =>{
               this._refreshNeeded.next();          
           })
@@ -147,6 +147,26 @@ export class FeedService {
         return;
       }
     }
+
+
+    updatePost(data:any){
+      const body = data;
+
+      let id = data['post_id']
+
+      if(this.tenantUrl){
+        return this.http.put(this.tenantUrl + '/feed/api/post/' + id + '/update/', body).pipe(
+          tap(res=>{
+            console.log(res)
+            this._refreshNeeded.next()
+          })
+        );
+      }else{
+        return;
+      }
+    }
+
+
 
     askPollQuestion(data:any){
       const body = data;

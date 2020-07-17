@@ -14,7 +14,6 @@ import { Subscription } from 'rxjs';
 import { UsersService } from 'src/app/users/users.service';
 import { User } from 'src/app/users/user.model';
 
- 
 @Component({
   selector: 'app-feed-side-menu',
   templateUrl: './feed-side-menu.component.html',
@@ -33,7 +32,6 @@ export class FeedSideMenuComponent implements OnInit, OnDestroy {
   faHome = faHome;
   faUser = faUser;
   
-  subscrition:Subscription;
   loginUser:User;
   loginUserSub:Subscription;
  
@@ -68,9 +66,6 @@ export class FeedSideMenuComponent implements OnInit, OnDestroy {
     if(this.loginUserSub){
       this.loginUserSub.unsubscribe()
     }
-    if(this.subscrition){
-      this.subscrition.unsubscribe()
-    }
   }
   
   navigateTo(path:string){
@@ -80,9 +75,10 @@ export class FeedSideMenuComponent implements OnInit, OnDestroy {
   openDialog(): void {
     const dialogRef = this.dialog.open(PublishModalFormComponent, {
       width: '500px',
-    });
-
-    this.subscrition = dialogRef.afterClosed().subscribe(result => {
+      data:{
+        post:null,
+        editMode_:false
+      }
     });
   }
 }

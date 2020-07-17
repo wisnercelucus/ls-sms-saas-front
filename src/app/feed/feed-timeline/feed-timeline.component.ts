@@ -21,6 +21,8 @@ import { NgForm } from '@angular/forms';
 import { AppService } from 'src/app/app.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PostShareModalFormComponent } from 'src/app/shared/post-share-modal-form/post-share-modal-form.component';
+import { DeleteConfirmDialogComponent } from 'src/app/shared/delete-confirm-dialog/delete-confirm-dialog.component';
+import { PublishModalFormComponent } from 'src/app/shared/publish-modal-form/publish-modal-form.component';
 
 @Component({
   selector: 'app-feed-timeline',
@@ -75,7 +77,7 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   tenantUrl:string;
   deletePostSub: Subscription;
 
-  constructor(public dialog: MatDialog, private feedService:FeedService, private route:ActivatedRoute, private router:Router, private usersService:UsersService, private appService:AppService) {
+  constructor(public dialog: MatDialog, public dialog_: MatDialog, private feedService:FeedService, private route:ActivatedRoute, private router:Router, private usersService:UsersService, private appService:AppService) {
 
   }
 
@@ -310,6 +312,27 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
     });
 
     this.subscrition = dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  openDeleteConfirmDialog(post:Post): void {
+    const dialogRef_ = this.dialog_.open(DeleteConfirmDialogComponent, {
+      width: '500px',
+      data:{
+        post:post,
+        loginUser:this.loginUser,
+        atPostDetail:false
+      }
+    });
+  }
+
+  openDialog_(post): void {
+    const dialogRef = this.dialog.open(PublishModalFormComponent, {
+      width: '500px',
+      data:{
+        post:post,
+        editMode_:true
+      }
     });
   }
 

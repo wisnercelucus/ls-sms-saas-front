@@ -15,6 +15,7 @@ import { PublishModalFormComponent } from './publish-modal-form/publish-modal-fo
 import { FormDialogComponent } from './form-dialog/form-dialog.component';
 import { DataTableRowHeaderComponent } from './data-table-row-header/data-table-row-header.component';
 import { PostShareModalFormComponent } from './post-share-modal-form/post-share-modal-form.component';
+import { DeleteConfirmDialogComponent } from './delete-confirm-dialog/delete-confirm-dialog.component';
 
 @NgModule({
     declarations:[
@@ -30,6 +31,7 @@ import { PostShareModalFormComponent } from './post-share-modal-form/post-share-
         FormDialogComponent,
         DataTableRowHeaderComponent,
         PostShareModalFormComponent,
+        DeleteConfirmDialogComponent,
     ],
 
     imports:[CommonModule, 

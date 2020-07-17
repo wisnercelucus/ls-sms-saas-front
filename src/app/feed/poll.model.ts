@@ -16,5 +16,6 @@ export interface Poll{
     options?:Option[];
     url?:string;
     is_open?:boolean;
-    number_of_vote?:number;  
+    number_of_vote?:number; 
+    open_until?:Date; 
 }

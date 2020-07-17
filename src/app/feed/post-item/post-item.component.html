@@ -25,7 +25,7 @@
                             <span>Report this post</span>
                         </button>
                         <mat-divider></mat-divider>
-                        <button *ngIf="post.is_owned" (click) ="deletePost(post.id)" mat-menu-item>
+                        <button *ngIf="post.is_owned" (click) ="openDeleteConfirmDialog(post)" mat-menu-item>
                             <mat-icon>delete_outline</mat-icon>
                             <span>Delete</span>
                         </button>
@@ -321,7 +321,7 @@
                             <span>Report this post</span>
                         </button>
                         <mat-divider></mat-divider>
-                        <button *ngIf="post.is_owned" (click) ="deletePost(post.id)" mat-menu-item>
+                        <button *ngIf="post.is_owned" (click) =" openDeleteConfirmDialog(post)" mat-menu-item>
                             <mat-icon>delete_outline</mat-icon>
                             <span>Delete</span>
                         </button>

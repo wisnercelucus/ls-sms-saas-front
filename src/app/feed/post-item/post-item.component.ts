@@ -22,6 +22,7 @@ import { UsersService } from 'src/app/users/users.service';
 import { NgForm } from '@angular/forms';
 import { PostShareModalFormComponent } from 'src/app/shared/post-share-modal-form/post-share-modal-form.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DeleteConfirmDialogComponent } from 'src/app/shared/delete-confirm-dialog/delete-confirm-dialog.component';
 
 @Component({
   selector: 'app-post-item',
@@ -59,6 +60,7 @@ export class PostItemComponent implements OnInit {
   votePollSub:Subscription;
   changeVoteSub:Subscription;
   subscrition:Subscription;
+  delDialogSubscription:Subscription;
   
   toggleCommentForm:false;
 
@@ -72,7 +74,7 @@ export class PostItemComponent implements OnInit {
   deletePostSub: Subscription;
 
 
-  constructor(public dialog: MatDialog, private appService: AppService, private usersService: UsersService, private feedService:FeedService, private router:Router, private route: ActivatedRoute) { }
+  constructor(public dialog: MatDialog, public dialog_: MatDialog, private appService: AppService, private usersService: UsersService, private feedService:FeedService, private router:Router, private route: ActivatedRoute) { }
 
   getPost(id:number){
     this.router.navigate(['/post', id])
@@ -110,6 +112,22 @@ export class PostItemComponent implements OnInit {
        this.getLogingUser()
      }
  }
+ 
+  openDeleteConfirmDialog(post:Post): void {
+    const dialogRef_ = this.dialog_.open(DeleteConfirmDialogComponent, {
+      width: '500px',
+      data:{
+        post:post,
+        loginUser:this.loginUser,
+        atPostDetail:true
+      }
+    });
+
+    this.delDialogSubscription = dialogRef_.afterClosed().subscribe(result => {
+    });
+  }
+
+
 
  deletePost(id:number){
   this.deletePostSub = this.feedService.deletePost(id).subscribe()
@@ -142,6 +160,9 @@ export class PostItemComponent implements OnInit {
    }
    if(this.subscrition){
      this.subscrition.unsubscribe()
+   }
+   if(this.delDialogSubscription){
+    this.delDialogSubscription.unsubscribe()
    }
  }
 

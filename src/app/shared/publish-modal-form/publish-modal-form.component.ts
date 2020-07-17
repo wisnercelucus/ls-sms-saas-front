@@ -1,5 +1,5 @@
-import { Component, OnDestroy, ViewChild, ElementRef, OnInit } from '@angular/core';
-import {MatDialogRef} from '@angular/material/dialog';
+import { Component, OnDestroy, ViewChild, ElementRef, OnInit, Inject } from '@angular/core';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { UsersService } from 'src/app/users/users.service';
 import { Subscription } from 'rxjs';
 
@@ -11,7 +11,10 @@ import { FeedService } from 'src/app/feed/feed.service';
 import { User } from 'src/app/users/user.model';
 import { Post } from 'src/app/feed/post.model';
 
-
+interface DialogData{
+  postToEdit:Post;
+  editMode_:boolean;
+}
 
 @Component({
   selector: 'app-publish-modal-form',
@@ -31,17 +34,24 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
 
   pollForm: FormGroup;
   editMode=false;
+  postToEdit:Post;
 
   loginUser:User;
 
   selectedFile:File = null;
+  editMode_:boolean;
+  postUpdateSub:Subscription;
 
   constructor(
     public dialogRef: MatDialogRef<PublishModalFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private feedService:FeedService, 
     private usersService:UsersService, 
     public linkifyService: NgxLinkifyjsService
-    ) { }
+    ) { 
+      this.postToEdit = this.data['post'];
+      this.editMode_ = this.data['editMode_'];
+    }
 
   ngOnInit(): void {
     this.initForm();
@@ -164,6 +174,9 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
     if(this.pollCreateSub){
       this.pollCreateSub.unsubscribe()
     }
+    if(this.postUpdateSub){
+      this.postUpdateSub.unsubscribe()
+    }
   }
 
   onAddOption(){
@@ -183,6 +196,61 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
   }
   closeDialog(){
     this.dialogRef.close()
+  }
+
+  onEditPost(form:NgForm) {
+    if(!this.selectedFile){
+      let r: string;
+      let newC:boolean;
+
+      if(form.value['content']){
+        r  = this.linkifyService.linkify(form.value.content);
+        newC = false
+      }
+
+      if(form.value['new_content']){
+        r  = this.linkifyService.linkify(form.value.new_content);
+        newC = true
+      }
+
+      let post_id = form.value.post_id
+
+      let newContent = this.updateHashLinks(r);
+      newContent = this.updateUsernameLinks(newContent);
+
+      const post:any = {content:newContent, new_content: newC, post_id:post_id}
+
+      this.postUpdateSub = this.feedService.updatePost(post).subscribe(
+        res=>{
+          form.reset();
+          this.dialogRef.close()
+        }
+      );
+
+    }else{
+      const fd = new FormData(this.form.nativeElement);
+      const r  = this.linkifyService.linkify(fd.get("content").toString())
+      const content = this.updateHashLinks(r);
+
+      const newContent = this.updateUsernameLinks(content);
+
+      fd.set("content", newContent);
+
+      fd.append('image', this.selectedFile.name);
+
+      this.postUpdateSub = this.feedService.updatePost(fd).subscribe(
+        res=>{
+          form.reset();
+          this.dialogRef.close()
+        },
+        err=>{
+          console.log(err)
+        }
+      );
+    }
+  }
+  onUpdatePoll(fp:NgForm){
+      console.log(fp.value)
   }
 
 }
