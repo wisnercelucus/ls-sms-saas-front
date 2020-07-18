@@ -67,4 +67,14 @@
     cursor: pointer;
     font-size: 30px;
     color: #0ec54e;
-}  
+} 
+
+.selected-image-preview{
+    width: 90%;
+    margin: 0 auto;
+}
+
+.selected-image-preview .imagepreview{
+    width: 98%;
+    margin: 0 auto;
+}

@@ -41,6 +41,7 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
   selectedFile:File = null;
   editMode_:boolean;
   postUpdateSub:Subscription;
+  imagePreviewUrl:string;
 
   constructor(
     public dialogRef: MatDialogRef<PublishModalFormComponent>,
@@ -126,7 +127,12 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
 
   onFileSelected(event:any){
     this.selectedFile = <File>event.target.files[0];
-  }
+    let reader = new FileReader()
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (e:any)=>{
+      this.imagePreviewUrl = e.target.result;
+    }
+}
 
   getLogingUser(){
     this.loginUserSub = this.usersService.loginUser.subscribe(

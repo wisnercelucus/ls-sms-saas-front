@@ -34,6 +34,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   username:string;
 
   selectedFile:File = null;
+  imagePreviewUrl:string;
 
   constructor(
     private feedService:FeedService, 
@@ -106,6 +107,7 @@ export class FeedComponent implements OnInit, OnDestroy {
       this.postCreateSub = this.feedService.createPost(fd).subscribe(
         res=>{
           form.reset();
+          this.imagePreviewUrl = "";
         },
         err=>{
           console.log(err)
@@ -185,7 +187,11 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   onFileSelected(event:any){
       this.selectedFile = <File>event.target.files[0];
-      //console.log(this.selectedFile)
+      let reader = new FileReader()
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (e:any)=>{
+        this.imagePreviewUrl = e.target.result;
+      }
   }
 
 }

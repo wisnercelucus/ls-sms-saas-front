@@ -125,6 +125,16 @@ ul li{
     resize:vertical;
 }
 
+.selected-image-preview{
+    width: 90%;
+    margin: 0 auto;
+}
+
+.selected-image-preview .imagepreview{
+    width: 98%;
+    margin: 0 auto;
+}
+
 
 
 @media screen and (min-width: 1490px)
@@ -195,7 +205,6 @@ and (max-width: 1333px)
  }
 
 }
-
 
 @media screen and (max-width: 1214px){
     .profile-section{
