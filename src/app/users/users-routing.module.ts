@@ -10,7 +10,7 @@ import { FeedTimelineComponent } from '../feed/feed-timeline/feed-timeline.compo
 import { UsersListComponent } from './users-list/users-list.component';
 
 const routes: Routes = [
-    {path: 'accounts', component:UsersComponent, canActivate:[AuthGuard],
+    {path: 'accounts', component:UsersComponent, canActivate:[AuthGuard], runGuardsAndResolvers: 'always',
         children:[
             {path:'all', component:UsersListComponent},
             {path:'groups', component:GroupsComponent},

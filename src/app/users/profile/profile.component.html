@@ -6,11 +6,11 @@
     <div class="main-content">
         <div class="user-profile">
           <mat-card>
-           <img mat-card-image *ngIf="loginUser" class="cover-profile" [src]="loginUser.user_profile.cover_image? loginUser.user_profile.cover_image : loginUser.user_profile.default_cover" alt="loginUser.username">
+           <img mat-card-image *ngIf="user" class="cover-profile" [src]="user.user_profile.cover_image? user.user_profile.cover_image : user.user_profile.default_cover" alt="user.username">
             <mat-card-content>
-                 <img *ngIf="loginUser" class="user-profile-image" [src]="loginUser.image? loginUser.image : loginUser.default_image">
+                 <img *ngIf="user" class="user-profile-image" [src]="user.image? user.image : user.default_image">
                 <div class="user-profile-detail">
-                    <h1 class="user-name" *ngIf="loginUser" >{{ loginUser.first_name + ' ' + loginUser.last_name}}</h1>
+                    <h1 class="user-name" *ngIf="user" >{{ user.first_name + ' ' + user.last_name}}</h1>
                     <h5 class="user-title">Developer</h5>
                 </div>
                 <div class="user-profile-bio">

@@ -46,6 +46,24 @@ export class UsersService {
    )
   }
 
+  getProfile(username:string){
+    if(!this.instance){
+      return;
+    }
+
+    return this.http.get<User>(this.tenantUrl + '/accounts/api/' + username +'/profile/', {headers:this.headers}).pipe(
+      tap(resData =>{
+        //this.loginUser.next(resData)
+      },
+        (err:HttpErrorResponse)=> {
+          
+            this.handleError(err);
+          
+        }
+      )
+   )
+  }
+
 
 
   followUser(data:any){
