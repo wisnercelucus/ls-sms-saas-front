@@ -16,7 +16,7 @@ import { faBirthdayCake,
  faUserCircle, faUsers, faHome, faUser, faShare} from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { FeedService } from '../feed.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { AppService } from 'src/app/app.service';
 import { UsersService } from 'src/app/users/users.service';
 import { NgForm } from '@angular/forms';
@@ -88,6 +88,11 @@ export class PostItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
+    this.router.routeReuseStrategy.shouldReuseRoute = (future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean => {
+      return false;
+     };
+
     this.appService.TENANT_URL.subscribe(
      url => {
          this.tenantUrl = url;
@@ -112,7 +117,7 @@ export class PostItemComponent implements OnInit {
        this.getLogingUser()
      }
  }
- 
+
   openDeleteConfirmDialog(post:Post): void {
     const dialogRef_ = this.dialog_.open(DeleteConfirmDialogComponent, {
       width: '500px',

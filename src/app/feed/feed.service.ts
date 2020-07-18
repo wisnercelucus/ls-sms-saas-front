@@ -11,10 +11,15 @@ import { tap } from 'rxjs/operators';
 })
 export class FeedService {
   tenantUrl:string;
-  postsListChanged = new Subject<Post[]>();
+
   allPosts:Post[];
   allUserPosts:Post[];
+  singlePost:Post;
+
+  postsListChanged = new Subject<Post[]>();
   userPostsListChanged = new Subject<Post[]>();
+  singlePostChange = new Subject<Post>();
+  
 
   private _refreshNeeded = new Subject<void>();
 
@@ -109,6 +114,8 @@ export class FeedService {
       if(this.tenantUrl){
         return this.http.get<Post>(this.tenantUrl + '/feed/api/post/' + id, {headers: headers}).pipe(
           tap(res=>{
+            this.singlePost = res;
+            this.singlePostChange.next(this.singlePost);
           })
         );
         }else{

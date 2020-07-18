@@ -1,7 +1,7 @@
         <mat-card class="post-card" *ngIf="post">
             
             <span *ngIf="!post.parent">
-                <a (click)="getPost(post.id)">
+                
                 <mat-card-header>
                         <div mat-card-avatar class="card-header-image">
                             <img class="avatar-xs-card" [src]="post.user.image? post.user.image : post.user.default_image " alt="{{ 'Photo of ' + post.user.username }}">
@@ -31,12 +31,13 @@
                         </button>
                         </mat-menu>
                 </mat-card-header>
-                </a>
+                
                 <mat-card-content>
+                <a (click)="getPost(post.id)">
                 
                     <p *ngIf="!post.poll" class="post-paragraph" [innerHTML]= "post.content">
                     </p>
-                    
+                </a>
                     <div class="wrap-voted-post" *ngIf="post.poll">
                         <div class="poll-status-handler">
                             <span class="post-type">
@@ -154,9 +155,9 @@
                         </div>
 
                     </div>
-
+                    <a (click)="getPost(post.id)">
                     <img mat-card-image *ngIf="post.image" [src]="post.image" alt="post.id">
-                    
+                    </a>
                     <div class="post-stat" id="{{'post'+ post.id}}">
                         <span>{{ post.likes + ' ' }}Likes</span>
                         <span>{{ post.total_comments + ' ' }}Comments</span>
@@ -328,7 +329,7 @@
                         </mat-menu>
                     </a>
                 </div>
-            <a (click)="getPost(post.parent.id)">
+            
                 <mat-card-header>
                         <div mat-card-avatar class="card-header-image">
                             <img class="avatar-xs-card" [src]="post.parent.user.image ? post.parent.user.image : post.parent.user.default_image" alt="{{ 'Photo of ' + post.parent.user.username }}">
@@ -337,12 +338,12 @@
                     <mat-card-subtitle>Developer &middot; {{ post.parent.timesince}}</mat-card-subtitle>
 
                 </mat-card-header>
-                </a>
-                <mat-card-content>
                 
+                <mat-card-content>
+                <a (click)="getPost(post.parent.id)">
                     <p *ngIf="!post.parent.poll" class="post-paragraph" [innerHTML]= "post.parent.content">
                     </p>
-                    
+                </a>
                     <div class="wrap-voted-post" *ngIf="post.parent.poll">
                         <div class="poll-status-handler">
                             <span class="post-type">
@@ -460,9 +461,9 @@
                         </div>
 
                     </div>
-
+                    <a (click)="getPost(post.parent.id)">
                     <img mat-card-image *ngIf="post.parent.image" [src]="post.parent.image" alt="post.id">
-                    
+                    </a>
                     <div class="post-stat" id="{{'post'+ post.id}}">
                         <span>{{ post.likes + ' ' }}Likes</span>
                         <span>{{ post.total_comments + ' ' }}Comments</span>
