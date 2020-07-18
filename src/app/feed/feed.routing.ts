@@ -7,11 +7,11 @@ import { PostDetailComponent } from './post-detail/post-detail.component';
 
 
 const routes: Routes = [
-    {path:'feed', component:FeedComponent, canActivate:[AuthGuard], children:[
+    {path:'feed', component:FeedComponent, canActivate:[AuthGuard], runGuardsAndResolvers: 'always', children:[
         {path:'', component:FeedTimelineComponent}, 
     ]},
     
-    {path:'post/:id', canActivate:[AuthGuard], component:PostDetailComponent}
+    {path:'post/:id', canActivate:[AuthGuard], runGuardsAndResolvers: 'always', component:PostDetailComponent}
 ]
 
 @NgModule({

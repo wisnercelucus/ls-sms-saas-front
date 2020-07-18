@@ -14,7 +14,7 @@ import { faBirthdayCake,
 import { Post } from 'src/app/feed/post.model';
 import { FeedService } from '../feed.service';
 import { Subscription } from 'rxjs';
-import {  Router, ActivatedRoute } from '@angular/router';
+import {  Router, ActivatedRoute, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
 import { UsersService } from 'src/app/users/users.service';
 import { User } from 'src/app/users/user.model';
 import { NgForm } from '@angular/forms';
@@ -63,6 +63,7 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   votePollSub:Subscription;
   changeVoteSub:Subscription;
   subscrition:Subscription;
+  navigationSubscription:Subscription; 
 
   username:string;
   
@@ -77,9 +78,14 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   tenantUrl:string;
   deletePostSub: Subscription;
 
-  constructor(public dialog: MatDialog, public dialog_: MatDialog, private feedService:FeedService, private route:ActivatedRoute, private router:Router, private usersService:UsersService, private appService:AppService) {
-
-  }
+  constructor(public dialog: MatDialog, public dialog_: MatDialog, 
+              private feedService:FeedService, 
+              private route:ActivatedRoute, 
+              private router:Router, 
+              private usersService:UsersService, 
+              private appService:AppService) {
+     
+    }
 
 /*
   initiateVoteForm(){
@@ -103,6 +109,11 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+    this.router.routeReuseStrategy.shouldReuseRoute = (future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean => {
+      return false;
+     };
+
      this.appService.TENANT_URL.subscribe(
       url => {
           this.tenantUrl = url;
@@ -117,13 +128,18 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
       this.feedService.refreshNeeded.subscribe(
         ()=>{
           this.postsSub =  this.feedService.getPosts().subscribe();
-          this.getAllPosts();
         }
       )
       this.getAllPosts();
     }else{
         this.postsSub =  this.feedService.getUserPost(this.username).subscribe();
-        this.getAllUserPosts(); 
+
+        this.feedService.refreshNeeded.subscribe(
+          ()=>{
+            this.postsSub =  this.feedService.getUserPost(this.username).subscribe();
+          }
+        )
+        this.getAllUserPosts();
     }
 
   }
@@ -169,6 +185,11 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
+
+    if(this.navigationSubscription){
+      this.navigationSubscription.unsubscribe()
+    }
+
     if(this.feedSub){
       this.feedSub.unsubscribe()
     }

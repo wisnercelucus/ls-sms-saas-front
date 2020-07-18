@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http'
 import { AuthService } from 'src/app/auth/auth.service';
 import { AppService } from '../app.service';
 import { Post } from './post.model';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Injectable({
