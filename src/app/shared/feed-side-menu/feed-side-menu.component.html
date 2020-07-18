@@ -1,10 +1,13 @@
     <mat-card class="side-menu-card">
-        <mat-card-header>
+        <mat-card-header *ngIf="loginUser">
             <div mat-card-avatar>
-                <img *ngIf="loginUser" class="avatar-xs-card" [src]="loginUser.image? loginUser.image : loginUser.default_image" alt="{{loginUser.first_name + ' ' + loginUser.last_name + ' profile picture'}}">
+                <img class="avatar-xs-card" [src]="loginUser.image? loginUser.image : loginUser.default_image" alt="{{loginUser.first_name + ' ' + loginUser.last_name + ' profile picture'}}">
             </div>
             <mat-card-title *ngIf="loginUser">{{ loginUser.first_name + ' ' + loginUser.last_name }}</mat-card-title>
-            <mat-card-subtitle>Developer</mat-card-subtitle>
+                    <mat-card-subtitle class="user-title" *ngIf="loginUser.user_profile.is_student">Student </mat-card-subtitle>
+                    <mat-card-subtitle class="user-title" *ngIf="loginUser.user_profile.is_teacher">Teacher </mat-card-subtitle>
+                    <mat-card-subtitle class="user-title" *ngIf="loginUser.user_profile.is_school_admin">System administrator </mat-card-subtitle>
+                    <mat-card-subtitle class="user-title" *ngIf="loginUser.user_profile.is_support_staff">Support staff </mat-card-subtitle>
         </mat-card-header>
 
         <mat-card-content>

@@ -12,6 +12,7 @@ import { User } from '../user.model';
 import { Subscription } from 'rxjs';
 import { Post } from 'src/app/feed/post.model';
 import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-profile',
@@ -37,14 +38,21 @@ export class ProfileComponent implements OnInit, OnDestroy {
   userProfileSub:Subscription;
   username:string;
   postList:Post[];
+  tenantUrl:string;
+  appServiceSub:Subscription;
   
-  constructor(private userService:UsersService, private router:Router, private route:ActivatedRoute) { }
+  constructor(private userService:UsersService, private appService:AppService, private router:Router, private route:ActivatedRoute) { }
 
   ngOnInit(): void {
 
     this.router.routeReuseStrategy.shouldReuseRoute = (future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean => {
       return false;
      };
+
+     this.appServiceSub = this.appService.TENANT_URL.subscribe(url=>{
+        this.tenantUrl = url;
+     })
+
 
     this.username = this.route.snapshot.params['username'];
     
@@ -72,6 +80,9 @@ ngOnDestroy(){
   }
   if(this.userProfileSub){
     this.userProfileSub.unsubscribe()
+  }
+  if(this.appServiceSub){
+    this.appServiceSub.unsubscribe()
   }
 }
 

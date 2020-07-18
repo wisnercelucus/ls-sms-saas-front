@@ -24,6 +24,9 @@ export interface UserProfile{
     id:number;
     updated_by:User,
     default_cover:string
+    bio:string;
+    birth_date:any;
+    moto:string
 }
 
 export interface User{
@@ -37,6 +40,9 @@ export interface User{
     first_name:string;
     default_image:string;
     user_profile:UserProfile;
-            
+    followers:User[];
+    following:User[]; 
+    country:string; 
+    city:string;    
 }
 
