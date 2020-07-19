@@ -23,6 +23,7 @@ import { NgForm } from '@angular/forms';
 import { PostShareModalFormComponent } from 'src/app/shared/post-share-modal-form/post-share-modal-form.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmDialogComponent } from 'src/app/shared/delete-confirm-dialog/delete-confirm-dialog.component';
+import { PostReportDialogComponent } from 'src/app/shared/post-report-dialog/post-report-dialog.component';
 
 @Component({
   selector: 'app-post-item',
@@ -74,7 +75,7 @@ export class PostItemComponent implements OnInit {
   deletePostSub: Subscription;
 
 
-  constructor(public dialog: MatDialog, public dialog_: MatDialog, private appService: AppService, private usersService: UsersService, private feedService:FeedService, private router:Router, private route: ActivatedRoute) { }
+  constructor(public dialog: MatDialog, public dialog_: MatDialog, public dialog__: MatDialog, private appService: AppService, private usersService: UsersService, private feedService:FeedService, private router:Router, private route: ActivatedRoute) { }
 
   getPost(id:number){
     this.router.navigate(['/post', id])
@@ -99,9 +100,7 @@ export class PostItemComponent implements OnInit {
      }
    )
    this.getLogingUser();
-
  }
-
 
  getLogingUser(){
    this.loginUserSub = this.usersService.loginUser.subscribe(
@@ -173,20 +172,19 @@ export class PostItemComponent implements OnInit {
 
  submitComment(form:NgForm){
      if(!form.value.parent_id){
-       //const comment = {content:form.value.content, content_type:form.value.content_type, object_id:form.value.object_id}
+      
        this.createCommentSub = this.feedService.postComment(form.value).subscribe(
          res =>{
-           //console.log(res)
+
          },
          err=>{
            console.log(err)
          }
        )
      }else{
-       //const comment = {content:form.value.content, content_type:form.value.content_type, object_id:form.value.object_id}
+      
        this.createCommentSub = this.feedService.postComment(form.value).subscribe(
          res =>{
-           //console.log(res)
          },
          err=>{
            console.log(err)
@@ -254,7 +252,6 @@ export class PostItemComponent implements OnInit {
 
    this.changeVoteSub = this.feedService.changeVotePoll(form.value).subscribe(
      res=>{
-       //element.classList.add("remove")
      }
    )
    
@@ -283,7 +280,17 @@ export class PostItemComponent implements OnInit {
      }
    });
 
-   this.subscrition = dialogRef.afterClosed().subscribe(result => {
-   });
  }
+
+ openPostReportDialog(postId:number): void {
+  const dialogRef = this.dialog__.open(PostReportDialogComponent, {
+    width: '500px',
+    data:{
+      idPostToReport:postId
+    }
+  });
+}
+
+
+
 }

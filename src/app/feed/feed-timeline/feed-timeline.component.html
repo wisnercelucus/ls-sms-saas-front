@@ -28,11 +28,11 @@
                             <mat-icon>create</mat-icon>
                             <span>Edit</span>
                         </button>
-                        <button *ngIf="post.is_owned" mat-menu-item>
-                            <mat-icon>security</mat-icon>
-                            <span>Change privacy</span>
-                        </button>
                         <button mat-menu-item>
+                            <mat-icon>security</mat-icon>
+                            <span>Change post visibility</span>
+                        </button>
+                        <button *ngIf="!post.is_owned" (click)="openPostReportDialog(post.id)" mat-menu-item>
                             <mat-icon>report</mat-icon>
                             <span>Report this post</span>
                         </button>
@@ -331,11 +331,11 @@
                             <mat-icon>create</mat-icon>
                             <span>Edit</span>
                         </button>
-                        <button *ngIf="post.is_owned" mat-menu-item>
-                            <mat-icon>security</mat-icon>
-                            <span>Change privacy</span>
-                        </button>
                         <button mat-menu-item>
+                            <mat-icon>security</mat-icon>
+                            <span>Change post visibily</span>
+                        </button>
+                        <button *ngIf="!post.is_owned" (click)="openPostReportDialog(post.id)" mat-menu-item>
                             <mat-icon>report</mat-icon>
                             <span>Report this post</span>
                         </button>

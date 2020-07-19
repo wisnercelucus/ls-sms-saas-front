@@ -21,11 +21,11 @@
                             <mat-icon>create</mat-icon>
                             <span>Edit</span>
                         </button>
-                        <button *ngIf="post.is_owned" mat-menu-item>
-                            <mat-icon>security</mat-icon>
-                            <span>Change privacy</span>
-                        </button>
                         <button mat-menu-item>
+                            <mat-icon>security</mat-icon>
+                            <span>Change post visibility</span>
+                        </button>
+                        <button *ngIf="!post.is_owned" (click)="openPostReportDialog(post.id)" mat-menu-item>
                             <mat-icon>report</mat-icon>
                             <span>Report this post</span>
                         </button>
@@ -186,8 +186,7 @@
                         <input type="hidden" [ngModel] = "post.id" name='object_id' [value]="post.id">
                         <mat-form-field class="comment-form-content-box">
                             <textarea id="{{'comment-content' + post.id}}" (click)="rezizable('comment-content' + post.id)" name="content" ngModel matInput placeholder="Leave a comment..."></textarea>    
-                        </mat-form-field>  
-                            <!--<textarea class="comment-input" placeholder="Ex. It makes me feel..." name="commentValue" #commentInput></textarea>-->
+                        </mat-form-field>
 
                         <button class="post-comment" type="submit"
                              matRipple
@@ -318,11 +317,11 @@
                             <mat-icon>create</mat-icon>
                             <span>Edit</span>
                         </button>
-                        <button *ngIf="post.is_owned" mat-menu-item>
-                            <mat-icon>security</mat-icon>
-                            <span>Change privacy</span>
-                        </button>
                         <button mat-menu-item>
+                            <mat-icon>security</mat-icon>
+                            <span>Change post visibility</span>
+                        </button>
+                        <button *ngIf="!post.is_owned" (click)="openPostReportDialog(post.id)" mat-menu-item>
                             <mat-icon>report</mat-icon>
                             <span>Report this post</span>
                         </button>

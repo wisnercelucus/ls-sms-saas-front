@@ -23,6 +23,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PostShareModalFormComponent } from 'src/app/shared/post-share-modal-form/post-share-modal-form.component';
 import { DeleteConfirmDialogComponent } from 'src/app/shared/delete-confirm-dialog/delete-confirm-dialog.component';
 import { PublishModalFormComponent } from 'src/app/shared/publish-modal-form/publish-modal-form.component';
+import { PostReportDialogComponent } from 'src/app/shared/post-report-dialog/post-report-dialog.component';
 
 @Component({
   selector: 'app-feed-timeline',
@@ -78,7 +79,9 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   tenantUrl:string;
   deletePostSub: Subscription;
 
-  constructor(public dialog: MatDialog, public dialog_: MatDialog, 
+  constructor(public dialog: MatDialog, 
+              public dialog_: MatDialog, 
+              public dialog__:MatDialog,
               private feedService:FeedService, 
               private route:ActivatedRoute, 
               private router:Router, 
@@ -87,18 +90,6 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
      
     }
 
-/*
-  initiateVoteForm(){
-    let postId:number;
-    let fb: FormBuilder;
-    let option:any;
-
-    this.voteForm= new FormGroup({
-      'question': new FormControl(postId, Validators.required),
-      'option': new FormControl(option, Validators.required)
-    })
-
-  }*/
 
   getUserData(username:string){   
     if(username){
@@ -357,4 +348,13 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
     });
   }
 
-}
+  openPostReportDialog(postId:number): void {
+
+    const dialogRef = this.dialog__.open(PostReportDialogComponent, {
+      width: '500px',
+      data:{
+        idPostToReport:postId
+      }
+    });
+  }
+} 

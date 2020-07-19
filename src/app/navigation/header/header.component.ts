@@ -10,7 +10,6 @@ import * as fromApp from '../../store/app.reducer';
 import { map } from 'rxjs/operators';
 import * as AuthActions from '../../auth/store/auth.actions';
 import { FeedService } from 'src/app/feed/feed.service';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-header',
@@ -70,10 +69,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
           user.token
         );
 
-        //this.getLogingUser();
         this.Logsubsciption = this.userService.getMyProfile().subscribe(
           res=>{
-            //console.log(res);
           }
         );
 
@@ -90,10 +87,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngAfterViewInit(){
-    if(!this.loginUser){
-
-      this.getLogingUser()
-    }
   }
 
   getLogingUser(){
@@ -110,7 +103,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onLogout(){
-    //this.authService.logout();
     this.store.dispatch(new AuthActions.Logout())
   }
   
