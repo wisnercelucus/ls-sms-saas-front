@@ -15,8 +15,13 @@ export class UsersListComponent implements OnInit, OnDestroy {
   usersListSub:Subscription;
   followUserSub:Subscription;
   tenantUrlSub:Subscription;
+  followersSub:Subscription;
+  followingUserSub:Subscription;
+
   loginUser:User;
   tenantUrl:string;
+  followersList:User[]
+  followingList:User[]
 
   constructor(private usersService:UsersService, private appService:AppService) { }
 
@@ -35,6 +40,13 @@ export class UsersListComponent implements OnInit, OnDestroy {
     if(this.tenantUrlSub){
       this.tenantUrlSub.unsubscribe()
     }
+    if(this.followersSub){
+      this.followUserSub.unsubscribe()
+    }
+
+    if(this.followingUserSub){
+      this.followingUserSub.unsubscribe()
+    }
   }
 
   ngOnInit(): void {
@@ -44,6 +56,9 @@ export class UsersListComponent implements OnInit, OnDestroy {
         this.usersList = res;
       }
     )
+
+    this.onGetFollowers();
+    this.onGetFollowing();
 
     this.loginUserSub = this.usersService.loginUser.subscribe(
       user=>{
@@ -72,5 +87,27 @@ export class UsersListComponent implements OnInit, OnDestroy {
       }
     )
   }
+
+  onGetFollowers(){
+    this.followUserSub = this.usersService.getFollowers()
+    .subscribe(
+      res=>{
+        this.followersList = res;
+      }
+      
+    )
+  }
+
+
+  onGetFollowing(){
+    this.followingUserSub = this.usersService.getFollowing()
+    .subscribe(
+      res=>{
+        this.followingList = res;
+      }
+      
+    )
+  }
+  
 
 }

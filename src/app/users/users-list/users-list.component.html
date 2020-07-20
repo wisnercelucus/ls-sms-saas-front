@@ -29,11 +29,11 @@
                 </div>
             </mat-tab>
             <mat-tab *ngIf="loginUser" label="{{ loginUser.following.length }} Following">
-                <div *ngIf="loginUser && loginUser.following">
-                    <mat-card class="user-detail" *ngFor="let user of loginUser.following">
+                <div *ngIf="loginUser && followingList">
+                    <mat-card class="user-detail" *ngFor="let user of followingList">
                         <mat-card-header>
                             <div mat-card-avatar>
-                                <img class="avatar-xs-card" [src]="user.image? tenantUrl + user.image : user.default_image" alt="{{user.username}}">
+                                <img class="avatar-xs-card" [src]="user.image? user.image : user.default_image" alt="{{user.username}}">
                             </div>
                             <mat-card-title><a class="user-link" [routerLink]="['/accounts', user.username]">{{ user.first_name + ' ' + user.last_name}}</a></mat-card-title>
                             <mat-card-subtitle>{{user.user_profile.title}}</mat-card-subtitle>
@@ -50,11 +50,11 @@
                 </div>
             </mat-tab>
                 <mat-tab *ngIf="loginUser" label="{{ loginUser.followers.length }} Followers">
-                <div *ngIf="loginUser && loginUser.followers">
-                    <mat-card class="user-detail" *ngFor="let user of loginUser.followers">
+                <div *ngIf="loginUser && followersList">
+                    <mat-card class="user-detail" *ngFor="let user of followersList">
                         <mat-card-header>
                             <div mat-card-avatar>
-                                <img class="avatar-xs-card" [src]="user.image? tenantUrl + user.image: user.default_image" alt="{{user.username}}">
+                                <img class="avatar-xs-card" [src]="user.image? user.image: user.default_image" alt="{{user.username}}">
                             </div>
                             <mat-card-title><a class="user-link" [routerLink]="['/accounts', user.username]">{{ user.first_name + ' ' + user.last_name}}</a></mat-card-title>
                             <mat-card-subtitle>{{user.user_profile.title}}</mat-card-subtitle>

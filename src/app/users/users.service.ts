@@ -117,6 +117,46 @@ export class UsersService {
    )
   }
 
+
+  getFollowers(){
+
+    if(!this.instance){
+      return;
+    }
+
+     return this.http.get<User[]>(this.tenantUrl + '/accounts/api/followers/').pipe(
+      tap(
+        (res:User[])=>{
+            //console.log(res)
+        },
+
+        (err:HttpErrorResponse)=> {
+          this.handleError(err);
+        }
+      )  
+   )
+  }
+
+
+  getFollowing(){
+
+    if(!this.instance){
+      return;
+    }
+
+     return this.http.get<User[]>(this.tenantUrl + '/accounts/api/following/').pipe(
+      tap(
+        (res:User[])=>{
+            //console.log(res)
+        },
+
+        (err:HttpErrorResponse)=> {
+          this.handleError(err);
+        }
+      )  
+   )
+  }
+
   changePassword(oldPassword:string, newPassword:string){
     if(!this.instance){
       return;
