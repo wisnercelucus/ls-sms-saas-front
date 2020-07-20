@@ -42,7 +42,6 @@ export class UsersListComponent implements OnInit, OnDestroy {
     this.usersListSub = this.usersService.getUsersList().subscribe(
       res=>{
         this.usersList = res;
-        console.log(this.usersList)
       }
     )
 
@@ -51,6 +50,12 @@ export class UsersListComponent implements OnInit, OnDestroy {
         this.loginUser = user
       }
         
+    )
+
+    this.tenantUrlSub = this.appService.TENANT_URL.subscribe(
+      res => {
+        this.tenantUrl = res;
+      }
     )
   }
 
