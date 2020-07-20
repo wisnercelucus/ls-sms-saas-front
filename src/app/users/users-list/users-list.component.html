@@ -5,26 +5,72 @@
     </div>
 
     <div class="main-content">
-        <div *ngIf="usersList">
 
-            <h3>All users: {{ usersList.length }}</h3>
-        
-            <mat-card class="user-detail" *ngFor="let user of usersList">
-                <mat-card-header>
-                    <div mat-card-avatar>
-                        <img class="avatar-xs-card" [src]="user.image? user.image: user.default_image" alt="{{user.username}}">
-                    </div>
-                    <mat-card-title><a class="user-link" [routerLink]="['/accounts', user.username]">{{ user.first_name + ' ' + user.last_name}}</a></mat-card-title>
-                    <mat-card-subtitle>Developer</mat-card-subtitle>
-                </mat-card-header>
+        <mat-tab-group>
+            <mat-tab *ngIf="usersList" label="All users: {{ usersList.length }}"> 
+
+                <div *ngIf="usersList">
+
+                    <mat-card class="user-detail" *ngFor="let user of usersList">
+                        <mat-card-header>
+                            <div mat-card-avatar>
+                                <img class="avatar-xs-card" [src]="user.image? user.image: user.default_image" alt="{{user.username}}">
+                            </div>
+                            <mat-card-title><a class="user-link" [routerLink]="['/accounts', user.username]">{{ user.first_name + ' ' + user.last_name}}</a></mat-card-title>
+                            <mat-card-subtitle>{{user.user_profile.title}}</mat-card-subtitle>
+                        </mat-card-header>
+                        
+                        <mat-card-actions *ngIf="loginUser">
+                            <a *ngIf="user.username != loginUser.username" mat-raised-button id="{{'user-' + user.id }}" class="follow-btn" (click)="onFollowUser(user.username, 'user-' + user.id)"> {{ user.is_followed ? "Following" : "Follow"}}</a>
+                        </mat-card-actions>
+            
+                    </mat-card>
+
+                </div>
+            </mat-tab>
+            <mat-tab label="Following">
+                <div *ngIf="loginUser && loginUser.following">
+
+                    <mat-card class="user-detail" *ngFor="let user of loginUser.following">
+                        <mat-card-header>
+                            <div mat-card-avatar>
+                                <img class="avatar-xs-card" [src]="user.image? user.image: user.default_image" alt="{{user.username}}">
+                            </div>
+                            <mat-card-title><a class="user-link" [routerLink]="['/accounts', user.username]">{{ user.first_name + ' ' + user.last_name}}</a></mat-card-title>
+                            <mat-card-subtitle>{{user.user_profile.title}}</mat-card-subtitle>
+                        </mat-card-header>
+                        
+                        <mat-card-actions *ngIf="loginUser">
+                            <a *ngIf="user.username != loginUser.username" mat-raised-button id="{{'user-' + user.id }}" class="follow-btn" (click)="onFollowUser(user.username, 'user-' + user.id)"> {{ user.is_followed ? "Following" : "Follow"}}</a>
+                        </mat-card-actions>
                 
-                <mat-card-actions *ngIf="loginUser">
-                    <a *ngIf="user.username != loginUser.username" mat-raised-button id="{{'user-' + user.id }}" class="follow-btn" (click)="onFollowUser(user.username, 'user-' + user.id)"> {{ user.is_followed ? "Following" : "Follow"}}</a>
-                </mat-card-actions>
-    
-            </mat-card>
-    
-        </div>
+                    </mat-card>
+
+                    <p *ngIf="loginUser && !loginUser.following">You are not following any user for now.</p>
+                
+                </div>
+            </mat-tab>
+                <mat-tab label="Followers">
+                <div *ngIf="loginUser && loginUser.followers">
+                    <mat-card class="user-detail" *ngFor="let user of loginUser.followers">
+                        <mat-card-header>
+                            <div mat-card-avatar>
+                                <img class="avatar-xs-card" [src]="user.image? user.image: user.default_image" alt="{{user.username}}">
+                            </div>
+                            <mat-card-title><a class="user-link" [routerLink]="['/accounts', user.username]">{{ user.first_name + ' ' + user.last_name}}</a></mat-card-title>
+                            <mat-card-subtitle>{{user.user_profile.title}}</mat-card-subtitle>
+                        </mat-card-header>
+                        
+                        <mat-card-actions *ngIf="loginUser">
+                            <a *ngIf="user.username != loginUser.username" mat-raised-button id="{{'user-' + user.id }}" class="follow-btn" (click)="onFollowUser(user.username, 'user-' + user.id)"> {{ user.is_followed ? "Following" : "Follow"}}</a>
+                        </mat-card-actions>
+                
+                    </mat-card>
+
+                    <p *ngIf="loginUser && !loginUser.followers">You have no followers for now.</p>
+                </div>
+            </mat-tab>
+          </mat-tab-group>
     </div>
 
     <div class="side-profile-menu-right">
