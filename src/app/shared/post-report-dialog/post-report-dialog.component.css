@@ -1,0 +1,17 @@
+.form-row{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-row .checkbox{
+    margin-bottom: 10px;
+}
+
+.post-full-width{
+    width: 100%;
+}
+
+.publish{
+    background-color: dodgerblue;
+    color:white;
+}

@@ -1,155 +1,29 @@
-    <h1 mat-dialog-title *ngIf="loginUser">Hi, {{loginUser.username}}</h1>
+    <h1 mat-dialog-title>Hi, {{loginUser.username}}. <br> Help us keep our community clean and safe for everyone.</h1>
+    <p>Please tell us why we need to care about that post you are reporting. You report will be confidential.</p>
     <div mat-dialog-content>
-        <div class="publish-form">
-          <mat-card *ngIf="!editMode_">
+        <div class="post-report-form">
+          <mat-card>
             <mat-card-content>
-                <mat-tab-group>
-                    <mat-tab label="Say something?">
-                        <form enctype="multipart/form-data" class="post-form" (ngSubmit)="onSubmitPost(f)" #f="ngForm" #form>
-                            <mat-form-field class="post-full-width">
-                                <mat-label>Post something to your timeline</mat-label>
-                                <textarea id="post-content" onclick="rezizable('post-content')" class="post-content" name="content" ngModel matInput placeholder="Ex. It makes me feel..."></textarea>
-                            </mat-form-field>
-                        <input style="display:none" (change)="onFileSelected($event)" name="image" type="file" accept="image/x-png,image/gif,image/jpeg" #imageInput>
-                        <div class="form-group">
-                            <button (click)="imageInput.click()" class="file-choose" mat-raised-button type="button"><span class="select-image-btn material-icons">insert_photo</span>Add photo(s)</button>
-                            <button class="file-choose" mat-raised-button type="button"><span class="material-icons">attach_file</span>Attach file(s)</button>
+                        <form class="post-form" (ngSubmit)="onSubmitPostReport(f)" #f="ngForm" #form>
+                        <div class="form-row">
+                            <mat-checkbox  class="checkbox" ngModel name="racism" required>Racism</mat-checkbox>
+                            <mat-checkbox  class="checkbox" ngModel name="bullying" required>Bulliying</mat-checkbox>
+                            <mat-checkbox  class="checkbox" ngModel name="violence" required>Violence</mat-checkbox>
+                            <mat-checkbox  class="checkbox" ngModel name="unauthorized_publish" required>Unauthorized publication</mat-checkbox>
+                            <mat-checkbox  class="checkbox" ngModel name="hate_speech" required>Hate speech</mat-checkbox>
+                            <mat-checkbox  class="checkbox" ngModel name="nudity_or_sexual_content" required>Nudity/Sexual content</mat-checkbox>
+                            <mat-checkbox  class="checkbox" ngModel name="harassment" required>Harassment</mat-checkbox>
+                            <mat-checkbox  class="checkbox" ngModel name="fake_news" required>Fake news</mat-checkbox>
+                            <mat-checkbox  class="checkbox" ngModel name="spam" required>Spam</mat-checkbox>
+                            <mat-checkbox  class="checkbox" ngModel name="something_else" required>Somethin else</mat-checkbox>
                         </div>
-                        <div class="selected-image-preview">
-                                <img class="imagepreview" *ngIf="imagePreviewUrl" [src] = "imagePreviewUrl">
-                        </div>
-                            <button class="publish" mat-raised-button type="submit">Publish</button>
-                        </form>
-                    </mat-tab>
-                    <mat-tab label="Poll"> 
-                        <form class="poll-form" 
-                        [formGroup]="pollForm"
-                        (ngSubmit)="onSubmit()"
-                        >
-                            <mat-form-field class="poll-full-width">
-
-                                <mat-label>Ask a question?</mat-label>
-                                <textarea matInput 
-                                id="poll-question" onclick="rezizable('poll-question')"
-                                formControlName="question" 
-                                placeholder="Ex. what best between...?">
-                                </textarea>
-            
-                            </mat-form-field>
-
-                            <mat-form-field class="poll-full-width">
-                                <mat-label>Open until</mat-label>
-                                <input  matInput [matDatepicker]="picker1" formControlName="open_until">
-                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                                <mat-datepicker #picker1></mat-datepicker>
-                            </mat-form-field>
-
-                            <mat-form-field class="poll-full-width">
-                                <mat-label>Option</mat-label>
-                                <input matInput 
-                                    formControlName="option1" 
-                                    placeholder="Ex. Python">
-                            </mat-form-field>
-
-                            <mat-form-field class="poll-full-width">
-                                <mat-label>Option</mat-label>
-                                <input matInput
-                                    formControlName="option2"
-                                    placeholder="Ex. PHP">
-                            </mat-form-field>
-
-                            <div class="options-added" formArrayName="optionsAdded">
-                                <div class="form-group" 
-                                *ngFor="let optionCtrl of controls; let i = index" 
-                                [formGroupName]="i"
-                                >
-                                <mat-form-field class="poll-full-width">
-                                    <mat-label>Option</mat-label>
-                                    <input matInput class="inputAdded"
-                                        formControlName="option"
-                                        placeholder="Ex. PHP">
-                                </mat-form-field>
-                                <button class="option-remove-btn"
-                                type="button" 
-                                mat-raised-button
-                                (click)="onRemoveOption(i)"
-                                ><fa-icon [icon]="faMinusSquare"></fa-icon> Remove</button>
-                                </div>
-                            </div>
-
-                            <button 
-                                class="add-option" 
-                                mat-raised-button 
-                                type="button"
-                                (click)="onAddOption()"
-                                ><fa-icon [icon]="faPlus"></fa-icon> Add option</button>
-                            
-                            <button class="publish" mat-raised-button type="submit">Ask</button>
-                        </form>
-                    </mat-tab>
-                </mat-tab-group>
-            </mat-card-content>
-          </mat-card>
-
-          <mat-card *ngIf="editMode_">
-                <form *ngIf="postToEdit && !postToEdit.poll" enctype="multipart/form-data" class="post-form" (ngSubmit)="onEditPost(f1)" #f1="ngForm" #form>
-                    <mat-form-field class="post-full-width">
-                        <mat-label>Update post</mat-label>
-                        <textarea *ngIf="!postToEdit.parent" id="post-content" onclick="rezizable('post-content')" class="post-content" name="content" [(ngModel)] ="postToEdit.content" matInput placeholder="Ex. It makes me feel..."></textarea>
-                        <textarea *ngIf="postToEdit.parent" id="post-content" onclick="rezizable('post-content')" class="post-content" name="new_content" [(ngModel)] ="postToEdit.new_content" matInput placeholder="Ex. It makes me feel..."></textarea>
+                        <mat-form-field class="post-full-width">
+                                <mat-label>Tell us more</mat-label>
+                                <textarea id="post-report-content" onclick="rezizable('post-report-content')" class="post-content" name="detail" ngModel matInput placeholder="Ex. It appears to me that..."></textarea>
                         </mat-form-field>
-                        <input [ngModel]="postToEdit.id" name="post_id" type="hidden">
-                        <input style="display:none" (change)="onFileSelected($event)" name="image" type="file" accept="image/x-png,image/gif,image/jpeg" #imageInput>
-                    <div class="form-group">
-                        <button (click)="imageInput.click()" class="file-choose" mat-raised-button type="button"><span class="select-image-btn material-icons">insert_photo</span>Change photo(s)</button>
-                        <button class="file-choose" mat-raised-button type="button"><span class="material-icons">attach_file</span>Attach file(s)</button>
-                    </div>
-
-                    <div class="selected-image-preview">
-                            <img class="imagepreview" *ngIf="imagePreviewUrl" [src] = "imagePreviewUrl">
-                    </div>
-
-                        <button class="publish" mat-raised-button type="submit">Update</button>
-                </form>
-
-                <div class="current-image" *ngIf="postToEdit.image">
-                        <h5>You will replace this image if you add a new one.</h5>
-                        <img mat-card-image [src]="postToEdit.image" alt="{{postToEdit.id}}">
-                    </div>
-
-                        <form class="poll-form" 
-                        (ngSubmit)="onUpdatePoll(fp)" #fp="ngForm"
-                        *ngIf="postToEdit && postToEdit.poll && postToEdit.poll.is_open"
-                        >
-                                <p>When your poll is running, you can only update your question or deadline to not mislead voters. 
-                                We suggest that updates only bring more detail (context to the poll). 
-                                If you need to drastically change the poll question, consider delete the running one and create a new poll.
-                                </p>
-                                <mat-form-field class="poll-full-width">
-
-                                    <mat-label>Update a poll question?</mat-label>
-                                    <textarea matInput 
-                                    id="poll-question" onclick="rezizable('poll-question')"
-                                    name="question"
-                                    [(ngModel)] = "postToEdit.poll.question" 
-                                    placeholder="Ex. what best between...?">
-                                    </textarea>
-                
-                                </mat-form-field>
-
-                                <mat-form-field class="poll-full-width">
-                                    <mat-label>Open until</mat-label>
-                                    <input  matInput [matDatepicker]="picker1" name="open_until" [(ngModel)]="postToEdit.poll.open_until">
-                                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker1></mat-datepicker>
-                                </mat-form-field>
-                            
-                            <button class="publish" mat-raised-button type="submit">Update</button>
+                        <button class="publish" mat-raised-button type="submit">Report</button>
                         </form>
-                        <div class="not-editable-poll" *ngIf="postToEdit && postToEdit.poll && !postToEdit.poll.is_open">
-                            <p>Sorry, you can only edit poll that is open.</p>
-                        </div>
-
+            </mat-card-content>
           </mat-card>
         </div>
     </div>
