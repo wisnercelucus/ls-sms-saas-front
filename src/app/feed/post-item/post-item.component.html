@@ -1,6 +1,5 @@
-        <mat-card class="post-card" *ngIf="post">
-            
-            <span *ngIf="!post.parent">
+                
+            <span *ngIf="post && !post.parent">
                 
                 <mat-card-header>
                         <div mat-card-avatar class="card-header-image">
@@ -305,7 +304,7 @@
             </span>
 
 
-            <span *ngIf="post.parent">
+            <span *ngIf="post && post.parent">
                 <div class="post-share-detail">
                 <a (click)="getPost(post.id)">
                     <p><a class="user-link" (click)="getUserData(post.user.username)"><fa-icon [icon]="faShare"></fa-icon> {{ post.user.first_name + ' ' + post.user.last_name }}</a> &middot; {{post.timesince}}.</p>
@@ -611,5 +610,3 @@
                 </div>
                 </div>
             </span>
-
-        </mat-card>

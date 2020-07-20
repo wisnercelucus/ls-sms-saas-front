@@ -23,6 +23,7 @@ import { NgForm } from '@angular/forms';
 import { PostShareModalFormComponent } from 'src/app/shared/post-share-modal-form/post-share-modal-form.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmDialogComponent } from 'src/app/shared/delete-confirm-dialog/delete-confirm-dialog.component';
+import { PublishModalFormComponent } from 'src/app/shared/publish-modal-form/publish-modal-form.component';
 
 @Component({
   selector: 'app-post-item',
@@ -286,4 +287,16 @@ export class PostItemComponent implements OnInit {
    this.subscrition = dialogRef.afterClosed().subscribe(result => {
    });
  }
+
+ openDialog_(post): void {
+  const dialogRef = this.dialog.open(PublishModalFormComponent, {
+    width: '500px',
+    data:{
+      post:post,
+      editMode_:true
+    }
+  });
+}
+
+
 }
