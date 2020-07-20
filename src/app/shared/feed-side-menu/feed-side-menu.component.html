@@ -4,10 +4,8 @@
                 <img class="avatar-xs-card" [src]="loginUser.image? loginUser.image : loginUser.default_image" alt="{{loginUser.first_name + ' ' + loginUser.last_name + ' profile picture'}}">
             </div>
             <mat-card-title *ngIf="loginUser">{{ loginUser.first_name + ' ' + loginUser.last_name }}</mat-card-title>
-                    <mat-card-subtitle class="user-title" *ngIf="loginUser.user_profile.is_student">Student </mat-card-subtitle>
-                    <mat-card-subtitle class="user-title" *ngIf="loginUser.user_profile.is_teacher">Teacher </mat-card-subtitle>
-                    <mat-card-subtitle class="user-title" *ngIf="loginUser.user_profile.is_school_admin">System administrator </mat-card-subtitle>
-                    <mat-card-subtitle class="user-title" *ngIf="loginUser.user_profile.is_support_staff">Support staff </mat-card-subtitle>
+                    <mat-card-subtitle class="user-title" *ngIf="loginUser.user_profile.title">{{loginUser.user_profile.title}}</mat-card-subtitle>
+
         </mat-card-header>
 
         <mat-card-content>

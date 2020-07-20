@@ -7,10 +7,8 @@
                         </div>
                     <mat-card-title><a class="user-link" (click)="getUserData(post.user.username)">{{ post.user.first_name + ' ' + post.user.last_name }}</a></mat-card-title>
                     
-                    <mat-card-subtitle class="user-title" *ngIf="post.user.user_profile.is_student">Student &middot; {{ post.timesince}}</mat-card-subtitle>
-                    <mat-card-subtitle class="user-title" *ngIf="post.user.user_profile.is_teacher">Teacher &middot; {{ post.timesince}}</mat-card-subtitle>
-                    <mat-card-subtitle class="user-title" *ngIf="post.user.user_profile.is_school_admin">System administrator &middot; {{ post.timesince}}</mat-card-subtitle>
-                    <mat-card-subtitle class="user-title" *ngIf="post.user.user_profile.is_support_staff">Support staff &middot; {{ post.timesince}}</mat-card-subtitle>
+                    <mat-card-subtitle class="user-title" *ngIf="post.user.user_profile.title">{{post.user.user_profile.title}} &middot; {{ post.timesince}}</mat-card-subtitle>
+
 
                         <button class="post-sub-menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Post sub-menu">
                         <mat-icon>more_vert</mat-icon>
@@ -340,10 +338,7 @@
                             <img class="avatar-xs-card" [src]="post.parent.user.image ? post.parent.user.image : post.parent.user.default_image" alt="{{ 'Photo of ' + post.parent.user.username }}">
                         </div>
                     <mat-card-title><a class="user-link" (click)="getUserData(post.parent.user.username)">{{ post.parent.user.first_name + ' ' + post.parent.user.last_name }}</a></mat-card-title>
-                    <mat-card-subtitle class="user-title" *ngIf="post.parent.user.user_profile.is_student">Student &middot; {{ post.parent.timesince}}</mat-card-subtitle>
-                    <mat-card-subtitle class="user-title" *ngIf="post.parent.user.user_profile.is_teacher">Teacher &middot; {{ post.parent.timesince}}</mat-card-subtitle>
-                    <mat-card-subtitle class="user-title" *ngIf="post.parent.user.user_profile.is_school_admin">System administrator &middot; {{ post.parent.timesince}}</mat-card-subtitle>
-                    <mat-card-subtitle class="user-title" *ngIf="post.parent.user.user_profile.is_support_staff">Support staff &middot; {{ post.parent.timesince}}</mat-card-subtitle>
+                    <mat-card-subtitle class="user-title" *ngIf="post.parent.user.user_profile.title">{{post.parent.user.user_profile.title}} &middot; {{ post.parent.timesince}}</mat-card-subtitle>
                 </mat-card-header>
                 
                 <mat-card-content>

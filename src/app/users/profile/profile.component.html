@@ -11,10 +11,7 @@
                  <img *ngIf="user" class="user-profile-image" [src]="user.image? user.image : user.default_image">
                 <div class="user-profile-detail" *ngIf="user">
                     <h1 class="user-name" *ngIf="user" >{{ user.first_name + ' ' + user.last_name}}</h1>
-                    <h5 class="user-title" *ngIf="user.user_profile.is_student">Student</h5>
-                    <h5 class="user-title" *ngIf="user.user_profile.is_teacher">Teacher</h5>
-                    <h5 class="user-title" *ngIf="user.user_profile.is_school_admin">System administrator</h5>
-                    <h5 class="user-title" *ngIf="user.user_profile.is_support_staff">Support staff</h5>
+                    <h5 class="user-title" *ngIf="user.user_profile.title">{{user.user_profile.title}}</h5>
                 </div>
                 <div class="user-profile-bio" *ngIf="user">
 
