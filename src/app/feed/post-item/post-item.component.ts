@@ -23,6 +23,7 @@ import { NgForm } from '@angular/forms';
 import { PostShareModalFormComponent } from 'src/app/shared/post-share-modal-form/post-share-modal-form.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmDialogComponent } from 'src/app/shared/delete-confirm-dialog/delete-confirm-dialog.component';
+import { PublishModalFormComponent } from 'src/app/shared/publish-modal-form/publish-modal-form.component';
 import { PostReportDialogComponent } from 'src/app/shared/post-report-dialog/post-report-dialog.component';
 
 @Component({
@@ -75,7 +76,14 @@ export class PostItemComponent implements OnInit {
   deletePostSub: Subscription;
 
 
-  constructor(public dialog: MatDialog, public dialog_: MatDialog, public dialog__: MatDialog, private appService: AppService, private usersService: UsersService, private feedService:FeedService, private router:Router, private route: ActivatedRoute) { }
+  constructor(public dialog: MatDialog, 
+    public dialog_: MatDialog, 
+    public dialog__: MatDialog, 
+    private appService: AppService, 
+    private usersService: UsersService, 
+    private feedService:FeedService, 
+    private router:Router, 
+    private route: ActivatedRoute) { }
 
   getPost(id:number){
     this.router.navigate(['/post', id])
@@ -282,7 +290,17 @@ export class PostItemComponent implements OnInit {
 
  }
 
- openPostReportDialog(postId:number): void {
+ openDialog_(post): void {
+  const dialogRef = this.dialog_.open(PublishModalFormComponent, {
+    width: '500px',
+    data:{
+      post:post,
+      editMode_:true
+    }
+  })
+  }
+
+  openPostReportDialog(postId:number): void {
   const dialogRef = this.dialog__.open(PostReportDialogComponent, {
     width: '500px',
     data:{
@@ -290,7 +308,6 @@ export class PostItemComponent implements OnInit {
     }
   });
 }
-
 
 
 }

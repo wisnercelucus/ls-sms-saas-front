@@ -41,6 +41,7 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
   selectedFile:File = null;
   editMode_:boolean;
   postUpdateSub:Subscription;
+  updatePollSub:Subscription;
   imagePreviewUrl:string;
 
   constructor(
@@ -87,6 +88,9 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
   onSubmitPost(form:NgForm){
 
     if(!this.selectedFile){
+
+      //const links = this.linkifyService.find(form.value.content)
+
       const r  = this.linkifyService.linkify(form.value.content);
 
       let newContent = this.updateHashLinks(r);
@@ -187,6 +191,10 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
     if(this.postUpdateSub){
       this.postUpdateSub.unsubscribe()
     }
+
+    if(this.updatePollSub){
+      this.updatePollSub.unsubscribe()
+    }
   }
 
   onAddOption(){
@@ -255,8 +263,18 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
       );
     }
   }
+
   onUpdatePoll(fp:NgForm){
-      console.log(fp.value)
+
+      this.updatePollSub = this.feedService.updatePollQuestion(fp.value).subscribe(
+        res=>{
+          fp.reset()
+          this.dialogRef.close()
+        },
+        err=>{
+          //
+        }
+      )
   }
 
 }

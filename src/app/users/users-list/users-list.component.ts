@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { User } from '../user.model';
 import { UsersService } from '../users.service';
 import { Subscription } from 'rxjs';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-users-list',
@@ -13,10 +14,22 @@ export class UsersListComponent implements OnInit, OnDestroy {
   usersList:User[];
   usersListSub:Subscription;
   followUserSub:Subscription;
-  loginUser:User;
+  tenantUrlSub:Subscription;
+  followersSub:Subscription;
+  followingUserSub:Subscription;
+  usersListChangedSub:Subscription;
 
-  constructor(private usersService:UsersService) { }
+  loginUser:User;
+  tenantUrl:string;
+  followersList:User[]
+  followingList:User[]
+
+  constructor(private usersService:UsersService, private appService:AppService) { }
+
   ngOnDestroy(): void {
+    if(this.usersListChangedSub){
+      this.usersListChangedSub.unsubscribe()
+    }
     if(this.usersListSub){
       this.usersListSub.unsubscribe()
     }
@@ -28,6 +41,16 @@ export class UsersListComponent implements OnInit, OnDestroy {
     if(this.loginUserSub){
       this.loginUserSub.unsubscribe()
     }
+    if(this.tenantUrlSub){
+      this.tenantUrlSub.unsubscribe()
+    }
+    if(this.followersSub){
+      this.followUserSub.unsubscribe()
+    }
+
+    if(this.followingUserSub){
+      this.followingUserSub.unsubscribe()
+    }
   }
 
   ngOnInit(): void {
@@ -38,11 +61,32 @@ export class UsersListComponent implements OnInit, OnDestroy {
       }
     )
 
+    this.usersListChangedSub = this.usersService.usersListrefreshNeeded.subscribe(
+      res=>{
+        this.usersListSub = this.usersService.getUsersList().subscribe(
+          res=>{
+            this.usersList = res;
+          }
+        )
+        this.onGetFollowers();
+        this.onGetFollowing();        
+      }
+    )
+
+    this.onGetFollowers();
+    this.onGetFollowing();
+
     this.loginUserSub = this.usersService.loginUser.subscribe(
       user=>{
         this.loginUser = user
       }
         
+    )
+
+    this.tenantUrlSub = this.appService.TENANT_URL.subscribe(
+      res => {
+        this.tenantUrl = res;
+      }
     )
   }
 
@@ -59,5 +103,29 @@ export class UsersListComponent implements OnInit, OnDestroy {
       }
     )
   }
+
+  onGetFollowers(){
+    this.followUserSub = this.usersService.getFollowers()
+    .subscribe(
+      res=>{
+        this.followersList = res;
+      }
+      
+    )
+  }
+
+
+  onGetFollowing(){
+
+    this.followingUserSub = this.usersService.getFollowing()
+    .subscribe(
+      res=>{
+        this.followingList = res;
+
+      }
+      
+    )
+  }
+  
 
 }

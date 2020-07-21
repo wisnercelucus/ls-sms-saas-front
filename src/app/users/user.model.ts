@@ -26,7 +26,8 @@ export interface UserProfile{
     default_cover:string
     bio:string;
     birth_date:any;
-    moto:string
+    moto:string;
+    title:string;
 }
 
 export interface User{

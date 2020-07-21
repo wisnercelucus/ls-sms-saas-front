@@ -4,7 +4,9 @@
     </div>
 
     <div class="main-content" *ngIf="post">
-          <app-post-item [post]="post"></app-post-item> 
+        <mat-card class="post-card">
+            <app-post-item [post]="post"></app-post-item> 
+        </mat-card>   
     </div>
 
     <div class="side-profile-menu-right">
