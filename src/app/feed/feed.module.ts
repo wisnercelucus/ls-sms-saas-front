@@ -8,6 +8,7 @@ import { NgxLinkifyjsModule } from 'ngx-linkifyjs';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { PostItemComponent } from './post-item/post-item.component';
 
+
 @NgModule({
     declarations:[
         FeedTimelineComponent,
@@ -20,7 +21,7 @@ import { PostItemComponent } from './post-item/post-item.component';
              SharedModule,
              CommonModule,
              RouterModule,
-             NgxLinkifyjsModule
+             NgxLinkifyjsModule,
             ],
     }
 )

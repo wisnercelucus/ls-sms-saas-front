@@ -11,9 +11,13 @@
                 <mat-tab-group>
                     <mat-tab label="Say something?">
                         <form enctype="multipart/form-data" class="post-form" (ngSubmit)="onSubmitPost(f)" #f="ngForm" #form>
+                            <div class="handle-emojis">
+                                <emoji-mart (emojiClick)="addEmoji($event)"></emoji-mart>
+                            </div>
+                               
                             <mat-form-field class="post-full-width">
                                 <mat-label>Post something to your timeline</mat-label>
-                                <textarea id="post-content" onclick="rezizable('post-content')" class="post-content" name="content" ngModel matInput placeholder="Ex. It makes me feel..."></textarea>
+                                <textarea id="post-content" onclick="rezizable('post-content')" class="post-content" name="content" ngModel matInput placeholder="Ex. It makes me feel..." #textarea></textarea>
                             </mat-form-field>
                         <input style="display:none" (change)="onFileSelected($event)" name="image" type="file" accept="image/x-png,image/gif,image/jpeg" #imageInput>
                         <div class="form-group">

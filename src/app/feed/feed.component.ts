@@ -21,6 +21,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   faPlus=faPlus;
   faMinusSquare=faMinusSquare;
   @ViewChild('form') form: ElementRef;
+  @ViewChild("textarea") textarea: ElementRef;
 
   postsSub:Subscription;
   postCreateSub:Subscription;
@@ -36,6 +37,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   selectedFile:File = null;
   imagePreviewUrl:string;
 
+  
   constructor(
     private feedService:FeedService, 
     private usersService:UsersService, 
@@ -192,6 +194,17 @@ export class FeedComponent implements OnInit, OnDestroy {
       reader.onload = (e:any)=>{
         this.imagePreviewUrl = e.target.result;
       }
+  }
+
+  addEmoji(event){
+    let el = <HTMLTextAreaElement>document.querySelector("#post-content")
+    if(!el.value){
+      el.value = event.emoji.native;
+    }else{
+      el.value = el.value  + " " + event.emoji.native;
+    }
+    
+    el.focus()
   }
 
 }

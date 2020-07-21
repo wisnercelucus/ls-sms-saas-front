@@ -38,6 +38,7 @@ import { FeedRoutingModule } from './feed/feed.routing';
 import { FeedModule } from './feed/feed.module';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,7 +80,7 @@ import { FeedModule } from './feed/feed.module';
     ForumModule,
     ForumRoutingModule,
     FeedRoutingModule,
-    FeedModule
+    FeedModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi:true}],
   bootstrap: [AppComponent]
