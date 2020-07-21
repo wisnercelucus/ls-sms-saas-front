@@ -135,7 +135,11 @@ ul li{
     margin: 0 auto;
 }
 
+.handle-emoji{
+    text-align: right;
+    margin-top: -18px;
 
+}
 
 @media screen and (min-width: 1490px)
 and (max-width: 1760px)
