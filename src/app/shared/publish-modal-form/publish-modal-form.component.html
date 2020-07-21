@@ -131,15 +131,15 @@
                                     <textarea matInput 
                                     id="poll-question" onclick="rezizable('poll-question')"
                                     name="question"
-                                    [(ngModel)] = "postToEdit.poll.question" 
+                                    [ngModel] = "postToEdit.poll.question" 
                                     placeholder="Ex. what best between...?">
                                     </textarea>
                 
                                 </mat-form-field>
-
+                                <input type="hidden" name="post_id" [ngModel]="postToEdit.id">
                                 <mat-form-field class="poll-full-width">
                                     <mat-label>Open until</mat-label>
-                                    <input  matInput [matDatepicker]="picker1" name="open_until" [(ngModel)]="postToEdit.poll.open_until">
+                                    <input  matInput [matDatepicker]="picker1" name="open_until" [ngModel]="postToEdit.poll.open_until">
                                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                                     <mat-datepicker #picker1></mat-datepicker>
                                 </mat-form-field>

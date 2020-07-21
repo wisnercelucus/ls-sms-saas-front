@@ -17,6 +17,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
   tenantUrlSub:Subscription;
   followersSub:Subscription;
   followingUserSub:Subscription;
+  usersListChangedSub:Subscription;
 
   loginUser:User;
   tenantUrl:string;
@@ -26,6 +27,9 @@ export class UsersListComponent implements OnInit, OnDestroy {
   constructor(private usersService:UsersService, private appService:AppService) { }
 
   ngOnDestroy(): void {
+    if(this.usersListChangedSub){
+      this.usersListChangedSub.unsubscribe()
+    }
     if(this.usersListSub){
       this.usersListSub.unsubscribe()
     }
@@ -54,6 +58,18 @@ export class UsersListComponent implements OnInit, OnDestroy {
     this.usersListSub = this.usersService.getUsersList().subscribe(
       res=>{
         this.usersList = res;
+      }
+    )
+
+    this.usersListChangedSub = this.usersService.usersListrefreshNeeded.subscribe(
+      res=>{
+        this.usersListSub = this.usersService.getUsersList().subscribe(
+          res=>{
+            this.usersList = res;
+          }
+        )
+        this.onGetFollowers();
+        this.onGetFollowing();        
       }
     )
 
@@ -100,10 +116,12 @@ export class UsersListComponent implements OnInit, OnDestroy {
 
 
   onGetFollowing(){
+
     this.followingUserSub = this.usersService.getFollowing()
     .subscribe(
       res=>{
         this.followingList = res;
+
       }
       
     )

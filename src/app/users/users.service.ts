@@ -4,6 +4,7 @@ import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http
 import { User } from './user.model';
 import { tap } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
+import { EventEmitter } from 'events';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class UsersService {
   
   loginUser = new BehaviorSubject<User>(null);
   usersList = new Subject<User[]>();
+  usersListrefreshNeeded = new Subject<void>();
 
   headers = new HttpHeaders({
     'Content-Type': 'application/json'
@@ -78,7 +80,7 @@ export class UsersService {
     return this.http.post<User[]>(this.tenantUrl + '/accounts/api/follow/', body).pipe(
       tap(
         (res:User[])=>{
-            //console.log(res)
+            this.usersListrefreshNeeded.next();
         },
 
         (err:HttpErrorResponse)=> {

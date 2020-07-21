@@ -55,7 +55,15 @@ export class PostReportDialogComponent implements OnInit, OnDestroy {
   }
 
   onSubmitPostReport(form:NgForm){
-      console.log(form.value)
+      this.postReportCreateSub = this.feedService.reportPost(form.value).subscribe(
+        res=>{
+          form.reset()
+          this.dialogRef.close()
+        },
+        err=>{
+          //Nothing
+        }
+      )
   }
 
 

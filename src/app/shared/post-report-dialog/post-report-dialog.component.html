@@ -17,6 +17,8 @@
                             <mat-checkbox  class="checkbox" ngModel name="spam" required>Spam</mat-checkbox>
                             <mat-checkbox  class="checkbox" ngModel name="something_else" required>Somethin else</mat-checkbox>
                         </div>
+                        <input type="hidden" [ngModel] ="post_id" name="post_id">
+                        
                         <mat-form-field class="post-full-width">
                                 <mat-label>Tell us more</mat-label>
                                 <textarea id="post-report-content" onclick="rezizable('post-report-content')" class="post-content" name="detail" ngModel matInput placeholder="Ex. It appears to me that..."></textarea>

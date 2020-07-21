@@ -28,8 +28,8 @@
 
                 </div>
             </mat-tab>
-            <mat-tab *ngIf="loginUser" label="{{ loginUser.following.length }} Following">
-                <div *ngIf="loginUser && followingList">
+            <mat-tab *ngIf="loginUser && followingList" label="{{ followingList.length }} Following">
+                <div>
                     <mat-card class="user-detail" *ngFor="let user of followingList">
                         <mat-card-header>
                             <div mat-card-avatar>
@@ -49,8 +49,8 @@
                 
                 </div>
             </mat-tab>
-                <mat-tab *ngIf="loginUser" label="{{ loginUser.followers.length }} Followers">
-                <div *ngIf="loginUser && followersList">
+                <mat-tab *ngIf="loginUser && followersList" label="{{ followersList.length }} Followers">
+                <div>
                     <mat-card class="user-detail" *ngFor="let user of followersList">
                         <mat-card-header>
                             <div mat-card-avatar>

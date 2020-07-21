@@ -186,6 +186,26 @@ export class FeedService {
       }
     }
 
+
+
+    updatePollQuestion(data:any){
+      const body = data;
+
+      if(this.tenantUrl){
+        return this.http.put<{status:string}>(this.tenantUrl + '/feed/api/poll/update/', body)
+        .pipe(
+            tap(p =>{
+              this._refreshNeeded.next()
+            },
+            err=>{
+              console.log(err)
+            }),
+          );
+        }else{
+        return;
+      }
+    }
+
     votePoll(data:any){
       const body = data;
 
@@ -223,6 +243,22 @@ export class FeedService {
         return this.http.post<{status:string}>(this.tenantUrl + '/feed/api/post/share/', body).pipe(
           tap(p =>{
             this._refreshNeeded.next();       
+          })
+        );
+      }else{
+        return;
+      }
+
+    }
+
+    reportPost(data:any){
+
+      const body = data;
+
+      if(this.tenantUrl){
+        return this.http.post<{status:string}>(this.tenantUrl + '/feed/api/post/report/create/', body).pipe(
+          tap(p =>{
+            //this._refreshNeeded.next();       
           })
         );
       }else{
