@@ -34,3 +34,24 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 #to review
 https://medium.com/engineering-on-the-incline/reloading-current-route-on-click-angular-5-1a1bfc740ab2
+
+#TODO
+##Feed
+
+Like comment endpoint call
+Finalize poll update
+Link preview
+Finalize post report
+Finalize change post visibility
+Refactor single post component
+Upload PDF document and show preview
+
+Next: Multiple file and pictures upload.
+
+##Profile
+Refactor user subtitle
+Zoom user profile photo
+Edit profile commnunication with end point.
+
+
+
