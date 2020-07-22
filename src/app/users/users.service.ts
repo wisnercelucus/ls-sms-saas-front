@@ -4,7 +4,6 @@ import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http
 import { User } from './user.model';
 import { tap } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
-import { EventEmitter } from 'events';
 
 @Injectable({
   providedIn: 'root'

@@ -9,7 +9,6 @@ import { faPlus, faMinusSquare
 import { NgForm } from '@angular/forms';
 import { FeedService } from 'src/app/feed/feed.service';
 import { User } from 'src/app/users/user.model';
-import { Post } from 'src/app/feed/post.model';
 
 interface DialogData{
   idPostToReport:number;

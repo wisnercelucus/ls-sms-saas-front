@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UsersService } from '../users.service';
-import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Subscription } from 'rxjs';
 
@@ -19,8 +18,8 @@ export class PasswordChangeComponent implements OnInit, OnDestroy {
   changePasswordSub:Subscription;
 
   constructor(private usersService:UsersService, 
-                  private authService:AuthService, 
-                  private router:Router) { }
+                  private authService:AuthService
+                  ) { }
 
   ngOnInit(): void {
   }

@@ -27,12 +27,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   instance:string;
   loginUser:User;
 
-  subscription: Subscription;
   userSubs: Subscription;
   loginUserSub:Subscription;
   testUserSub:Subscription;
   Logsubsciption:Subscription;
-  postsSub:Subscription;
+  //postsSub:Subscription;
 
   constructor(private router: Router, 
               private authService: AuthService, 
@@ -45,7 +44,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   getUserData(username:string){   
     if(username){
-      this.postsSub =  this.feedService.getUserPost(username).subscribe();
+      //this.postsSub =  this.feedService.getUserPost(username).subscribe();
       this.router.navigate(['/accounts', username])
     }
   }
@@ -86,9 +85,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   }
 
-  ngAfterViewInit(){
-  }
-
   getLogingUser(){
       this.loginUserSub = this.userService.getMyProfile().subscribe(
         user=>{
@@ -113,13 +109,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if(this.loginUserSub){
       this.loginUserSub.unsubscribe();
     }
+    /*
     if(this.postsSub){
       this.postsSub.unsubscribe();
     }
-
-    if(this.subscription){
-      this.subscription.unsubscribe();
-    }
+    */
 
     if(this.testUserSub){
       this.testUserSub.unsubscribe();

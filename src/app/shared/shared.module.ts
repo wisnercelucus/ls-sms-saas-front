@@ -17,7 +17,7 @@ import { DataTableRowHeaderComponent } from './data-table-row-header/data-table-
 import { PostShareModalFormComponent } from './post-share-modal-form/post-share-modal-form.component';
 import { DeleteConfirmDialogComponent } from './delete-confirm-dialog/delete-confirm-dialog.component';
 import { PostReportDialogComponent } from './post-report-dialog/post-report-dialog.component';
-import { PickerModule } from '@ctrl/ngx-emoji-mart';
+
 @NgModule({
     declarations:[
         AlertDialogComponent, 
@@ -40,8 +40,7 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
         FormsModule, 
         ReactiveFormsModule, 
         MaterialModule, 
-        FontAwesomeModule,
-        PickerModule 
+        FontAwesomeModule
     ],
 
     exports:[
@@ -59,8 +58,7 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
             UsersSuggestionsComponent,
             GroupsSuggestionsComponent,
             PublishModalFormComponent,
-            DataTableRowHeaderComponent,
-            PickerModule 
+            DataTableRowHeaderComponent
         ]
 }
 )

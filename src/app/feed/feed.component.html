@@ -13,18 +13,8 @@
                         <form enctype="multipart/form-data" class="post-form" (ngSubmit)="onSubmitPost(f)" #f="ngForm" #form>
                                 <mat-form-field class="post-full-width">
                                     <mat-label>Post something to your timeline</mat-label>
-                                    <textarea id="post-content-pr" onclick="rezizable('post-content-pr')" class="post-content" name="content" ngModel matInput placeholder="Ex. It makes me feel..." #textarea></textarea>
-                                </mat-form-field>
-                                <div class="handle-emoji">
-                                    <a class="emoji-menu" mat-button [matMenuTriggerFor]="menu">
-                                        <span class="material-icons">
-                                        sentiment_satisfied_alt
-                                        </span>
-                                    </a>
-                                    <mat-menu #menu="matMenu">
-                                        <emoji-mart (emojiClick)="addEmoji($event)" (click)="$event.stopPropagation();"></emoji-mart>
-                                    </mat-menu>
-                                </div>  
+                                    <textarea id="post-content-pr" onclick="rezizable('post-content-pr')" class="post-content" name="content" matInput placeholder="Ex. It makes me feel..." #textarea></textarea>
+                                </mat-form-field> 
                         <input style="display:none" (change)="onFileSelected($event)" name="image" type="file" accept="image/x-png,image/gif,image/jpeg" #imageInput>
                         <div class="form-group">
                             <button (click)="imageInput.click()" class="file-choose" mat-raised-button type="button"><span class="select-image-btn material-icons">insert_photo</span>Add photo(s)</button>

@@ -16,7 +16,7 @@ import { faBirthdayCake,
  faUserCircle, faUsers, faHome, faUser, faShare} from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { FeedService } from '../feed.service';
-import { Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AppService } from 'src/app/app.service';
 import { UsersService } from 'src/app/users/users.service';
 import { NgForm } from '@angular/forms';
@@ -33,7 +33,8 @@ import { PostReportDialogComponent } from 'src/app/shared/post-report-dialog/pos
 })
 export class PostItemComponent implements OnInit {
   @Input() post:Post;
-  loginUser:User;
+  @Input() loginUser:User;
+  @Input() tenantUrl:string;
 
   faBirthdayCake = faBirthdayCake;
   faMapMarker = faMapMarker;
@@ -54,7 +55,6 @@ export class PostItemComponent implements OnInit {
 
   postsSub:Subscription;
   createCommentSub:Subscription;
-  loginUserSub:Subscription;
   postLikeSub:Subscription;
   votePollSub:Subscription;
   changeVoteSub:Subscription;
@@ -68,18 +68,15 @@ export class PostItemComponent implements OnInit {
   radius: number;
   color: string;
   
-  tenantUrl:string;
+ 
   deletePostSub: Subscription;
 
 
   constructor(public dialog: MatDialog, 
     public dialog_: MatDialog, 
     public dialog__: MatDialog, 
-    private appService: AppService, 
-    private usersService: UsersService, 
     private feedService:FeedService, 
-    private router:Router, 
-    private route: ActivatedRoute) { }
+    private router:Router) { }
 
   getPost(id:number){
     this.router.navigate(['/post', id])
@@ -94,31 +91,6 @@ export class PostItemComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.router.routeReuseStrategy.shouldReuseRoute = (future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean => {
-      return false;
-     };
-
-    this.appService.TENANT_URL.subscribe(
-     url => {
-         this.tenantUrl = url;
-     }
-   )
-   this.getLogingUser();
- }
-
- getLogingUser(){
-   this.loginUserSub = this.usersService.loginUser.subscribe(
-     user=>{
-       this.loginUser = user;
-     }
-   );
-}
-
-
- ngAfterViewInit(){
-     if(!this.loginUser){
-       this.getLogingUser()
-     }
  }
 
   openDeleteConfirmDialog(post:Post): void {
@@ -165,9 +137,6 @@ export class PostItemComponent implements OnInit {
      this.changeVoteSub.unsubscribe()
    }
 
-   if(this.loginUserSub){
-     this.loginUserSub.unsubscribe()
-   }
  }
 
  submitComment(form:NgForm){

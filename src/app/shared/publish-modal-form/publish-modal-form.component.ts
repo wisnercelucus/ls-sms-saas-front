@@ -31,6 +31,8 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
   postCreateSub:Subscription;
   loginUserSub:Subscription;
   pollCreateSub:Subscription;
+  postUpdateSub:Subscription;
+  updatePollSub:Subscription;
 
   pollForm: FormGroup;
   editMode=false;
@@ -40,8 +42,7 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
 
   selectedFile:File = null;
   editMode_:boolean;
-  postUpdateSub:Subscription;
-  updatePollSub:Subscription;
+
   imagePreviewUrl:string;
 
   constructor(

@@ -29,6 +29,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   pollCreateSub:Subscription;
 
   pollForm: FormGroup;
+  postForm:FormGroup;
   editMode=false;
 
   loginUser:User;
@@ -48,6 +49,17 @@ export class FeedComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initForm();
     this.getLogingUser();
+    this.initiatePostForm();
+  }
+
+
+
+  initiatePostForm(){
+    this.postForm = new FormGroup({
+      content: new FormControl('', {
+        validators: [Validators.required]
+      }),
+    });
   }
 
 
@@ -91,7 +103,7 @@ export class FeedComponent implements OnInit, OnDestroy {
 
       this.postCreateSub = this.feedService.createPost(post).subscribe(
         res=>{
-          form.reset();
+          this.postForm.reset();
         }
       );
 
@@ -108,7 +120,7 @@ export class FeedComponent implements OnInit, OnDestroy {
 
       this.postCreateSub = this.feedService.createPost(fd).subscribe(
         res=>{
-          form.reset();
+          this.postForm.reset();
           this.imagePreviewUrl = "";
         },
         err=>{

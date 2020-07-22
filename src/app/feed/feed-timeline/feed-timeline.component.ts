@@ -31,6 +31,7 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
 
   tenantUrl:string;
   deletePostSub: Subscription;
+  tenantUrlSub:Subscription; 
 
   constructor(
               private feedService:FeedService, 
@@ -56,7 +57,7 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
       return false;
      };
     */
-     this.appService.TENANT_URL.subscribe(
+     this.tenantUrlSub =  this.appService.TENANT_URL.subscribe(
       url => {
           this.tenantUrl = url;
       }
@@ -130,6 +131,9 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
     }
     if(this.loginUserSub){
       this.loginUserSub.unsubscribe()
+    }
+    if(this.tenantUrlSub){
+      this.tenantUrlSub.unsubscribe()
     }
     
   }

@@ -7,7 +7,7 @@
     <div class="user-activities" *ngIf="dataSource">
         <mat-card class="post-card" *ngFor="let post of dataSource; let i = index">
             
-            <app-post-item [post]="post"></app-post-item> 
+            <app-post-item [post]="post" [loginUser]="loginUser" [tenantUrl]="tenantUrl"></app-post-item> 
 
         </mat-card>
      </div>

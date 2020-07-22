@@ -5,7 +5,7 @@
 
     <div class="main-content" *ngIf="post">
         <mat-card class="post-card">
-            <app-post-item [post]="post"></app-post-item> 
+            <app-post-item [post]="post" [loginUser]="loginUser" [tenantUrl]="tenantUrl"></app-post-item> 
         </mat-card>   
     </div>
 
