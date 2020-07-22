@@ -39,17 +39,13 @@ https://medium.com/engineering-on-the-incline/reloading-current-route-on-click-a
 ##Feed
 
 Like comment endpoint call
-Finalize poll update
-Link preview
-Finalize post report
-Finalize change post visibility
-Refactor single post component
-Upload PDF document and show preview
 
+Link preview
+Finalize change post visibility
+Upload PDF document and show preview
 Next: Multiple file and pictures upload.
 
 ##Profile
-Refactor user subtitle
 Zoom user profile photo
 Edit profile commnunication with end point.
 

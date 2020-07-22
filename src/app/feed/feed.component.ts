@@ -198,7 +198,8 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   addEmoji(event){
     let el = <HTMLTextAreaElement>document.querySelector("#post-content-pr")
-      el.value = el.value  + " " + event.emoji.native;
+      el.value = el.value  + " " + event.emoji.native + "  ";
+      console.log(el.parentElement)
       el.focus();
   }
 

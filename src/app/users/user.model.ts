@@ -28,6 +28,7 @@ export interface UserProfile{
     birth_date:any;
     moto:string;
     title:string;
+    birth_day:string;
 }
 
 export interface User{

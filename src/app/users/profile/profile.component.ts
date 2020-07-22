@@ -34,12 +34,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
   
   loginUser:User;
   user:User;
+
   loginUserSub:Subscription;
   userProfileSub:Subscription;
+  appServiceSub:Subscription;
+
   username:string;
   postList:Post[];
   tenantUrl:string;
-  appServiceSub:Subscription;
+  
   
   constructor(private userService:UsersService, private appService:AppService, private router:Router, private route:ActivatedRoute) { }
 

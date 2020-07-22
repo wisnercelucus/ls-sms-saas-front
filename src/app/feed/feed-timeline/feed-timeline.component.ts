@@ -3,10 +3,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Post } from 'src/app/feed/post.model';
 import { FeedService } from '../feed.service';
 import { Subscription } from 'rxjs';
-import {  Router, ActivatedRoute, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
+import {  Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { UsersService } from 'src/app/users/users.service';
 import { User } from 'src/app/users/user.model';
-import { NgForm } from '@angular/forms';
 import { AppService } from 'src/app/app.service';
 
 @Component({
@@ -25,8 +24,6 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   postsSub:Subscription;
   loginUserSub:Subscription;
 
-
- 
 
   username:string;
   
@@ -54,11 +51,11 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
+    /*
     this.router.routeReuseStrategy.shouldReuseRoute = (future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean => {
       return false;
      };
-
+    */
      this.appService.TENANT_URL.subscribe(
       url => {
           this.tenantUrl = url;
@@ -93,8 +90,6 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
     this.router.navigate(['/post', id])
   }
   
-
-
   getLogingUser(){
     this.loginUserSub = this.usersService.loginUser.subscribe(
       user=>{

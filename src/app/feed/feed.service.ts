@@ -68,6 +68,22 @@ export class FeedService {
 
    }
   
+
+   likeComment(comment_id:number){
+ 
+    if(this.tenantUrl){
+      return this.http.get(this.tenantUrl + '/feed/comments/api/'+ comment_id +'/like/').pipe(
+        tap(res=>{
+          this._refreshNeeded.next();
+        })
+      );
+    }else{
+      return;
+    }
+
+   }
+
+
   getUserPost(username:string){
 
     const headers = new HttpHeaders({

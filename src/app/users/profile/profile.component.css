@@ -123,7 +123,9 @@ ul li{
     margin-top: 10px;  
 }
 
-.user-profile-bio .birth-detail span{
+.user-profile-bio .birth-detail .provenance-detail,
+.user-profile-bio .birth-detail .birth-date-detail
+{
   margin-right: 30px;
   font-size: 15px;
   font-weight: 400;

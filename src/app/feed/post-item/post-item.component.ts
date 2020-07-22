@@ -52,17 +52,13 @@ export class PostItemComponent implements OnInit {
   faSpinner = faSpinner;
   faShare = faShare
 
-  feedSub:Subscription;
-  feedSub1:Subscription;
-  routerSubscription:Subscription;
   postsSub:Subscription;
   createCommentSub:Subscription;
   loginUserSub:Subscription;
   postLikeSub:Subscription;
   votePollSub:Subscription;
   changeVoteSub:Subscription;
-  subscrition:Subscription;
-  delDialogSubscription:Subscription;
+  likeCommentSub:Subscription;
   
   toggleCommentForm:false;
 
@@ -134,9 +130,6 @@ export class PostItemComponent implements OnInit {
         atPostDetail:true
       }
     });
-
-    this.delDialogSubscription = dialogRef_.afterClosed().subscribe(result => {
-    });
   }
 
 
@@ -146,12 +139,13 @@ export class PostItemComponent implements OnInit {
   this.router.navigate(['/feed'])
 }
  ngOnDestroy(){
-   if(this.feedSub){
-     this.feedSub.unsubscribe()
+   if(this.likeCommentSub){
+     this.likeCommentSub.unsubscribe();
    }
-   if(this.feedSub1){
-     this.feedSub1.unsubscribe()
-   }
+  if(this.postsSub){
+    this.postsSub.unsubscribe();
+  }
+
    if(this.createCommentSub){
      this.createCommentSub.unsubscribe()
    }
@@ -170,11 +164,9 @@ export class PostItemComponent implements OnInit {
    if(this.changeVoteSub){
      this.changeVoteSub.unsubscribe()
    }
-   if(this.subscrition){
-     this.subscrition.unsubscribe()
-   }
-   if(this.delDialogSubscription){
-    this.delDialogSubscription.unsubscribe()
+
+   if(this.loginUserSub){
+     this.loginUserSub.unsubscribe()
    }
  }
 
@@ -309,5 +301,13 @@ export class PostItemComponent implements OnInit {
   });
 }
 
+onLikeComment(id:number){
+  this.likeCommentSub = this.feedService.likeComment(id)
+  .subscribe(
+    res=>{
+      console.log(res)
+    }
+  )
+}
 
 }

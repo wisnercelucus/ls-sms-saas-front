@@ -15,9 +15,9 @@ export class UsersListComponent implements OnInit, OnDestroy {
   usersListSub:Subscription;
   followUserSub:Subscription;
   tenantUrlSub:Subscription;
-  followersSub:Subscription;
-  followingUserSub:Subscription;
+  followingListSub:Subscription;
   usersListChangedSub:Subscription;
+  followersListSub:Subscription;
 
   loginUser:User;
   tenantUrl:string;
@@ -44,12 +44,12 @@ export class UsersListComponent implements OnInit, OnDestroy {
     if(this.tenantUrlSub){
       this.tenantUrlSub.unsubscribe()
     }
-    if(this.followersSub){
-      this.followUserSub.unsubscribe()
+    if(this.followersListSub){
+      this.followersListSub.unsubscribe()
     }
 
-    if(this.followingUserSub){
-      this.followingUserSub.unsubscribe()
+    if(this.followingListSub){
+      this.followingListSub.unsubscribe()
     }
   }
 
@@ -105,7 +105,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
   }
 
   onGetFollowers(){
-    this.followUserSub = this.usersService.getFollowers()
+    this.followersListSub = this.usersService.getFollowers()
     .subscribe(
       res=>{
         this.followersList = res;
@@ -117,7 +117,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
 
   onGetFollowing(){
 
-    this.followingUserSub = this.usersService.getFollowing()
+    this.followingListSub = this.usersService.getFollowing()
     .subscribe(
       res=>{
         this.followingList = res;

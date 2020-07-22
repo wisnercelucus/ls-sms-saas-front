@@ -16,8 +16,8 @@
                 <div class="user-profile-bio" *ngIf="user">
 
                     <div class="birth-detail" >
-                        <span *ngIf="user.city || user.country"><fa-icon [icon]="faMapMarker"></fa-icon> From: <span *ngIf="user.city">{{user.city}},</span><span *ngIf="user.country">{{user.country}}</span></span>
-                        <span *ngIf="user.user_profile.birth_date"><fa-icon [icon]="faBirthdayCake"></fa-icon> Born: {{user.user_profile.birth_date}}</span>
+                        <span class="provenance-detail" *ngIf="user.city || user.country"><fa-icon [icon]="faMapMarker"></fa-icon> From: <span *ngIf="user.city">{{user.city + " "}},</span><span *ngIf="user.country">{{user.country}}</span></span>
+                        <span class="birth-date-detail" *ngIf="user.user_profile.birth_day"><fa-icon [icon]="faBirthdayCake"></fa-icon> Born: {{user.user_profile.birth_day}}</span>
                     </div>
 
                     <p class="description" *ngIf="user.user_profile.bio">{{user.user_profile.bio}}</p>
