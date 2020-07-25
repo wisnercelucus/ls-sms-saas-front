@@ -1,6 +1,10 @@
 import { User } from '../users/user.model';
 import { Poll } from './poll.model';
 
+export interface PostImage{
+    image:string;
+}
+
 export interface Post{
     id?:number;
     user?:User;
@@ -20,4 +24,5 @@ export interface Post{
     poll?:Poll;
     did_vote?:boolean;
     is_owned?: boolean;
+    images?:PostImage[];
 }

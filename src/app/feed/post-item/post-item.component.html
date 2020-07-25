@@ -152,9 +152,23 @@
                         </div>
 
                     </div>
-                    <a (click)="getPost(post.id)">
-                    <img mat-card-image *ngIf="post.image" [src]="post.image" alt="{{post.id}}">
-                    </a>
+                    <div class="image-handler" *ngIf="post.images">
+                        <div class="multiple-image-row" *ngIf="post.images.length == 1">
+                            <div class="single-column" *ngFor="let image of post.images">
+                                <a (click)="getPost(post.id)" >
+                                    <img mat-card-image [src]=" tenantUrl + image.image" alt="{{post.id}}">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="multiple-image-row" *ngIf="post.images.length > 1 && post.images.length < 3">
+                            <div class="two-image-column">
+                                <a (click)="getPost(post.id)"  *ngFor="let image of post.images">
+                                    <img [src]=" tenantUrl + image.image" alt="{{post.id}}">
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
                     <div class="post-stat" id="{{'post'+ post.id}}">
                         <span>{{ post.likes + ' ' }}Likes</span>
                         <span>{{ post.total_comments + ' ' }}Comments</span>

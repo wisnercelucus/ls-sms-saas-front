@@ -36,6 +36,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   username:string;
 
   selectedFile:File = null;
+  selectedFiles:File[];
   imagePreviewUrl:string;
 
   
@@ -92,14 +93,16 @@ export class FeedComponent implements OnInit, OnDestroy {
 }
 
   onSubmitPost(form:NgForm){
+    let has_image = false;
 
-    if(!this.selectedFile){
+    if(!this.selectedFiles){
+
       const r  = this.linkifyService.linkify(form.value.content);
 
       let newContent = this.updateHashLinks(r);
       newContent = this.updateUsernameLinks(newContent);
 
-      const post:Post = {content:newContent}
+      const post:any = {content:newContent, has_image:has_image}
 
       this.postCreateSub = this.feedService.createPost(post).subscribe(
         res=>{
@@ -109,15 +112,23 @@ export class FeedComponent implements OnInit, OnDestroy {
 
     }else{
       const fd = new FormData(this.form.nativeElement);
+      
+      if(!fd.get("content").toString()){
+        return;
+      }
       const r  = this.linkifyService.linkify(fd.get("content").toString())
       const content = this.updateHashLinks(r);
 
       const newContent = this.updateUsernameLinks(content);
 
       fd.set("content", newContent);
-
-      fd.append('image', this.selectedFile.name);
-
+      
+      
+      for(let f of this.selectedFiles){
+        fd.append('image', f.name);
+      }      
+      
+      
       this.postCreateSub = this.feedService.createPost(fd).subscribe(
         res=>{
           this.postForm.reset();
@@ -200,18 +211,21 @@ export class FeedComponent implements OnInit, OnDestroy {
   }
 
   onFileSelected(event:any){
-      this.selectedFile = <File>event.target.files[0];
-      let reader = new FileReader()
+      
+      //this.selectedFile = <File>event.target.files[0];
+      this.selectedFiles = event.target.files
+      console.log(this.selectedFiles)
+      /*let reader = new FileReader()
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (e:any)=>{
         this.imagePreviewUrl = e.target.result;
-      }
+      }*/
   }
 
   addEmoji(event){
     let el = <HTMLTextAreaElement>document.querySelector("#post-content-pr")
       el.value = el.value  + " " + event.emoji.native + "  ";
-      console.log(el.parentElement)
+      //console.log(el.parentElement)
       el.focus();
   }
 

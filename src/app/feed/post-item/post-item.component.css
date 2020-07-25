@@ -8,6 +8,43 @@
     margin-bottom: 20px !important;
 }
 
+.multiple-image-row{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+}
+
+.two-image-column {
+    flex: 1;
+    max-width: 100%;
+    padding: 0 4px;
+    display: flex;
+}
+
+.two-image-column img {
+    margin-top: 8px;
+    vertical-align: middle;
+    width: 50%;
+}
+
+.two-image-column img:first-child {
+    margin-top: 0px;
+}
+
+.single-column{
+    flex:100%;
+}
+
+.single-column img {
+    margin-top: 8px;
+    vertical-align: middle;
+}
+
+.multiple-image-column img {
+    margin-top: 8px;
+    vertical-align: middle;
+}
+
 .post-paragraph:hover{
     cursor: pointer;
 }
