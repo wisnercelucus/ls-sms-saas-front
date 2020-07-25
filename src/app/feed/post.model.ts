@@ -18,7 +18,6 @@ export interface Post{
     parent?:Post;
     likes?:number;
     did_like?:boolean;
-    image?:string;
     redirect_?:string;
     comments?:Comment[];
     poll?:Poll;

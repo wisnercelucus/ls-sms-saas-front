@@ -153,6 +153,7 @@
 
                     </div>
                     <div class="image-handler" *ngIf="post.images">
+
                         <div class="multiple-image-row" *ngIf="post.images.length == 1">
                             <div class="single-column" *ngFor="let image of post.images">
                                 <a (click)="getPost(post.id)" >
@@ -160,14 +161,16 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="multiple-image-row" *ngIf="post.images.length > 1 && post.images.length < 3">
-                            <div class="two-image-column">
-                                <a (click)="getPost(post.id)"  *ngFor="let image of post.images">
-                                    <img [src]=" tenantUrl + image.image" alt="{{post.id}}">
-                                </a>
-                            </div>
 
-                        </div>
+                        <owl-carousel-o [options]="customOptions" *ngIf="post.images.length > 1">
+                        
+                            <ng-container *ngFor="let postImage of post.images">
+                            <ng-template carouselSlide [id]="post.id">
+                                <img [src]="tenantUrl + postImage.image" [alt]="post.id">
+                            </ng-template>
+                            </ng-container>
+                        
+                        </owl-carousel-o>
                     </div>
                     <div class="post-stat" id="{{'post'+ post.id}}">
                         <span>{{ post.likes + ' ' }}Likes</span>
@@ -476,9 +479,17 @@
                         </div>
 
                     </div>
-                    <a (click)="getPost(post.parent.id)">
-                    <img mat-card-image *ngIf="post.parent.image" [src]="post.parent.image" alt="{{post.id}}">
-                    </a>
+                    
+                        <owl-carousel-o [options]="customOptions" *ngIf="post.parent.images.length > 1">
+                        
+                            <ng-container *ngFor="let postImage of post.parent.images">
+                            <ng-template carouselSlide [id]="post.parent.id">
+                                <img [src]="tenantUrl + postImage.image" [alt]="post.parent.id">
+                            </ng-template>
+                            </ng-container>
+                        
+                        </owl-carousel-o>
+        
                     <div class="post-stat" id="{{'post'+ post.id}}">
                         <span>{{ post.likes + ' ' }}Likes</span>
                         <span>{{ post.total_comments + ' ' }}Comments</span>

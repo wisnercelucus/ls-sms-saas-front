@@ -5,11 +5,11 @@ import { FeedService} from './feed.service';
 import { faPlus, faMinusSquare
 } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormControl, Validators, FormArray, NgForm } from '@angular/forms';
-import { Post } from './post.model';
 import { User } from '../users/user.model';
 import { UsersService } from '../users/users.service';
 import { Router } from '@angular/router';
 import {NgxLinkifyjsService} from 'ngx-linkifyjs';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 
 @Component({
@@ -36,8 +36,9 @@ export class FeedComponent implements OnInit, OnDestroy {
   username:string;
 
   selectedFile:File = null;
-  selectedFiles:File[];
+  selectedFiles:File[]=[];
   imagePreviewUrl:string;
+  imagePreviewUrls:string[]=[];
 
   
   constructor(
@@ -95,7 +96,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   onSubmitPost(form:NgForm){
     let has_image = false;
 
-    if(!this.selectedFiles){
+    if(this.selectedFiles.length == 0){
 
       const r  = this.linkifyService.linkify(form.value.content);
 
@@ -106,13 +107,13 @@ export class FeedComponent implements OnInit, OnDestroy {
 
       this.postCreateSub = this.feedService.createPost(post).subscribe(
         res=>{
-          this.postForm.reset();
+          form.reset();
         }
       );
 
     }else{
       const fd = new FormData(this.form.nativeElement);
-      
+
       if(!fd.get("content").toString()){
         return;
       }
@@ -131,7 +132,7 @@ export class FeedComponent implements OnInit, OnDestroy {
       
       this.postCreateSub = this.feedService.createPost(fd).subscribe(
         res=>{
-          this.postForm.reset();
+          form.reset();
           this.imagePreviewUrl = "";
         },
         err=>{
@@ -214,12 +215,15 @@ export class FeedComponent implements OnInit, OnDestroy {
       
       //this.selectedFile = <File>event.target.files[0];
       this.selectedFiles = event.target.files
-      console.log(this.selectedFiles)
-      /*let reader = new FileReader()
-      reader.readAsDataURL(event.target.files[0]);
-      reader.onload = (e:any)=>{
-        this.imagePreviewUrl = e.target.result;
-      }*/
+
+      for(let i=0; i<this.selectedFiles.length; i++){
+        let reader = new FileReader()
+        reader.readAsDataURL(this.selectedFiles[i]);
+        reader.onload = (e:any)=>{
+          this.imagePreviewUrls.push(e.target.result);
+        }
+      }
+
   }
 
   addEmoji(event){
@@ -227,6 +231,31 @@ export class FeedComponent implements OnInit, OnDestroy {
       el.value = el.value  + " " + event.emoji.native + "  ";
       //console.log(el.parentElement)
       el.focus();
+  }
+
+  customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: true,
+    navSpeed: 700,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 1
+      },
+      740: {
+        items: 1
+      },
+      940: {
+        items: 1
+      }
+    },
+    nav: true
   }
 
 }

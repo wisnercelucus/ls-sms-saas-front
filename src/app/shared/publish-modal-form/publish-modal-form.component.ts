@@ -10,6 +10,8 @@ import {NgxLinkifyjsService} from 'ngx-linkifyjs';
 import { FeedService } from 'src/app/feed/feed.service';
 import { User } from 'src/app/users/user.model';
 import { Post } from 'src/app/feed/post.model';
+import { OwlOptions } from 'ngx-owl-carousel-o';
+import { AppService } from 'src/app/app.service';
 
 interface DialogData{
   postToEdit:Post;
@@ -41,16 +43,21 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
   loginUser:User;
 
   selectedFile:File = null;
+  selectedFiles:File[] = [];
   editMode_:boolean;
 
   imagePreviewUrl:string;
+  imagePreviewUrls:string[] =[];
+  tenantUrl:string;
+  tenanTUrlSub:Subscription;
 
   constructor(
     public dialogRef: MatDialogRef<PublishModalFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private feedService:FeedService, 
     private usersService:UsersService, 
-    public linkifyService: NgxLinkifyjsService
+    public linkifyService: NgxLinkifyjsService,
+    private appService:AppService
     ) { 
       this.postToEdit = this.data['post'];
       this.editMode_ = this.data['editMode_'];
@@ -59,6 +66,11 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.initForm();
     this.getLogingUser();
+    this.tenanTUrlSub = this.appService.TENANT_URL.subscribe(
+      res=>{
+        this.tenantUrl = res;
+      }
+    )
   }
 
 
@@ -66,11 +78,6 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
     this.dialogRef.close();
   }
 
-  ngAfterViewInit(){
-    if(!this.loginUser){
-      this.getLogingUser()
-    }
-  }
 
   updateHashLinks(text:string){
       let hashtagRegex = /(^|\s)#([\w\d-]+)/g
@@ -86,57 +93,70 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
     return newText   
 }
 
-  onSubmitPost(form:NgForm){
+onSubmitPost(form:NgForm){
+  let has_image = false;
 
-    if(!this.selectedFile){
+  if(this.selectedFiles.length == 0){
 
-      //const links = this.linkifyService.find(form.value.content)
+    const r  = this.linkifyService.linkify(form.value.content);
 
-      const r  = this.linkifyService.linkify(form.value.content);
+    let newContent = this.updateHashLinks(r);
+    newContent = this.updateUsernameLinks(newContent);
 
-      let newContent = this.updateHashLinks(r);
-      newContent = this.updateUsernameLinks(newContent);
+    const post:any = {content:newContent, has_image:has_image}
 
-      const post:Post = {content:newContent}
+    this.postCreateSub = this.feedService.createPost(post).subscribe(
+      res=>{
+        form.reset();
+      }
+    );
 
-      this.postCreateSub = this.feedService.createPost(post).subscribe(
-        res=>{
-          form.reset();
-          this.closeDialog()
-        }
-      );
+  }else{
+    const fd = new FormData(this.form.nativeElement);
 
-    }else{
-      const fd = new FormData(this.form.nativeElement);
-      const r  = this.linkifyService.linkify(fd.get("content").toString())
-      const content = this.updateHashLinks(r);
-
-      const newContent = this.updateUsernameLinks(content);
-
-      fd.set("content", newContent);
-
-      fd.append('image', this.selectedFile.name);
-
-      this.postCreateSub = this.feedService.createPost(fd).subscribe(
-        res=>{
-          form.reset();
-          this.dialogRef.close()
-        },
-        err=>{
-          console.log(err)
-        }
-      );
+    if(!fd.get("content").toString()){
+      return;
     }
+    const r  = this.linkifyService.linkify(fd.get("content").toString())
+    const content = this.updateHashLinks(r);
+
+    const newContent = this.updateUsernameLinks(content);
+
+    fd.set("content", newContent);
     
+    
+    for(let f of this.selectedFiles){
+      fd.append('image', f.name);
+    }      
+    
+    
+    this.postCreateSub = this.feedService.createPost(fd).subscribe(
+      res=>{
+        form.reset();
+        this.imagePreviewUrl = "";
+      },
+      err=>{
+        console.log(err)
+      }
+    );
   }
+  
+}
+
 
   onFileSelected(event:any){
-    this.selectedFile = <File>event.target.files[0];
-    let reader = new FileReader()
-    reader.readAsDataURL(event.target.files[0]);
-    reader.onload = (e:any)=>{
-      this.imagePreviewUrl = e.target.result;
+      
+    //this.selectedFile = <File>event.target.files[0];
+    this.selectedFiles = event.target.files
+
+    for(let i=0; i<this.selectedFiles.length; i++){
+      let reader = new FileReader()
+      reader.readAsDataURL(this.selectedFiles[i]);
+      reader.onload = (e:any)=>{
+        this.imagePreviewUrls.push(e.target.result);
+      }
     }
+
 }
 
   getLogingUser(){
@@ -196,6 +216,9 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
     if(this.updatePollSub){
       this.updatePollSub.unsubscribe()
     }
+    if(this.tenanTUrlSub){
+      this.tenanTUrlSub.unsubscribe();
+    }
   }
 
   onAddOption(){
@@ -215,7 +238,7 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
   }
 
   onEditPost(form:NgForm) {
-    if(!this.selectedFile){
+    if(this.selectedFiles.length == 0){
       let r: string;
       let newC:boolean;
 
@@ -238,6 +261,7 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
 
       this.postUpdateSub = this.feedService.updatePost(post, post_id).subscribe(
         res=>{
+          this.selectedFiles = []
           this.dialogRef.close()
         }
       );
@@ -251,12 +275,15 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
 
       fd.set("content", newContent);
 
-      fd.append('image', this.selectedFile.name);
+      for(let file of this.selectedFiles){
+        fd.append('image', file.name);
+      }
 
       this.postUpdateSub = this.feedService.updatePost(fd,  +fd.get("post_id")).subscribe(
         res=>{
           form.reset();
           this.dialogRef.close()
+          this.selectedFiles = []
         },
         err=>{
           console.log(err)
@@ -276,6 +303,30 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
           //
         }
       )
+  }
+  customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: true,
+    navSpeed: 700,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 1
+      },
+      740: {
+        items: 1
+      },
+      940: {
+        items: 1
+      }
+    },
+    nav: true
   }
 
 }

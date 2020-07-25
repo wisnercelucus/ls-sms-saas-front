@@ -20,7 +20,13 @@
     padding: 0 4px;
     display: flex;
 }
-
+.img{
+    width: 500px;
+    height: 500px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .two-image-column img {
     margin-top: 8px;
     vertical-align: middle;

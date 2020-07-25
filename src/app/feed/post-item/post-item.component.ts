@@ -16,15 +16,14 @@ import { faBirthdayCake,
  faUserCircle, faUsers, faHome, faUser, faShare} from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { FeedService } from '../feed.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AppService } from 'src/app/app.service';
-import { UsersService } from 'src/app/users/users.service';
+import { Router} from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { PostShareModalFormComponent } from 'src/app/shared/post-share-modal-form/post-share-modal-form.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmDialogComponent } from 'src/app/shared/delete-confirm-dialog/delete-confirm-dialog.component';
 import { PublishModalFormComponent } from 'src/app/shared/publish-modal-form/publish-modal-form.component';
 import { PostReportDialogComponent } from 'src/app/shared/post-report-dialog/post-report-dialog.component';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-post-item',
@@ -277,6 +276,31 @@ onLikeComment(id:number){
       console.log(res)
     }
   )
+}
+
+customOptions: OwlOptions = {
+  loop: true,
+  mouseDrag: true,
+  touchDrag: true,
+  pullDrag: true,
+  dots: true,
+  navSpeed: 700,
+  navText: ['', ''],
+  responsive: {
+    0: {
+      items: 1
+    },
+    400: {
+      items: 1
+    },
+    740: {
+      items: 1
+    },
+    940: {
+      items: 1
+    }
+  },
+  nav: true
 }
 
 }

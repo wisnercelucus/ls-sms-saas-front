@@ -10,14 +10,23 @@
                                 <mat-label>Post something to your timeline</mat-label>
                                 <textarea id="post-content" onclick="rezizable('post-content')" class="post-content" name="content" ngModel matInput placeholder="Ex. It makes me feel..."></textarea>
                             </mat-form-field>
-                        <input style="display:none" (change)="onFileSelected($event)" name="image" type="file" accept="image/x-png,image/gif,image/jpeg" #imageInput>
+                        <input style="display:none" (change)="onFileSelected($event)" name="image" type="file" multiple accept="image/x-png,image/gif,image/jpeg" #imageInput>
                         <div class="form-group">
                             <button (click)="imageInput.click()" class="file-choose" mat-raised-button type="button"><span class="select-image-btn material-icons">insert_photo</span>Add photo(s)</button>
-                            <button class="file-choose" mat-raised-button type="button"><span class="material-icons">attach_file</span>Attach file(s)</button>
+                            <!--<button class="file-choose" mat-raised-button type="button"><span class="material-icons">attach_file</span>Attach file(s)</button>-->
                         </div>
-                        <div class="selected-image-preview">
-                                <img class="imagepreview" *ngIf="imagePreviewUrl" [src] = "imagePreviewUrl">
-                        </div>
+                            <div class="selected-image-preview" *ngIf="imagePreviewUrls">
+                                
+                                <owl-carousel-o [options]="customOptions" *ngIf="imagePreviewUrls.length >= 1">
+                                
+                                    <ng-container *ngFor="let url of imagePreviewUrls; let i = index">
+                                    <ng-template carouselSlide [id]="i">
+                                        <img [src]="url" [alt]="i">
+                                    </ng-template>
+                                    </ng-container>
+                                
+                                </owl-carousel-o>
+                            </div>
                             <button class="publish" mat-raised-button type="submit">Publish</button>
                         </form>
                     </mat-tab>
@@ -99,22 +108,42 @@
                         <textarea *ngIf="postToEdit.parent" id="post-content" onclick="rezizable('post-content')" class="post-content" name="new_content" [(ngModel)] ="postToEdit.new_content" matInput placeholder="Ex. It makes me feel..."></textarea>
                         </mat-form-field>
                         <input [ngModel]="postToEdit.id" name="post_id" type="hidden">
-                        <input style="display:none" (change)="onFileSelected($event)" name="image" type="file" accept="image/x-png,image/gif,image/jpeg" #imageInput>
+                        <input style="display:none" (change)="onFileSelected($event)" name="image" type="file" multiple accept="image/x-png,image/gif,image/jpeg" #imageInput>
                     <div class="form-group">
                         <button (click)="imageInput.click()" class="file-choose" mat-raised-button type="button"><span class="select-image-btn material-icons">insert_photo</span>Change photo(s)</button>
-                        <button class="file-choose" mat-raised-button type="button"><span class="material-icons">attach_file</span>Attach file(s)</button>
+                        <!--<button class="file-choose" mat-raised-button type="button"><span class="material-icons">attach_file</span>Attach file(s)</button>-->
                     </div>
 
-                    <div class="selected-image-preview">
-                            <img class="imagepreview" *ngIf="imagePreviewUrl" [src] = "imagePreviewUrl">
-                    </div>
+                        <div class="selected-image-preview" *ngIf="imagePreviewUrls">
+                            
+                            <owl-carousel-o [options]="customOptions" *ngIf="imagePreviewUrls.length >= 1">
+                            
+                                <ng-container *ngFor="let url of imagePreviewUrls; let i = index">
+                                <ng-template carouselSlide [id]="i">
+                                    <img [src]="url" [alt]="i">
+                                </ng-template>
+                                </ng-container>
+                            
+                            </owl-carousel-o>
+                        </div>
 
                         <button class="publish" mat-raised-button type="submit">Update</button>
                 </form>
 
-                <div class="current-image" *ngIf="postToEdit.image">
-                        <h5>You will replace this image if you add a new one.</h5>
-                        <img mat-card-image [src]="postToEdit.image" alt="{{postToEdit.id}}">
+                <div class="current-image" *ngIf="postToEdit.images">
+        
+                        <div class="selected-image-preview">
+                            
+                            <owl-carousel-o [options]="customOptions">
+                            
+                                <ng-container *ngFor="let postImage of postToEdit.images; let i = index">
+                                <ng-template carouselSlide [id]="i">
+                                    <img [src]="tenantUrl + postImage.image" [alt]="i">
+                                </ng-template>
+                                </ng-container>
+                            
+                            </owl-carousel-o>
+                        </div>
                     </div>
 
                         <form class="poll-form" 

@@ -17,6 +17,7 @@ import { DataTableRowHeaderComponent } from './data-table-row-header/data-table-
 import { PostShareModalFormComponent } from './post-share-modal-form/post-share-modal-form.component';
 import { DeleteConfirmDialogComponent } from './delete-confirm-dialog/delete-confirm-dialog.component';
 import { PostReportDialogComponent } from './post-report-dialog/post-report-dialog.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 @NgModule({
     declarations:[
@@ -40,7 +41,8 @@ import { PostReportDialogComponent } from './post-report-dialog/post-report-dial
         FormsModule, 
         ReactiveFormsModule, 
         MaterialModule, 
-        FontAwesomeModule
+        FontAwesomeModule,
+        CarouselModule
     ],
 
     exports:[
@@ -58,7 +60,8 @@ import { PostReportDialogComponent } from './post-report-dialog/post-report-dial
             UsersSuggestionsComponent,
             GroupsSuggestionsComponent,
             PublishModalFormComponent,
-            DataTableRowHeaderComponent
+            DataTableRowHeaderComponent,
+            CarouselModule
         ]
 }
 )
