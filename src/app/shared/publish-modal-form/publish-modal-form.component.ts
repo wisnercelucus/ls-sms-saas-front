@@ -44,6 +44,7 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
 
   selectedFile:File = null;
   selectedFiles:File[] = [];
+  selectedDocs:File[] = [];
   editMode_:boolean;
 
   imagePreviewUrl:string;
@@ -96,7 +97,7 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
 onSubmitPost(form:NgForm){
   let has_image = false;
 
-  if(this.selectedFiles.length == 0){
+  if(this.selectedFiles.length == 0 && this.selectedDocs.length == 0){
 
     const r  = this.linkifyService.linkify(form.value.content);
 
@@ -108,6 +109,8 @@ onSubmitPost(form:NgForm){
     this.postCreateSub = this.feedService.createPost(post).subscribe(
       res=>{
         form.reset();
+        this.selectedFiles = []
+        this.imagePreviewUrls = []
       }
     );
 
@@ -124,16 +127,24 @@ onSubmitPost(form:NgForm){
 
     fd.set("content", newContent);
     
-    
-    for(let f of this.selectedFiles){
-      fd.append('image', f.name);
-    }      
-    
+    if(this.selectedFiles.length >= 1){
+      for(let f of this.selectedFiles){
+        fd.append('image', f.name);
+      }   
+    }
+
+    if(this.selectedDocs.length >= 1){
+      for(let doc of this.selectedDocs){
+        fd.append("file", doc.name);
+      }
+    }
     
     this.postCreateSub = this.feedService.createPost(fd).subscribe(
       res=>{
         form.reset();
         this.imagePreviewUrl = "";
+        this.selectedFiles =[];
+        this.imagePreviewUrls = [];
       },
       err=>{
         console.log(err)
@@ -159,6 +170,10 @@ onSubmitPost(form:NgForm){
 
 }
 
+onDocSelected(event:any){
+  this.selectedDocs = event.target.files
+  //console.log(this.selectedDocs)
+}
   getLogingUser(){
     this.loginUserSub = this.usersService.loginUser.subscribe(
       user=>{

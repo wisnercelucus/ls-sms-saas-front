@@ -11,9 +11,10 @@
                                 <textarea id="post-content" onclick="rezizable('post-content')" class="post-content" name="content" ngModel matInput placeholder="Ex. It makes me feel..."></textarea>
                             </mat-form-field>
                         <input style="display:none" (change)="onFileSelected($event)" name="image" type="file" multiple accept="image/x-png,image/gif,image/jpeg" #imageInput>
+                        <input style="display:none" (change)="onDocSelected($event)" name="pdf" type="file" multiple #docInput>
                         <div class="form-group">
                             <button (click)="imageInput.click()" class="file-choose" mat-raised-button type="button"><span class="select-image-btn material-icons">insert_photo</span>Add photo(s)</button>
-                            <!--<button class="file-choose" mat-raised-button type="button"><span class="material-icons">attach_file</span>Attach file(s)</button>-->
+                            <button (click)="docInput.click()" class="file-choose" mat-raised-button type="button"><span class="material-icons">attach_file</span>Attach file(s)</button>
                         </div>
                             <div class="selected-image-preview" *ngIf="imagePreviewUrls">
                                 
