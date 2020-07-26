@@ -43,11 +43,12 @@ Like comment endpoint call
 Link preview
 Finalize change post visibility
 Upload PDF document and show preview
-Next: Multiple file and pictures upload.
+
 
 ##Profile
 Zoom user profile photo
 Edit profile commnunication with end point.
 
+#Update UI on profile post like.
 
 

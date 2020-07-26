@@ -378,9 +378,11 @@
                                 <fa-icon [icon]="faTimesCircle"></fa-icon> closed
                             </span>
                         </div>
+                        <a  (click)="getPost(post.parent.id)">
 
                         <p class="post-paragraph" [innerHTML]= "post.parent.content">
                         </p>
+                        </a>
                         <mat-divider></mat-divider>
                     </div>
 
@@ -480,7 +482,7 @@
 
                     </div>
                     
-                        <owl-carousel-o [options]="customOptions" *ngIf="post.parent.images.length > 1">
+                        <owl-carousel-o [options]="customOptions" *ngIf="post.parent.images && post.parent.images.length > 1">
                         
                             <ng-container *ngFor="let postImage of post.parent.images">
                             <ng-template carouselSlide [id]="post.parent.id">
