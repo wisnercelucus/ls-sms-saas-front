@@ -38,12 +38,8 @@ https://medium.com/engineering-on-the-incline/reloading-current-route-on-click-a
 #TODO
 ##Feed
 
-Like comment endpoint call
-
 Link preview
 Finalize change post visibility
-Upload PDF document and show preview
-
 
 ##Profile
 Zoom user profile photo

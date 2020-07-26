@@ -479,8 +479,11 @@
                         </div>
 
                     </div>
-                    
-                        <owl-carousel-o [options]="customOptions" *ngIf="post.parent.images && post.parent.images.length >= 1">
+                    <div class="docs-handler" *ngIf="post.parent.docs">
+                        <p *ngFor="let doc of post.parent.docs"><a href="{{tenantUrl + doc.pdf}}" target="blank">{{doc.title}}</a></p>
+                    </div>
+
+                    <owl-carousel-o [options]="customOptions" *ngIf="post.parent.images && post.parent.images.length >= 1">
                         
                             <ng-container *ngFor="let postImage of post.parent.images">
                             <ng-template carouselSlide [id]="post.parent.id">
@@ -488,7 +491,7 @@
                             </ng-template>
                             </ng-container>
                         
-                        </owl-carousel-o>
+                    </owl-carousel-o>
         
                     <div class="post-stat" id="{{'post'+ post.id}}">
                         <span>{{ post.likes + ' ' }}Likes</span>
