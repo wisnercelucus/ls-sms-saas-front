@@ -229,7 +229,7 @@
                             </div>
 
                             <div class="comment-actions">
-                                <button id="{{'comment-btn' + post.id + comment.id}}"  *ngIf="comment && loginUser" (click) ="onLikeComment(comment.id, 'comment-btn' + post.id + comment.id)" [class]="comment.likers.includes(loginUser.id)? 'did_like': '' " mat-button><fa-icon [icon]="faThumbsUp"></fa-icon> {{comment.likes}}</button>
+                                <button id="{{'comment-btn' + post.id + comment.id}}"  *ngIf="comment && loginUser" (click) ="onLikeComment(comment.id, 'comment-btn' + post.id + comment.id)" [class]="comment.likers.includes(loginUser.id)? 'did_like': '' " mat-button><span><fa-icon [icon]="faThumbsUp"></fa-icon></span> <span class="counter">{{comment.likes}}</span></button>
                                 <button mat-button (click)="onToggleCommentForm('comment-form' + j)">Reply</button>
                             </div>
 
@@ -278,7 +278,7 @@
                                     </p>
                                 </div>
                                 <div class="comment-actions">
-                                    <button id="{{'comment-reply-btn' + post.id + reply.id}}"  *ngIf="reply && loginUser" (click) = "onLikeComment(reply.id, 'comment-reply-btn' + post.id + reply.id)" [class]="reply.likers.includes(loginUser.id)? 'did_like': '' " mat-button><fa-icon [icon]="faThumbsUp"></fa-icon> {{reply.likes}}</button>
+                                    <button id="{{'comment-reply-btn' + post.id + reply.id}}"  *ngIf="reply && loginUser" (click) = "onLikeComment(reply.id, 'comment-reply-btn' + post.id + reply.id)" [class]="reply.likers.includes(loginUser.id)? 'did_like': '' " mat-button><span><fa-icon [icon]="faThumbsUp"></fa-icon></span> <span class="counter">{{reply.likes}}</span></button>
                                     <button (click)="onToggleCommentForm('comment-form'+ j + k)" mat-button>Reply</button>
                                 </div>
 
@@ -546,7 +546,7 @@
                                 </p>
                             </div>
                             <div class="comment-actions">
-                                <button id="{{'comment-btn' + comment.id}}" *ngIf="comment && loginUser" (click) ="onLikeComment(comment.id, 'comment-btn' + comment.id)" [class]="comment.likers.includes(loginUser.id)? 'did_like': '' " mat-button><fa-icon [icon]="faThumbsUp"></fa-icon> {{comment.likes}}</button>
+                                <button id="{{'comment-btn' + comment.id}}" *ngIf="comment && loginUser" (click) ="onLikeComment(comment.id, 'comment-btn' + comment.id)" [class]="comment.likers.includes(loginUser.id)? 'did_like': '' " mat-button><span><fa-icon [icon]="faThumbsUp"></fa-icon></span> <span class="counter">{{comment.likes}}</span></button>
                                 <button mat-button (click)="onToggleCommentForm('comment-form' + j)">Reply</button>
                             </div>
 
@@ -593,7 +593,7 @@
                                     </p>
                                 </div>
                                 <div class="comment-actions">
-                                    <button id="{{'comment-reply-btn' + reply.id}}" *ngIf="reply && loginUser" (click) = "onLikeComment(reply.id, 'comment-reply-btn' + reply.id)" [class]="reply.likers.includes(loginUser.id)? 'did_like': '' " mat-button><fa-icon [icon]="faThumbsUp"></fa-icon> {{reply.likes}}</button>
+                                    <button id="{{'comment-reply-btn' + reply.id}}" *ngIf="reply && loginUser" (click) = "onLikeComment(reply.id, 'comment-reply-btn' + reply.id)" [class]="reply.likers.includes(loginUser.id)? 'did_like': '' " mat-button><span><fa-icon [icon]="faThumbsUp"></fa-icon></span> <span class="counter">{{reply.likes}}</span></button>
                                     <button (click)="onToggleCommentForm('comment-form' + j + k)" mat-button>Reply</button>
                                 </div>
 

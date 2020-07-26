@@ -20,6 +20,9 @@
     padding: 0 4px;
     display: flex;
 }
+span.counter{
+    margin-left: 5px;
+}
 .img{
     width: 500px;
     height: 500px;

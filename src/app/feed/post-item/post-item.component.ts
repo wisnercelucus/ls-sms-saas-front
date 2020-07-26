@@ -274,8 +274,17 @@ onLikeComment(id:number, elid:string){
   .subscribe(
     res=>{
       let element = document.getElementById(elid)
-      
-      element.innerHTML =  res['likes']
+      element.children[0].removeChild(element.children[0].children[1])
+      let span = document.createElement("span");
+      span.innerHTML = res['likes']
+      span.style.marginLeft = "5px"
+      element.children[0].append(span)
+
+      if(res['liked']){
+        element.classList.add("did_like"); 
+      }else{
+        element.classList.remove("did_like");
+      }
     }
   )
 }
