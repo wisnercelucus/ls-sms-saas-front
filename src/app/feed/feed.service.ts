@@ -74,7 +74,7 @@ export class FeedService {
     if(this.tenantUrl){
       return this.http.get(this.tenantUrl + '/feed/comments/api/'+ comment_id +'/like/').pipe(
         tap(res=>{
-          this._refreshNeeded.next();
+          //this._refreshNeeded.next();
         })
       );
     }else{

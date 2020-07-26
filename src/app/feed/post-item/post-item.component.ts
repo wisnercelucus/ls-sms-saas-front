@@ -269,11 +269,13 @@ export class PostItemComponent implements OnInit {
   });
 }
 
-onLikeComment(id:number){
+onLikeComment(id:number, elid:string){
   this.likeCommentSub = this.feedService.likeComment(id)
   .subscribe(
     res=>{
-      console.log(res)
+      let element = document.getElementById(elid)
+      
+      element.innerHTML =  res['likes']
     }
   )
 }
