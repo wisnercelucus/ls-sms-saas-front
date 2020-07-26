@@ -277,6 +277,20 @@ mat-card-header{
 
 }
 
+.preview-title h4{
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    font-weight: 550;
+
+}
+
+.preview-content p{
+    position: absolute;
+    left: 3px;
+    top: 3px;
+}
+
 .poll-option .vote-results .voted-option{
     padding: 8px;
     position: relative;

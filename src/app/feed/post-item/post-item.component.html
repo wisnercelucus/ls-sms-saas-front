@@ -157,29 +157,56 @@
                         <p *ngFor="let doc of post.docs"><a href="{{tenantUrl + doc.pdf}}" target="blank">{{doc.title}}</a></p>
                     </div>
 
-                    <mat-grid-list cols="3" rowHeight="70px" *ngIf="post.previews">
+                    <mat-card *ngIf="post.previews">
+
+                    <mat-grid-list cols="3" rowHeight="65px" 
+                    *ngIf="post.previews && post.previews.image">
+                    <a href="{{post.previews.url}}" target="blank">
                     <mat-grid-tile *ngIf="post.previews.image"
                         [colspan]="1"
-                        [rowspan]="1"
+                        [rowspan]="2"
                         >
                         <img src="{{post.previews.image}}" width="100%">
 
                     </mat-grid-tile>
-                    <mat-grid-tile
+                    <mat-grid-tile class="preview-title"
                         [colspan]="2"
                         [rowspan]="1"
                         >
-                        <h3>{{post.previews.title}}</h3>
+                        <h4>{{post.previews.title}}</h4>
                     </mat-grid-tile>
 
-                    <mat-grid-tile
-                        [colspan]="3"
+                    <mat-grid-tile *ngIf="post.previews.description" class="preview-content"
+                        [colspan]="2"
                         [rowspan]="1"
                         >
+                        <p>
                         {{post.previews.description}}
+                        </p>
+                    </mat-grid-tile>
+                    </a>
+                    </mat-grid-list>
+
+                    <mat-grid-list cols="1" rowHeight="65px" *ngIf="post.previews && !post.previews.image">
+                    <a href="{{post.previews.url}}" target="blank">
+                    <mat-grid-tile class="preview-title"
+                        [colspan]="1"
+                        [rowspan]="1"
+                        >
+                        <h4>{{post.previews.title}}</h4>
                     </mat-grid-tile>
 
+                    <mat-grid-tile  *ngIf="post.previews.description" class="preview-content"
+                        [colspan]="1"
+                        [rowspan]="1"
+                        >
+                        <p>
+                        {{post.previews.description}}
+                        </p>
+                    </mat-grid-tile>
+                    </a>
                     </mat-grid-list>
+                    </mat-card>
 
                     <div class="image-handler" *ngIf="post.images">
 
