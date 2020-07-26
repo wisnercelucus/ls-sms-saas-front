@@ -11,6 +11,13 @@ export interface PostDocs{
     title?:string;
 }
 
+export interface PostLink{
+    title:string;
+    description:string;
+    image:string;
+    url:string;
+}
+
 export interface Post{
     id?:number;
     user?:User;
@@ -32,4 +39,5 @@ export interface Post{
     images?:PostImage[];
     docs?:PostDocs[];
     pdfs?:PostDocs[];
+    previews?:PostLink
 }

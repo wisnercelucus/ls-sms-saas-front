@@ -40,6 +40,9 @@ https://medium.com/engineering-on-the-incline/reloading-current-route-on-click-a
 
 Link preview
 Finalize change post visibility
+Update post with files
+add dele specific file
+add delete specific image
 
 ##Profile
 Zoom user profile photo

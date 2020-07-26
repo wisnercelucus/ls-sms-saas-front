@@ -157,6 +157,30 @@
                         <p *ngFor="let doc of post.docs"><a href="{{tenantUrl + doc.pdf}}" target="blank">{{doc.title}}</a></p>
                     </div>
 
+                    <mat-grid-list cols="3" rowHeight="70px" *ngIf="post.previews">
+                    <mat-grid-tile *ngIf="post.previews.image"
+                        [colspan]="1"
+                        [rowspan]="1"
+                        >
+                        <img src="{{post.previews.image}}" width="100%">
+
+                    </mat-grid-tile>
+                    <mat-grid-tile
+                        [colspan]="2"
+                        [rowspan]="1"
+                        >
+                        <h3>{{post.previews.title}}</h3>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile
+                        [colspan]="3"
+                        [rowspan]="1"
+                        >
+                        {{post.previews.description}}
+                    </mat-grid-tile>
+
+                    </mat-grid-list>
+
                     <div class="image-handler" *ngIf="post.images">
 
                         <owl-carousel-o [options]="customOptions" *ngIf="post.images.length >= 1">

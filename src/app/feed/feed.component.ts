@@ -8,7 +8,7 @@ import { FormGroup, FormControl, Validators, FormArray, NgForm } from '@angular/
 import { User } from '../users/user.model';
 import { UsersService } from '../users/users.service';
 import { Router } from '@angular/router';
-import {NgxLinkifyjsService} from 'ngx-linkifyjs';
+import {NgxLinkifyjsService, Link, LinkType} from 'ngx-linkifyjs';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
 
@@ -94,17 +94,29 @@ export class FeedComponent implements OnInit, OnDestroy {
     return newText   
 }
 
+isEmail(email:string) {
+  const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}
   onSubmitPost(form:NgForm){
     let has_image = false;
 
     if(this.selectedFiles.length == 0 && this.selectedDocs.length == 0){
+      const foundLinks: Link[] = this.linkifyService.find(form.value.content);
+      let urls: Link[] = [];
+
+      for(let link of foundLinks){
+          if(!this.isEmail(link.value)){
+              urls.push(link)
+          }
+      }
 
       const r  = this.linkifyService.linkify(form.value.content);
 
       let newContent = this.updateHashLinks(r);
       newContent = this.updateUsernameLinks(newContent);
 
-      const post:any = {content:newContent, has_image:has_image}
+      const post:any = {content:newContent, has_image:has_image, links:urls}
 
       this.postCreateSub = this.feedService.createPost(post).subscribe(
         res=>{
@@ -123,6 +135,19 @@ export class FeedComponent implements OnInit, OnDestroy {
       const r  = this.linkifyService.linkify(fd.get("content").toString())
       const content = this.updateHashLinks(r);
 
+      const foundLinks: Link[] = this.linkifyService.find(fd.get("content").toString());
+      let urls: Link[] = [];
+
+      for(let link of foundLinks){
+          if(!this.isEmail(link.value)){
+              urls.push(link)
+          }
+      }
+      
+      //console.log(urls[0].href)
+
+      fd.set('links', urls[0].href)
+
       const newContent = this.updateUsernameLinks(content);
 
       fd.set("content", newContent);
@@ -132,6 +157,8 @@ export class FeedComponent implements OnInit, OnDestroy {
           fd.append('image', f.name);
         }   
       }
+
+      
 
       if(this.selectedDocs.length >= 1){
         for(let doc of this.selectedDocs){
