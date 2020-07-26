@@ -152,17 +152,14 @@
                         </div>
 
                     </div>
+
+                    <div class="docs-handler" *ngIf="post.docs">
+                        <p *ngFor="let doc of post.docs"><a href="{{tenantUrl + doc.pdf}}" target="blank">{{doc.title}}</a></p>
+                    </div>
+
                     <div class="image-handler" *ngIf="post.images">
 
-                        <div class="multiple-image-row" *ngIf="post.images.length == 1">
-                            <div class="single-column" *ngFor="let image of post.images">
-                                <a (click)="getPost(post.id)" >
-                                    <img mat-card-image [src]=" tenantUrl + image.image" alt="{{post.id}}">
-                                </a>
-                            </div>
-                        </div>
-
-                        <owl-carousel-o [options]="customOptions" *ngIf="post.images.length > 1">
+                        <owl-carousel-o [options]="customOptions" *ngIf="post.images.length >= 1">
                         
                             <ng-container *ngFor="let postImage of post.images">
                             <ng-template carouselSlide [id]="post.id">
@@ -172,6 +169,7 @@
                         
                         </owl-carousel-o>
                     </div>
+
                     <div class="post-stat" id="{{'post'+ post.id}}">
                         <span>{{ post.likes + ' ' }}Likes</span>
                         <span>{{ post.total_comments + ' ' }}Comments</span>
@@ -482,7 +480,7 @@
 
                     </div>
                     
-                        <owl-carousel-o [options]="customOptions" *ngIf="post.parent.images && post.parent.images.length > 1">
+                        <owl-carousel-o [options]="customOptions" *ngIf="post.parent.images && post.parent.images.length >= 1">
                         
                             <ng-container *ngFor="let postImage of post.parent.images">
                             <ng-template carouselSlide [id]="post.parent.id">

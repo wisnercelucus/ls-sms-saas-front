@@ -49,6 +49,4 @@ Upload PDF document and show preview
 Zoom user profile photo
 Edit profile commnunication with end point.
 
-#Update UI on profile post like.
-
 

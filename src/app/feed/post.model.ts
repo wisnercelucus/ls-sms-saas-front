@@ -5,6 +5,12 @@ export interface PostImage{
     image:string;
 }
 
+
+export interface PostDocs{
+    pdf:string;
+    title?:string;
+}
+
 export interface Post{
     id?:number;
     user?:User;
@@ -24,4 +30,6 @@ export interface Post{
     did_vote?:boolean;
     is_owned?: boolean;
     images?:PostImage[];
+    docs?:PostDocs[];
+    pdfs?:PostDocs[];
 }
