@@ -36,12 +36,14 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 https://medium.com/engineering-on-the-incline/reloading-current-route-on-click-angular-5-1a1bfc740ab2
 
 #TODO
+
 ##Feed
 
 Finalize change post visibility
 Update post with files
-add dele specific file
+add delete specific file
 add delete specific image
+
 
 ##Profile
 Zoom user profile photo
