@@ -534,6 +534,58 @@
                         <p *ngFor="let doc of post.parent.docs"><a href="{{tenantUrl + doc.pdf}}" target="blank">{{doc.title}}</a></p>
                     </div>
 
+
+                    <mat-card *ngIf="post.parent.previews">
+
+                    <mat-grid-list cols="3" rowHeight="65px" 
+                    *ngIf="post.parent.previews && post.parent.previews.image">
+                    <a href="{{post.parent.previews.url}}" target="blank">
+                    <mat-grid-tile *ngIf="post.parent.previews.image"
+                        [colspan]="1"
+                        [rowspan]="2"
+                        >
+                        <img src="{{post.parent.previews.image}}" width="100%">
+
+                    </mat-grid-tile>
+                    <mat-grid-tile class="preview-title"
+                        [colspan]="2"
+                        [rowspan]="1"
+                        >
+                        <h4>{{post.parent.previews.title}}</h4>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile *ngIf="post.parent.previews.description" class="preview-content"
+                        [colspan]="2"
+                        [rowspan]="1"
+                        >
+                        <p>
+                        {{post.parent.previews.description}}
+                        </p>
+                    </mat-grid-tile>
+                    </a>
+                    </mat-grid-list>
+
+                    <mat-grid-list cols="1" rowHeight="65px" *ngIf="post.parent.previews && !post.parent.previews.image">
+                    <a href="{{post.parent.previews.url}}" target="blank">
+                    <mat-grid-tile class="preview-title"
+                        [colspan]="1"
+                        [rowspan]="1"
+                        >
+                        <h4>{{post.parent.previews.title}}</h4>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile  *ngIf="post.parent.previews.description" class="preview-content"
+                        [colspan]="1"
+                        [rowspan]="1"
+                        >
+                        <p>
+                        {{post.parent.previews.description}}
+                        </p>
+                    </mat-grid-tile>
+                    </a>
+                    </mat-grid-list>
+                    </mat-card>
+
                     <owl-carousel-o [options]="customOptions" *ngIf="post.parent.images && post.parent.images.length >= 1">
                         
                             <ng-container *ngFor="let postImage of post.parent.images">
