@@ -123,6 +123,7 @@ isEmail(email:string) {
           form.reset();
           this.selectedFiles = []
           this.imagePreviewUrls = []
+          this.selectedDocs = []
         }
       );
 
@@ -138,15 +139,15 @@ isEmail(email:string) {
       const foundLinks: Link[] = this.linkifyService.find(fd.get("content").toString());
       let urls: Link[] = [];
 
-      for(let link of foundLinks){
+      if(foundLinks.length >= 1){
+        for(let link of foundLinks){
           if(!this.isEmail(link.value)){
               urls.push(link)
           }
-      }
-      
-      //console.log(urls[0].href)
+        }
 
-      fd.set('links', urls[0].href)
+        fd.set('links', urls[0].href)
+      }
 
       const newContent = this.updateUsernameLinks(content);
 
@@ -169,9 +170,9 @@ isEmail(email:string) {
       this.postCreateSub = this.feedService.createPost(fd).subscribe(
         res=>{
           form.reset();
-          this.imagePreviewUrl = "";
           this.selectedFiles =[];
           this.imagePreviewUrls = [];
+          this.selectedDocs = []
         },
         err=>{
           console.log(err)

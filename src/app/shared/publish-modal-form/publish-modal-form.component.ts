@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 import { faPlus, faMinusSquare
 } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormControl, Validators, FormArray, NgForm } from '@angular/forms';
-import {NgxLinkifyjsService} from 'ngx-linkifyjs';
+import {NgxLinkifyjsService, Link, LinkType} from 'ngx-linkifyjs';
 import { FeedService } from 'src/app/feed/feed.service';
 import { User } from 'src/app/users/user.model';
 import { Post } from 'src/app/feed/post.model';
@@ -94,65 +94,94 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
     return newText   
 }
 
-onSubmitPost(form:NgForm){
-  let has_image = false;
-
-  if(this.selectedFiles.length == 0 && this.selectedDocs.length == 0){
-
-    const r  = this.linkifyService.linkify(form.value.content);
-
-    let newContent = this.updateHashLinks(r);
-    newContent = this.updateUsernameLinks(newContent);
-
-    const post:any = {content:newContent, has_image:has_image}
-
-    this.postCreateSub = this.feedService.createPost(post).subscribe(
-      res=>{
-        form.reset();
-        this.selectedFiles = []
-        this.imagePreviewUrls = []
-      }
-    );
-
-  }else{
-    const fd = new FormData(this.form.nativeElement);
-
-    if(!fd.get("content").toString()){
-      return;
-    }
-    const r  = this.linkifyService.linkify(fd.get("content").toString())
-    const content = this.updateHashLinks(r);
-
-    const newContent = this.updateUsernameLinks(content);
-
-    fd.set("content", newContent);
-    
-    if(this.selectedFiles.length >= 1){
-      for(let f of this.selectedFiles){
-        fd.append('image', f.name);
-      }   
-    }
-
-    if(this.selectedDocs.length >= 1){
-      for(let doc of this.selectedDocs){
-        fd.append("file", doc.name);
-      }
-    }
-    
-    this.postCreateSub = this.feedService.createPost(fd).subscribe(
-      res=>{
-        form.reset();
-        this.imagePreviewUrl = "";
-        this.selectedFiles =[];
-        this.imagePreviewUrls = [];
-      },
-      err=>{
-        console.log(err)
-      }
-    );
-  }
-  
+isEmail(email:string) {
+  const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
 }
+  onSubmitPost(form:NgForm){
+    let has_image = false;
+
+    if(this.selectedFiles.length == 0 && this.selectedDocs.length == 0){
+      const foundLinks: Link[] = this.linkifyService.find(form.value.content);
+      let urls: Link[] = [];
+
+      for(let link of foundLinks){
+          if(!this.isEmail(link.value)){
+              urls.push(link)
+          }
+      }
+
+      const r  = this.linkifyService.linkify(form.value.content);
+
+      let newContent = this.updateHashLinks(r);
+      newContent = this.updateUsernameLinks(newContent);
+
+      const post:any = {content:newContent, has_image:has_image, links:urls}
+
+      this.postCreateSub = this.feedService.createPost(post).subscribe(
+        res=>{
+          form.reset();
+          this.selectedFiles = []
+          this.imagePreviewUrls = []
+          this.selectedDocs = []
+        }
+      );
+
+    }else{
+      const fd = new FormData(this.form.nativeElement);
+
+      if(!fd.get("content").toString()){
+        return;
+      }
+
+      const r  = this.linkifyService.linkify(fd.get("content").toString())
+      const content = this.updateHashLinks(r);
+
+      const foundLinks: Link[] = this.linkifyService.find(fd.get("content").toString());
+      let urls: Link[] = [];
+
+      if(foundLinks.length >= 1){
+        for(let link of foundLinks){
+          if(!this.isEmail(link.value)){
+              urls.push(link)
+          }
+        }
+
+        fd.set('links', urls[0].href)
+      }
+
+      const newContent = this.updateUsernameLinks(content);
+
+      fd.set("content", newContent);
+      
+      if(this.selectedFiles.length >= 1){
+        for(let f of this.selectedFiles){
+          fd.append('image', f.name);
+        }   
+      }
+
+      
+
+      if(this.selectedDocs.length >= 1){
+        for(let doc of this.selectedDocs){
+          fd.append("file", doc.name);
+        }
+      }
+      
+      this.postCreateSub = this.feedService.createPost(fd).subscribe(
+        res=>{
+          form.reset();
+          this.selectedFiles =[];
+          this.imagePreviewUrls = [];
+          this.selectedDocs = []
+        },
+        err=>{
+          console.log(err)
+        }
+      );
+    }
+    
+  }
 
 
   onFileSelected(event:any){

@@ -38,7 +38,6 @@ https://medium.com/engineering-on-the-incline/reloading-current-route-on-click-a
 #TODO
 ##Feed
 
-Link preview
 Finalize change post visibility
 Update post with files
 add dele specific file
