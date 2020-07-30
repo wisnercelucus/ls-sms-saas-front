@@ -1,3 +1,295 @@
-.forums{
+.feed{
     padding-top: 70px;
+    display: flex;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    position: relative;
 }
+a{
+    text-decoration: none;
+}
+
+ul{
+    list-style: none;
+    padding: 0px !important;
+
+}
+ul li{
+    list-style: none;
+}
+
+.feed .side-profile-menu-left{
+    flex:1;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    bottom: 5px;
+    overflow:hidden;
+}
+
+.feed .side-profile-menu-left:hover{
+    overflow-y:scroll;
+}
+
+
+.feed .side-profile-menu-right{
+    flex:1;
+    position: fixed;
+    top: 70px;
+    right: 10px;
+}
+
+.user-profile-community{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+
+.feed .main-content{
+    width: 800px;
+    margin: 0 auto;
+}
+
+.avatar-xs-card{
+    border-radius: 100%;
+    height: 50px;
+    width: 50px;
+}
+
+.avatar-xs{
+    border-radius: 100%;
+    height: 25px;
+    width: 25px;
+}
+.publish{
+    background-color: dodgerblue;
+    color: white;
+    margin-top: 8px;
+}
+
+.publish-form{
+    padding: 8px;
+}
+
+.post-form, .poll-form {
+    min-width: 100px;
+    width: 100%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+  
+.poll-form button{
+    margin-right: 8px;
+}
+
+.add-option{
+    background-color: fuchsia;
+    color: ghostwhite;
+}
+
+.poll-form button:last-child{
+    margin-right: 0px;
+}
+
+.post-full-width, .poll-full-width {
+    width: 100%;
+  }
+
+.form-group{
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.form-group button{
+    margin-left: 8px;
+    height: 35px !important;
+    background-color: firebrick;
+    color: ghostwhite;
+}
+
+.form-group .file-choose{
+    color: #0ec54e;
+    background-color: #fff;
+}
+
+.form-group .select-image-btn{
+    height: 30px !important;
+    cursor: pointer;
+    font-size: 30px;
+    color: #0ec54e;
+}  
+
+.post-content{
+    resize:vertical;
+}
+
+.selected-image-preview{
+    width: 90%;
+    margin: 0 auto;
+}
+
+.selected-image-preview .imagepreview{
+    width: 98%;
+    margin: 0 auto;
+}
+
+.handle-emoji{
+    text-align: right;
+    margin-top: -18px;
+
+}
+
+.tab-icon {
+    margin-right: 8px;
+  }
+
+@media screen and (min-width: 1490px)
+and (max-width: 1760px)
+{
+ .main-content {
+     max-width: 650px;
+ }
+
+ .side-profile-menu-left,.side-profile-menu-right{
+     width: 400px;
+ }
+
+}
+
+@media screen and (min-width: 1470px)
+and (max-width: 1489px)
+{
+ .main-content {
+     max-width: 650px;
+ }
+
+ .side-profile-menu-left,.side-profile-menu-right{
+     width: 380px;
+ }
+
+}
+
+
+
+@media screen and (min-width: 1335px)
+and (max-width: 1469px)
+{
+ .main-content {
+     max-width: 650px;
+ }
+
+ .side-profile-menu-left,.side-profile-menu-right{
+     width: 315px;
+ }
+
+}
+
+@media screen and (min-width: 1300px)
+and (max-width: 1334px)
+{
+ .main-content {
+     max-width: 650px;
+ }
+
+ .side-profile-menu-left,.side-profile-menu-right{
+     width: 300px;
+ }
+
+}
+
+
+
+@media screen and (min-width: 1215px)
+and (max-width: 1333px)
+{
+ .main-content {
+     max-width: 650px;
+ }
+
+ .side-profile-menu-left,.side-profile-menu-right{
+     width: 270px;
+ }
+
+}
+
+@media screen and (max-width: 1214px){
+    .profile-section{
+        flex-direction: column;
+    }
+    .cover-profile{
+        height: 225px;
+        z-index: 1;
+    }
+    .side-profile-menu-left,.side-profile-menu-right{
+        display: none;
+    }
+
+    .feed .main-content{
+
+        margin: 0 auto;
+        display: flex;
+        max-width: max(320px, 100%);
+        flex-direction: column;
+    }
+    .publish-form{
+        max-width: max( 320px, 100%);
+    }
+
+    .news-feed{
+        max-width: max( 320px, 100%);
+    }
+
+}
+
+@media screen and (max-width: 600px){
+    .profile-section{
+        flex-direction: column;
+    }
+    .cover-profile{
+        height: 225px;
+        z-index: 1;
+    }
+    .side-profile-menu-left,.side-profile-menu-right{
+        display: none;
+    }
+
+    .feed .main-content{
+
+        margin-left: 5px;
+        margin-right: 5px;
+        display: flex;
+        max-width: max(320px, 100%);
+        flex-direction: column;
+    }
+    .publish-form{
+        max-width: max( 320px, 100%);
+    }
+
+    .news-feed{
+        max-width: max( 320px, 100%);
+    }
+
+}
+
+
+@media screen and (max-width: 359px){
+    .user-profile-detail h1{
+        font-size: 14px;
+    }
+
+    .feed .main-content{
+        flex:1;
+        margin-left: 2px;
+        margin-right: 2px;
+    }
+    .publish-form{
+        flex: 1;
+    }
+    .news-feed{
+        flex: 1;
+    }
+
+}
+

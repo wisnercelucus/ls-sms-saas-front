@@ -27,6 +27,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import {MatRippleModule} from '@angular/material/core';
+import {MatChipsModule} from '@angular/material/chips';
 
 const Materials = [
   MatButtonModule,
@@ -57,6 +58,7 @@ const Materials = [
   MatPaginatorModule,
   MatSortModule,
   MatRippleModule,
+  MatChipsModule,
 ]
 
 

@@ -1,3 +1,67 @@
-<section class="forums">
-    <h1>Forums</h1>
+<section class="feed">
+    <div class="side-profile-menu-left">
+    <app-feed-side-menu></app-feed-side-menu>
+    </div>
+
+    <div class="main-content">
+        <div class="publish-form">
+
+          <mat-card>
+            <mat-card-content>
+                        <form enctype="multipart/form-data" class="post-form" (ngSubmit)="onSubmitPost(f)" #f="ngForm" #form>
+                                
+                        <ckeditor name = "question" ngModel [editor]="Editor" (ready)="onReady($event)"></ckeditor>
+        
+                            <button class="publish" mat-raised-button type="submit">Ask</button>
+                        </form>
+
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <br>
+
+        <div class="news-feed">
+            <mat-tab-group animationDuration="0ms">
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                    <mat-icon class="tab-icon">question_answer</mat-icon>
+                    All questions
+                    </ng-template>
+                    Feed
+                </mat-tab>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                    <mat-icon class="tab-icon">rate_review</mat-icon>
+                    Contribute
+                    </ng-template>
+                    Contribute
+                </mat-tab>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                    <mat-icon class="tab-icon">topic</mat-icon>
+                    Categories
+                    </ng-template>
+                    Categories
+                </mat-tab>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                    <mat-icon class="tab-icon">groups</mat-icon>
+                    Contributors
+                    </ng-template>
+                    Contributors
+                </mat-tab>
+            </mat-tab-group>
+            <router-outlet></router-outlet>
+        </div>
+
+    </div>
+
+    <div class="side-profile-menu-right">
+        <app-users-suggestions></app-users-suggestions>
+        <br>
+        <app-groups-suggestions></app-groups-suggestions>
+        <br>
+        <app-feed-copyright></app-feed-copyright>
+    </div>
+
 </section>

@@ -184,9 +184,7 @@ isEmail(email:string) {
   }
 
 
-  onFileSelected(event:any){
-      
-    //this.selectedFile = <File>event.target.files[0];
+  onFileSelected(event:any){    
     this.selectedFiles = event.target.files
 
     for(let i=0; i<this.selectedFiles.length; i++){
@@ -196,7 +194,6 @@ isEmail(email:string) {
         this.imagePreviewUrls.push(e.target.result);
       }
     }
-
 }
 
 onDocSelected(event:any){

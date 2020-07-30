@@ -9,7 +9,6 @@ import { AuthService } from '../auth.service';
 import { AuthUser } from 'src/app/users/user.model';
 import { AppService } from 'src/app/app.service';
 
-
 interface AuthResponseData{
         'token':string;
         'user_id':number
@@ -64,6 +63,7 @@ const handleError = (errorRes: any) => {
 export class AuthEffects{
     tenantUrl:string;
     loginRedirectUrl:string;
+    instance:string;
     
     headers = new HttpHeaders({
         'Content-Type': 'application/json'
@@ -120,9 +120,6 @@ export class AuthEffects{
         //this.authService.clearLogoutTimer();
         localStorage.removeItem('userData');
         this.router.navigate(['/auth/login']);
-        if(this.subscrition){
-          this.subscrition.unsubscribe();
-        }
       })
     );
 
@@ -168,15 +165,26 @@ export class AuthEffects{
       })
     );
   
-    tenantUrl1:string;
-    subscrition:Subscription;
 
     constructor(private actions$:Actions, private http: HttpClient, private router:Router, private appService:AppService, private authService:AuthService, private route:ActivatedRoute){
-      this.subscrition = this.appService.TENANT_URL.subscribe(
-        url=>{
-          this.tenantUrl = url;
-        }
-      )
-      //this.tenantUrl = 'http://fdsa.demo.local:8000';
+      this.urlHasInstance();
+    }
+
+    urlHasInstance(){
+      if(window.location.hostname === this.appService.BASE_DOMAIN){
+        this.instance=null;
+        return false;
+  
+      }else{
+        const hostName = window.location.hostname.toString();
+        const hostNameParts = hostName.split(".")
+        if(hostNameParts.length >= 3){
+          this.instance =  hostNameParts.reverse()[2]
+          this.tenantUrl = this.appService.PROTOCOL + this.instance + "." + this.appService.BASE_DOMAIN  + ":" + this.appService.API_PORT;
+          return true;
+        }else{
+          return;
+        } 
+      }
     }
 }

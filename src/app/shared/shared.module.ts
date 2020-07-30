@@ -18,6 +18,7 @@ import { PostShareModalFormComponent } from './post-share-modal-form/post-share-
 import { DeleteConfirmDialogComponent } from './delete-confirm-dialog/delete-confirm-dialog.component';
 import { PostReportDialogComponent } from './post-report-dialog/post-report-dialog.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
     declarations:[
@@ -42,7 +43,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
         ReactiveFormsModule, 
         MaterialModule, 
         FontAwesomeModule,
-        CarouselModule
+        CarouselModule,
+        CKEditorModule
     ],
 
     exports:[
@@ -61,7 +63,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
             GroupsSuggestionsComponent,
             PublishModalFormComponent,
             DataTableRowHeaderComponent,
-            CarouselModule
+            CarouselModule,
+            CKEditorModule
         ]
 }
 )
