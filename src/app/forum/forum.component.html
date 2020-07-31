@@ -10,7 +10,7 @@
             <mat-card-content>
                         <form enctype="multipart/form-data" class="post-form" (ngSubmit)="onSubmitPost(f)" #f="ngForm" #form>
                                 
-                        <ckeditor id="editor" name = "question" ngModel [editor]="Editor" (ready)="onReady($event)"></ckeditor>
+                        <ckeditor id="editor" name = "question" [config]="config" ngModel [editor]="Editor" (ready)="onReady($event)"></ckeditor>
         
                             <button class="publish" mat-raised-button type="submit">Ask</button>
                         </form>

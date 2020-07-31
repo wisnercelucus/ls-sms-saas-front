@@ -93,3 +93,7 @@ ul li{
 .rights ul li:last-child{
     margin-right: 0px;
 }
+
+.nav-link span{
+    position: absolute;
+}

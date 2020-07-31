@@ -12,14 +12,15 @@
                 <ul>
                     <li (click)="openDialog()"><a class="nav-link" (click)="openDialog()">Publish</a></li>
                     <li (click)="navigateTo('/feed')"><a class="nav-link" (click)="navigateTo('/feed')"><fa-icon [icon]="faHome"></fa-icon> Home</a></li>
+                    <li (click)="navigateTo('/forums')"><a class="nav-link" (click)="navigateTo('/forums')"><mat-icon class="feed-icon">rate_review</mat-icon> <span>Forums</span></a></li>
                     <li (click)="navigateTo('/accounts/' + loginUser.username)"><a class="nav-link" (click)="navigateTo('/accounts/' + loginUser.username)"><fa-icon [icon]="faUser"></fa-icon> Profile</a></li>
                     <li><a class="nav-link" href="javascript:void(0)"><fa-icon [icon]="faShareAltSquare"></fa-icon> Posts and shares</a></li>
                     <li><a class="nav-link" href="javascript:void(0)"><fa-icon [icon]="faHeart"></fa-icon> Likes and replies</a></li>
                     <mat-divider></mat-divider>
-                    <li><a class="nav-link" href="javascript:void(0)">Followers</a></li>
-                    <li><a class="nav-link" href="javascript:void(0)">Following</a></li>
+                    <li (click)="navigateTo('/accounts/all')"><a class="nav-link" (click)="navigateTo('/accounts/all')">Followers</a></li>
+                    <li (click)="navigateTo('/accounts/all')"><a class="nav-link" (click)="navigateTo('/accounts/all')">Following</a></li>
                      <mat-divider></mat-divider>
-                    <li><a class="nav-link" href="javascript:void(0)"><fa-icon [icon]="faUsers"></fa-icon> Groups</a></li>
+                    <li (click)="navigateTo('/accounts/groups')"><a class="nav-link" (click)="navigateTo('/accounts/groups')"><fa-icon [icon]="faUsers"></fa-icon> Groups</a></li>
                     <li (click)="navigateTo('/accounts/all')"><a class="nav-link" (click)="navigateTo('/accounts/all')"><fa-icon [icon]="faUserCircle"></fa-icon> Users</a></li>
                 </ul>
         </mat-card-content>
