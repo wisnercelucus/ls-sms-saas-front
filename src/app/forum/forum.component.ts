@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';;
-import { NgForm } from '@angular/forms';
+import { NgForm, FormControl } from '@angular/forms';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { Observable } from 'rxjs';
+import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
+import {MatChipInputEvent} from '@angular/material/chips';
+import { map, startWith } from 'rxjs/operators';
 
 export class UploadAdapter {
   constructor( public loader ) {
@@ -28,9 +33,26 @@ export class UploadAdapter {
 })
 export class ForumComponent implements OnInit {
   public Editor = ClassicEditor;
-  config;
+  config:any;
+
+  visible = true;
+  selectable = true;
+  removable = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  categoryCtrl = new FormControl();
+  filteredCategories: Observable<string[]>;
+  categories: string[] = ['Biology'];
+  allCategories: string[] = ['Chemistry', 'Biology', 'History', 'Art', 'Science'];
+
+  @ViewChild('categoryInput') categoryInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   constructor() {
+    this.filteredCategories = this.categoryCtrl.valueChanges.pipe(
+      startWith(null),
+      map((fruit: string | null) => fruit ? this._filter(fruit) : this.allCategories.slice()));
+
+
     this.config = {
       toolbar: {
         items: [
@@ -75,6 +97,45 @@ export class ForumComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our fruit
+    if ((value || '').trim()) {
+      this.categories.push(value.trim());
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+
+    this.categoryCtrl.setValue(null);
+  }
+
+  remove(category: string): void {
+    const index = this.categories.indexOf(category);
+
+    if (index >= 0) {
+      this.categories.splice(index, 1);
+    }
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.categories.push(event.option.viewValue);
+    this.categoryInput.nativeElement.value = '';
+    this.categoryCtrl.setValue(null);
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.allCategories.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+
 
   uploadFile(file){
     let name = '';

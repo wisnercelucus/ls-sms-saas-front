@@ -6,7 +6,8 @@
     <div class="main-content">
         <div class="user-profile">
           <mat-card>
-           <img mat-card-image *ngIf="user" class="cover-profile" [src]="user.user_profile.cover_image? tenantUrl + user.user_profile.cover_image : user.user_profile.default_cover" alt="user.username">
+            <div *ngIf="user" class="cover cover-profile" style="background-image: url({{user.user_profile.cover_image? tenantUrl + user.user_profile.cover_image : user.user_profile.default_cover}})" ></div>
+           <!--<img mat-card-image *ngIf="user" class="cover-profile" [src]="user.user_profile.cover_image? tenantUrl + user.user_profile.cover_image : user.user_profile.default_cover" alt="user.username">-->
             <mat-card-content>
                  <img *ngIf="user" class="user-profile-image" [src]="user.image? user.image : user.default_image">
                 <div class="user-profile-detail" *ngIf="user">
@@ -16,7 +17,7 @@
                 <div class="user-profile-bio" *ngIf="user">
 
                     <div class="birth-detail" >
-                        <span class="provenance-detail" *ngIf="user.city || user.country"><fa-icon [icon]="faMapMarker"></fa-icon> From: <span *ngIf="user.city">{{user.city + " "}},</span><span *ngIf="user.country">{{user.country}}</span></span>
+                        <span class="provenance-detail" *ngIf="user.city || user.country"><fa-icon [icon]="faMapMarker"></fa-icon> From: <span *ngIf="user.city">{{user.city}},</span> <span *ngIf="user.country">{{" " + user.country}}</span></span>
                         <span class="birth-date-detail" *ngIf="user.user_profile.birth_day"><fa-icon [icon]="faBirthdayCake"></fa-icon> Born: {{user.user_profile.birth_day}}</span>
                     </div>
 

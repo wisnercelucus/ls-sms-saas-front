@@ -28,6 +28,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import {MatRippleModule} from '@angular/material/core';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 const Materials = [
   MatButtonModule,
@@ -59,6 +60,7 @@ const Materials = [
   MatSortModule,
   MatRippleModule,
   MatChipsModule,
+  MatAutocompleteModule
 ]
 
 

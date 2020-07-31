@@ -3,6 +3,7 @@ import { User } from '../user.model';
 import { UsersService } from '../users.service';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/app.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-users-list',
@@ -23,6 +24,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
   tenantUrl:string;
   followersList:User[]
   followingList:User[]
+  //selected = new FormControl(0)
 
   constructor(private usersService:UsersService, private appService:AppService) { }
 
@@ -54,7 +56,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
+    
     this.usersListSub = this.usersService.getUsersList().subscribe(
       res=>{
         this.usersList = res;
@@ -126,6 +128,4 @@ export class UsersListComponent implements OnInit, OnDestroy {
       
     )
   }
-  
-
 }

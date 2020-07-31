@@ -68,6 +68,12 @@ ul li{
     color: white;
     margin-top: 8px;
 }
+.discard{
+    background-color: #fd602f;
+    color: white;
+    margin-top: 8px;
+    margin-right: 8px;
+}
 
 .publish-form{
     padding: 8px;
@@ -96,7 +102,14 @@ ul li{
 .post-full-width, .poll-full-width {
     width: 100%;
   }
-
+  .chip-list {
+    width: 100%;
+    margin-top: 20px;
+  }
+.full-width{
+    width: 100%;
+    margin-bottom: 20px;
+}
 .form-group{
     display: flex;
     margin-bottom: 15px;
