@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';;
 import { NgForm } from '@angular/forms';
-import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
 
 export class UploadAdapter {
   constructor( public loader ) {
@@ -28,11 +27,7 @@ export class UploadAdapter {
   styleUrls: ['./forum.component.css']
 })
 export class ForumComponent implements OnInit {
-  public Editor = ClassicEditor.create( 
-                  document.querySelector( '#editor' ), {
-                  plugins: [ CodeBlock],
-                  toolbar: [ 'codeBlock']
-                } )
+  public Editor = ClassicEditor;
 
   constructor() { }
 
