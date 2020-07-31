@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, OnDestroy} from '@angular/core';
-import { Subscription} from 'rxjs';
+import { Subscription, Observable} from 'rxjs';
 import { Router} from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { User, AuthUser } from 'src/app/users/user.model';
@@ -10,6 +10,8 @@ import * as fromApp from '../../store/app.reducer';
 import { map } from 'rxjs/operators';
 import * as AuthActions from '../../auth/store/auth.actions';
 import { FeedService } from 'src/app/feed/feed.service';
+import { NotificationsService } from 'src/app/notifications/notifications.service';
+import { NotificationModel } from 'src/app/notifications/notification.model';
 
 @Component({
   selector: 'app-header',
@@ -31,20 +33,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
   loginUserSub:Subscription;
   testUserSub:Subscription;
   Logsubsciption:Subscription;
-  //postsSub:Subscription;
+  notificationList:NotificationModel[];
+  notificationSub:Subscription;
+
 
   constructor(private router: Router, 
               private authService: AuthService, 
               private appService:AppService, 
               private userService:UsersService,
               private store:Store<fromApp.AppState>,
-              private feedService:FeedService) { }
+              private feedService:FeedService,
+              private notificationsService:NotificationsService) { }
 
   timer: any;
 
   getUserData(username:string){   
     if(username){
-      //this.postsSub =  this.feedService.getUserPost(username).subscribe();
       this.router.navigate(['/accounts', username])
     }
   }
@@ -70,6 +74,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
         this.Logsubsciption = this.userService.getMyProfile().subscribe(
           res=>{
+          }
+        );
+
+        this.notificationSub = this.notificationsService.getUsersNotification()
+        .subscribe(
+          res=>{
+            this.notificationList = res;
           }
         );
 
@@ -109,11 +120,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if(this.loginUserSub){
       this.loginUserSub.unsubscribe();
     }
-    /*
-    if(this.postsSub){
-      this.postsSub.unsubscribe();
-    }
-    */
 
     if(this.testUserSub){
       this.testUserSub.unsubscribe();

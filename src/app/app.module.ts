@@ -36,6 +36,7 @@ import {EffectsModule} from '@ngrx/effects';
 import { AuthEffects } from './auth/store/auth.effects';
 import { FeedRoutingModule } from './feed/feed.routing';
 import { FeedModule } from './feed/feed.module';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 
 
@@ -52,6 +53,7 @@ import { FeedModule } from './feed/feed.module';
     TestimonialsComponent,
     FaqComponent,
     ParticlesComponent,
+    NotificationsComponent,
 
   ],
 

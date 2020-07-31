@@ -9,8 +9,6 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root'
 })
 export class UsersService {
-  subscrition: Subscription;
-
   loginRedirectUrl:string;
   instance:string;
   baseDomain:string;

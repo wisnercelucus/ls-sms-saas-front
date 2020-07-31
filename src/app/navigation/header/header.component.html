@@ -39,18 +39,34 @@
         </ul>
 
         <ul *ngIf="isAuthenticated" fxLayout fxLayoutGap="10px" class="nav-items">
-            <li class="nav-item">
-                <span class="handle-icon">
-                <mat-icon matBadge="6" matBadgeColor="warn">notifications</mat-icon>
-                </span>
+            
+            <li class="nav-item handle-icon" [matMenuTriggerFor]="menu3">
+            
+                <mat-icon matBadge="{{ notificationList? notificationList.length : 0}}" matBadgeColor="warn">notifications</mat-icon>  
+
             </li>
+            
+            <mat-menu #menu3="matMenu">
+            <span *ngIf="notificationList">
+                <a class="notification-item" *ngFor="let notification of notificationList">
+                    <img class="avatar-xs" *ngIf="loginUser" [src]="loginUser.image ? loginUser.image : loginUser.default_image" title="{{ loginUser.username }}"> 
+                    <span class="notification-item-content">
+                        <strong>{{loginUser.first_name + " " + loginUser.last_name}} </strong>
+                       {{notification.content}}
+                    </span>
+                </a>
+                <mat-divider></mat-divider>
+                </span>
+            </mat-menu>
+            
+
 
             <li class="nav-item">
                 <a routerLink="/feed"><span class="handle-icon">
                 <mat-icon>dynamic_feed</mat-icon></span>
                 </a>
             </li>
-            
+
             <li class="nav-item">
             <a routerLink="/forums">
                 <span class="handle-icon">

@@ -9,6 +9,7 @@ import * as fromApp from './store/app.reducer';
 import { Store } from '@ngrx/store';
 import * as AuthActions from './auth/store/auth.actions';
 import { FeedService } from './feed/feed.service';
+import { NotificationsService } from './notifications/notifications.service';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +29,8 @@ export class AppComponent implements OnInit, OnDestroy {
               private appService:AppService,
               private usersService:UsersService,
               private store:Store<fromApp.AppState>,
-              private feedService: FeedService) {
+              private feedService: FeedService,
+              private notificationsService:NotificationsService) {
     this.urlHasInstance();
    
   }
@@ -63,6 +65,7 @@ export class AppComponent implements OnInit, OnDestroy {
           this.authService.tenantUrl = tenantUrl;
           this.usersService.tenantUrl = tenantUrl;
           this.feedService.tenantUrl = tenantUrl;
+          this.notificationsService.tenantUrl = tenantUrl;
         }
     );
 
