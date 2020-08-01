@@ -17,30 +17,25 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   post:Post;
   loginUser:User;
   postId:number;
+
   postSub:Subscription;
   singlePostChangeSub:Subscription;
   loginUserSub:Subscription;
   tenantUrlSub:Subscription;
+
   tenantUrl:string;
 
   constructor(private route:ActivatedRoute,
     private router:Router,
     private usersService:UsersService,
      private feedService:FeedService, private appService:AppService) { }
+     
   ngOnDestroy(): void {
-    if(this.postSub){
-      this.postSub.unsubscribe();
-    }
-    if(this.singlePostChangeSub){
-      this.singlePostChangeSub.unsubscribe();
-    }
-
-    if(this.loginUserSub){
-      this.loginUserSub.unsubscribe()
-    }
-    if(this.tenantUrlSub){
-      this.tenantUrlSub.unsubscribe()
-    }
+    this.postSub.unsubscribe();
+    this.singlePostChangeSub.unsubscribe(); 
+    this.loginUserSub.unsubscribe();
+    this.tenantUrlSub.unsubscribe();
+    
   }
 
   ngOnInit(): void {

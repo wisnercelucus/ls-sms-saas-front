@@ -47,11 +47,6 @@ export class PostReportDialogComponent implements OnInit, OnDestroy {
     this.dialogRef.close();
   }
 
-  ngAfterViewInit(){
-    if(!this.loginUser){
-      this.getLogingUser()
-    }
-  }
 
   onSubmitPostReport(form:NgForm){
       this.postReportCreateSub = this.feedService.reportPost(form.value).subscribe(
@@ -76,12 +71,11 @@ export class PostReportDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    if(this.postReportCreateSub){
-      this.postReportCreateSub.unsubscribe()
-    }
-    if(this.loginUserSub){
-      this.loginUserSub.unsubscribe();
-    }
+
+    this.postReportCreateSub.unsubscribe()
+    
+    this.loginUserSub.unsubscribe();
+    
   }
 
 }

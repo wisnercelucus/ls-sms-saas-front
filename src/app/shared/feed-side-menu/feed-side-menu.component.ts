@@ -10,8 +10,6 @@ import { faBirthdayCake,
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { PublishModalFormComponent } from '../publish-modal-form/publish-modal-form.component';
-import { Subscription } from 'rxjs';
-import { UsersService } from 'src/app/users/users.service';
 import { User } from 'src/app/users/user.model';
 
 @Component({
@@ -35,7 +33,7 @@ export class FeedSideMenuComponent implements OnInit, OnDestroy {
   @Input() loginUser:User;
  
   constructor(private router:Router,
-    public dialog: MatDialog, private userService:UsersService
+    public dialog: MatDialog
     ) { }
 
   ngOnInit(): void {

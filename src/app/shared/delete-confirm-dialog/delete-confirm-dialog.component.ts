@@ -40,7 +40,7 @@ export class DeleteConfirmDialogComponent {
       if(this.atPostDetail){
         this.deletePostSub = this.feedService.deletePost(id).subscribe(
           res=>{
-            this.dialogRef.close();
+            this.dialogRef.close()
             this.router.navigate(['/feed']);
           }
         )
@@ -57,8 +57,8 @@ export class DeleteConfirmDialogComponent {
       
     }
     ngOnDestroy(){
-      if(this.deletePostSub){
-        this.deletePostSub.unsubscribe()
-      }
+
+      this.deletePostSub.unsubscribe()
+      
     }
 }

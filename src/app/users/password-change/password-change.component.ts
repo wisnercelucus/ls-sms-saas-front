@@ -25,9 +25,9 @@ export class PasswordChangeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    if(this.changePasswordSub){
+
       this.changePasswordSub.unsubscribe();
-    }
+  
   }
 
   onSubmit(form:NgForm){
@@ -48,7 +48,7 @@ export class PasswordChangeComponent implements OnInit, OnDestroy {
        err => {
          this.errorMessage = "An error occured."
           this.isLoading = false;
-          console.log(err)
+
        }
      )
       

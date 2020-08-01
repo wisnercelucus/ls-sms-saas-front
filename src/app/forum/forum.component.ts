@@ -99,9 +99,8 @@ export class ForumComponent implements OnInit, OnDestroy {
     };
    }
   ngOnDestroy(): void {
-    if(this.loginUserSub){
-      this.loginUserSub.unsubscribe();
-    }
+    this.loginUserSub.unsubscribe();
+    
   }
 
   ngOnInit(): void {

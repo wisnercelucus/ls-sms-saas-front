@@ -11,8 +11,10 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./users-list.component.css']
 })
 export class UsersListComponent implements OnInit, OnDestroy {
-  loginUserSub:Subscription;
+  
   usersList:User[];
+
+  loginUserSub:Subscription;
   usersListSub:Subscription;
   followUserSub:Subscription;
   tenantUrlSub:Subscription;
@@ -29,30 +31,27 @@ export class UsersListComponent implements OnInit, OnDestroy {
   constructor(private usersService:UsersService, private appService:AppService) { }
 
   ngOnDestroy(): void {
-    if(this.usersListChangedSub){
+
       this.usersListChangedSub.unsubscribe()
-    }
-    if(this.usersListSub){
+    
+
       this.usersListSub.unsubscribe()
-    }
+    
 
-    if(this.followUserSub){
+
       this.followUserSub.unsubscribe()
-    }
+    
 
-    if(this.loginUserSub){
       this.loginUserSub.unsubscribe()
-    }
-    if(this.tenantUrlSub){
-      this.tenantUrlSub.unsubscribe()
-    }
-    if(this.followersListSub){
-      this.followersListSub.unsubscribe()
-    }
+    
 
-    if(this.followingListSub){
+      this.tenantUrlSub.unsubscribe()
+
+      this.followersListSub.unsubscribe()
+    
+
       this.followingListSub.unsubscribe()
-    }
+    
   }
 
   ngOnInit(): void {

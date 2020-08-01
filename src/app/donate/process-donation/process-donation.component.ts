@@ -55,14 +55,14 @@ export class ProcessDonationComponent implements OnInit {
    }
  }
    ngOnDestroy() {
-           if (this.card) {
+        if (this.card) {
                // We remove event listener here to keep memory clean
-               this.card.removeEventListener('change', this.cardHandler);
-               this.card.destroy();  
-           }
-           if(this.subscription){
-               this.subscription.unsubscribe();
-           }
+            this.card.removeEventListener('change', this.cardHandler);
+            this.card.destroy();  
+        }
+  
+        this.subscription.unsubscribe();
+
 
            
        }

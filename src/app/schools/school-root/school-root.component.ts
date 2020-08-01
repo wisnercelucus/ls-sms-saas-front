@@ -1,7 +1,6 @@
-import {Component, OnInit, Output, EventEmitter, OnDestroy} from '@angular/core';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { Router, ActivatedRoute, Event, NavigationStart, NavigationEnd } from '@angular/router';
-import { Subscription } from 'rxjs';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import { Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+
 
 @Component({
   selector: 'app-school-root',
@@ -12,36 +11,21 @@ export class SchoolRootComponent implements OnInit, OnDestroy {
 
   panelOpenState = false; 
   atSchoolRoot=false;
-  subscription:Subscription;
 
   constructor(private router:Router, private route: ActivatedRoute) {
-    this.subscription = this.router.events.subscribe(
-      (event: Event) => {
-        if(event instanceof NavigationStart){
-
-        }
-        if(event instanceof NavigationEnd){
-          if(window.location.pathname != '/school'){
-              this.atSchoolRoot = false;
-          }else{
-            this.atSchoolRoot = true;
-          }
-          
-        }
-      }
-    )
-
     
   }
   
 
   ngOnInit(): void { 
+    this.router.routeReuseStrategy.shouldReuseRoute = (future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean => {
+      return false;
+     };
+     
     this.atSchoolRoot = window.location.pathname === '/school'? true : false;
   }
   ngOnDestroy(){
-      if(this.subscription){
-        this.subscription.unsubscribe();
-      }
+
   }
 
   ngAfterViewInt(){

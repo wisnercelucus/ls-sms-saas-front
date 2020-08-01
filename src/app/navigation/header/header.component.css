@@ -60,7 +60,7 @@ a:hover{
     display: flex;
 }
 
-handle-notification{
+.handle-notification{
     margin-top: 3px;
 }
 
@@ -81,7 +81,6 @@ handle-notification{
     width: 25px;
     margin-right: 6px;
     margin-top: 4px;
-    flex:1;  
 }
 
 
@@ -91,7 +90,6 @@ handle-notification{
     width: 25px;
     margin-right: 6px;
     margin-top: 4px;
-    flex:1;
 }
 
 .notification{
@@ -100,22 +98,24 @@ handle-notification{
     padding-top: 7px;
 }
 
+.notification-list{
+    display:flex;
+    flex-direction:column;
+}
+
 .notification span{
     font-size: 30px;
 }
 
 .notification-item{
     color:#101010;
-    display: flex;
     padding: 8px;
 }
 .notification-item .avatar-xs{
     border-radius: 100%;
-    height: 45px;
-    width: 45px;
+    height: 35px;
+    width: 35px;
     margin-right: 6px;
-    margin-top: 4px;
-    flex:1;
 }
 
 

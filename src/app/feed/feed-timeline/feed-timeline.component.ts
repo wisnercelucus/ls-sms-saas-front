@@ -118,24 +118,11 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(){
-
-    if(this.feedSub){
       this.feedSub.unsubscribe()
-    }
-    if(this.feedSub1){
       this.feedSub1.unsubscribe()
-    }
-
-    if(this.postsSub){
       this.postsSub.unsubscribe()
-    }
-    if(this.loginUserSub){
       this.loginUserSub.unsubscribe()
-    }
-    if(this.tenantUrlSub){
       this.tenantUrlSub.unsubscribe()
-    }
-    
   }
 
 

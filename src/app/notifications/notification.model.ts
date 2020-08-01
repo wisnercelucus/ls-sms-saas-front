@@ -7,4 +7,5 @@ export interface NotificationModel{
     to?:number[];
     read_by?:number[];
     owner?:User;
+    object_id?:number;
 }

@@ -35,6 +35,7 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
   pollCreateSub:Subscription;
   postUpdateSub:Subscription;
   updatePollSub:Subscription;
+  tenanTUrlSub:Subscription;
 
   pollForm: FormGroup;
   editMode=false;
@@ -50,7 +51,7 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
   imagePreviewUrl:string;
   imagePreviewUrls:string[] =[];
   tenantUrl:string;
-  tenanTUrlSub:Subscription;
+  
 
   constructor(
     public dialogRef: MatDialogRef<PublishModalFormComponent>,
@@ -90,7 +91,7 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
   updateUsernameLinks(text:string){
     let usernameRegex = /(^|\s)@([\w\d-]+)/g
     let htmlreplace = text
-    let newText = htmlreplace.replace(usernameRegex, "$1<a style='text-decoration:none' href='/accounts/$2/'>$2</a>")
+    let newText = htmlreplace.replace(usernameRegex, "$1<a style='text-decoration:none' href='/accounts/$2/'>@$2</a>")
     return newText   
 }
 
@@ -160,8 +161,6 @@ isEmail(email:string) {
         }   
       }
 
-      
-
       if(this.selectedDocs.length >= 1){
         for(let doc of this.selectedDocs){
           fd.append("file", doc.name);
@@ -198,7 +197,6 @@ isEmail(email:string) {
 
 onDocSelected(event:any){
   this.selectedDocs = event.target.files
-  //console.log(this.selectedDocs)
 }
   getLogingUser(){
     this.loginUserSub = this.usersService.loginUser.subscribe(
@@ -241,25 +239,14 @@ onDocSelected(event:any){
   }
 
   ngOnDestroy(){
-    if(this.postCreateSub){
+  
       this.postCreateSub.unsubscribe()
-    }
-    if(this.loginUserSub){
       this.loginUserSub.unsubscribe();
-    }
-    if(this.pollCreateSub){
       this.pollCreateSub.unsubscribe()
-    }
-    if(this.postUpdateSub){
-      this.postUpdateSub.unsubscribe()
-    }
-
-    if(this.updatePollSub){
-      this.updatePollSub.unsubscribe()
-    }
-    if(this.tenanTUrlSub){
+      this.postUpdateSub.unsubscribe()   
+      this.updatePollSub.unsubscribe()    
       this.tenanTUrlSub.unsubscribe();
-    }
+    
   }
 
   onAddOption(){

@@ -1,5 +1,7 @@
 {
-  "extends": "tslint:recommended",
+  "extends": ["tslint:recommended",
+    "@angular-extensions/lint-rules"
+  ],
   "rules": {
     "align": {
       "options": [

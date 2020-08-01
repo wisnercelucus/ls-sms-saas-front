@@ -29,7 +29,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   userSubs: Subscription;
   loginUserSub:Subscription;
-  Logsubsciption:Subscription;
   notificationList:NotificationModel[];
   notificationSub:Subscription;
 
@@ -67,11 +66,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
           user.token
         );
 
-        this.Logsubsciption = this.userService.getMyProfile().subscribe(
-          res=>{
-            this.loginUser = res;
-          }
-        );
+        this.getLogingUser();
 
         this.notificationSub = this.notificationsService.getUsersNotification()
         .subscribe(
@@ -112,9 +107,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.loginUserSub.unsubscribe();
     }
 
-    if(this.Logsubsciption){
-      this.Logsubsciption.unsubscribe();
-    }
     if(this.notificationSub){
       this.notificationSub.unsubscribe();
     }

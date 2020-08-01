@@ -73,13 +73,6 @@ export class FeedComponent implements OnInit, OnDestroy {
     }
   }
 
-
-  ngAfterViewInit(){
-    if(!this.loginUser){
-      this.getLogingUser()
-    }
-  }
-
   updateHashLinks(text:string){
       let hashtagRegex = /(^|\s)#([\w\d-]+)/g
       let htmlreplace = text
@@ -90,7 +83,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   updateUsernameLinks(text:string){
     let usernameRegex = /(^|\s)@([\w\d-]+)/g
     let htmlreplace = text
-    let newText = htmlreplace.replace(usernameRegex, "$1<a style='text-decoration:none' href='/accounts/$2/'>$2</a>")
+    let newText = htmlreplace.replace(usernameRegex, "$1<a style='text-decoration:none' href='/accounts/$2/'>@$2</a>")
     return newText   
 }
 
@@ -190,8 +183,6 @@ isEmail(email:string) {
       }
     );
 }
-
-
 
   initForm(){
     let question = '';

@@ -20,7 +20,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   showLoadingSpinner = false;
   instance:string;
-  userSubs:Subscription;
+  //userSubs:Subscription;
   tentantUrl:string;
   subscribtion:Subscription;
 
@@ -74,12 +74,10 @@ export class AppComponent implements OnInit, OnDestroy {
     
   }
   ngOnDestroy(){
-    if(this.userSubs){
-      this.userSubs.unsubscribe()
-    }
-    if(this.subscribtion){
+      //this.userSubs.unsubscribe()
+
       this.subscribtion.unsubscribe()
-    }
+
   }
 
 }

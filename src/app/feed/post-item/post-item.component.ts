@@ -110,54 +110,20 @@ export class PostItemComponent implements OnInit {
   this.router.navigate(['/feed'])
 }
  ngOnDestroy(){
-   if(this.likeCommentSub){
-     this.likeCommentSub.unsubscribe();
-   }
-  if(this.postsSub){
+    this.likeCommentSub.unsubscribe();
     this.postsSub.unsubscribe();
-  }
-
-   if(this.createCommentSub){
-     this.createCommentSub.unsubscribe()
-   }
-   if(this.deletePostSub){
+    this.createCommentSub.unsubscribe()
     this.deletePostSub.unsubscribe()
-   }
-
-   if(this.postLikeSub){
-     this.postLikeSub.unsubscribe()
-   }
-
-   if(this.votePollSub){
-     this.votePollSub.unsubscribe()
-   }
-
-   if(this.changeVoteSub){
-     this.changeVoteSub.unsubscribe()
-   }
-
+    this.postLikeSub.unsubscribe()
+    this.votePollSub.unsubscribe()
+    this.changeVoteSub.unsubscribe()
  }
 
  submitComment(form:NgForm){
      if(!form.value.parent_id){
-      
-       this.createCommentSub = this.feedService.postComment(form.value).subscribe(
-         res =>{
-
-         },
-         err=>{
-           console.log(err)
-         }
-       )
+       this.createCommentSub = this.feedService.postComment(form.value).subscribe()
      }else{
-      
-       this.createCommentSub = this.feedService.postComment(form.value).subscribe(
-         res =>{
-         },
-         err=>{
-           console.log(err)
-         }
-       )
+       this.createCommentSub = this.feedService.postComment(form.value).subscribe()
      }
  }
 
