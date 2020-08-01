@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';;
 import { NgForm, FormControl } from '@angular/forms';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
@@ -33,7 +33,7 @@ export class UploadAdapter {
   templateUrl: './forum.component.html',
   styleUrls: ['./forum.component.css']
 })
-export class ForumComponent implements OnInit {
+export class ForumComponent implements OnInit, OnDestroy {
   public Editor = ClassicEditor;
   config:any;
 
@@ -98,6 +98,11 @@ export class ForumComponent implements OnInit {
       language: 'en'
     };
    }
+  ngOnDestroy(): void {
+    if(this.loginUserSub){
+      this.loginUserSub.unsubscribe();
+    }
+  }
 
   ngOnInit(): void {
     this.getLogingUser();

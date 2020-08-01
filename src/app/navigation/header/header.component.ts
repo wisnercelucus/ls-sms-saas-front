@@ -1,7 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, OnDestroy} from '@angular/core';
-import { Subscription, Observable} from 'rxjs';
+import { Subscription} from 'rxjs';
 import { Router} from '@angular/router';
-import { AuthService } from 'src/app/auth/auth.service';
 import { User, AuthUser } from 'src/app/users/user.model';
 import { AppService } from 'src/app/app.service';
 import { UsersService } from 'src/app/users/users.service';
@@ -9,7 +8,6 @@ import { Store } from '@ngrx/store';
 import * as fromApp from '../../store/app.reducer';
 import { map } from 'rxjs/operators';
 import * as AuthActions from '../../auth/store/auth.actions';
-import { FeedService } from 'src/app/feed/feed.service';
 import { NotificationsService } from 'src/app/notifications/notifications.service';
 import { NotificationModel } from 'src/app/notifications/notification.model';
 
@@ -31,18 +29,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   userSubs: Subscription;
   loginUserSub:Subscription;
-  testUserSub:Subscription;
   Logsubsciption:Subscription;
   notificationList:NotificationModel[];
   notificationSub:Subscription;
 
 
-  constructor(private router: Router, 
-              private authService: AuthService, 
+  constructor(private router: Router,  
               private appService:AppService, 
               private userService:UsersService,
               private store:Store<fromApp.AppState>,
-              private feedService:FeedService,
               private notificationsService:NotificationsService) { }
 
   timer: any;
@@ -74,6 +69,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
         this.Logsubsciption = this.userService.getMyProfile().subscribe(
           res=>{
+            this.loginUser = res;
           }
         );
 
@@ -88,11 +84,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     });
     
-    this.testUserSub = this.userService.loginUser.subscribe(
-      user=>{
-        this.loginUser = user;
-      }
-    )
 
   }
 
@@ -121,9 +112,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.loginUserSub.unsubscribe();
     }
 
-    if(this.testUserSub){
-      this.testUserSub.unsubscribe();
-    }
     if(this.Logsubsciption){
       this.Logsubsciption.unsubscribe();
     }
