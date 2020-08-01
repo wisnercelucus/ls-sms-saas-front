@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { faBirthdayCake, 
   faMapMarker, 
   faThumbsUp, 
@@ -32,30 +32,18 @@ export class FeedSideMenuComponent implements OnInit, OnDestroy {
   faHome = faHome;
   faUser = faUser;
   
-  loginUser:User;
-  loginUserSub:Subscription;
+  @Input() loginUser:User;
  
   constructor(private router:Router,
     public dialog: MatDialog, private userService:UsersService
     ) { }
 
   ngOnInit(): void {
-   this.getLogingUser();
-  }
 
-  getLogingUser(){
-      this.loginUserSub = this.userService.loginUser.subscribe (
-        user=>{
-            this.loginUser = user;
-        }
-      );
   }
-
 
   ngOnDestroy(){
-    if(this.loginUserSub){
-      this.loginUserSub.unsubscribe()
-    }
+    //nothing
   }
   
   navigateTo(path:string){

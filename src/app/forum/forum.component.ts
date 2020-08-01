@@ -2,10 +2,12 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';;
 import { NgForm, FormControl } from '@angular/forms';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
 import {MatChipInputEvent} from '@angular/material/chips';
 import { map, startWith } from 'rxjs/operators';
+import { UsersService } from '../users/users.service';
+import { User } from '../users/user.model';
 
 export class UploadAdapter {
   constructor( public loader ) {
@@ -43,11 +45,13 @@ export class ForumComponent implements OnInit {
   filteredCategories: Observable<string[]>;
   categories: string[] = ['Biology'];
   allCategories: string[] = ['Chemistry', 'Biology', 'History', 'Art', 'Science'];
+  loginUserSub:Subscription;
+  loginUser:User;
 
   @ViewChild('categoryInput') categoryInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
-  constructor() {
+  constructor(private usersService:UsersService) {
     this.filteredCategories = this.categoryCtrl.valueChanges.pipe(
       startWith(null),
       map((fruit: string | null) => fruit ? this._filter(fruit) : this.allCategories.slice()));
@@ -96,7 +100,17 @@ export class ForumComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.getLogingUser();
   }
+
+  getLogingUser(){
+    this.loginUserSub = this.usersService.loginUser.subscribe (
+      user=>{
+          this.loginUser = user;
+      }
+    );
+}
+
 
   add(event: MatChipInputEvent): void {
     const input = event.input;
