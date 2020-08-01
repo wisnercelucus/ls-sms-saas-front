@@ -127,6 +127,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if(this.Logsubsciption){
       this.Logsubsciption.unsubscribe();
     }
+    if(this.notificationSub){
+      this.notificationSub.unsubscribe();
+    }
 
   }
 
