@@ -12,10 +12,11 @@
             </mat-card-header>
             <mat-card-content>
                         <form enctype="multipart/form-data" class="post-form" (ngSubmit)="onSubmitPost(f)" #f="ngForm" #form>
-                        <ckeditor id="editor" name = "question" [config]="config" ngModel [editor]="Editor" 
+                        <angular-editor id="editor" [placeholder]="'Enter text here...'" name="htmlContent" [(ngModel)]="htmlContent"></angular-editor>
+                        <!--<ckeditor id="editor" name = "question" [config]="config" ngModel [editor]="Editor" 
                         (ready)="onReady($event)"
                         (change)="onChange($event)"
-                        ></ckeditor>
+                        ></ckeditor>-->
                         
                         <mat-form-field class="full-width">
                             <input type="text" placeholder="What's your question about?" matInput ngModel name="title" required>

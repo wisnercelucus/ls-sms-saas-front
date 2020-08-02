@@ -109,6 +109,7 @@ export class ForumComponent implements OnInit, OnDestroy {
   //loginUserSub:Subscription;
   destroy$:Subject<void> = new Subject<void>();
   loginUser:User;
+  htmlContent:string;
 
   @ViewChild('categoryInput') categoryInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;

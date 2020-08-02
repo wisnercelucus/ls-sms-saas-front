@@ -19,6 +19,7 @@ import { DeleteConfirmDialogComponent } from './delete-confirm-dialog/delete-con
 import { PostReportDialogComponent } from './post-report-dialog/post-report-dialog.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
     declarations:[
@@ -44,7 +45,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
         MaterialModule, 
         FontAwesomeModule,
         CarouselModule,
-        CKEditorModule
+        CKEditorModule,
+        AngularEditorModule 
     ],
 
     exports:[
@@ -64,7 +66,9 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
             PublishModalFormComponent,
             DataTableRowHeaderComponent,
             CarouselModule,
-            CKEditorModule
+            CKEditorModule,
+            AngularEditorModule
+            
         ]
 }
 )
