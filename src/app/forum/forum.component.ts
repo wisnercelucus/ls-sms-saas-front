@@ -2,17 +2,71 @@ import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/co
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';;
 import { NgForm, FormControl } from '@angular/forms';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import { Observable, Subscription, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
 import {MatChipInputEvent} from '@angular/material/chips';
 import { map, startWith, takeUntil } from 'rxjs/operators';
 import { UsersService } from '../users/users.service';
 import { User } from '../users/user.model';
+import { ForumsService } from './forums.service';
+import { HttpParams } from '@angular/common/http';
 
 export class UploadAdapter {
   constructor( public loader ) {
      this.loader = loader;
   }
+
+  //the uploadFile method use to upload image to your server
+  uploadFile(file,url?:string,user?:string){
+    let name = '';
+    url='your api';
+    let formData:FormData = new FormData();
+    let headers = new Headers();
+    name = file.name;
+    formData.append('attachment', file, name);
+    const dotIndex = name.lastIndexOf('.');
+    const fileName  = dotIndex>0?name.substring(0,dotIndex):name;
+    formData.append('name', fileName);
+    formData.append('source', user);
+  
+    headers.append('Content-Type', 'multipart/form-data');
+    headers.append('Accept', 'application/json');
+    console.log('formData',formData);
+    let params = new HttpParams();
+    const options = {
+        params: params,
+        reportProgress: true,
+    };
+  //http post return an observer
+  //so I need to convert to Promise
+    //return this.http.post(url,formData,options);
+  }
+
+
+  /*
+  upload() {
+      let upload = new Promise((resolve, reject)=>{
+        this.loader['file'].then(
+            (data)=>{
+                this.uploadFile(data,this.url,'test')
+                .subscribe(
+                    (result)=>{
+                      //resolve data formate must like this
+                      //if **default** is missing, you will get an error
+                        **resolve({ default: result['attachment'] })**
+                    },
+                    (error)=>{
+                        reject(data.msg);
+                    }
+                );
+            }
+        );
+      });
+      return upload;
+  }
+  */
+
+
 
   upload() {
      return this.loader.file
@@ -24,6 +78,10 @@ export class UploadAdapter {
                  myReader.readAsDataURL(file);
            } ) );
   };
+
+  abort() {
+    console.log("abort")
+  }
 }
 
 
@@ -43,8 +101,8 @@ export class ForumComponent implements OnInit, OnDestroy {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   categoryCtrl = new FormControl();
   filteredCategories: Observable<string[]>;
-  categories: string[] = ['Biology'];
-  allCategories: string[] = ['Chemistry', 'Biology', 'History', 'Art', 'Science'];
+  categories: string[] = [];
+  allCategories: string[] = [];
   //loginUserSub:Subscription;
   destroy$:Subject<void> = new Subject<void>();
   loginUser:User;
@@ -52,10 +110,12 @@ export class ForumComponent implements OnInit, OnDestroy {
   @ViewChild('categoryInput') categoryInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
-  constructor(private usersService:UsersService) {
+  constructor(private usersService:UsersService,
+    private forumsService:ForumsService
+    ) {
     this.filteredCategories = this.categoryCtrl.valueChanges.pipe(
       startWith(null),
-      map((fruit: string | null) => fruit ? this._filter(fruit) : this.allCategories.slice()));
+      map((category: string | null) => category ? this._filter(category) : this.allCategories.slice()));
 
 
     this.config = {
@@ -111,6 +171,17 @@ export class ForumComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getLogingUser();
+    this.getCategories();
+  }
+
+  getCategories(){
+    this.forumsService.getForumsCategories()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(categories=>{
+      for(let cat of categories){
+          this.allCategories.push(cat.title)
+      }
+    })
   }
 
   getLogingUser(){
@@ -164,27 +235,13 @@ export class ForumComponent implements OnInit, OnDestroy {
 
 
 
-  uploadFile(file){
-    let name = '';
-    let formData:FormData = new FormData();
-    let headers = new Headers();
-    name = file.name;
-    formData.append('attachment', file, name);
-    const dotIndex = name.lastIndexOf('.');
-    const fileName  = dotIndex>0?name.substring(0,dotIndex):name;
-    formData.append('name', fileName);
-
-    headers.append('Content-Type', 'multipart/form-data');
-    headers.append('Accept', 'application/json');
-    console.log('formData',formData);
-
-    return 0;
-  }
-
-
-
   onSubmitPost(f:NgForm){
-    console.log(f.value)
+    const data = {topic:f.value, categories:this.categories}   
+    this.forumsService.createTopic(data)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(res=>{
+      console.log(res);
+    })
   }
 
   onReady(eventData) {

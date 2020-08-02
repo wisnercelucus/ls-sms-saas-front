@@ -11,6 +11,7 @@ import * as AuthActions from './auth/store/auth.actions';
 import { FeedService } from './feed/feed.service';
 import { NotificationsService } from './notifications/notifications.service';
 import { takeUntil } from 'rxjs/operators';
+import { ForumsService } from './forum/forums.service';
 
 @Component({
   selector: 'app-root',
@@ -31,7 +32,9 @@ export class AppComponent implements OnInit, OnDestroy {
               private usersService:UsersService,
               private store:Store<fromApp.AppState>,
               private feedService: FeedService,
-              private notificationsService:NotificationsService) {
+              private notificationsService:NotificationsService,
+              private forumsService:ForumsService
+              ) {
     this.urlHasInstance();
    
   }
@@ -70,6 +73,7 @@ export class AppComponent implements OnInit, OnDestroy {
           this.usersService.tenantUrl = tenantUrl;
           this.feedService.tenantUrl = tenantUrl;
           this.notificationsService.tenantUrl = tenantUrl;
+          this.forumsService.tenantUrl = tenantUrl;
         }
     );
 

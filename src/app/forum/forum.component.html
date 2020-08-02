@@ -7,12 +7,17 @@
         <div class="publish-form">
 
           <mat-card>
+            <mat-card-header class="card-title">
+                <mat-card-title>Write a question</mat-card-title>
+            </mat-card-header>
             <mat-card-content>
                         <form enctype="multipart/form-data" class="post-form" (ngSubmit)="onSubmitPost(f)" #f="ngForm" #form>
-                        <mat-form-field class="full-width">
-                            <input type="text" placeholder="Question label" matInput ngModel name="title" required>
-                        </mat-form-field>
                         <ckeditor id="editor" name = "question" [config]="config" ngModel [editor]="Editor" (ready)="onReady($event)"></ckeditor>
+                        
+                        <mat-form-field class="full-width">
+                            <input type="text" placeholder="What's your question about?" matInput ngModel name="title" required>
+                        </mat-form-field>
+
                         <mat-form-field class="chip-list">
                             <mat-chip-list #chipList aria-label="Category selection">
                                 <mat-chip
