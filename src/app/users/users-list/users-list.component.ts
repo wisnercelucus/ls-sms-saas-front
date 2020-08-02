@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { User } from '../user.model';
 import { UsersService } from '../users.service';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { AppService } from 'src/app/app.service';
+import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -11,24 +12,30 @@ import { AppService } from 'src/app/app.service';
   styleUrls: ['./users-list.component.css']
 })
 export class UsersListComponent implements OnInit, OnDestroy {
-  loginUserSub:Subscription;
+  
   usersList:User[];
+  /*
+  loginUserSub:Subscription;
   usersListSub:Subscription;
   followUserSub:Subscription;
   tenantUrlSub:Subscription;
   followingListSub:Subscription;
   usersListChangedSub:Subscription;
   followersListSub:Subscription;
-
+  */
   loginUser:User;
   tenantUrl:string;
   followersList:User[]
   followingList:User[]
   //selected = new FormControl(0)
+  destroy$:Subject<void> = new Subject<void>();
 
   constructor(private usersService:UsersService, private appService:AppService) { }
 
   ngOnDestroy(): void {
+    this.destroy$.next()
+    this.destroy$.complete()
+    /*
     if(this.usersListChangedSub){
       this.usersListChangedSub.unsubscribe()
     }
@@ -53,19 +60,29 @@ export class UsersListComponent implements OnInit, OnDestroy {
     if(this.followingListSub){
       this.followingListSub.unsubscribe()
     }
+    */
   }
 
   ngOnInit(): void {
     
-    this.usersListSub = this.usersService.getUsersList().subscribe(
+    //this.usersListSub = 
+    this.usersService.getUsersList()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       res=>{
         this.usersList = res;
       }
     )
 
-    this.usersListChangedSub = this.usersService.usersListrefreshNeeded.subscribe(
+    //this.usersListChangedSub = 
+    this.usersService.usersListrefreshNeeded
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       res=>{
-        this.usersListSub = this.usersService.getUsersList().subscribe(
+        //this.usersListSub = 
+        this.usersService.getUsersList()
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(
           res=>{
             this.usersList = res;
           }
@@ -78,14 +95,20 @@ export class UsersListComponent implements OnInit, OnDestroy {
     this.onGetFollowers();
     this.onGetFollowing();
 
-    this.loginUserSub = this.usersService.loginUser.subscribe(
+    //this.loginUserSub = 
+    this.usersService.loginUser
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       user=>{
         this.loginUser = user
       }
         
     )
 
-    this.tenantUrlSub = this.appService.TENANT_URL.subscribe(
+    //this.tenantUrlSub = 
+    this.appService.TENANT_URL
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       res => {
         this.tenantUrl = res;
       }
@@ -93,7 +116,9 @@ export class UsersListComponent implements OnInit, OnDestroy {
   }
 
   onFollowUser(username:string,  id:string){
-    this.followUserSub = this.usersService.followUser({username:username})
+    //this.followUserSub = 
+    this.usersService.followUser({username:username})
+    .pipe(takeUntil(this.destroy$))
     .subscribe(
       res=>{
         let el =  document.getElementById(id)
@@ -107,7 +132,9 @@ export class UsersListComponent implements OnInit, OnDestroy {
   }
 
   onGetFollowers(){
-    this.followersListSub = this.usersService.getFollowers()
+    //this.followersListSub = 
+    this.usersService.getFollowers()
+    .pipe(takeUntil(this.destroy$))
     .subscribe(
       res=>{
         this.followersList = res;
@@ -118,8 +145,10 @@ export class UsersListComponent implements OnInit, OnDestroy {
 
 
   onGetFollowing(){
-
-    this.followingListSub = this.usersService.getFollowing()
+    
+    //this.followingListSub = 
+    this.usersService.getFollowing()
+    .pipe(takeUntil(this.destroy$))
     .subscribe(
       res=>{
         this.followingList = res;

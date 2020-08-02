@@ -1,17 +1,18 @@
 import { Component, OnDestroy, ViewChild, ElementRef, OnInit, Inject } from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { UsersService } from 'src/app/users/users.service';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 
 import { faPlus, faMinusSquare
 } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormControl, Validators, FormArray, NgForm } from '@angular/forms';
-import {NgxLinkifyjsService, Link, LinkType} from 'ngx-linkifyjs';
+import {NgxLinkifyjsService, Link} from 'ngx-linkifyjs';
 import { FeedService } from 'src/app/feed/feed.service';
 import { User } from 'src/app/users/user.model';
 import { Post } from 'src/app/feed/post.model';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { AppService } from 'src/app/app.service';
+import { takeUntil } from 'rxjs/operators';
 
 interface DialogData{
   postToEdit:Post;
@@ -29,14 +30,15 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
   @ViewChild('form') form: ElementRef;
   
   username:string;
-
+/*
   postCreateSub:Subscription;
   loginUserSub:Subscription;
   pollCreateSub:Subscription;
   postUpdateSub:Subscription;
   updatePollSub:Subscription;
   tenanTUrlSub:Subscription;
-
+*/
+  destroy$:Subject<void> = new Subject<void>();
   pollForm: FormGroup;
   editMode=false;
   postToEdit:Post;
@@ -68,7 +70,11 @@ export class PublishModalFormComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.initForm();
     this.getLogingUser();
-    this.tenanTUrlSub = this.appService.TENANT_URL.subscribe(
+
+    //this.tenanTUrlSub = 
+    this.appService.TENANT_URL
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       res=>{
         this.tenantUrl = res;
       }
@@ -119,7 +125,10 @@ isEmail(email:string) {
 
       const post:any = {content:newContent, has_image:has_image, links:urls}
 
-      this.postCreateSub = this.feedService.createPost(post).subscribe(
+      //this.postCreateSub = 
+      this.feedService.createPost(post)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
         res=>{
           form.reset();
           this.selectedFiles = []
@@ -167,7 +176,10 @@ isEmail(email:string) {
         }
       }
       
-      this.postCreateSub = this.feedService.createPost(fd).subscribe(
+      //this.postCreateSub = 
+      this.feedService.createPost(fd)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
         res=>{
           form.reset();
           this.selectedFiles =[];
@@ -199,7 +211,10 @@ onDocSelected(event:any){
   this.selectedDocs = event.target.files
 }
   getLogingUser(){
-    this.loginUserSub = this.usersService.loginUser.subscribe(
+    //this.loginUserSub = 
+    this.usersService.loginUser
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       user=>{
 
           this.loginUser = user;
@@ -229,7 +244,9 @@ onDocSelected(event:any){
   }
 
   onSubmit(){
-    this.pollCreateSub = this.feedService.askPollQuestion(this.pollForm.value)
+    //this.pollCreateSub = 
+    this.feedService.askPollQuestion(this.pollForm.value)
+    .pipe(takeUntil(this.destroy$))
     .subscribe(
       res=>{
         this.pollForm.reset()
@@ -239,6 +256,9 @@ onDocSelected(event:any){
   }
 
   ngOnDestroy(){
+    this.destroy$.next()
+    this.destroy$.complete()
+      /*
       if(this.postCreateSub){
         this.postCreateSub.unsubscribe()
       }
@@ -257,6 +277,7 @@ onDocSelected(event:any){
       if(this.tenanTUrlSub){
         this.tenanTUrlSub.unsubscribe();
       }
+      */
       
   }
 
@@ -298,7 +319,10 @@ onDocSelected(event:any){
 
       const post:any = {content:newContent, has_new_content: newC, post_id:post_id, has_no_picture:true}
 
-      this.postUpdateSub = this.feedService.updatePost(post, post_id).subscribe(
+      //this.postUpdateSub = 
+      this.feedService.updatePost(post, post_id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
         res=>{
           this.selectedFiles = []
           this.dialogRef.close()
@@ -318,7 +342,10 @@ onDocSelected(event:any){
         fd.append('image', file.name);
       }
 
-      this.postUpdateSub = this.feedService.updatePost(fd,  +fd.get("post_id")).subscribe(
+      //this.postUpdateSub = 
+      this.feedService.updatePost(fd,  +fd.get("post_id"))
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
         res=>{
           form.reset();
           this.dialogRef.close()
@@ -333,7 +360,10 @@ onDocSelected(event:any){
 
   onUpdatePoll(fp:NgForm){
 
-      this.updatePollSub = this.feedService.updatePollQuestion(fp.value).subscribe(
+    //this.updatePollSub = 
+      this.feedService.updatePollQuestion(fp.value)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
         res=>{
           fp.reset()
           this.dialogRef.close()

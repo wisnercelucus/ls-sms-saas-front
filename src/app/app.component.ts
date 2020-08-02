@@ -3,13 +3,14 @@ import { Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { AppService } from './app.service';
 import { UsersService } from './users/users.service';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 
 import * as fromApp from './store/app.reducer';
 import { Store } from '@ngrx/store';
 import * as AuthActions from './auth/store/auth.actions';
 import { FeedService } from './feed/feed.service';
 import { NotificationsService } from './notifications/notifications.service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,8 @@ export class AppComponent implements OnInit, OnDestroy {
   showLoadingSpinner = false;
   instance:string;
   tentantUrl:string;
-  subscribtion:Subscription;
+  //subscribtion:Subscription;
+  destroy$:Subject<void> = new Subject<void>();
 
   constructor(private router: Router, 
               private authService: AuthService,
@@ -59,7 +61,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this.appService.instance = this.instance;
 
     this.authService.instance = this.instance;
-    this.subscribtion = this.appService.TENANT_URL.subscribe(
+    //this.subscribtion = 
+    this.appService.TENANT_URL
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
         tenantUrl => {
           this.authService.tenantUrl = tenantUrl;
           this.usersService.tenantUrl = tenantUrl;
@@ -73,9 +78,13 @@ export class AppComponent implements OnInit, OnDestroy {
     
   }
   ngOnDestroy(){
+    this.destroy$.next()
+    this.destroy$.complete()
+    /*
       if(this.subscribtion){
         this.subscribtion.unsubscribe()
       }
+      */
   }
 
 }

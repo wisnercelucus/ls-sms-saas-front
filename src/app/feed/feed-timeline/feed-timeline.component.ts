@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Post } from 'src/app/feed/post.model';
 import { FeedService } from '../feed.service';
-import { Subscription, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import {  Router, ActivatedRoute} from '@angular/router';
 import { UsersService } from 'src/app/users/users.service';
 import { User } from 'src/app/users/user.model';
@@ -31,8 +31,8 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   toggleCommentForm:false;
 
   tenantUrl:string;
-  deletePostSub: Subscription;
-  tenantUrlSub:Subscription;
+  //deletePostSub: Subscription;
+  //tenantUrlSub:Subscription;
   destroy$:Subject<void> = new Subject<void>();
 
   constructor(
@@ -62,7 +62,10 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
       return false;
      };
     */
-     this.tenantUrlSub =  this.appService.TENANT_URL.subscribe(
+   //this.tenantUrlSub =  
+     this.appService.TENANT_URL
+     .pipe(takeUntil(this.destroy$))
+     .subscribe(
       url => {
           this.tenantUrl = url;
       }

@@ -2,10 +2,10 @@ import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/co
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';;
 import { NgForm, FormControl } from '@angular/forms';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, Subject } from 'rxjs';
 import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
 import {MatChipInputEvent} from '@angular/material/chips';
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, takeUntil } from 'rxjs/operators';
 import { UsersService } from '../users/users.service';
 import { User } from '../users/user.model';
 
@@ -45,7 +45,8 @@ export class ForumComponent implements OnInit, OnDestroy {
   filteredCategories: Observable<string[]>;
   categories: string[] = ['Biology'];
   allCategories: string[] = ['Chemistry', 'Biology', 'History', 'Art', 'Science'];
-  loginUserSub:Subscription;
+  //loginUserSub:Subscription;
+  destroy$:Subject<void> = new Subject<void>();
   loginUser:User;
 
   @ViewChild('categoryInput') categoryInput: ElementRef<HTMLInputElement>;
@@ -99,9 +100,12 @@ export class ForumComponent implements OnInit, OnDestroy {
     };
    }
   ngOnDestroy(): void {
+    this.destroy$.next()
+    this.destroy$.complete()
+    /*
     if(this.loginUserSub){
       this.loginUserSub.unsubscribe();
-    }
+    }*/
     
   }
 
@@ -110,7 +114,10 @@ export class ForumComponent implements OnInit, OnDestroy {
   }
 
   getLogingUser(){
-    this.loginUserSub = this.usersService.loginUser.subscribe (
+    //this.loginUserSub = 
+    this.usersService.loginUser
+    .pipe(takeUntil(this.destroy$))
+    .subscribe (
       user=>{
           this.loginUser = user;
       }

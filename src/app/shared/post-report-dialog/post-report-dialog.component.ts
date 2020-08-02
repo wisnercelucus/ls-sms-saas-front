@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, Inject } from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { UsersService } from 'src/app/users/users.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
 
 import { faPlus, faMinusSquare
 } from '@fortawesome/free-solid-svg-icons';
@@ -9,6 +9,7 @@ import { faPlus, faMinusSquare
 import { NgForm } from '@angular/forms';
 import { FeedService } from 'src/app/feed/feed.service';
 import { User } from 'src/app/users/user.model';
+import { takeUntil } from 'rxjs/operators';
 
 interface DialogData{
   idPostToReport:number;
@@ -23,10 +24,11 @@ export class PostReportDialogComponent implements OnInit, OnDestroy {
 
   faPlus=faPlus;
   faMinusSquare=faMinusSquare;
-
+/*
   postReportCreateSub:Subscription;
   loginUserSub:Subscription;
-
+*/
+  destroy$:Subject<void> = new Subject<void>();
   post_id:number;
   loginUser:User;
 
@@ -49,7 +51,10 @@ export class PostReportDialogComponent implements OnInit, OnDestroy {
 
 
   onSubmitPostReport(form:NgForm){
-      this.postReportCreateSub = this.feedService.reportPost(form.value).subscribe(
+    //this.postReportCreateSub = 
+      this.feedService.reportPost(form.value)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
         res=>{
           form.reset()
           this.dialogRef.close()
@@ -62,7 +67,10 @@ export class PostReportDialogComponent implements OnInit, OnDestroy {
 
 
   getLogingUser(){
-    this.loginUserSub = this.usersService.loginUser.subscribe(
+    //this.loginUserSub = 
+    this.usersService.loginUser
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       user=>{
 
           this.loginUser = user;
@@ -71,6 +79,9 @@ export class PostReportDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
+    this.destroy$.next();
+    this.destroy$.complete;
+    /*
     if(this.postReportCreateSub){
       this.postReportCreateSub.unsubscribe()
     }
@@ -78,7 +89,7 @@ export class PostReportDialogComponent implements OnInit, OnDestroy {
     if(this.loginUserSub){
       this.loginUserSub.unsubscribe();
     }
-    
+    */
     
   }
 

@@ -14,7 +14,7 @@ import { faBirthdayCake,
  faTimesCircle,
  faSpinner,
  faUserCircle, faUsers, faHome, faUser, faShare} from '@fortawesome/free-solid-svg-icons';
-import { Subscription, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { FeedService } from '../feed.service';
 import { Router} from '@angular/router';
 import { NgForm } from '@angular/forms';

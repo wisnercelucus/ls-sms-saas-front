@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UsersService } from 'src/app/users/users.service';
 import { Post } from 'src/app/feed/post.model';
 import { NgForm } from '@angular/forms';
 import { FeedService } from 'src/app/feed/feed.service';
+import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -15,8 +16,11 @@ import { FeedService } from 'src/app/feed/feed.service';
 export class PostShareModalFormComponent implements OnInit, OnDestroy {
 
   username:string;
+  /*
   sub:Subscription;
   sharePostSub:Subscription;
+  */
+ destroy$:Subject<void> = new Subject<void>();
 
   post:Post;
   
@@ -27,7 +31,10 @@ export class PostShareModalFormComponent implements OnInit, OnDestroy {
     private usersService:UsersService,
     private feedService:FeedService
     ) {
-      this.sub = this.usersService.loginUser.subscribe(
+      //this.sub =
+      this.usersService.loginUser
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
         user=>{
             this.username = user.username;
         }
@@ -43,19 +50,25 @@ export class PostShareModalFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-        if(this.sub){
+    this.destroy$.next()
+    this.destroy$.complete()
+    /*
+      if(this.sub){
           this.sub.unsubscribe();
-        }
+      }
      
       if(this.sharePostSub){
         this.sharePostSub.unsubscribe()
       }
-      
+      */
     
   }
 
   onSharePost(form:NgForm){
-    this.sharePostSub = this.feedService.sharePost(form.value)
+    //this.sharePostSub = 
+    this.feedService
+    .sharePost(form.value)
+    .pipe(takeUntil(this.destroy$))
     .subscribe(
       res=>{
         //console.log(res)

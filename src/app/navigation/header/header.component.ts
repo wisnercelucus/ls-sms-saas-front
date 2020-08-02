@@ -1,12 +1,12 @@
 import { Component, OnInit, EventEmitter, Output, OnDestroy} from '@angular/core';
-import { Subscription} from 'rxjs';
+import { Subject} from 'rxjs';
 import { Router} from '@angular/router';
 import { User, AuthUser } from 'src/app/users/user.model';
 import { AppService } from 'src/app/app.service';
 import { UsersService } from 'src/app/users/users.service';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../store/app.reducer';
-import { map } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 import * as AuthActions from '../../auth/store/auth.actions';
 import { NotificationsService } from 'src/app/notifications/notifications.service';
 import { NotificationModel } from 'src/app/notifications/notification.model';
@@ -19,19 +19,19 @@ import { NotificationModel } from 'src/app/notifications/notification.model';
 export class HeaderComponent implements OnInit, OnDestroy {
   @Output() sideNavToggle = new EventEmitter<void>();
   isAuthenticated=false;
-
-
-
   authenticateduser:AuthUser;
   image:string;
   instance:string;
   loginUser:User;
 
+  /*
   userSubs: Subscription;
   loginUserSub:Subscription;
-  notificationList:NotificationModel[];
   notificationSub:Subscription;
-
+  */
+  notificationList:NotificationModel[];
+  destroy$:Subject<void> = new Subject<void>();
+  
 
   constructor(private router: Router,  
               private appService:AppService, 
@@ -50,7 +50,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
       this.urlHasInstance();
       
-      this.userSubs = this.store.select('auth').pipe(
+      //this.userSubs = 
+      this.store.select('auth')
+      .pipe(takeUntil(this.destroy$))
+      .pipe(
         map(
           authState =>{
             return authState.authUser;
@@ -67,8 +70,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
         );
 
         this.getLogingUser();
-
-        this.notificationSub = this.notificationsService.getUsersNotification()
+        //this.notificationSub = 
+        this.notificationsService.getUsersNotification()
+        .pipe(takeUntil(this.destroy$))
         .subscribe(
           res=>{
             this.notificationList = res;
@@ -83,7 +87,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   getLogingUser(){
-      this.loginUserSub = this.userService.getMyProfile().subscribe(
+      //this.loginUserSub = 
+      this.userService.getMyProfile()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
         user=>{
             this.loginUser = user;
         }
@@ -100,6 +107,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
   
   ngOnDestroy(){
+    this.destroy$.next()
+    this.destroy$.complete()
+  
+    /*
     if (this.userSubs){
       this.userSubs.unsubscribe();
     }
@@ -110,6 +121,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if(this.notificationSub){
       this.notificationSub.unsubscribe();
     }
+    */
 
   }
 

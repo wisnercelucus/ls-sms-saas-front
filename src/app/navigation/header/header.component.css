@@ -83,6 +83,11 @@ a:hover{
     margin-top: 4px;
 }
 
+.avatar-xs-notification{
+    height: 35px !important;
+    width: 35px !important;
+    border-radius: 100% !important;
+}
 
 .handle-user .avatar-xs{
     border-radius: 100%;
@@ -117,7 +122,6 @@ a:hover{
     width: 35px;
     margin-right: 6px;
 }
-
 
 @media screen and (max-width: 599px){
     .site-logo{

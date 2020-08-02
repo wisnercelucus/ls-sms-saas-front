@@ -51,9 +51,7 @@ export class DeleteConfirmDialogComponent {
             this.dialogRef.close();
           }
         );
-      }
-      
-      
+      }  
       
     }
     ngOnDestroy(){

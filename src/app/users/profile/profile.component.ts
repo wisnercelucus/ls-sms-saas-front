@@ -9,10 +9,11 @@ import { faBirthdayCake,
          faUserCircle, faUsers, faHome, faUser} from '@fortawesome/free-solid-svg-icons';
 import { UsersService } from '../users.service';
 import { User } from '../user.model';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Post } from 'src/app/feed/post.model';
 import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { AppService } from 'src/app/app.service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
@@ -34,15 +35,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
   
   loginUser:User;
   user:User;
-
+  /*
   loginUserSub:Subscription;
   userProfileSub:Subscription;
   appServiceSub:Subscription;
-
+  */
   username:string;
   postList:Post[];
   tenantUrl:string;
-  
+  destroy$:Subject<void> = new Subject<void>();
   
   constructor(private userService:UsersService, private appService:AppService, private router:Router, private route:ActivatedRoute) { }
 
@@ -52,7 +53,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
       return false;
      };
 
-     this.appServiceSub = this.appService.TENANT_URL.subscribe(url=>{
+     //this.appServiceSub = 
+     this.appService.TENANT_URL
+     .pipe(takeUntil(this.destroy$))
+     .subscribe(url=>{
         this.tenantUrl = url;
      })
 
@@ -60,7 +64,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.username = this.route.snapshot.params['username'];
     
 
-    this.userProfileSub = this.userService.getProfile(this.username).subscribe(
+    //this.userProfileSub = 
+    this.userService.getProfile(this.username)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       user=>{
         this.user = user;
       }
@@ -70,7 +77,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   getLogingUser(){
-    this.loginUserSub = this.userService.loginUser.subscribe(
+    //this.loginUserSub = 
+    this.userService.loginUser
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
           user=>{
             this.loginUser = user;
           }
@@ -78,6 +88,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
 
 ngOnDestroy(){
+  this.destroy$.next()
+  this.destroy$.complete()
+  /*
   if(this.loginUserSub){
     this.loginUserSub.unsubscribe();
   }
@@ -88,7 +101,7 @@ ngOnDestroy(){
   
   if(this.appServiceSub){
     this.appServiceSub.unsubscribe()
-  }
+  }*/
 
 }
 
