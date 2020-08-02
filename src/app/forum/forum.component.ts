@@ -9,25 +9,27 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 import { UsersService } from '../users/users.service';
 import { User } from '../users/user.model';
 import { ForumsService } from './forums.service';
-import { HttpParams } from '@angular/common/http';
+import { HttpParams, HttpClient } from '@angular/common/http';
+import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
+
 
 export class UploadAdapter {
-  constructor( public loader ) {
+  constructor( public loader, private http?:HttpClient ) {
      this.loader = loader;
+     this.http = http;
   }
 
   //the uploadFile method use to upload image to your server
-  uploadFile(file,url?:string,user?:string){
+  uploadFile(file,url?:string){
+    let http: HttpClient;
     let name = '';
-    url='your api';
     let formData:FormData = new FormData();
     let headers = new Headers();
     name = file.name;
-    formData.append('attachment', file, name);
+    formData.append('image', file, name);
     const dotIndex = name.lastIndexOf('.');
     const fileName  = dotIndex>0?name.substring(0,dotIndex):name;
     formData.append('name', fileName);
-    formData.append('source', user);
   
     headers.append('Content-Type', 'multipart/form-data');
     headers.append('Accept', 'application/json');
@@ -39,21 +41,22 @@ export class UploadAdapter {
     };
   //http post return an observer
   //so I need to convert to Promise
-    //return this.http.post(url,formData,options);
+    return http.post(url,formData,options);
   }
 
-
-  /*
+/*
+  
   upload() {
       let upload = new Promise((resolve, reject)=>{
         this.loader['file'].then(
             (data)=>{
-                this.uploadFile(data,this.url,'test')
+                this.uploadFile(data,
+                  'http://fdsa.demo.local:8000/forums/topics/image/create/')
                 .subscribe(
                     (result)=>{
                       //resolve data formate must like this
                       //if **default** is missing, you will get an error
-                        **resolve({ default: result['attachment'] })**
+                        resolve({ default: result['image'] })
                     },
                     (error)=>{
                         reject(data.msg);
@@ -67,7 +70,7 @@ export class UploadAdapter {
   */
 
 
-
+/*
   upload() {
      return this.loader.file
            .then( file => new Promise( ( resolve, reject ) => {
@@ -78,7 +81,7 @@ export class UploadAdapter {
                  myReader.readAsDataURL(file);
            } ) );
   };
-
+*/
   abort() {
     console.log("abort")
   }
@@ -111,14 +114,15 @@ export class ForumComponent implements OnInit, OnDestroy {
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   constructor(private usersService:UsersService,
-    private forumsService:ForumsService
+    private forumsService:ForumsService,
+    private http:HttpClient
     ) {
     this.filteredCategories = this.categoryCtrl.valueChanges.pipe(
       startWith(null),
       map((category: string | null) => category ? this._filter(category) : this.allCategories.slice()));
 
-
     this.config = {
+      placeholder: 'Type your topic',
       toolbar: {
         items: [
           'heading',
@@ -245,9 +249,13 @@ export class ForumComponent implements OnInit, OnDestroy {
   }
 
   onReady(eventData) {
-      eventData.plugins.get('FileRepository').createUploadAdapter = function (loader) {
+    eventData.plugins.get('FileRepository').createUploadAdapter = function (loader) {
       return new UploadAdapter(loader);
     };
+  }
+
+  public onChange( $event: ChangeEvent  ) {
+    //console.log($event.editor)
   }
 
 }

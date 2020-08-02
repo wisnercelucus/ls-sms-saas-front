@@ -22,3 +22,7 @@ a:hover{
     display: inline-block;
     padding-left: 6px;
 }
+
+:host ::ng-deep .ck-editor__editable_inline {
+    min-height: 100px;
+}
