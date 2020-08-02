@@ -25,8 +25,10 @@ export class PasswordChangeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-
+    if(this.changePasswordSub){
       this.changePasswordSub.unsubscribe();
+    }
+      
   
   }
 

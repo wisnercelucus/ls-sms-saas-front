@@ -43,10 +43,14 @@ export class PostShareModalFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-
-      this.sub.unsubscribe();
-    
-      this.sharePostSub.unsubscribe()
+        if(this.sub){
+          this.sub.unsubscribe();
+        }
+     
+      if(this.sharePostSub){
+        this.sharePostSub.unsubscribe()
+      }
+      
     
   }
 

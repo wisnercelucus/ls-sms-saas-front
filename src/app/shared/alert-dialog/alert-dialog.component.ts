@@ -11,7 +11,10 @@ export class AlertDialogComponent implements OnInit, OnDestroy {
 
   constructor() { }
   ngOnDestroy(): void {
-    this.close.unsubscribe()
+    if(this.close){
+      this.close.unsubscribe()
+    }
+    
   }
 
   ngOnInit(): void {

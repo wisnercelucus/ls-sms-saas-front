@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { FeedService} from './feed.service';
 
 import { faPlus, faMinusSquare
@@ -10,6 +10,7 @@ import { UsersService } from '../users/users.service';
 import { Router } from '@angular/router';
 import {NgxLinkifyjsService, Link, LinkType} from 'ngx-linkifyjs';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -23,10 +24,10 @@ export class FeedComponent implements OnInit, OnDestroy {
   @ViewChild('form') form: ElementRef;
   @ViewChild("textarea") textarea: ElementRef;
 
-  postsSub:Subscription;
-  postCreateSub:Subscription;
-  loginUserSub:Subscription;
-  pollCreateSub:Subscription;
+  //postsSub:Subscription;
+  //postCreateSub:Subscription;
+  //loginUserSub:Subscription;
+  //pollCreateSub:Subscription;
 
   pollForm: FormGroup;
   postForm:FormGroup;
@@ -40,6 +41,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   selectedDocs:File[]=[]
   imagePreviewUrl:string;
   imagePreviewUrls:string[]=[];
+  destroy$:Subject<void> = new Subject<void>();
 
   
   constructor(
@@ -68,7 +70,10 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   getUserData(username:string){   
     if(username){
-      this.postsSub =  this.feedService.getUserPost(this.username).subscribe();
+     // this.postsSub
+      this.feedService.getUserPost(this.username)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe();
       this.router.navigate(['/accounts', username])
     }
   }
@@ -111,7 +116,10 @@ isEmail(email:string) {
 
       const post:any = {content:newContent, has_image:has_image, links:urls}
 
-      this.postCreateSub = this.feedService.createPost(post).subscribe(
+      //this.postCreateSub = 
+     this.feedService.createPost(post)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
         res=>{
           form.reset();
           this.selectedFiles = []
@@ -159,8 +167,10 @@ isEmail(email:string) {
           fd.append("file", doc.name);
         }
       }
-      
-      this.postCreateSub = this.feedService.createPost(fd).subscribe(
+      //this.postCreateSub = 
+      this.feedService.createPost(fd)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
         res=>{
           form.reset();
           this.selectedFiles =[];
@@ -176,7 +186,10 @@ isEmail(email:string) {
   }
 
   getLogingUser(){
-    this.loginUserSub = this.usersService.loginUser.subscribe(
+    //this.loginUserSub = 
+    this.usersService.loginUser
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       user=>{
 
           this.loginUser = user;
@@ -206,7 +219,9 @@ isEmail(email:string) {
   }
 
   onSubmit(){
-    this.pollCreateSub = this.feedService.askPollQuestion(this.pollForm.value)
+    //this.pollCreateSub = 
+    this.feedService.askPollQuestion(this.pollForm.value)
+    .pipe(takeUntil(this.destroy$))
     .subscribe(
       res=>{
         this.pollForm.reset()
@@ -215,6 +230,9 @@ isEmail(email:string) {
   }
 
   ngOnDestroy(){
+    this.destroy$.next()
+    this.destroy$.complete()
+    /*
     if(this.postsSub){
         this.postsSub.unsubscribe();
     }
@@ -226,7 +244,7 @@ isEmail(email:string) {
     }
     if(this.pollCreateSub){
       this.pollCreateSub.unsubscribe()
-    }
+    }*/
   }
 
   onAddOption(){

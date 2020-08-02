@@ -239,14 +239,25 @@ onDocSelected(event:any){
   }
 
   ngOnDestroy(){
-  
-      this.postCreateSub.unsubscribe()
-      this.loginUserSub.unsubscribe();
-      this.pollCreateSub.unsubscribe()
-      this.postUpdateSub.unsubscribe()   
-      this.updatePollSub.unsubscribe()    
-      this.tenanTUrlSub.unsubscribe();
-    
+      if(this.postCreateSub){
+        this.postCreateSub.unsubscribe()
+      }
+      if(this.loginUserSub){
+        this.loginUserSub.unsubscribe();
+      }
+      if(this.pollCreateSub){
+        this.pollCreateSub.unsubscribe()
+      }
+      if(this.postUpdateSub){
+        this.postUpdateSub.unsubscribe()   
+      }
+      if(this.updatePollSub){
+        this.updatePollSub.unsubscribe()  
+      }
+      if(this.tenanTUrlSub){
+        this.tenanTUrlSub.unsubscribe();
+      }
+      
   }
 
   onAddOption(){

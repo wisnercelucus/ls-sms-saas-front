@@ -14,7 +14,7 @@ import { faBirthdayCake,
  faTimesCircle,
  faSpinner,
  faUserCircle, faUsers, faHome, faUser, faShare} from '@fortawesome/free-solid-svg-icons';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
 import { FeedService } from '../feed.service';
 import { Router} from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -24,6 +24,7 @@ import { DeleteConfirmDialogComponent } from 'src/app/shared/delete-confirm-dial
 import { PublishModalFormComponent } from 'src/app/shared/publish-modal-form/publish-modal-form.component';
 import { PostReportDialogComponent } from 'src/app/shared/post-report-dialog/post-report-dialog.component';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-post-item',
@@ -51,14 +52,14 @@ export class PostItemComponent implements OnInit {
   faTimesCircle = faTimesCircle;
   faSpinner = faSpinner;
   faShare = faShare
-
+/*
   postsSub:Subscription;
   createCommentSub:Subscription;
   postLikeSub:Subscription;
   votePollSub:Subscription;
   changeVoteSub:Subscription;
   likeCommentSub:Subscription;
-  
+  */
   toggleCommentForm:false;
 
   centered = false;
@@ -68,7 +69,9 @@ export class PostItemComponent implements OnInit {
   color: string;
   
  
-  deletePostSub: Subscription;
+  //deletePostSub: Subscription;
+
+  destroy$:Subject<void> = new Subject<void>();
 
 
   constructor(public dialog: MatDialog, 
@@ -83,7 +86,10 @@ export class PostItemComponent implements OnInit {
 
   getUserData(username:string){   
     if(username){
-      this.postsSub =  this.feedService.getUserPost(username).subscribe();
+      //this.postsSub =  
+      this.feedService.getUserPost(username)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe();
       this.router.navigate(['/accounts', username])
     }
   }
@@ -106,10 +112,16 @@ export class PostItemComponent implements OnInit {
 
 
  deletePost(id:number){
-  this.deletePostSub = this.feedService.deletePost(id).subscribe()
+  //this.deletePostSub = 
+  this.feedService.deletePost(id)
+  .pipe(takeUntil(this.destroy$))
+  .subscribe()
   this.router.navigate(['/feed'])
 }
  ngOnDestroy(){
+   this.destroy$.next()
+   this.destroy$.complete()
+   /*
     this.likeCommentSub.unsubscribe();
     this.postsSub.unsubscribe();
     this.createCommentSub.unsubscribe()
@@ -117,13 +129,20 @@ export class PostItemComponent implements OnInit {
     this.postLikeSub.unsubscribe()
     this.votePollSub.unsubscribe()
     this.changeVoteSub.unsubscribe()
+   */ 
  }
 
  submitComment(form:NgForm){
      if(!form.value.parent_id){
-       this.createCommentSub = this.feedService.postComment(form.value).subscribe()
+       //this.createCommentSub = 
+       this.feedService.postComment(form.value)
+       .pipe(takeUntil(this.destroy$))
+       .subscribe()
      }else{
-       this.createCommentSub = this.feedService.postComment(form.value).subscribe()
+      //this.createCommentSub = 
+       this.feedService.postComment(form.value)
+       .pipe(takeUntil(this.destroy$))
+       .subscribe()
      }
  }
 
@@ -150,7 +169,10 @@ export class PostItemComponent implements OnInit {
  }
 
  onLikePost(id:number){
-     this.postLikeSub =  this.feedService.likePost(+id).subscribe(
+    //this.postLikeSub =  
+     this.feedService.likePost(+id)
+     .pipe(takeUntil(this.destroy$))
+     .subscribe(
        res=>{
 
          let element = document.getElementById("post"+id);
@@ -183,8 +205,10 @@ export class PostItemComponent implements OnInit {
 
  changeVote(form:NgForm, id:string){
    let element = document.getElementById(id);
-
-   this.changeVoteSub = this.feedService.changeVotePoll(form.value).subscribe(
+    //this.changeVoteSub = 
+    this.feedService.changeVotePoll(form.value)
+   .pipe(takeUntil(this.destroy$))
+   .subscribe(
      res=>{
      }
    )
@@ -201,8 +225,10 @@ export class PostItemComponent implements OnInit {
    if(!form.value['option']){
      return
    }
-
-   this.votePollSub = this.feedService.votePoll(form.value).subscribe();
+   //this.votePollSub = 
+   this.feedService.votePoll(form.value)
+   .pipe(takeUntil(this.destroy$))
+   .subscribe();
  }
 
  openDialog(post:Post): void {
@@ -216,7 +242,7 @@ export class PostItemComponent implements OnInit {
 
  }
 
- openDialog_(post): void {
+ openDialog_(post:Post): void {
   const dialogRef = this.dialog_.open(PublishModalFormComponent, {
     width: '500px',
     data:{
@@ -236,7 +262,9 @@ export class PostItemComponent implements OnInit {
 }
 
 onLikeComment(id:number, elid:string){
-  this.likeCommentSub = this.feedService.likeComment(id)
+  //this.likeCommentSub = 
+  this.feedService.likeComment(id)
+  .pipe(takeUntil(this.destroy$))
   .subscribe(
     res=>{
       let element = document.getElementById(elid)

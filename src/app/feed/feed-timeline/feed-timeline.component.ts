@@ -2,11 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Post } from 'src/app/feed/post.model';
 import { FeedService } from '../feed.service';
-import { Subscription } from 'rxjs';
-import {  Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { Subscription, Subject } from 'rxjs';
+import {  Router, ActivatedRoute} from '@angular/router';
 import { UsersService } from 'src/app/users/users.service';
 import { User } from 'src/app/users/user.model';
 import { AppService } from 'src/app/app.service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-feed-timeline',
@@ -18,12 +19,12 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   dataSource:Post[];
   
   loginUser:User;
-
+/*
   feedSub:Subscription;
   feedSub1:Subscription;
   postsSub:Subscription;
   loginUserSub:Subscription;
-
+*/
 
   username:string;
   
@@ -31,7 +32,8 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
 
   tenantUrl:string;
   deletePostSub: Subscription;
-  tenantUrlSub:Subscription; 
+  tenantUrlSub:Subscription;
+  destroy$:Subject<void> = new Subject<void>();
 
   constructor(
               private feedService:FeedService, 
@@ -45,7 +47,10 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
 
   getUserData(username:string){   
     if(username){
-      this.postsSub =  this.feedService.getUserPost(this.username).subscribe();
+      //this.postsSub =  
+      this.feedService.getUserPost(this.username)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe();
       this.getAllUserPosts();
       this.router.navigate(['/accounts', username])
     }
@@ -66,20 +71,36 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
     this.username = this.route.snapshot.params['username'];
 
     if(!this.username){
-      this.postsSub =  this.feedService.getPosts().subscribe();
+      //this.postsSub =  
+      this.feedService.getPosts()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe();
 
-      this.feedService.refreshNeeded.subscribe(
+      this.feedService.refreshNeeded
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
         ()=>{
-          this.postsSub =  this.feedService.getPosts().subscribe();
+          //this.postsSub =  
+          this.feedService.getPosts()
+          .pipe(takeUntil(this.destroy$))
+          .subscribe();
         }
       )
       this.getAllPosts();
     }else{
-        this.postsSub =  this.feedService.getUserPost(this.username).subscribe();
+      //this.postsSub =  
+        this.feedService.getUserPost(this.username)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe();
 
-        this.feedService.refreshNeeded.subscribe(
+        this.feedService.refreshNeeded
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(
           ()=>{
-            this.postsSub =  this.feedService.getUserPost(this.username).subscribe();
+            //this.postsSub =  
+            this.feedService.getUserPost(this.username)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe();
           }
         )
         this.getAllUserPosts();
@@ -92,7 +113,10 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   }
   
   getLogingUser(){
-    this.loginUserSub = this.usersService.loginUser.subscribe(
+    //this.loginUserSub = 
+    this.usersService.loginUser
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       user=>{
         this.loginUser = user;
       }
@@ -101,7 +125,10 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
 
 
   getAllPosts(){
-    this.feedSub = this.feedService.postsListChanged.subscribe(
+    //this.feedSub = 
+    this.feedService.postsListChanged
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       (postL:Post[]) =>{
         this.dataSource = postL;
       }
@@ -109,7 +136,10 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
   }
 
   getAllUserPosts(){
-    this.feedSub1 = this.feedService.userPostsListChanged.subscribe(
+    //this.feedSub1 = 
+    this.feedService.userPostsListChanged
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       (postL:Post[]) =>{
         this.dataSource = postL;
       }
@@ -118,11 +148,15 @@ export class FeedTimelineComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(){
+    this.destroy$.next()
+    this.destroy$.complete()
+    /*
       this.feedSub.unsubscribe()
       this.feedSub1.unsubscribe()
       this.postsSub.unsubscribe()
       this.loginUserSub.unsubscribe()
       this.tenantUrlSub.unsubscribe()
+      */
   }
 
 

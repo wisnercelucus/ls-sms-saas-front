@@ -71,10 +71,14 @@ export class PostReportDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-
-    this.postReportCreateSub.unsubscribe()
+    if(this.postReportCreateSub){
+      this.postReportCreateSub.unsubscribe()
+    }
     
-    this.loginUserSub.unsubscribe();
+    if(this.loginUserSub){
+      this.loginUserSub.unsubscribe();
+    }
+    
     
   }
 

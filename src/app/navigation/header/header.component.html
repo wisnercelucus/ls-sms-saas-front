@@ -58,14 +58,14 @@
                         </span>
                     </a>
                 </span>
-            </mat-list>
+            <mat-list>
                 <div mat-subheader>Notes</div>
                 <mat-list-item *ngFor="let notification of notificationList">
                     <mat-icon mat-list-icon>note</mat-icon>
                     <div mat-line>{{notification.content}}</div>
                     <div mat-line> {{notification.created_at}} </div>
                 </mat-list-item>
-                </mat-list>
+            </mat-list>
             </mat-menu>
             
 

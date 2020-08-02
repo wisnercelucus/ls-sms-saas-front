@@ -3,9 +3,10 @@ import { Post } from '../post.model';
 import { User } from 'src/app/users/user.model';
 import { Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { FeedService } from '../feed.service';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { UsersService } from 'src/app/users/users.service';
 import { AppService } from 'src/app/app.service';
+import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -18,12 +19,13 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   loginUser:User;
   postId:number;
 
-  postSub:Subscription;
-  singlePostChangeSub:Subscription;
-  loginUserSub:Subscription;
-  tenantUrlSub:Subscription;
+  //postSub:Subscription;
+  //singlePostChangeSub:Subscription;
+  //loginUserSub:Subscription;
+  //tenantUrlSub:Subscription;
 
   tenantUrl:string;
+  destroy$: Subject<void> = new Subject<void>();
 
   constructor(private route:ActivatedRoute,
     private router:Router,
@@ -31,10 +33,14 @@ export class PostDetailComponent implements OnInit, OnDestroy {
      private feedService:FeedService, private appService:AppService) { }
      
   ngOnDestroy(): void {
+    this.destroy$.next()
+    this.destroy$.complete()
+    /*
     this.postSub.unsubscribe();
     this.singlePostChangeSub.unsubscribe(); 
     this.loginUserSub.unsubscribe();
     this.tenantUrlSub.unsubscribe();
+    */
     
   }
 
@@ -47,7 +53,10 @@ export class PostDetailComponent implements OnInit, OnDestroy {
     this.postId = this.route.snapshot.params['id'];
     this.getPost(this.postId);
     
-    this.singlePostChangeSub = this.feedService.refreshNeeded.subscribe(
+    //this.singlePostChangeSub = 
+    this.feedService.refreshNeeded
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       res=>{
         this.getPost(this.postId);
       }
@@ -55,7 +64,10 @@ export class PostDetailComponent implements OnInit, OnDestroy {
 
     this.getLogingUser();
 
-   this.tenantUrlSub = this.appService.TENANT_URL.subscribe(
+    //this.tenantUrlSub = 
+   this.appService.TENANT_URL
+   .pipe(takeUntil(this.destroy$))
+   .subscribe(
       url => {
           this.tenantUrl = url;
       }
@@ -63,7 +75,10 @@ export class PostDetailComponent implements OnInit, OnDestroy {
 
   }
   getLogingUser(){
-    this.loginUserSub = this.usersService.loginUser.subscribe(
+    //this.loginUserSub = 
+    this.usersService.loginUser
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       user=>{
 
           this.loginUser = user;
@@ -71,7 +86,10 @@ export class PostDetailComponent implements OnInit, OnDestroy {
     );
 }
   getPost(id:number){
-    this.postSub = this.feedService.getPost(id).subscribe(
+    //this.postSub = 
+    this.feedService.getPost(id)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       res=>{
         this.post = res;
       },

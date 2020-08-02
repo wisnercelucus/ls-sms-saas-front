@@ -57,8 +57,9 @@ export class DeleteConfirmDialogComponent {
       
     }
     ngOnDestroy(){
-
-      this.deletePostSub.unsubscribe()
-      
+      if(this.deletePostSub){
+        this.deletePostSub.unsubscribe()
+      }
+       
     }
 }

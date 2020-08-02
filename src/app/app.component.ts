@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, Event, NavigationStart, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { AppService } from './app.service';
 import { UsersService } from './users/users.service';
@@ -20,7 +20,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   showLoadingSpinner = false;
   instance:string;
-  //userSubs:Subscription;
   tentantUrl:string;
   subscribtion:Subscription;
 
@@ -74,10 +73,9 @@ export class AppComponent implements OnInit, OnDestroy {
     
   }
   ngOnDestroy(){
-      //this.userSubs.unsubscribe()
-
-      this.subscribtion.unsubscribe()
-
+      if(this.subscribtion){
+        this.subscribtion.unsubscribe()
+      }
   }
 
 }

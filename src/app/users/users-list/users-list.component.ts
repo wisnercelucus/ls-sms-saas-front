@@ -3,7 +3,7 @@ import { User } from '../user.model';
 import { UsersService } from '../users.service';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/app.service';
-import { FormControl } from '@angular/forms';
+
 
 @Component({
   selector: 'app-users-list',
@@ -11,10 +11,8 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./users-list.component.css']
 })
 export class UsersListComponent implements OnInit, OnDestroy {
-  
-  usersList:User[];
-
   loginUserSub:Subscription;
+  usersList:User[];
   usersListSub:Subscription;
   followUserSub:Subscription;
   tenantUrlSub:Subscription;
@@ -31,27 +29,30 @@ export class UsersListComponent implements OnInit, OnDestroy {
   constructor(private usersService:UsersService, private appService:AppService) { }
 
   ngOnDestroy(): void {
-
+    if(this.usersListChangedSub){
       this.usersListChangedSub.unsubscribe()
-    
-
+    }
+    if(this.usersListSub){
       this.usersListSub.unsubscribe()
-    
+    }
 
-
+    if(this.followUserSub){
       this.followUserSub.unsubscribe()
-    
+    }
 
+    if(this.loginUserSub){
       this.loginUserSub.unsubscribe()
-    
-
+    }
+    if(this.tenantUrlSub){
       this.tenantUrlSub.unsubscribe()
-
+    }
+    if(this.followersListSub){
       this.followersListSub.unsubscribe()
-    
+    }
 
+    if(this.followingListSub){
       this.followingListSub.unsubscribe()
-    
+    }
   }
 
   ngOnInit(): void {
