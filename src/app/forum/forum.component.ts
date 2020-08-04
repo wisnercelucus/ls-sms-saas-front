@@ -10,7 +10,6 @@ import { UsersService } from '../users/users.service';
 import { User } from '../users/user.model';
 import { ForumsService } from './forums.service';
 import { HttpClient } from '@angular/common/http';
-import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 import { Topic } from './topic.model';
 import { AppService } from '../app.service';
 
@@ -300,14 +299,14 @@ export class ForumComponent implements OnInit, OnDestroy {
     })
   }
 
-  onReady(eventData) {
-    eventData.plugins.get('FileRepository').createUploadAdapter = function (loader) {
-      return new UploadAdapter(loader);
-    };
-  }
+  public onEditorCreated(quill: any) {
 
-  public onChange( $event: ChangeEvent  ) {
-    //console.log($event.editor)
+    (window as any).mathquill4quill()(quill, {
+      displayHistory: true, // defaults to false
+      historyCacheKey: '__my_app_math_history_cachekey_', // optional
+      historySize: 20, // optional (defaults to 10)
+      operators: [["\\sqrt[n]{x}", "\\nthroot"], ["\\frac{x}{y}","\\frac"]]
+    });
   }
 
 }
