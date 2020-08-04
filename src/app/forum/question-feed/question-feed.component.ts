@@ -13,6 +13,7 @@ export class QuestionFeedComponent implements OnInit, OnDestroy {
   @Input() topicList: Topic[];
   tenantUrl:string;
   destroy$:Subject<void> = new Subject<void>();
+
   constructor(private appService:AppService) { }
 
   ngOnInit(): void {
@@ -20,9 +21,9 @@ export class QuestionFeedComponent implements OnInit, OnDestroy {
   }
 
   getTenantUrl(){
-    this.appService.TENANT_URL.pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(
+    this.appService.TENANT_URL
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       url=>{
         this.tenantUrl = url;
       }
