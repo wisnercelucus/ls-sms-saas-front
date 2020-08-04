@@ -27,9 +27,24 @@
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
               "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css",
+              "./node_modules/quill/dist/quill.core.css",
+              "./node_modules/quill/dist/quill.bubble.css",
+              "./node_modules/quill/dist/quill.snow.css",
+              "./node_modules/quill-emoji/dist/quill-emoji.css",
+              "./node_modules/katex/dist/katex.min.css",
+              "./node_modules/mathquill/build/mathquill.css",
+              "./node_modules/mathquill4quill/build/mathquill4quill.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/katex/dist/katex.min.js",
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/mathquill/build/mathquill.min.js",
+              "./node_modules/mathquill4quill/build/mathquill4quill.min.js",
+              "./node_modules/quill/dist/quill.js",
+              "src/assets/scripts/mathquilladvanced.js"
+              
+            ]
           },
           "configurations": {
             "production": {

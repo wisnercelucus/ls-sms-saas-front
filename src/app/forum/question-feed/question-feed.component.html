@@ -1,1 +1,5 @@
-<p>question-feed works!</p>
+<div *ngIf="topicList">
+    <div *ngFor="let topic of topicList">
+        <app-question-item [topic] = "topic" [tenantUrl]="tenantUrl"></app-question-item>
+    </div>
+</div>

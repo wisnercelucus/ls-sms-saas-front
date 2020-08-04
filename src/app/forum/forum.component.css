@@ -51,9 +51,18 @@ ul li{
 }
 
 
+
+
 .feed .main-content{
-    width: 800px;
+    max-width: 620px;
     margin: 0 auto;
+
+}
+
+.feed .forums-feed{
+    max-width: 600px;
+    margin: 0 auto;
+   
 }
 
 .avatar-xs-card{
@@ -73,8 +82,6 @@ ul li{
     margin-top: 8px;
 }
 .discard{
-    background-color: #fd602f;
-    color: white;
     margin-top: 8px;
     margin-right: 8px;
 }
@@ -108,11 +115,11 @@ ul li{
   }
   .chip-list {
     width: 100%;
-    margin-top: 20px;
+    margin-bottom: 30px;
   }
 .full-width{
     width: 100%;
-    margin-top: 20px;
+    margin-bottom: 10px;
 }
 .form-group{
     display: flex;

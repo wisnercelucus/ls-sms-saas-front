@@ -1,0 +1,16 @@
+.header-image {
+    background-size: cover;
+    /*style="background-image: url({{topic.user.profile_image}})";*/
+  }
+
+.question-card{
+      margin-bottom: 12px;
+}
+
+.question-content{
+    overflow-x: hidden;
+}
+
+.question-content:hover{
+    overflow-x: scroll;
+}

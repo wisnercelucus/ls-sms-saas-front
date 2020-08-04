@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgxLinkifyjsModule } from 'ngx-linkifyjs';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,9 +13,7 @@ import { BannerComponent } from './welcome/banner/banner.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PricingComponent } from './welcome/pricing/pricing.component';
 import { TestimonialsComponent } from './welcome/testimonials/testimonials.component';
-
 import { FaqComponent } from './welcome/faq/faq.component';
-
 import { ParticlesModule } from 'ngx-particle';
 import { ParticlesComponent } from './welcome/particles/particles.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
@@ -37,7 +34,6 @@ import { AuthEffects } from './auth/store/auth.effects';
 import { FeedRoutingModule } from './feed/feed.routing';
 import { FeedModule } from './feed/feed.module';
 import { NotificationsComponent } from './notifications/notifications.component';
-
 
 
 @NgModule({
@@ -82,7 +78,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
     ForumModule,
     ForumRoutingModule,
     FeedRoutingModule,
-    FeedModule,
+    FeedModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi:true}],
   bootstrap: [AppComponent]

@@ -9,82 +9,107 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 import { UsersService } from '../users/users.service';
 import { User } from '../users/user.model';
 import { ForumsService } from './forums.service';
-import { HttpParams, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
+import { Topic } from './topic.model';
+import { AppService } from '../app.service';
 
 
 export class UploadAdapter {
-  constructor( public loader, private http?:HttpClient ) {
+  xhr = new XMLHttpRequest();
+
+  constructor( public loader,
+    private http?:HttpClient ) {
      this.loader = loader;
-     this.http = http;
   }
 
-  //the uploadFile method use to upload image to your server
-  uploadFile(file,url?:string){
-    let http: HttpClient;
-    let name = '';
-    let formData:FormData = new FormData();
-    let headers = new Headers();
-    name = file.name;
-    formData.append('image', file, name);
-    const dotIndex = name.lastIndexOf('.');
-    const fileName  = dotIndex>0?name.substring(0,dotIndex):name;
-    formData.append('name', fileName);
+  _initRequest() {
+    const xhr = this.xhr
+
+    // Note that your request may look different. It is up to you and your editor
+    // integration to choose the right communication channel. This example uses
+    // a POST request with JSON as a data structure but your configuration
+    // could be different.
+    xhr.open( 'post', 'http://fdsa.demo.local:8000/forums/api/topics/image/create/', true);
+
+    xhr.setRequestHeader('Authorization', 'Token ' + '76762413b07245198b9cf78dd162929250b91559');
+    xhr.responseType = 'json';
+    }
+
+    _initListeners( resolve, reject, file ) {
+      const xhr = this.xhr;
+      const loader = this.loader;
+      const genericErrorText = `Couldn't upload file: ${ file.name }.`;
+
+      xhr.addEventListener( 'error', () => reject( genericErrorText ) );
+      xhr.addEventListener( 'abort', () => reject() );
+      xhr.addEventListener( 'load', () => {
+          const response = xhr.response;
+
+          // This example assumes the XHR server's "response" object will come with
+          // an "error" which has its own "message" that can be passed to reject()
+          // in the upload promise.
+          //
+          // Your integration may handle upload errors in a different way so make sure
+          // it is done properly. The reject() function must be called when the upload fails.
+          if ( !response || response.error ) {
+              return reject( response && response.error ? response.error.message : genericErrorText );
+          }
+
+          // If the upload is successful, resolve the upload promise with an object containing
+          // at least the "default" URL, pointing to the image on the server.
+          // This URL will be used to display the image in the content. Learn more in the
+          // UploadAdapter#upload documentation.
+          resolve( {
+              default: response.url
+          } );
+      } );
+
+      // Upload progress when it is supported. The file loader has the #uploadTotal and #uploaded
+      // properties which are used e.g. to display the upload progress bar in the editor
+      // user interface.
+      if ( xhr.upload ) {
+          xhr.upload.addEventListener( 'progress', evt => {
+              if ( evt.lengthComputable ) {
+                  loader.uploadTotal = evt.total;
+                  loader.uploaded = evt.loaded;
+              }
+          } );
+      }
+  }
+
+
+    _sendRequest( file ) {
+      // Prepare the form data.
+      const data = new FormData();
   
-    headers.append('Content-Type', 'multipart/form-data');
-    headers.append('Accept', 'application/json');
-    console.log('formData',formData);
-    let params = new HttpParams();
-    const options = {
-        params: params,
-        reportProgress: true,
-    };
-  //http post return an observer
-  //so I need to convert to Promise
-    return http.post(url,formData,options);
-  }
-
-/*
+      data.append( 'upload', file );
   
-  upload() {
-      let upload = new Promise((resolve, reject)=>{
-        this.loader['file'].then(
-            (data)=>{
-                this.uploadFile(data,
-                  'http://fdsa.demo.local:8000/forums/topics/image/create/')
-                .subscribe(
-                    (result)=>{
-                      //resolve data formate must like this
-                      //if **default** is missing, you will get an error
-                        resolve({ default: result['image'] })
-                    },
-                    (error)=>{
-                        reject(data.msg);
-                    }
-                );
-            }
-        );
-      });
-      return upload;
+      // Important note: This is the right place to implement security mechanisms
+      // like authentication and CSRF protection. For instance, you can use
+      // XMLHttpRequest.setRequestHeader() to set the request headers containing
+      // the CSRF token generated earlier by your application.
+  
+      // Send the request.
+      this.xhr.send( data );
   }
-  */
 
 
-/*
-  upload() {
-     return this.loader.file
-           .then( file => new Promise( ( resolve, reject ) => {
-                 var myReader= new FileReader();
-                 myReader.onloadend = (e) => {
-                    resolve({ default: myReader.result });
-                 }
-                 myReader.readAsDataURL(file);
-           } ) );
-  };
-*/
-  abort() {
-    console.log("abort")
-  }
+   upload() {
+    return this.loader.file
+        .then( file => new Promise( ( resolve, reject ) => {
+            this._initRequest();
+            this._initListeners( resolve, reject, file );
+            this._sendRequest( file );
+        } ) );
+    }
+  
+    // Aborts the upload process.
+      abort() {
+        if ( this.xhr ) {
+            this.xhr.abort();
+        }
+      }
 }
 
 
@@ -110,17 +135,21 @@ export class ForumComponent implements OnInit, OnDestroy {
   destroy$:Subject<void> = new Subject<void>();
   loginUser:User;
   htmlContent:string;
+  topicList:Topic[];
+  tenantUrl:string;
 
   @ViewChild('categoryInput') categoryInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
+
   constructor(private usersService:UsersService,
     private forumsService:ForumsService,
-    private http:HttpClient
+    private appSerive:AppService
     ) {
     this.filteredCategories = this.categoryCtrl.valueChanges.pipe(
       startWith(null),
       map((category: string | null) => category ? this._filter(category) : this.allCategories.slice()));
+
 
     this.config = {
       placeholder: 'Type your topic',
@@ -177,6 +206,7 @@ export class ForumComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getLogingUser();
     this.getCategories();
+    this.getTopics();
   }
 
   getCategories(){
@@ -188,6 +218,18 @@ export class ForumComponent implements OnInit, OnDestroy {
       }
     })
   }
+
+
+  getTopics(){
+    this.forumsService.getTopics()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe( topics =>{
+      this.topicList = topics;
+    }
+    )
+  }
+
+
 
   getLogingUser(){
     //this.loginUserSub = 

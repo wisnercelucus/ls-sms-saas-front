@@ -45,6 +45,7 @@ export interface User{
     followers:User[];
     following:User[]; 
     country:string; 
-    city:string;    
+    city:string; 
+    profile_image:string;   
 }
 

@@ -6,6 +6,10 @@ import { QuestionDetailComponent } from './question-detail/question-detail.compo
 import { ForumSideMenuComponent } from './forum-side-menu/forum-side-menu.component';
 import { QuestionItemComponent } from './question-item/question-item.component';
 import { QuestionFeedComponent } from './question-feed/question-feed.component';
+import { CategoryListComponent } from './category-list/category-list.component';
+import { ContributeComponent } from './contribute/contribute.component';
+import { ContributorsComponent } from './contributors/contributors.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
@@ -14,11 +18,15 @@ import { QuestionFeedComponent } from './question-feed/question-feed.component';
     QuestionDetailComponent,
     ForumSideMenuComponent,
     QuestionItemComponent,
-    QuestionFeedComponent
+    QuestionFeedComponent,
+    CategoryListComponent,
+    ContributeComponent,
+    ContributorsComponent
   ],
   imports: [
     SharedModule,
     RouterModule,
+    BrowserModule
   ]
 })
 export class ForumModule { }
