@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Category } from './category.model';
 import { tap } from 'rxjs/operators';
 import { Topic } from './topic.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -10,8 +11,10 @@ import { Topic } from './topic.model';
 export class ForumsService{
     tenantUrl:string;
     instance:string;
+    refreshneeded:Subject<void> = new Subject<void>();
 
     constructor(private http:HttpClient){}
+
 
     getForumsCategories(){
         return this.http.get<Category[]>(this.tenantUrl + '/forums/api/categories/').pipe(
@@ -27,7 +30,7 @@ export class ForumsService{
         body
         ).pipe(
           tap(res=>{
-            //console.log(res)
+            this.refreshneeded.next();
           })
         );
     }

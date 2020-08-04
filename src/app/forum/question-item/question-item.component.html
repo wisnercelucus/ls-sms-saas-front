@@ -7,8 +7,8 @@
     <mat-card-subtitle>{{topic.user.user_profile.title}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <h1>{{topic.title}}</h1>
-    <p [innerHTML]="topic.content" class="question-content">
+    <h2>{{topic.title}}</h2>
+    <p [innerHTML]="contentSafe" class="question-content">
     </p>
   </mat-card-content>
   <mat-card-actions>

@@ -207,6 +207,14 @@ export class ForumComponent implements OnInit, OnDestroy {
     this.getLogingUser();
     this.getCategories();
     this.getTopics();
+
+    this.forumsService.refreshneeded
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
+      ()=>{
+        this.getTopics();
+      }
+    )
   }
 
   getCategories(){
@@ -287,7 +295,8 @@ export class ForumComponent implements OnInit, OnDestroy {
     this.forumsService.createTopic(data)
     .pipe(takeUntil(this.destroy$))
     .subscribe(res=>{
-      console.log(res);
+      f.resetForm()
+      this.categories = []
     })
   }
 

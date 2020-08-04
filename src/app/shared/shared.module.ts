@@ -19,7 +19,8 @@ import { DeleteConfirmDialogComponent } from './delete-confirm-dialog/delete-con
 import { PostReportDialogComponent } from './post-report-dialog/post-report-dialog.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { QuillModule } from 'ngx-quill'
+import { QuillModule } from 'ngx-quill';
+import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 
 import 'quill-emoji/dist/quill-emoji.js'
 
@@ -51,7 +52,7 @@ import 'quill-emoji/dist/quill-emoji.js'
         CKEditorModule,
         QuillModule.forRoot({
             modules: {
-              syntax: false,
+              syntax: true,
               'emoji-shortname': true,
               'emoji-toolbar': true,
               'formula':true,
@@ -78,8 +79,18 @@ import 'quill-emoji/dist/quill-emoji.js'
                 //['formula']                        // link and image, video
               ]
             }
-          })
+          }),
+          HighlightModule
     ],
+
+    providers: [
+        {
+          provide: HIGHLIGHT_OPTIONS,
+          useValue: {
+            fullLibraryLoader: () => import('highlight.js'),
+          }
+        }
+      ],
 
     exports:[
             AlertDialogComponent,
@@ -99,7 +110,8 @@ import 'quill-emoji/dist/quill-emoji.js'
             DataTableRowHeaderComponent,
             CarouselModule,
             CKEditorModule,
-            QuillModule
+            QuillModule,
+            HighlightModule
         ]
 }
 )
