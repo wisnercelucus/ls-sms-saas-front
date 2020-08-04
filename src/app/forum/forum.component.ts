@@ -305,7 +305,9 @@ export class ForumComponent implements OnInit, OnDestroy {
       displayHistory: true, // defaults to false
       historyCacheKey: '__my_app_math_history_cachekey_', // optional
       historySize: 20, // optional (defaults to 10)
-      operators: [["\\sqrt[n]{x}", "\\nthroot"], ["\\frac{x}{y}","\\frac"]]
+      operators: [["\\sqrt[n]{x}", "\\nthroot"], 
+                  ["\\frac{x}{y}","\\frac"], 
+                  ["\\ln{x}","\\ln"]]
     });
   }
 

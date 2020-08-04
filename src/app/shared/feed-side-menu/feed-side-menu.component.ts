@@ -6,7 +6,12 @@ import { faBirthdayCake,
   faComment, 
   faHeart,
  faSmile , 
- faUserCircle, faUsers, faHome, faUser} from '@fortawesome/free-solid-svg-icons';
+ faUserCircle, 
+ faUsers, 
+ faHome, 
+ faUser,
+ faComments
+} from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { PublishModalFormComponent } from '../publish-modal-form/publish-modal-form.component';
@@ -29,6 +34,7 @@ export class FeedSideMenuComponent implements OnInit, OnDestroy {
   faUsers = faUsers;
   faHome = faHome;
   faUser = faUser;
+  faComments = faComments;
   
   @Input() loginUser:User;
  

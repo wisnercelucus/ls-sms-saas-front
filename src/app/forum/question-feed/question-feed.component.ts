@@ -35,5 +35,4 @@ export class QuestionFeedComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-
 }
