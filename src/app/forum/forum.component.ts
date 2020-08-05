@@ -12,6 +12,7 @@ import { ForumsService } from './forums.service';
 import { HttpClient } from '@angular/common/http';
 import { Topic } from './topic.model';
 import { AppService } from '../app.service';
+import { faPlus, faMinusSquare} from '@fortawesome/free-solid-svg-icons';
 
 
 export class UploadAdapter {
@@ -139,6 +140,7 @@ export class ForumComponent implements OnInit, OnDestroy {
 
   @ViewChild('categoryInput') categoryInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
+  panelOpenState = false;
 
 
   constructor(private usersService:UsersService,
@@ -149,48 +151,6 @@ export class ForumComponent implements OnInit, OnDestroy {
       startWith(null),
       map((category: string | null) => category ? this._filter(category) : this.allCategories.slice()));
 
-
-    this.config = {
-      placeholder: 'Type your topic',
-      toolbar: {
-        items: [
-          'heading',
-          '|',
-          'bold',
-          'italic',
-          'link',
-          'bulletedList',
-          'numberedList',
-          '|',
-          'indent',
-          'outdent',
-          '|',
-          'imageUpload',
-          'blockQuote',
-          'insertTable',
-          'mediaEmbed',
-          'undo',
-          'redo'
-        ]
-      },
-      image: {
-        toolbar: [
-          'imageStyle:full',
-          'imageStyle:side',
-          '|',
-          'imageTextAlternative'
-        ]
-      },
-      table: {
-        contentToolbar: [
-          'tableColumn',
-          'tableRow',
-          'mergeTableCells'
-        ]
-      },
-      // This value must be kept in sync with the language defined in webpack.config.js.
-      language: 'en'
-    };
    }
   ngOnDestroy(): void {
     this.destroy$.next()

@@ -4,7 +4,7 @@
   }
 
 .question-card{
-      margin-bottom: 12px;
+    margin-top: 12px;
 }
 
 .question-content{
@@ -13,4 +13,20 @@
 
 .question-content:hover{
     overflow-x: auto;
+}
+
+.question-stat{
+    display:flex;
+    padding:6px;
+}
+
+.question-stat span{
+    font-size: 12px;
+}
+.question-stat span:first-child{
+    margin-right: 20px;
+}
+
+.did_like{
+    color: dodgerblue;
 }

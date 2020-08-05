@@ -1,7 +1,22 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Topic } from '../topic.model';
 import { DomSanitizer } from '@angular/platform-browser';
- 
+import { faBirthdayCake, 
+  faMapMarker, 
+  faThumbsUp, 
+  faShareAltSquare, 
+  faComment, 
+  faHeart,
+ faSmile, 
+ faChartBar,
+ faCheckSquare,
+ faTimesCircle,
+ faSpinner,
+ faUserCircle, faUsers, faHome, faUser, faShare,
+ faCommentDots, faPenSquare
+} from '@fortawesome/free-solid-svg-icons';
+
+
 @Component({
   selector: 'app-question-item',
   templateUrl: './question-item.component.html',
@@ -9,6 +24,25 @@ import { DomSanitizer } from '@angular/platform-browser';
   
 })
 export class QuestionItemComponent implements OnInit {
+  faBirthdayCake = faBirthdayCake;
+  faMapMarker = faMapMarker;
+  faThumbsUp = faThumbsUp;
+  faShareAltSquare = faShareAltSquare;
+  faComment = faComment;
+  faHeart = faHeart;
+  faSmile = faSmile;
+  faUserCircle = faUserCircle;
+  faUsers = faUsers;
+  faHome = faHome;
+  faUser = faUser;
+  faChartBar = faChartBar;
+  faCheckSquare = faCheckSquare;
+  faTimesCircle = faTimesCircle;
+  faSpinner = faSpinner;
+  faShare = faShare;
+  faCommentDots = faCommentDots;
+  faPenSquare = faPenSquare;
+
   @Input() topic:Topic;
   @Input() tenantUrl:string;
   contentSafe:any;

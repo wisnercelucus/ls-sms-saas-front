@@ -10,9 +10,15 @@
     <h2>{{topic.title}}</h2>
     <p [innerHTML]="contentSafe" class="question-content">
     </p>
+
+    <div class="question-stat">
+        <span>Likes</span>
+        <span>Comments</span>
+    </div>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
+    <button mat-button><fa-icon [icon]="faPenSquare"></fa-icon> Answer</button>
+    <button mat-button><fa-icon [icon]="faThumbsUp"></fa-icon> Like</button>
+    <button mat-button><fa-icon [icon]="faShareAltSquare"></fa-icon> Share</button>
   </mat-card-actions>
 </mat-card>

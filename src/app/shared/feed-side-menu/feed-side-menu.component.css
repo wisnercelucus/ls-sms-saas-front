@@ -97,3 +97,7 @@ ul li{
 .nav-link span{
     position: absolute;
 }
+
+.nav-link fa-icon{
+    color: dodgerblue;
+}

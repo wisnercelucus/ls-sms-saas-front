@@ -2,8 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/co
 import { Subject } from 'rxjs';
 import { FeedService} from './feed.service';
 
-import { faPlus, faMinusSquare
-} from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faMinusSquare} from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormControl, Validators, FormArray, NgForm } from '@angular/forms';
 import { User } from '../users/user.model';
 import { UsersService } from '../users/users.service';

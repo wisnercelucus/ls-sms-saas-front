@@ -51,14 +51,18 @@ ul li{
 }
 
 
-
-
 .feed .main-content{
-    max-width: 620px;
+    max-width: 650px;
     margin: 0 auto;
-
 }
 
+.ql-tooltip{
+    z-index: 20000;
+    background-color: blue !important;
+}
+.ql-editing{
+    z-index: 20000;
+}
 
 .avatar-xs-card{
     border-radius: 100%;
@@ -81,34 +85,8 @@ ul li{
     margin-right: 8px;
 }
 
-.publish-form{
-    padding: 8px;
-}
 
-.post-form, .poll-form {
-    min-width: 100px;
-    width: 100%;
-    padding-top: 8px;
-    padding-bottom: 8px;
-}
-  
-.poll-form button{
-    margin-right: 8px;
-}
-
-.add-option{
-    background-color: fuchsia;
-    color: ghostwhite;
-}
-
-.poll-form button:last-child{
-    margin-right: 0px;
-}
-
-.post-full-width, .poll-full-width {
-    width: 100%;
-  }
-  .chip-list {
+.chip-list {
     width: 100%;
     margin-bottom: 30px;
   }
@@ -140,9 +118,7 @@ ul li{
     color: #0ec54e;
 }  
 
-.post-content{
-    resize:vertical;
-}
+
 
 .selected-image-preview{
     width: 90%;
@@ -162,7 +138,21 @@ ul li{
 
 .tab-icon {
     margin-right: 8px;
-  }
+}
+
+.question-fake-input{
+    width: 100%;
+    padding: 8px;
+    border: 0.5px solid gainsboro;
+    border-radius: 15px;
+    background-color: #fafafa;
+}
+
+.question-fake-input:focus{
+    outline: none;
+    
+}
+
 
 @media screen and (min-width: 1490px)
 and (max-width: 1760px)

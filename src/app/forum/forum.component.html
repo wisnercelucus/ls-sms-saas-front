@@ -6,10 +6,13 @@
     <div class="main-content">
         <div class="publish-form">
          <mat-accordion class="headers-align">
-            <mat-expansion-panel>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false"
+            >
                 <mat-expansion-panel-header>
                 <mat-panel-title>
-                    Smart Forum: Write a question, find help
+                    <span *ngIf="panelOpenState">Smart forum: ask a question, find help</span>
+                    <input *ngIf="!panelOpenState" class="question-fake-input" type="text" placeholder="Smart forum: ask a question, find help ...">
                 </mat-panel-title>
                 </mat-expansion-panel-header>
             <mat-card>
@@ -63,7 +66,7 @@
         <br>
 
         <div class="forums-feed">
-        <mat-card>
+        
             <mat-tab-group animationDuration="0ms">
                 <mat-tab>
                     <ng-template mat-tab-label>
@@ -87,7 +90,7 @@
                     <app-contributors></app-contributors>
                 </mat-tab>
             </mat-tab-group>
-        </mat-card>
+        
         </div>
 
     </div>
