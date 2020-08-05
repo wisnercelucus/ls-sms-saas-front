@@ -13,7 +13,7 @@ import { faBirthdayCake,
  faTimesCircle,
  faSpinner,
  faUserCircle, faUsers, faHome, faUser, faShare,
- faCommentDots, faPenSquare
+ faCommentDots, faPenSquare, faThumbsDown, faRetweet
 } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -42,6 +42,8 @@ export class QuestionItemComponent implements OnInit {
   faShare = faShare;
   faCommentDots = faCommentDots;
   faPenSquare = faPenSquare;
+  faThumbsDown = faThumbsDown;
+  faRetweet = faRetweet;
 
   @Input() topic:Topic;
   @Input() tenantUrl:string;

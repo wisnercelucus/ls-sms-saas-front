@@ -7,7 +7,7 @@ import { FormGroup, FormControl, Validators, FormArray, NgForm } from '@angular/
 import { User } from '../users/user.model';
 import { UsersService } from '../users/users.service';
 import { Router } from '@angular/router';
-import {NgxLinkifyjsService, Link, LinkType} from 'ngx-linkifyjs';
+import {NgxLinkifyjsService, Link} from 'ngx-linkifyjs';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { takeUntil } from 'rxjs/operators';
 
@@ -185,7 +185,6 @@ isEmail(email:string) {
   }
 
   getLogingUser(){
-    //this.loginUserSub = 
     this.usersService.loginUser
     .pipe(takeUntil(this.destroy$))
     .subscribe(
@@ -218,7 +217,6 @@ isEmail(email:string) {
   }
 
   onSubmit(){
-    //this.pollCreateSub = 
     this.feedService.askPollQuestion(this.pollForm.value)
     .pipe(takeUntil(this.destroy$))
     .subscribe(
@@ -231,19 +229,6 @@ isEmail(email:string) {
   ngOnDestroy(){
     this.destroy$.next()
     this.destroy$.complete()
-    /*
-    if(this.postsSub){
-        this.postsSub.unsubscribe();
-    }
-    if(this.postCreateSub){
-      this.postCreateSub.unsubscribe()
-    }
-    if(this.loginUserSub){
-      this.loginUserSub.unsubscribe();
-    }
-    if(this.pollCreateSub){
-      this.pollCreateSub.unsubscribe()
-    }*/
   }
 
   onAddOption(){
@@ -259,8 +244,6 @@ isEmail(email:string) {
   }
 
   onFileSelected(event:any){
-      
-      //this.selectedFile = <File>event.target.files[0];
       this.selectedFiles = event.target.files
 
       for(let i=0; i<this.selectedFiles.length; i++){
@@ -275,13 +258,6 @@ isEmail(email:string) {
   onDocSelected(event:any){
       this.selectedDocs = event.target.files
       //console.log(this.selectedDocs)
-  }
-
-  addEmoji(event){
-    let el = <HTMLTextAreaElement>document.querySelector("#post-content-pr")
-      el.value = el.value  + " " + event.emoji.native + "  ";
-      //console.log(el.parentElement)
-      el.focus();
   }
 
   customOptions: OwlOptions = {

@@ -12,6 +12,7 @@ export class ForumsService{
     tenantUrl:string;
     instance:string;
     refreshneeded:Subject<void> = new Subject<void>();
+    topics:Topic[];
 
     constructor(private http:HttpClient){}
 
@@ -65,6 +66,14 @@ export class ForumsService{
           //console.log(res)
         })
       );
+    }
+
+    setTopics(topics:[]){
+      this.topics.push(...topics)
+    }
+
+    getTopicList(){
+      return this.topics.slice();
     }
 
 

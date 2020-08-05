@@ -22,9 +22,10 @@
 
 .question-stat span{
     font-size: 12px;
-}
-.question-stat span:first-child{
     margin-right: 20px;
+}
+.question-stat span:last-child{
+    margin-right: 0px;
 }
 
 .did_like{

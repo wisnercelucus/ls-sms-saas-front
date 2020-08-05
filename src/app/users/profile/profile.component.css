@@ -30,7 +30,7 @@
 }
 
 .profile-section .main-content{
-    width: 800px;
+    max-width: 500px;
     margin: 0 auto;
 }
 
@@ -166,7 +166,7 @@ ul li{
 and (max-width: 1760px)
 {
  .main-content {
-     max-width: 650px;
+     max-width: 500px;
  }
 
  .side-profile-menu-left,.side-profile-menu-right{
@@ -179,7 +179,7 @@ and (max-width: 1760px)
 and (max-width: 1489px)
 {
  .main-content {
-     max-width: 650px;
+    max-width: 500px;
  }
 
  .side-profile-menu-left,.side-profile-menu-right{
@@ -194,7 +194,7 @@ and (max-width: 1489px)
 and (max-width: 1469px)
 {
  .main-content {
-     max-width: 650px;
+    max-width: 500px;
  }
 
  .side-profile-menu-left,.side-profile-menu-right{
@@ -207,7 +207,7 @@ and (max-width: 1469px)
 and (max-width: 1334px)
 {
  .main-content {
-     max-width: 650px;
+    max-width: 500px;
  }
 
  .side-profile-menu-left,.side-profile-menu-right{
@@ -222,7 +222,7 @@ and (max-width: 1334px)
 and (max-width: 1333px)
 {
  .main-content {
-     max-width: 650px;
+    max-width: 500px;
  }
 
  .side-profile-menu-left,.side-profile-menu-right{

@@ -34,7 +34,9 @@ import { AuthEffects } from './auth/store/auth.effects';
 import { FeedRoutingModule } from './feed/feed.routing';
 import { FeedModule } from './feed/feed.module';
 import { NotificationsComponent } from './notifications/notifications.component';
-
+import {StoreDevtoolsModule} from '@ngrx/store-devtools'
+import { environment } from 'src/environments/environment';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
   declarations: [
@@ -65,6 +67,8 @@ import { NotificationsComponent } from './notifications/notifications.component'
     ),
     StoreModule.forRoot(fromApp.appReducer),
     EffectsModule.forRoot([AuthEffects]),
+    StoreDevtoolsModule.instrument({logOnly:environment.production}),
+    StoreRouterConnectingModule.forRoot(),
     BrowserAnimationsModule,
     HttpClientModule,
     ParticlesModule,
