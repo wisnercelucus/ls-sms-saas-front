@@ -16,4 +16,6 @@ export interface Topic{
     is_removed?:boolean;
     view_count?:number;
     comment_count?:number;
+    timesince?:string;
+    comments?:Comment[];
 }

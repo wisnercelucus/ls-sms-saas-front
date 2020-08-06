@@ -17,6 +17,9 @@ import { faBirthdayCake,
 } from '@fortawesome/free-solid-svg-icons';
 import { NgForm } from '@angular/forms';
 import { User } from 'src/app/users/user.model';
+import * as fromApp from '../../store/app.reducer';
+import {Store} from '@ngrx/store';
+import * as ForumActions from '../store/forum.actions';
 
 
 @Component({
@@ -52,7 +55,9 @@ export class QuestionItemComponent implements OnInit {
   @Input() loginUser:User;
   contentSafe:any;
   user_image_url:string;
-  constructor(private sanitizer: DomSanitizer) { }
+  constructor(private sanitizer: DomSanitizer,
+    private store:Store<fromApp.AppState>
+    ) { }
 
   toggleCommentForm:false;
 
@@ -105,19 +110,20 @@ export class QuestionItemComponent implements OnInit {
   }
 
   submitComment(form:NgForm){
-    console.log(form.value)
-    /*
-    if(!form.value.parent_id){
-      //this.createCommentSub = 
-      this.feedService.postComment(form.value)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe()
-    }else{
-     //this.createCommentSub = 
-      this.feedService.postComment(form.value)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe()
-    }*/
+    //console.log(form.value)
+    this.store.dispatch(new ForumActions.AnswerTopic(form.value));
+}
+
+public onEditorCreated(quill: any) {
+
+  (window as any).mathquill4quill()(quill, {
+    displayHistory: true, // defaults to false
+    historyCacheKey: '__my_app_math_history_cachekey_', // optional
+    historySize: 20, // optional (defaults to 10)
+    operators: [["\\sqrt[n]{x}", "\\nthroot"], 
+                ["\\frac{x}{y}","\\frac"], 
+                ["\\ln{x}","\\ln"]]
+  });
 }
 
 }

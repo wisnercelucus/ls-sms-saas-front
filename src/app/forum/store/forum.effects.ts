@@ -14,23 +14,7 @@ const handleError = (errorRes: any) => {
     let errorMessage = 'An unknown error occurred!';
 
     if(errorRes){
-        console.log(errorRes.error.message)
-        //errorMessage = errorRes.error.message.non_field_errors[0];
         return of(new ForumActions.ForumActionFail(errorMessage));
-    }
-
-    if(errorRes.error.error.message){
-        switch (errorRes.error.error.message) {
-            case 'EMAIL_EXISTS':
-            errorMessage = 'This email exists already';
-            break;
-            case 'EMAIL_NOT_FOUND':
-            errorMessage = 'This email does not exist.';
-            break;
-            case 'INVALID_PASSWORD':
-            errorMessage = 'This password is not correct.';
-            break;
-        }
     }
 
     return of(new ForumActions.ForumActionFail(errorMessage));
@@ -93,10 +77,29 @@ export class ForumEffects{
                 })
             );
         }),
-
         
     )
   
+    @Effect()
+    CreateAnswer = this.actions$.pipe(
+        ofType(ForumActions.ANSWER_TOPIC),
+
+        switchMap(
+            (data:ForumActions.AnswerTopic) => {
+                const body=data.payload
+            return this.http.post<Comment>(this.tenantUrl + '/forums/comments/api/create/',
+            body).pipe(
+                map(res => { 
+                    console.log(res);
+                    return new ForumActions.AnswerTopicSuccess();
+                }),
+                catchError(errorMes=>{
+                    return handleError(errorMes)
+                })
+            );
+        }),
+        
+    )
 
     constructor(private actions$:Actions, 
         private http:HttpClient,

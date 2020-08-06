@@ -39,7 +39,12 @@ export function forumReducer(state = initialState, action:ForumActions.ForumActi
             return{
                 ...state,
                 errorMes: action.payload,
-            }       
+            } 
+        case ForumActions.ANSWER_TOPIC_SUCCESS:
+            return{
+                ...state
+            }
+                  
         default: {
             return state;
           }

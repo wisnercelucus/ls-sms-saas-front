@@ -13,7 +13,11 @@ export const UPDATE_TOPICS_LOCALY = '[Forum] Update Topic Locally]'
 export const CREATE_TOPIC = '[Forum] Create Topic';
 export const UPDATE_TOPIC = '[Forum] Update Topic';
 export const DELETE_TOPIC = '[Forum] Delete Topic';
+
 export const FORUM_ACTION_FAIL = '[Forum] Forum Action Fail';
+
+export const ANSWER_TOPIC = '[Forum] Answer Topic';
+export const ANSWER_TOPIC_SUCCESS = '[Forum] Answer Topic Success';
 
 export class SetTopics implements Action{
     readonly type = SET_TOPICS;
@@ -70,6 +74,19 @@ export class ForumActionFail implements Action{
     ){} 
 }
 
+export class AnswerTopic implements Action{
+    readonly type = ANSWER_TOPIC;
+
+    constructor(
+        public payload:Comment
+    ){} 
+}
+
+export class AnswerTopicSuccess implements Action{
+    readonly type = ANSWER_TOPIC_SUCCESS; 
+}
+
+
 export type ForumActions = SetTopics 
                             | FetchTopics 
                             | SetCategories 
@@ -79,4 +96,6 @@ export type ForumActions = SetTopics
                             | DeleteTopic
                             | UpdateTopicLocally
                             | ForumActionFail
+                            | AnswerTopic
+                            | AnswerTopicSuccess
                             ;

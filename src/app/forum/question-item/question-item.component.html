@@ -4,7 +4,7 @@
     style="background-image: url({{user_image_url}})"
     ></div>
     <mat-card-title>{{topic.user.first_name + " " + topic.user.last_name}}</mat-card-title>
-    <mat-card-subtitle>{{topic.user.user_profile.title}}</mat-card-subtitle>
+    <mat-card-subtitle>{{topic.user.user_profile.title}} &middot; {{ topic.timesince }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <h2>{{topic.title}}</h2>
@@ -33,11 +33,6 @@
           <input type="hidden" ngModel = "topic" name='content_type' ngValue='topic'>
           <input type="hidden" [ngModel] = "topic.id" name='object_id' [value]="topic.id">
           <quill-editor class="comment-form-content-box" (onEditorCreated)="onEditorCreated($event)" id="editor" [styles]="{height: '100px'}" name="content" ngModel></quill-editor>
-          <!-- <mat-form-field class="comment-form-content-box">
-              <quill-editor (onEditorCreated)="onEditorCreated($event)" id="editor" [styles]="{height: '150px'}" name="content" ngModel></quill-editor>
-              <textarea id="{{'comment-content' + topic.id}}" (click)="rezizable('comment-content' + topic.id)" name="content" ngModel matInput placeholder="Leave an answer..."></textarea>   
-          </mat-form-field>
-          --> 
           </div>
           <button class="post-comment" type="submit"
                   matRipple
