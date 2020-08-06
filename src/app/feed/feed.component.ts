@@ -11,6 +11,8 @@ import {NgxLinkifyjsService, Link} from 'ngx-linkifyjs';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { takeUntil } from 'rxjs/operators';
 
+//Soleil leve deux quiosques. DAI will launch appel d'offre. 
+//
 
 @Component({
   selector: 'app-feed',

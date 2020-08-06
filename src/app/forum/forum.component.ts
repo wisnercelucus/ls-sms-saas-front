@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';;
 import { NgForm, FormControl } from '@angular/forms';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
@@ -9,110 +9,12 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 import { UsersService } from '../users/users.service';
 import { User } from '../users/user.model';
 import { ForumsService } from './forums.service';
-import { HttpClient } from '@angular/common/http';
 import { Topic } from './topic.model';
-import { AppService } from '../app.service';
-import { faPlus, faMinusSquare} from '@fortawesome/free-solid-svg-icons';
+import { Store } from '@ngrx/store';
 
-
-export class UploadAdapter {
-  xhr = new XMLHttpRequest();
-
-  constructor( public loader,
-    private http?:HttpClient ) {
-     this.loader = loader;
-  }
-
-  _initRequest() {
-    const xhr = this.xhr
-
-    // Note that your request may look different. It is up to you and your editor
-    // integration to choose the right communication channel. This example uses
-    // a POST request with JSON as a data structure but your configuration
-    // could be different.
-    xhr.open( 'post', 'http://fdsa.demo.local:8000/forums/api/topics/image/create/', true);
-
-    xhr.setRequestHeader('Authorization', 'Token ' + '76762413b07245198b9cf78dd162929250b91559');
-    xhr.responseType = 'json';
-    }
-
-    _initListeners( resolve, reject, file ) {
-      const xhr = this.xhr;
-      const loader = this.loader;
-      const genericErrorText = `Couldn't upload file: ${ file.name }.`;
-
-      xhr.addEventListener( 'error', () => reject( genericErrorText ) );
-      xhr.addEventListener( 'abort', () => reject() );
-      xhr.addEventListener( 'load', () => {
-          const response = xhr.response;
-
-          // This example assumes the XHR server's "response" object will come with
-          // an "error" which has its own "message" that can be passed to reject()
-          // in the upload promise.
-          //
-          // Your integration may handle upload errors in a different way so make sure
-          // it is done properly. The reject() function must be called when the upload fails.
-          if ( !response || response.error ) {
-              return reject( response && response.error ? response.error.message : genericErrorText );
-          }
-
-          // If the upload is successful, resolve the upload promise with an object containing
-          // at least the "default" URL, pointing to the image on the server.
-          // This URL will be used to display the image in the content. Learn more in the
-          // UploadAdapter#upload documentation.
-          resolve( {
-              default: response.url
-          } );
-      } );
-
-      // Upload progress when it is supported. The file loader has the #uploadTotal and #uploaded
-      // properties which are used e.g. to display the upload progress bar in the editor
-      // user interface.
-      if ( xhr.upload ) {
-          xhr.upload.addEventListener( 'progress', evt => {
-              if ( evt.lengthComputable ) {
-                  loader.uploadTotal = evt.total;
-                  loader.uploaded = evt.loaded;
-              }
-          } );
-      }
-  }
-
-
-    _sendRequest( file ) {
-      // Prepare the form data.
-      const data = new FormData();
-  
-      data.append( 'upload', file );
-  
-      // Important note: This is the right place to implement security mechanisms
-      // like authentication and CSRF protection. For instance, you can use
-      // XMLHttpRequest.setRequestHeader() to set the request headers containing
-      // the CSRF token generated earlier by your application.
-  
-      // Send the request.
-      this.xhr.send( data );
-  }
-
-
-   upload() {
-    return this.loader.file
-        .then( file => new Promise( ( resolve, reject ) => {
-            this._initRequest();
-            this._initListeners( resolve, reject, file );
-            this._sendRequest( file );
-        } ) );
-    }
-  
-    // Aborts the upload process.
-      abort() {
-        if ( this.xhr ) {
-            this.xhr.abort();
-        }
-      }
-}
-
-
+import * as fromApp from '../store/app.reducer';
+import * as ForumActions from './store/forum.actions';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-forum',
@@ -131,7 +33,6 @@ export class ForumComponent implements OnInit, OnDestroy {
   filteredCategories: Observable<string[]>;
   categories: string[] = [];
   allCategories: string[] = [];
-  //loginUserSub:Subscription;
   destroy$:Subject<void> = new Subject<void>();
   loginUser:User;
   htmlContent:string;
@@ -145,61 +46,69 @@ export class ForumComponent implements OnInit, OnDestroy {
 
   constructor(private usersService:UsersService,
     private forumsService:ForumsService,
-    private appSerive:AppService
+    private store:Store<fromApp.AppState>,
+    private route: ActivatedRoute
+
     ) {
-    this.filteredCategories = this.categoryCtrl.valueChanges.pipe(
+      this.filteredCategories = this.categoryCtrl.valueChanges.pipe(
       startWith(null),
       map((category: string | null) => category ? this._filter(category) : this.allCategories.slice()));
 
    }
-  ngOnDestroy(): void {
-    this.destroy$.next()
-    this.destroy$.complete()
-    /*
-    if(this.loginUserSub){
-      this.loginUserSub.unsubscribe();
-    }*/
-    
-  }
+
+    ngOnDestroy(): void {
+      this.destroy$.next()
+      this.destroy$.complete()
+      
+    }
 
   ngOnInit(): void {
     this.getLogingUser();
     this.getCategories();
-    this.getTopics();
+    this.setTopics();
+    this.setCategories();
+  }
 
-    this.forumsService.refreshneeded
+
+  setCategories(){
+    this.store.select('forum')
     .pipe(takeUntil(this.destroy$))
     .subscribe(
-      ()=>{
-        this.getTopics();
+      forumState=>{
+        let categories = forumState.categories;
+        for(let cat of categories){
+          this.allCategories.push(cat.title);
+      }
       }
     )
   }
 
+
   getCategories(){
-    this.forumsService.getForumsCategories()
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(categories=>{
-      for(let cat of categories){
-          this.allCategories.push(cat.title)
-      }
-    })
+    this.store.dispatch(new ForumActions.FetchCategories());
   }
 
 
   getTopics(){
-    this.forumsService.getTopics()
-    .pipe(takeUntil(this.destroy$))
-    .subscribe( topics =>{
-      this.topicList = topics;
-    }
-    )
+    this.store.dispatch(new ForumActions.FetchTopics());
   }
 
+  setOnloadTopics(){
+    this.topicList = this.route.snapshot.data['topics']['payload'];
 
+  }
+
+  setTopics(){
+    this.store.select('forum')
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(forumSate=>{
+      if(forumSate){
+        this.topicList = forumSate.topics;
+      }
+    })
+  }
 
   getLogingUser(){
-    //this.loginUserSub = 
     this.usersService.loginUser
     .pipe(takeUntil(this.destroy$))
     .subscribe (
@@ -214,7 +123,6 @@ export class ForumComponent implements OnInit, OnDestroy {
     const input = event.input;
     const value = event.value;
 
-    // Add our fruit
     if ((value || '').trim()) {
       this.categories.push(value.trim());
     }
@@ -256,6 +164,8 @@ export class ForumComponent implements OnInit, OnDestroy {
     .subscribe(res=>{
       f.resetForm()
       this.categories = []
+      this.store.dispatch(new ForumActions.FetchTopics());
+      this.setTopics();
     })
   }
 

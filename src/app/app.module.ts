@@ -37,6 +37,8 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import {StoreDevtoolsModule} from '@ngrx/store-devtools'
 import { environment } from 'src/environments/environment';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { ForumEffects } from './forum/store/forum.effects';
+import { TopicResolver } from './forum/topic-resolver.service';
 
 @NgModule({
   declarations: [
@@ -66,7 +68,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
       }
     ),
     StoreModule.forRoot(fromApp.appReducer),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, ForumEffects]),
     StoreDevtoolsModule.instrument({logOnly:environment.production}),
     StoreRouterConnectingModule.forRoot(),
     BrowserAnimationsModule,
@@ -84,7 +86,9 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     FeedRoutingModule,
     FeedModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi:true}],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

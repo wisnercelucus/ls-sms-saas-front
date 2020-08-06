@@ -13,14 +13,29 @@ const initialState: State = {
     categories:[]
 }
 
-export function forumReducer(state, action:ForumActions.ForumActions){
+export function forumReducer(state = initialState, action:ForumActions.ForumActions){
     switch(action.type){
         case ForumActions.SET_TOPICS:
             return {
                 ...state,
                 topics:[...action.payload]
             }
-        default:
-            state
+        case ForumActions.SET_CATEGORIES:
+            return{
+                ...state,
+                categories:[...action.payload]
+            }
+            
+        case ForumActions.FETCH_TOPICS:
+            return {
+                ...state
+            }
+        case ForumActions.FETCH_CATEGORIES:
+            return {
+                ...state
+            }
+        default: {
+            return state;
+          }
     }
 }
