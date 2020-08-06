@@ -2,6 +2,7 @@ import { Category } from './category.model';
 import { User } from '../users/user.model';
 
 export interface Topic{
+    id:number;
     category?:Category;
     user:User;
     title:string;

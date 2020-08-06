@@ -22,7 +22,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { QuillModule } from 'ngx-quill';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 
-import 'quill-emoji/dist/quill-emoji.js'
+import 'quill-emoji/dist/quill-emoji.js';
+import { CommentFormComponent } from './comment-form/comment-form.component'
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import 'quill-emoji/dist/quill-emoji.js'
         PostShareModalFormComponent,
         DeleteConfirmDialogComponent,
         PostReportDialogComponent,
+        CommentFormComponent,
     ],
 
     imports:[CommonModule, 

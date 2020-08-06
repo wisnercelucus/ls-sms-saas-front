@@ -15,6 +15,8 @@ import { faBirthdayCake,
  faUserCircle, faUsers, faHome, faUser, faShare,
  faCommentDots, faPenSquare, faThumbsDown, faRetweet
 } from '@fortawesome/free-solid-svg-icons';
+import { NgForm } from '@angular/forms';
+import { User } from 'src/app/users/user.model';
 
 
 @Component({
@@ -47,13 +49,75 @@ export class QuestionItemComponent implements OnInit {
 
   @Input() topic:Topic;
   @Input() tenantUrl:string;
+  @Input() loginUser:User;
   contentSafe:any;
+  user_image_url:string;
   constructor(private sanitizer: DomSanitizer) { }
 
+  toggleCommentForm:false;
+
+  centered = false;
+  disabled = false;
+  unbounded = false;
+  radius: number;
+  color: string;
 
   ngOnInit(): void {
     this.contentSafe = this.sanitizer.bypassSecurityTrustHtml(this.topic['content'])
+    if(this.topic.user.image){
+      if(this.urlIsComplete(this.topic.user.image)){
+        this.user_image_url = this.topic.user.image;
+      }else{
+        this.user_image_url = this.tenantUrl + this.topic.user.image;
+      }
+    }else{
+      this.user_image_url = this.topic.user.default_image;
+    }
   }
 
+  urlIsComplete(url:string){
+    let splited_url = url.split(':')
+    if(splited_url[0] == 'http' || splited_url[0] == 'https'){
+      return true
+    }
+    return false
+  }
+
+  onToggleCommentForm(id:string){
+    let element = document.getElementById(id);
+    element.classList.remove('hide')
+    element.classList.add("fadeIn")
+  }
+
+  rezizable(id:string){
+    let textarea = document.getElementById(id);
+ 
+    textarea.addEventListener('keydown', autosize);
+    
+      function autosize(){
+        var el = this;
+        setTimeout(function(){
+          el.style.cssText = 'height:auto; padding:0';
+          el.style.cssText = 'height:' + el.scrollHeight + 'px';
+        },0);
+    
+      }
+  }
+
+  submitComment(form:NgForm){
+    console.log(form.value)
+    /*
+    if(!form.value.parent_id){
+      //this.createCommentSub = 
+      this.feedService.postComment(form.value)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe()
+    }else{
+     //this.createCommentSub = 
+      this.feedService.postComment(form.value)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe()
+    }*/
+}
 
 }

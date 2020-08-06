@@ -26,14 +26,20 @@ export function forumReducer(state = initialState, action:ForumActions.ForumActi
                 categories:[...action.payload]
             }
             
-        case ForumActions.FETCH_TOPICS:
-            return {
-                ...state
-            }
-        case ForumActions.FETCH_CATEGORIES:
-            return {
-                ...state
-            }
+        case ForumActions.UPDATE_TOPICS_LOCALY:
+            let new_topics:Topic[] = []
+            new_topics = [...state.topics]
+            new_topics.unshift(action.payload)
+            
+            return{
+                ...state,
+                topics:new_topics
+            } 
+        case ForumActions.FORUM_ACTION_FAIL:
+            return{
+                ...state,
+                errorMes: action.payload,
+            }       
         default: {
             return state;
           }

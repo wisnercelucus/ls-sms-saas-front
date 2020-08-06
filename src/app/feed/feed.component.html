@@ -11,10 +11,14 @@
                 <mat-tab-group>
                     <mat-tab label="Say something?">
                         <form enctype="multipart/form-data" class="post-form" (ngSubmit)="onSubmitPost(f)" #f="ngForm" #form>
-                                <mat-form-field class="post-full-width">
-                                    <mat-label>Post something to your timeline</mat-label>
-                                    <textarea id="post-content-pr" onclick="rezizable('post-content-pr')" class="post-content" ngModel name="content" matInput placeholder="Ex. It makes me feel..." #textarea></textarea>
-                                </mat-form-field> 
+                        
+                        <mat-form-field class="post-full-width">
+                            <mat-label>Post something to your timeline</mat-label>
+                            <textarea id="post-content-pr" onclick="rezizable('post-content-pr')" class="post-content" ngModel name="content" matInput placeholder="Ex. It makes me feel..." #textarea></textarea>
+                        </mat-form-field>
+
+                        <!--<quill-editor (onEditorCreated)="onEditorCreated($event)" id="editor" [styles]="{height: '150px'}" name="content" ngModel></quill-editor>-->
+                        
                         <input style="display:none" (change)="onFileSelected($event)" name="image" type="file" multiple accept="image/x-png,image/gif,image/jpeg" #imageInput>
                         <input style="display:none" (change)="onDocSelected($event)" name="pdf" type="file" multiple #docInput>
                         <div class="form-group">

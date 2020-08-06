@@ -8,7 +8,6 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import { map, startWith, takeUntil } from 'rxjs/operators';
 import { UsersService } from '../users/users.service';
 import { User } from '../users/user.model';
-import { ForumsService } from './forums.service';
 import { Topic } from './topic.model';
 import { Store } from '@ngrx/store';
 
@@ -45,7 +44,6 @@ export class ForumComponent implements OnInit, OnDestroy {
 
 
   constructor(private usersService:UsersService,
-    private forumsService:ForumsService,
     private store:Store<fromApp.AppState>,
     private route: ActivatedRoute
 
@@ -91,11 +89,6 @@ export class ForumComponent implements OnInit, OnDestroy {
 
   getTopics(){
     this.store.dispatch(new ForumActions.FetchTopics());
-  }
-
-  setOnloadTopics(){
-    this.topicList = this.route.snapshot.data['topics']['payload'];
-
   }
 
   setTopics(){
@@ -151,22 +144,26 @@ export class ForumComponent implements OnInit, OnDestroy {
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
     return this.allCategories.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
   }
 
-
-
   onSubmitPost(f:NgForm){
+    if(this.categories.length == 0){
+      return;
+    }
+
+    if(f.value['content'] == ""){
+      return;
+    }
+    
+    if(f.value['title'] == ""){
+      return;
+    }
+
     const data = {topic:f.value, categories:this.categories}   
-    this.forumsService.createTopic(data)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(res=>{
-      f.resetForm()
-      this.categories = []
-      this.store.dispatch(new ForumActions.FetchTopics());
-      this.setTopics();
-    })
+    this.store.dispatch(new ForumActions.CreateTopic(data));
+    f.resetForm();
+    this.categories = [];
   }
 
   public onEditorCreated(quill: any) {

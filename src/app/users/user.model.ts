@@ -46,6 +46,7 @@ export interface User{
     following:User[]; 
     country:string; 
     city:string; 
-    profile_image:string;   
+    profile_image:string; 
+    groups?:any;  
 }
 

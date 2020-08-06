@@ -287,4 +287,16 @@ isEmail(email:string) {
     nav: true
   }
 
+  public onEditorCreated(quill: any) {
+
+    (window as any).mathquill4quill()(quill, {
+      displayHistory: true, // defaults to false
+      historyCacheKey: '__my_app_math_history_cachekey_', // optional
+      historySize: 20, // optional (defaults to 10)
+      operators: [["\\sqrt[n]{x}", "\\nthroot"], 
+                  ["\\frac{x}{y}","\\frac"], 
+                  ["\\ln{x}","\\ln"]]
+    });
+  }
+
 }

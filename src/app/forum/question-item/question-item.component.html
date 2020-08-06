@@ -1,7 +1,7 @@
 <mat-card class="question-card">
   <mat-card-header>
     <div mat-card-avatar class="header-image"
-    style="background-image: url({{topic.user.image ? topic.user.image : topic.user.default_image}})"
+    style="background-image: url({{user_image_url}})"
     ></div>
     <mat-card-title>{{topic.user.first_name + " " + topic.user.last_name}}</mat-card-title>
     <mat-card-subtitle>{{topic.user.user_profile.title}}</mat-card-subtitle>
@@ -18,9 +18,38 @@
     </div>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button><fa-icon [icon]="faPenSquare"></fa-icon> Answer</button>
+    <button mat-button (click)="onToggleCommentForm('comment-form' + topic.id)" ><fa-icon [icon]="faPenSquare"></fa-icon> Answer</button>
     <button mat-button><fa-icon [icon]="faThumbsUp"></fa-icon> Upvote</button>
     <button mat-button><fa-icon [icon]="faThumbsDown"></fa-icon> Downvote</button>
     <button mat-button><fa-icon [icon]="faRetweet"></fa-icon> Share</button>
   </mat-card-actions>
+
+  <div class="comment-form-handler hide" id = "{{ 'comment-form' + topic.id }}">
+      <form class="comment-form" (ngSubmit)="submitComment(f1)" #f1="ngForm">
+          <div class="form-row">
+          <div mat-card-avatar class="comment-user-avatar">
+              <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image ? loginUser.image : loginUser.default_image" alt="{{loginUser.username}}">
+          </div>
+          <input type="hidden" ngModel = "topic" name='content_type' ngValue='topic'>
+          <input type="hidden" [ngModel] = "topic.id" name='object_id' [value]="topic.id">
+          <quill-editor class="comment-form-content-box" (onEditorCreated)="onEditorCreated($event)" id="editor" [styles]="{height: '100px'}" name="content" ngModel></quill-editor>
+          <!-- <mat-form-field class="comment-form-content-box">
+              <quill-editor (onEditorCreated)="onEditorCreated($event)" id="editor" [styles]="{height: '150px'}" name="content" ngModel></quill-editor>
+              <textarea id="{{'comment-content' + topic.id}}" (click)="rezizable('comment-content' + topic.id)" name="content" ngModel matInput placeholder="Leave an answer..."></textarea>   
+          </mat-form-field>
+          --> 
+          </div>
+          <button class="post-comment" type="submit"
+                  matRipple
+              [matRippleCentered]="centered"
+              [matRippleDisabled]="disabled"
+              [matRippleUnbounded]="unbounded"
+              [matRippleRadius]="radius"
+              [matRippleColor]="color"
+          >
+              <span class="material-icons">arrow_forward_ios</span>
+          </button>
+      </form>
+  </div>
+
 </mat-card>

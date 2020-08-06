@@ -31,3 +31,174 @@
 .did_like{
     color: dodgerblue;
 }
+
+.remove{
+    display: none;
+}
+
+.avatar-xs-card-comment{
+    border-radius: 100%;
+    height: 40px;
+    width: 40px; 
+}
+
+.comment-thread{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.comment-thread .inner-comment-thread{
+    margin-left: 50px;
+}
+.comment-thread .comment-box{
+    padding: 5px;
+    display: flex;
+    margin-bottom: 10px;
+    flex-direction: column;
+}
+
+.comment-thread .comment-box .comment-content-box{
+    flex:2;
+    display: flex;
+    flex-direction: row;
+}
+
+.comment-thread .comment-box .comment-content-box .comment-text{
+    flex:2;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.hide{
+    display:none;
+  }
+
+
+.comment-box .comment-reply-form-handler{
+    margin-top: 10px !important;
+    background-color: white;
+    margin-left: 50px;
+}
+
+.comment-box .comment-actions{
+    display: flex;
+    margin-left: 40px;
+}
+
+.comment-box .comment-actions button{
+    margin-right: 15px;
+}
+
+.comment-user{
+  font-weight: 570;  
+}
+.comment-box .comment-actions button:last-child{
+    margin-right: 0px;
+}
+
+.comment-thread .comment-box:last-child{
+    margin-bottom: 0px;
+}
+
+.comment-thread .comment-box .comment-user-avatar{
+    margin-right: 15px;
+    min-height: 50px;
+}
+
+.comment-thread .comment-box .comment-text{
+    padding: 0px;
+}
+
+.comment-form{
+    margin-bottom: 15px;
+}
+.comment-form .form-row{
+    display: flex;
+    flex-direction: row;
+    padding: 6px;
+}
+
+a{
+    text-decoration: none;
+}
+.comment-form .form-row .comment-user-avatar {
+    margin-right: 15px;
+}
+.comment-form .form-row .comment-input{
+    border-radius: 6px !important;
+    border: 1px solid #f1f1f1;
+    flex: 2;
+}
+
+.comment-form-content-box{
+    width: 100%;
+}
+
+.post-comment{
+    background-color: dodgerblue;
+    height: 36px;
+    max-height: 36px !important;
+    color: white;
+    width: 40px;
+    max-width: 40px !important;
+    text-align: center;
+    outline: none;
+    border: none;
+    border-radius: 4px;
+    padding: 6px;
+    cursor: pointer;
+    margin-left: 60px;
+
+}
+
+.fadeIn {
+    animation: fadein 2s;
+    -moz-animation: fadein 2s; /* Firefox */
+    -webkit-animation: fadein 2s; /* Safari and Chrome */
+    -o-animation: fadein 2s; /* Opera */
+}
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+
+@media screen and (max-width: 500px){
+    .comment-thread .inner-comment-thread{
+        margin-left: 0px;
+    }
+    .comment-box .comment-reply-form-handler{
+        margin-left: 0px;
+    }
+}
