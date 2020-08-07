@@ -26,7 +26,7 @@
     <button mat-button><fa-icon [icon]="faRetweet"></fa-icon> Share</button>
   </mat-card-actions>
 
-  <div class="comment-form-handler hide" id = "{{ 'comment-form' + topic.id }}">
+  <div class="comment-form-handler hide" id = "{{'comment-form' + topic.id}}">
       <form class="comment-form" (ngSubmit)="submitComment(f1)" #f1="ngForm">
           <div class="form-row">
           <div mat-card-avatar class="comment-user-avatar">
@@ -69,10 +69,10 @@
               <div class="comment-actions comment-actions-row">
                   <button id="{{'comment-btn' + topic.id + comment.id}}"  *ngIf="comment && loginUser" (click) ="onLikeComment(comment.id, 'comment-btn' + topic.id + comment.id)" [class]="comment.likers.includes(loginUser.id)? 'did_like': '' " mat-button><span><fa-icon [icon]="faThumbsUp"></fa-icon></span> <span class="counter">{{comment.likes}}</span></button>
                    <button mat-button>0 <fa-icon [icon]="faThumbsDown"></fa-icon></button>
-                  <button mat-button (click)="onToggleCommentForm('comment-form' + j)">Reply</button>
+                  <button mat-button (click)="onToggleCommentForm('comment-form' + j + comment.id)">Reply</button>
               </div>
 
-              <div class="comment-form-handler comment-reply-form-handler hide" id="{{'comment-form' + j}}">
+              <div class="comment-form-handler comment-reply-form-handler hide" id="{{'comment-form' + j + comment.id}}">
                   <form class="comment-form" (ngSubmit)="submitComment(f2)" #f2="ngForm">
                       <div class="form-row">
                       <div mat-card-avatar class="comment-user-avatar">
@@ -117,10 +117,10 @@
                   <div class="comment-actions comment-actions-row">
                       <button id="{{'comment-reply-btn' + topic.id + reply.id}}"  *ngIf="reply && loginUser" (click) = "onLikeComment(reply.id, 'comment-reply-btn' + topic.id + reply.id)" [class]="reply.likers.includes(loginUser.id)? 'did_like': '' " mat-button><span><fa-icon [icon]="faThumbsUp"></fa-icon></span> <span class="counter">{{reply.likes}}</span></button>
                       <button mat-button>0 <fa-icon [icon]="faThumbsDown"></fa-icon></button>
-                      <button (click)="onToggleCommentForm('comment-form'+ j + k)" mat-button>Reply</button>
+                      <button (click)="onToggleCommentForm('comment-form'+ j + k + reply.id)" mat-button>Reply</button>
                   </div>
 
-              <div id="{{'comment-form' + j + k }}" class="comment-form-handler comment-reply-form-handler hide">
+              <div id="{{'comment-form' + j + k + reply.id}}" class="comment-form-handler comment-reply-form-handler hide">
                   <form class="comment-form" (ngSubmit)="submitComment(f3)" #f3="ngForm">
                       <div class="form-row">
                       <div mat-card-avatar class="comment-user-avatar">

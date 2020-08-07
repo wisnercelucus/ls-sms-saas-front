@@ -90,7 +90,7 @@ export class ForumEffects{
             return this.http.post<Comment>(this.tenantUrl + '/forums/comments/api/create/',
             body).pipe(
                 map(res => { 
-                    console.log(res);
+                    //console.log(res);
                     return new ForumActions.AnswerTopicSuccess();
                 }),
                 catchError(errorMes=>{
