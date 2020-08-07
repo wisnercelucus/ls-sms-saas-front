@@ -20,6 +20,7 @@ import { User } from 'src/app/users/user.model';
 import * as fromApp from '../../store/app.reducer';
 import {Store} from '@ngrx/store';
 import * as ForumActions from '../store/forum.actions';
+import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -80,6 +81,11 @@ export class QuestionItemComponent implements OnInit {
     }
   }
 
+  getSafeContent(content:string){
+    return this.sanitizer.bypassSecurityTrustHtml(content)
+  }
+
+
   urlIsComplete(url:string){
     let splited_url = url.split(':')
     if(splited_url[0] == 'http' || splited_url[0] == 'https'){
@@ -110,20 +116,55 @@ export class QuestionItemComponent implements OnInit {
   }
 
   submitComment(form:NgForm){
-    //console.log(form.value)
     this.store.dispatch(new ForumActions.AnswerTopic(form.value));
-}
+    this.store.dispatch(new ForumActions.FetchTopics());
+  }
 
-public onEditorCreated(quill: any) {
+  public onEditorCreated(quill: any) {
+  
+    (window as any).mathquill4quill()(quill, {
+      displayHistory: true, // defaults to false
+      historyCacheKey: '__my_app_math_history_cachekey_', // optional
+      historySize: 20, // optional (defaults to 10)
+      operators: [["\\sqrt[n]{x}", "\\nthroot"], 
+                  ["\\frac{x}{y}","\\frac"], 
+                  ["\\ln{x}","\\ln"]]
+    });
+  }
+  getUserData(username:string){
+  
+  }
 
-  (window as any).mathquill4quill()(quill, {
-    displayHistory: true, // defaults to false
-    historyCacheKey: '__my_app_math_history_cachekey_', // optional
-    historySize: 20, // optional (defaults to 10)
-    operators: [["\\sqrt[n]{x}", "\\nthroot"], 
-                ["\\frac{x}{y}","\\frac"], 
-                ["\\ln{x}","\\ln"]]
-  });
-}
+  onLikeComment(id:number, ele_id:string){
+    
+  }
+
+  onLikePost(id:number){
+    //this.postLikeSub =  
+    /*
+     this.feedService.likePost(+id)
+     .pipe(takeUntil(this.destroy$))
+     .subscribe(
+       res=>{
+
+         let element = document.getElementById("post"+id);
+         element.removeChild(element.children[0])
+         let span = document.createElement("span");
+         span.innerHTML = res['likes'] + " Likes"
+         span.style.marginRight = "20px"
+         element.prepend(span)
+
+         if(res['liked']){
+           document.getElementById("post-like-button"+id).classList.add("did_like"); 
+         }else{
+           document.getElementById("post-like-button"+id).classList.remove("did_like");
+         }
+       },
+       err =>{
+         console.log(err)
+       }
+
+       )*/
+ }
 
 }

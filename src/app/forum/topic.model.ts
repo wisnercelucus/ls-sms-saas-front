@@ -18,4 +18,5 @@ export interface Topic{
     comment_count?:number;
     timesince?:string;
     comments?:Comment[];
+    total_comments?:number;
 }

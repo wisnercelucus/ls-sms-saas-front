@@ -10,13 +10,15 @@
     <h2>{{topic.title}}</h2>
     <p [innerHTML]="contentSafe" class="question-content">
     </p>
-
+    <mat-divider></mat-divider>
     <div class="question-stat">
         <span>0 Upvotes</span>
         <span>0 Downvotes</span>
-        <span>0 Comments</span>
+        <span>{{topic.total_comments}} Comments</span>
     </div>
+    <mat-divider></mat-divider>
   </mat-card-content>
+  
   <mat-card-actions>
     <button mat-button (click)="onToggleCommentForm('comment-form' + topic.id)" ><fa-icon [icon]="faPenSquare"></fa-icon> Answer</button>
     <button mat-button><fa-icon [icon]="faThumbsUp"></fa-icon> Upvote</button>
@@ -47,4 +49,105 @@
       </form>
   </div>
 
+  <div class="wrap-comment" *ngIf="topic.total_comments">
+      <div class="comment-thread" *ngFor="let comment of topic.comments; let j = index">
+          <div class class="comment-box">
+              <div class="comment-content-box">
+                  <div mat-card-avatar class="comment-user-avatar">
+                      <img class="avatar-xs-card-comment" *ngIf="tenantUrl" [src]=" comment.user.image ? tenantUrl + comment.user.image : comment.user.default_image" alt="{{comment.user.username}}">
+                  </div>
+                  <div class="comment-text">
+                  <a class="user-link" (click)="getUserData(comment.user.username)"> <span class="comment-user">{{ comment.user.first_name + ' ' + comment.user.last_name }}</span></a>
+                  <br>
+
+                      <p class="comment-content-text" [innerHTML]="getSafeContent(comment.content)"></p>
+
+                  </div>
+                  
+              </div>
+
+              <div class="comment-actions comment-actions-row">
+                  <button id="{{'comment-btn' + topic.id + comment.id}}"  *ngIf="comment && loginUser" (click) ="onLikeComment(comment.id, 'comment-btn' + topic.id + comment.id)" [class]="comment.likers.includes(loginUser.id)? 'did_like': '' " mat-button><span><fa-icon [icon]="faThumbsUp"></fa-icon></span> <span class="counter">{{comment.likes}}</span></button>
+                   <button mat-button>0 <fa-icon [icon]="faThumbsDown"></fa-icon></button>
+                  <button mat-button (click)="onToggleCommentForm('comment-form' + j)">Reply</button>
+              </div>
+
+              <div class="comment-form-handler comment-reply-form-handler hide" id="{{'comment-form' + j}}">
+                  <form class="comment-form" (ngSubmit)="submitComment(f2)" #f2="ngForm">
+                      <div class="form-row">
+                      <div mat-card-avatar class="comment-user-avatar">
+                          <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image? loginUser.image : loginUser.default_image" alt="{{loginUser.username}}}">
+                      </div>
+                      <input type="hidden" [ngModel] = "comment.id" name='parent_id'>
+                      <input type="hidden" ngModel = "topic" name='content_type'>
+                      <input type="hidden" [ngModel] = "topic.id" name='object_id'>
+                      <quill-editor class="comment-form-content-box" (onEditorCreated)="onEditorCreated($event)" id="editor" [styles]="{height: '100px'}" name="content" ngModel></quill-editor>
+                        
+                      </div>
+                      <button class="post-comment" type="submit"
+                          matRipple
+                          [matRippleCentered]="centered"
+                          [matRippleDisabled]="disabled"
+                          [matRippleUnbounded]="unbounded"
+                          [matRippleRadius]="radius"
+                          [matRippleColor]="color"
+                      >
+                          <span class="material-icons">arrow_forward_ios</span>
+                      </button>
+                  </form>
+              </div>
+
+
+          </div>
+
+          <div class="wrap-inner-comment"  *ngIf="comment.reply_count">
+              <div class="inner-comment-thread" *ngFor="let reply of comment.replies; let k = index">
+          
+                  <div class class="comment-box">
+                      <div class="comment-content-box">
+                          <div mat-card-avatar class="comment-user-avatar">
+                              <img class="avatar-xs-card-comment" *ngIf="tenantUrl" src="{{ reply.user.image ? tenantUrl +  reply.user.image : reply.user.default_image }}" alt="Photo of a Shiba Inu">
+                            </div>
+                      <div class="comment-text">
+                      <a class="user-link" (click)="getUserData(reply.user.username)"> <span class="comment-user">{{ reply.user.first_name + ' ' + reply.user.last_name }}</span></a>
+                      <br>
+                      <p [innerHTML]="getSafeContent(reply.content)"></p>
+                      </div>
+                  </div>
+                  <div class="comment-actions comment-actions-row">
+                      <button id="{{'comment-reply-btn' + topic.id + reply.id}}"  *ngIf="reply && loginUser" (click) = "onLikeComment(reply.id, 'comment-reply-btn' + topic.id + reply.id)" [class]="reply.likers.includes(loginUser.id)? 'did_like': '' " mat-button><span><fa-icon [icon]="faThumbsUp"></fa-icon></span> <span class="counter">{{reply.likes}}</span></button>
+                      <button mat-button>0 <fa-icon [icon]="faThumbsDown"></fa-icon></button>
+                      <button (click)="onToggleCommentForm('comment-form'+ j + k)" mat-button>Reply</button>
+                  </div>
+
+              <div id="{{'comment-form' + j + k }}" class="comment-form-handler comment-reply-form-handler hide">
+                  <form class="comment-form" (ngSubmit)="submitComment(f3)" #f3="ngForm">
+                      <div class="form-row">
+                      <div mat-card-avatar class="comment-user-avatar">
+                          <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image? loginUser.image : loginUser.default_image" alt="{{loginUser.username}}">
+                      </div>
+                      <input type="hidden" [ngModel] = "comment.id" name='parent_id'>
+                      <input type="hidden" ngModel = "topic" name='content_type'>
+                      <input type="hidden" [ngModel] = "topic.id" name='object_id'>
+                      <quill-editor class="comment-form-content-box" (onEditorCreated)="onEditorCreated($event)" id="editor" [styles]="{height: '100px'}" name="content" ngModel></quill-editor>
+                          
+                      </div>
+                      <button class="post-comment" type="submit"
+                          matRipple
+                          [matRippleCentered]="centered"
+                          [matRippleDisabled]="disabled"
+                          [matRippleUnbounded]="unbounded"
+                          [matRippleRadius]="radius"
+                          [matRippleColor]="color"
+                      >
+                          <span class="material-icons">arrow_forward_ios</span>
+                      </button>
+                  </form>
+              </div>
+
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
 </mat-card>

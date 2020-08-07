@@ -87,6 +87,10 @@
     margin-left: 40px;
 }
 
+.comment-actions-row{
+    margin-top: 12px;
+}
+
 .comment-box .comment-actions button{
     margin-right: 15px;
 }
@@ -151,6 +155,10 @@ a{
     cursor: pointer;
     margin-left: 62px;
 
+}
+
+span.counter{
+    margin-left: 5px;
 }
 
 .fadeIn {
