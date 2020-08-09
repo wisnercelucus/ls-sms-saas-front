@@ -60,7 +60,8 @@
                   <a class="user-link" (click)="getUserData(comment.user.username)"> <span class="comment-user">{{ comment.user.first_name + ' ' + comment.user.last_name }}</span></a>
                   <br>
 
-                      <p class="comment-content-text" [innerHTML]="getSafeContent(comment.content)"></p>
+                      <p class="comment-content-text" [innerHTML]="getSafeContent(comment.content)">
+                      </p>
 
                   </div>
                   
@@ -111,7 +112,7 @@
                       <div class="comment-text">
                       <a class="user-link" (click)="getUserData(reply.user.username)"> <span class="comment-user">{{ reply.user.first_name + ' ' + reply.user.last_name }}</span></a>
                       <br>
-                      <p [innerHTML]="getSafeContent(reply.content)"></p>
+                      <p class="comment-content-text" [innerHTML]="getSafeContent(reply.content)"></p>
                       </div>
                   </div>
                   <div class="comment-actions comment-actions-row">

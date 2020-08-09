@@ -121,6 +121,11 @@
 
 .comment-thread .comment-box .comment-text{
     padding: 0px;
+    overflow-x: hidden;
+}
+
+.comment-thread .comment-box .comment-text:hover{
+    overflow-x: auto;
 }
 
 .comment-form{
