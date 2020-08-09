@@ -155,27 +155,48 @@ export class QuestionItemComponent implements OnInit {
      .pipe(takeUntil(this.destroy$))
      .subscribe(
        res=>{
-         console.log(res)
-
-         /*let element = document.getElementById("post"+id);
-         element.removeChild(element.children[0])
-         let span = document.createElement("span");
-         span.innerHTML = res['likes'] + " Likes"
-         span.style.marginRight = "20px"
-         element.prepend(span)
-
-         if(res['liked']){
-           document.getElementById("post-like-button"+id).classList.add("did_like"); 
+         let element = document.getElementById("topic"+id);
+         //element.removeChild(element.replaceChild())
+         //element.removeChild(element.children[1])
+         let span0 = document.createElement("span");
+         let span1 = document.createElement("span");
+  
+         if(+res['down_likes'] == 1){
+          span1.innerHTML = res['down_likes'] + " Downvote"
          }else{
-           document.getElementById("post-like-button"+id).classList.remove("did_like");
-         }*/
+          span1.innerHTML = res['down_likes'] + " Downvotes"
+         }
+  
+         if(+res['up_likes'] == 1){
+          span0.innerHTML = res['up_likes'] + " Upvote"
+         }else{
+          span0.innerHTML = res['up_likes'] + " Upvotes"
+         }
+         
+         span1.style.marginRight = "20px"
+         span0.style.marginRight = "20px"
+         element.replaceChild(span1,element.children[1])
+         element.replaceChild(span0,element.children[0])
+
+         if(res['is_up_liked']){
+          
+          document.getElementById("topic-down-like-button"+id).classList.remove("did_down_like");
+          document.getElementById("topic-down-like-button"+id).classList.add("general-icon");
+         
+           document.getElementById("topic-up-like-button"+id).classList.remove("general-icon");
+           document.getElementById("topic-up-like-button"+id).classList.add("did_like"); 
+           
+         }else{
+           document.getElementById("topic-up-like-button"+id).classList.remove("did_like");
+           document.getElementById("topic-up-like-button"+id).classList.add("general-icon");
+         }
        },
        err =>{
          console.log(err)
        }
-
+  
     )
- }
+  }
 
 
  onDownLikeTopic(id:number){
@@ -185,20 +206,42 @@ export class QuestionItemComponent implements OnInit {
    .pipe(takeUntil(this.destroy$))
    .subscribe(
      res=>{
-       console.log(res)
+       let element = document.getElementById("topic"+id);
+       //element.removeChild(element.replaceChild())
+       //element.removeChild(element.children[1])
+       let span0 = document.createElement("span");
+       let span1 = document.createElement("span");
 
-       /*let element = document.getElementById("post"+id);
-       element.removeChild(element.children[0])
-       let span = document.createElement("span");
-       span.innerHTML = res['likes'] + " Likes"
-       span.style.marginRight = "20px"
-       element.prepend(span)
-
-       if(res['liked']){
-         document.getElementById("post-like-button"+id).classList.add("did_like"); 
+       if(+res['down_likes'] == 1){
+        span1.innerHTML = res['down_likes'] + " Downvote"
        }else{
-         document.getElementById("post-like-button"+id).classList.remove("did_like");
-       }*/
+        span1.innerHTML = res['down_likes'] + " Downvotes"
+       }
+
+       if(+res['up_likes'] == 1){
+        span0.innerHTML = res['up_likes'] + " Upvote"
+       }else{
+        span0.innerHTML = res['up_likes'] + " Upvotes"
+       }
+       
+       span1.style.marginRight = "20px"
+       span0.style.marginRight = "20px"
+       element.replaceChild(span1,element.children[1])
+       //element.prepend(span1)
+       element.replaceChild(span0,element.children[0])
+       //element.prepend(span0)
+
+       if(res['is_downliked']){
+         document.getElementById("topic-up-like-button"+id).classList.add("general-icon");
+         document.getElementById("topic-up-like-button"+id).classList.remove("did_like");
+
+         document.getElementById("topic-down-like-button"+id).classList.remove("general-icon");
+         document.getElementById("topic-down-like-button"+id).classList.add("did_down_like"); 
+         
+       }else{
+         document.getElementById("topic-down-like-button"+id).classList.remove("did_down_like");
+         document.getElementById("topic-down-like-button"+id).classList.add("general-icon");
+       }
      },
      err =>{
        console.log(err)
