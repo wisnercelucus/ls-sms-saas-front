@@ -8,7 +8,6 @@ export interface Comment{
     created_at?:Date;
     date_display?:string;
     timesince?:string;
-    url?:string;
     content_type:string;
     object_id:number;
     reply_count?:number;

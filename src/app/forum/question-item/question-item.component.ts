@@ -250,54 +250,79 @@ export class QuestionItemComponent implements OnInit {
   )
 }
 
-onVoteAnswer(id:number, elid:string){
+onVoteAnswer(id:number, elid:string, altelid:string){
   //this.likeCommentSub = 
   this.forumsService.voteAnswer(id)
   .pipe(takeUntil(this.destroy$))
   .subscribe(
     res=>{
-      console.log(res)
-      /*
-      let element = document.getElementById(elid)
-      element.children[0].removeChild(element.children[0].children[1])
-      let span = document.createElement("span");
-      span.innerHTML = res['likes']
-      span.style.marginLeft = "5px"
-      element.children[0].append(span)
 
-      if(res['liked']){
+      let element = document.getElementById(elid);
+      let altElement = document.getElementById(altelid);
+
+      element.children[0].removeChild(element.children[0].children[1]);
+      altElement.children[0].removeChild(altElement.children[0].children[1]);
+
+      let span = document.createElement("span");
+      span.innerHTML = res['up_votes'];
+      span.style.marginLeft = "5px";
+
+      let altSpan = document.createElement("span");
+      altSpan.innerHTML = res['down_votes'];
+      altSpan.style.marginLeft = "5px";
+
+      element.children[0].append(span);
+      altElement.children[0].append(altSpan);
+      
+      if(res['is_voted']){
+        altElement.classList.remove('did_like');
+        altElement.classList.add('general-icon');
+        
         element.classList.remove("general-icon"); 
-        element.classList.add("did_like"); 
+        element.classList.add("did_like");
+        
       }else{
         element.classList.remove("did_like");
         element.classList.add("general-icon");
-      }*/
+      }
     }
   )
 }
 
-onDownVoteAnswer(id:number, elid:string){
+onDownVoteAnswer(id:number, elid:string, altelid:string){
   //this.likeCommentSub = 
   this.forumsService.downVoteAnswer(id)
   .pipe(takeUntil(this.destroy$))
   .subscribe(
     res=>{
-      console.log(res)
-      /*
-      let element = document.getElementById(elid)
-      element.children[0].removeChild(element.children[0].children[1])
+    
+      let element = document.getElementById(elid);
+      let altElement = document.getElementById(altelid);
+      
+      element.children[0].removeChild(element.children[0].children[1]);
+      altElement.children[0].removeChild(altElement.children[0].children[1]);
+ 
       let span = document.createElement("span");
-      span.innerHTML = res['likes']
-      span.style.marginLeft = "5px"
-      element.children[0].append(span)
+      span.innerHTML = res['down_votes'];
+      span.style.marginLeft = "5px";
 
-      if(res['liked']){
+      let altSpan = document.createElement("span");
+      altSpan.innerHTML = res['up_votes'];
+      altSpan.style.marginLeft = "5px";
+
+      element.children[0].append(span);
+      altElement.children[0].append(altSpan);
+
+      if(res['is_downvoted']){
+        altElement.classList.remove('did_like');
+        altElement.classList.add('general-icon');
+
         element.classList.remove("general-icon"); 
         element.classList.add("did_like"); 
       }else{
         element.classList.remove("did_like");
         element.classList.add("general-icon");
-      }*/
+      }
     }
   )
 }

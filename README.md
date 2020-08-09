@@ -44,6 +44,12 @@ Update post with files
 add delete specific file
 add delete specific image
 
+delete a comment
+update a comment
+
+##Forum
+delete an answer
+update an answer
 
 ##Profile
 Zoom user profile photo
