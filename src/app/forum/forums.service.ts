@@ -102,5 +102,32 @@ export class ForumsService{
       }
     }
 
+    voteAnswer(comment_id:number){
+ 
+      if(this.tenantUrl){
+        return this.http.get(this.tenantUrl + '/feed/comments/api/'+ comment_id +'/up_vote/').pipe(
+          tap(res=>{
+            //this._refreshNeeded.next();
+          })
+        );
+      }else{
+        return;
+      }
+  
+     }
+  
+     downVoteAnswer(comment_id:number){
+ 
+      if(this.tenantUrl){
+        return this.http.get(this.tenantUrl + '/feed/comments/api/'+ comment_id +'/down_vote/').pipe(
+          tap(res=>{
+            //this._refreshNeeded.next();
+          })
+        );
+      }else{
+        return;
+      }
+  
+     }
 
 }

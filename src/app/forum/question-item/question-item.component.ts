@@ -250,4 +250,56 @@ export class QuestionItemComponent implements OnInit {
   )
 }
 
+onVoteAnswer(id:number, elid:string){
+  //this.likeCommentSub = 
+  this.forumsService.voteAnswer(id)
+  .pipe(takeUntil(this.destroy$))
+  .subscribe(
+    res=>{
+      console.log(res)
+      /*
+      let element = document.getElementById(elid)
+      element.children[0].removeChild(element.children[0].children[1])
+      let span = document.createElement("span");
+      span.innerHTML = res['likes']
+      span.style.marginLeft = "5px"
+      element.children[0].append(span)
+
+      if(res['liked']){
+        element.classList.remove("general-icon"); 
+        element.classList.add("did_like"); 
+      }else{
+        element.classList.remove("did_like");
+        element.classList.add("general-icon");
+      }*/
+    }
+  )
+}
+
+onDownVoteAnswer(id:number, elid:string){
+  //this.likeCommentSub = 
+  this.forumsService.downVoteAnswer(id)
+  .pipe(takeUntil(this.destroy$))
+  .subscribe(
+    res=>{
+      console.log(res)
+      /*
+      let element = document.getElementById(elid)
+      element.children[0].removeChild(element.children[0].children[1])
+      let span = document.createElement("span");
+      span.innerHTML = res['likes']
+      span.style.marginLeft = "5px"
+      element.children[0].append(span)
+
+      if(res['liked']){
+        element.classList.remove("general-icon"); 
+        element.classList.add("did_like"); 
+      }else{
+        element.classList.remove("did_like");
+        element.classList.add("general-icon");
+      }*/
+    }
+  )
+}
+
 }

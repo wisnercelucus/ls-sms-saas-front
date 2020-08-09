@@ -16,4 +16,10 @@ export interface Comment{
     likes?:number;
     replies?:Comment[];
     parent?:number;
+    up_voted?:any;
+    down_voted?:any;
+    up_voters?:number[];
+    down_voters?:number[];
+    up_votes?:number;
+    down_votes?:number;
 }
