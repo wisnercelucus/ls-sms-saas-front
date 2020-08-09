@@ -32,6 +32,14 @@
     color: dodgerblue;
 }
 
+.did_down_like{
+    color: dodgerblue;
+}
+
+.general-icon{
+    color: #606060;
+}
+
 .remove{
     display: none;
 }

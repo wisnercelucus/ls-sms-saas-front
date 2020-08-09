@@ -184,8 +184,10 @@ export class PostItemComponent implements OnInit {
 
          if(res['liked']){
            document.getElementById("post-like-button"+id).classList.add("did_like"); 
+           document.getElementById("post-like-button"+id).classList.remove("general-icon");
          }else{
            document.getElementById("post-like-button"+id).classList.remove("did_like");
+           document.getElementById("post-like-button"+id).classList.add("general-icon");
          }
        },
        err =>{
@@ -275,9 +277,11 @@ onLikeComment(id:number, elid:string){
       element.children[0].append(span)
 
       if(res['liked']){
+        element.classList.remove("general-icon"); 
         element.classList.add("did_like"); 
       }else{
         element.classList.remove("did_like");
+        element.classList.add("general-icon");
       }
     }
   )

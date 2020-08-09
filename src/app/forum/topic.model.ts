@@ -19,4 +19,10 @@ export interface Topic{
     timesince?:string;
     comments?:Comment[];
     total_comments?:number;
+    up_liked?:any;
+    down_liked?:any;
+    did_up_like?:boolean;
+    did_down_like?:boolean;
+    up_likes?:number;
+    down_likes?:number;
 }

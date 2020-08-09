@@ -1,4 +1,4 @@
-import {HttpClient, HttpParams} from '@angular/common/http'
+import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { Category } from './category.model';
 import { tap } from 'rxjs/operators';
@@ -74,6 +74,32 @@ export class ForumsService{
 
     getTopicList(){
       return this.topics.slice();
+    }
+
+    upLikeTopic(id:number){
+
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+      });
+
+      if(this.tenantUrl){
+        return this.http.get(this.tenantUrl + '/forums/api/topic/' + id + '/up_like/', {headers: headers}).pipe();
+      }else{
+        return;
+      }
+    }
+
+    downLikeTopic(id:number){
+
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+      });
+
+      if(this.tenantUrl){
+        return this.http.get(this.tenantUrl + '/forums/api/topic/' + id + '/down_like/', {headers: headers}).pipe();
+      }else{
+        return;
+      }
     }
 
 

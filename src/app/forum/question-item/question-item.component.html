@@ -11,19 +11,19 @@
     <p [innerHTML]="contentSafe" class="question-content">
     </p>
     <mat-divider></mat-divider>
-    <div class="question-stat">
-        <span>0 Upvotes</span>
-        <span>0 Downvotes</span>
-        <span>{{topic.total_comments}} Comments</span>
+    <div class="question-stat" id="{{'topic'+ topic.id}}">
+        <span>{{topic.up_likes}} {{topic.up_likes == 1? ' Upvote' : ' Upvotes'}}</span>
+        <span>{{topic.down_likes}} {{topic.down_likes == 1? ' Downvote' : ' Downvotes'}}</span>
+        <span>{{topic.total_comments}} {{topic.total_comments == 1? ' Answer': ' Answers'}}</span>
     </div>
     <mat-divider></mat-divider>
   </mat-card-content>
   
   <mat-card-actions>
-    <button mat-button (click)="onToggleCommentForm('comment-form' + topic.id)" ><fa-icon [icon]="faPenSquare"></fa-icon> Answer</button>
-    <button mat-button><fa-icon [icon]="faThumbsUp"></fa-icon> Upvote</button>
-    <button mat-button><fa-icon [icon]="faThumbsDown"></fa-icon> Downvote</button>
-    <button mat-button><fa-icon [icon]="faRetweet"></fa-icon> Share</button>
+    <button mat-button class="general-icon" (click)="onToggleCommentForm('comment-form' + topic.id)" ><fa-icon [icon]="faPenSquare"></fa-icon> Answer</button>
+    <button mat-button id="{{'topic-up-like-button'+ topic.id}}" (click)="onUpLikeTopic(topic.id)" [class]="topic.did_up_like? 'did_like': 'general-icon' "><fa-icon [icon]="faThumbsUp"></fa-icon> Upvote</button>
+    <button mat-button id="{{'topic-down-like-button'+ topic.id}}" (click)="onDownLikeTopic(topic.id)" [class]="topic.did_down_like? 'did_down_like': 'general-icon' "><fa-icon [icon]="faThumbsDown"></fa-icon> Downvote</button>
+    <button mat-button class="general-icon"><fa-icon [icon]="faRetweet"></fa-icon> Share</button>
   </mat-card-actions>
 
   <div class="comment-form-handler hide" id = "{{'comment-form' + topic.id}}">
@@ -67,9 +67,9 @@
               </div>
 
               <div class="comment-actions comment-actions-row">
-                  <button id="{{'comment-btn' + topic.id + comment.id}}"  *ngIf="comment && loginUser" (click) ="onLikeComment(comment.id, 'comment-btn' + topic.id + comment.id)" [class]="comment.likers.includes(loginUser.id)? 'did_like': '' " mat-button><span><fa-icon [icon]="faThumbsUp"></fa-icon></span> <span class="counter">{{comment.likes}}</span></button>
-                   <button mat-button>0 <fa-icon [icon]="faThumbsDown"></fa-icon></button>
-                  <button mat-button (click)="onToggleCommentForm('comment-form' + j + comment.id)">Reply</button>
+                  <button class="general-icon" id="{{'comment-btn' + topic.id + comment.id}}"  *ngIf="comment && loginUser" (click) ="onLikeComment(comment.id, 'comment-btn' + topic.id + comment.id)" [class]="comment.likers.includes(loginUser.id)? 'did_like': '' " mat-button><span><fa-icon [icon]="faThumbsUp"></fa-icon></span> <span class="counter">{{comment.likes}}</span></button>
+                   <button class="general-icon" mat-button>0 <fa-icon [icon]="faThumbsDown"></fa-icon></button>
+                  <button class="general-icon" mat-button (click)="onToggleCommentForm('comment-form' + j + comment.id)">Reply</button>
               </div>
 
               <div class="comment-form-handler comment-reply-form-handler hide" id="{{'comment-form' + j + comment.id}}">
@@ -115,9 +115,9 @@
                       </div>
                   </div>
                   <div class="comment-actions comment-actions-row">
-                      <button id="{{'comment-reply-btn' + topic.id + reply.id}}"  *ngIf="reply && loginUser" (click) = "onLikeComment(reply.id, 'comment-reply-btn' + topic.id + reply.id)" [class]="reply.likers.includes(loginUser.id)? 'did_like': '' " mat-button><span><fa-icon [icon]="faThumbsUp"></fa-icon></span> <span class="counter">{{reply.likes}}</span></button>
-                      <button mat-button>0 <fa-icon [icon]="faThumbsDown"></fa-icon></button>
-                      <button (click)="onToggleCommentForm('comment-form'+ j + k + reply.id)" mat-button>Reply</button>
+                      <button class="general-icon" id="{{'comment-reply-btn' + topic.id + reply.id}}"  *ngIf="reply && loginUser" (click) = "onLikeComment(reply.id, 'comment-reply-btn' + topic.id + reply.id)" [class]="reply.likers.includes(loginUser.id)? 'did_like': '' " mat-button><span><fa-icon [icon]="faThumbsUp"></fa-icon></span> <span class="counter">{{reply.likes}}</span></button>
+                      <button class="general-icon" mat-button>0 <fa-icon [icon]="faThumbsDown"></fa-icon></button>
+                      <button class="general-icon" (click)="onToggleCommentForm('comment-form'+ j + k + reply.id)" mat-button>Reply</button>
                   </div>
 
               <div id="{{'comment-form' + j + k + reply.id}}" class="comment-form-handler comment-reply-form-handler hide">

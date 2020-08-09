@@ -21,6 +21,8 @@ import * as fromApp from '../../store/app.reducer';
 import {Store} from '@ngrx/store';
 import * as ForumActions from '../store/forum.actions';
 import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { ForumsService } from '../forums.service';
 
 
 @Component({
@@ -50,6 +52,7 @@ export class QuestionItemComponent implements OnInit {
   faPenSquare = faPenSquare;
   faThumbsDown = faThumbsDown;
   faRetweet = faRetweet;
+  destroy$:Subject<void> = new Subject<void>();
 
   @Input() topic:Topic;
   @Input() tenantUrl:string;
@@ -57,7 +60,7 @@ export class QuestionItemComponent implements OnInit {
   contentSafe:any;
   user_image_url:string;
   constructor(private sanitizer: DomSanitizer,
-    private store:Store<fromApp.AppState>
+    private store:Store<fromApp.AppState>, private forumsService:ForumsService
     ) { }
 
   toggleCommentForm:false;
@@ -145,15 +148,16 @@ export class QuestionItemComponent implements OnInit {
     
   }
 
-  onLikePost(id:number){
+  onUpLikeTopic(id:number){
     //this.postLikeSub =  
-    /*
-     this.feedService.likePost(+id)
+    
+     this.forumsService.upLikeTopic(+id)
      .pipe(takeUntil(this.destroy$))
      .subscribe(
        res=>{
+         console.log(res)
 
-         let element = document.getElementById("post"+id);
+         /*let element = document.getElementById("post"+id);
          element.removeChild(element.children[0])
          let span = document.createElement("span");
          span.innerHTML = res['likes'] + " Likes"
@@ -164,13 +168,43 @@ export class QuestionItemComponent implements OnInit {
            document.getElementById("post-like-button"+id).classList.add("did_like"); 
          }else{
            document.getElementById("post-like-button"+id).classList.remove("did_like");
-         }
+         }*/
        },
        err =>{
          console.log(err)
        }
 
-       )*/
+    )
  }
+
+
+ onDownLikeTopic(id:number){
+  //this.postLikeSub =  
+  
+   this.forumsService.downLikeTopic(+id)
+   .pipe(takeUntil(this.destroy$))
+   .subscribe(
+     res=>{
+       console.log(res)
+
+       /*let element = document.getElementById("post"+id);
+       element.removeChild(element.children[0])
+       let span = document.createElement("span");
+       span.innerHTML = res['likes'] + " Likes"
+       span.style.marginRight = "20px"
+       element.prepend(span)
+
+       if(res['liked']){
+         document.getElementById("post-like-button"+id).classList.add("did_like"); 
+       }else{
+         document.getElementById("post-like-button"+id).classList.remove("did_like");
+       }*/
+     },
+     err =>{
+       console.log(err)
+     }
+
+  )
+}
 
 }
