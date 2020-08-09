@@ -96,9 +96,23 @@ export class ForumComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.destroy$))
     .subscribe(forumSate=>{
       if(forumSate){
-        this.topicList = forumSate.topics;
+        const topic_entities = forumSate.topic_entities
+        this.topicList = Object.keys(topic_entities).map(id=> 
+          topic_entities[parseInt(id, 10)]
+        );
       }
     })
+  }
+
+  private getTime(date?: Date) {
+    return date != null ? date.getTime() : 0;
+}
+
+
+  public sortByDate(arr:any): void {
+      arr.sort((a: Topic, b: Topic) => {
+          return this.getTime(a.date) - this.getTime(b.date);
+      });
   }
 
   getLogingUser(){

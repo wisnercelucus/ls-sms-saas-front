@@ -1,18 +1,20 @@
 import { Action } from '@ngrx/store';
 import { Topic } from '../topic.model';
 import { Category } from '../category.model';
+import {Comment} from '../../feed/comment.model';
 
 
 export const SET_TOPICS = '[Forum] Set Topics';
 export const FETCH_TOPICS = '[Forum] Fetch Topics';
-
-export const SET_CATEGORIES = '[Forum] Set Categories';
-export const FETCH_CATEGORIES = '[Forum] Fetch Categories';
+export const FETCH_TOPICS_SUCCESS = '[Forum] Fetch Topics Success';
 export const UPDATE_TOPICS_LOCALY = '[Forum] Update Topic Locally]'
-
 export const CREATE_TOPIC = '[Forum] Create Topic';
 export const UPDATE_TOPIC = '[Forum] Update Topic';
 export const DELETE_TOPIC = '[Forum] Delete Topic';
+
+
+export const SET_CATEGORIES = '[Forum] Set Categories';
+export const FETCH_CATEGORIES = '[Forum] Fetch Categories';
 
 export const FORUM_ACTION_FAIL = '[Forum] Forum Action Fail';
 
@@ -84,6 +86,7 @@ export class AnswerTopic implements Action{
 
 export class AnswerTopicSuccess implements Action{
     readonly type = ANSWER_TOPIC_SUCCESS; 
+    constructor(public payload:Comment){}
 }
 
 

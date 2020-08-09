@@ -220,18 +220,18 @@
                         
                         </owl-carousel-o>
                     </div>
-
+                <mat-divider></mat-divider>
                     <div class="post-stat" id="{{'post'+ post.id}}">
                         <span>{{ post.likes + ' ' }}Likes</span>
                         <span>{{ post.total_comments + ' ' }}Comments</span>
                     </div>
+                <mat-divider></mat-divider>
                 </mat-card-content>
                 
-                <mat-divider></mat-divider>
                 <mat-card-actions>
                     <button id="{{'post-like-button'+ post.id}}" (click) = "onLikePost(post.id)"  [class]="post.did_like? 'did_like': '' " mat-button><fa-icon [icon]="faThumbsUp"></fa-icon> Like</button>
-                    <button mat-button (click)="onToggleCommentForm('comment-form' + post.id)"><fa-icon [icon]="faComment"></fa-icon> Comment</button>
-                    <button mat-button (click)="openDialog(post)"><fa-icon [icon]="faShareAltSquare"></fa-icon> Share</button>
+                    <button mat-button (click)="onToggleCommentForm('comment-form' + post.id)"><fa-icon class="general-icon" [icon]="faComment"></fa-icon> Comment</button>
+                    <button mat-button (click)="openDialog(post)"><fa-icon class="general-icon" [icon]="faShareAltSquare"></fa-icon> Share</button>
                 </mat-card-actions>
 
                 <div class="comment-form-handler hide" id = "{{ 'comment-form' + post.id }}">
@@ -595,18 +595,19 @@
                             </ng-container>
                         
                     </owl-carousel-o>
-        
+                <mat-divider></mat-divider>
                     <div class="post-stat" id="{{'post'+ post.id}}">
                         <span>{{ post.likes + ' ' }}Likes</span>
                         <span>{{ post.total_comments + ' ' }}Comments</span>
                     </div>
+                <mat-divider></mat-divider>
                 </mat-card-content>
                 
-                <mat-divider></mat-divider>
+                
                 <mat-card-actions>
                     <button id="{{'post-like-button'+ post.id}}" (click) = "onLikePost(post.id)"  [class]="post.did_like? 'did_like': '' " mat-button><fa-icon [icon]="faThumbsUp"></fa-icon> Like</button>
-                    <button mat-button (click)="onToggleCommentForm('comment-form' + post.id)"><fa-icon [icon]="faComment"></fa-icon> Comment</button>
-                    <button mat-button (click)="openDialog(post)"><fa-icon [icon]="faShareAltSquare"></fa-icon> Share</button>
+                    <button mat-button (click)="onToggleCommentForm('comment-form' + post.id)"><fa-icon class="general-icon" [icon]="faComment"></fa-icon> Comment</button>
+                    <button mat-button (click)="openDialog(post)"><fa-icon class="general-icon" [icon]="faShareAltSquare"></fa-icon> Share</button>
                 </mat-card-actions>
 
                 <div class="comment-form-handler hide" id = "{{ 'comment-form' + post.id }}">

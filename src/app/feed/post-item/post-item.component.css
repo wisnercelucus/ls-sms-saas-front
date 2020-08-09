@@ -253,6 +253,10 @@ mat-card-header{
     color: dodgerblue;
 }
 
+.general-icon{
+    color: #606060;
+}
+
 .poll-status-handler{
     display: flex;
     margin-bottom: 20px;

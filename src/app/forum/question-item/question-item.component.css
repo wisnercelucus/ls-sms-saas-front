@@ -161,6 +161,10 @@ span.counter{
     margin-left: 5px;
 }
 
+.general-icon{
+    color: #606060;
+}
+
 .fadeIn {
     animation: fadein 2s;
     -moz-animation: fadein 2s; /* Firefox */

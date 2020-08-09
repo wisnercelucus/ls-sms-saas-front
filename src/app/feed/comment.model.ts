@@ -15,4 +15,5 @@ export interface Comment{
     did_like?:boolean;
     likes?:number;
     replies?:Comment[];
+    parent?:number;
 }

@@ -1,24 +1,34 @@
 import { Topic } from '../topic.model';
 import { Category } from '../category.model';
 import * as ForumActions from './forum.actions';
+import {Comment} from '../../feed/comment.model';
 
 export interface State{
-    topics:Topic[],
+    topic_entities:{[id:number]:Topic},
     categories:Category[]
     
 }
 
 const initialState: State = {
-    topics:[],
+    topic_entities: {},
     categories:[]
 }
 
 export function forumReducer(state = initialState, action:ForumActions.ForumActions){
     switch(action.type){
         case ForumActions.SET_TOPICS:
+            const topics = action.payload;
+            const topic_entities = topics.reduce((entities:{[id:number]:Topic}, topic:Topic)=>{
+                return {
+                    ...entities,
+                    [topic.id]: topic
+                }
+            }, {
+                ...state.topic_entities
+            })
             return {
                 ...state,
-                topics:[...action.payload]
+                topic_entities
             }
         case ForumActions.SET_CATEGORIES:
             return{
@@ -27,13 +37,13 @@ export function forumReducer(state = initialState, action:ForumActions.ForumActi
             }
             
         case ForumActions.UPDATE_TOPICS_LOCALY:
-            let new_topics:Topic[] = []
-            new_topics = [...state.topics]
-            new_topics.unshift(action.payload)
+            const topic = action.payload;
+            let top_entities = JSON.parse(JSON.stringify(state.topic_entities))
+            top_entities[topic.id] = topic;
             
             return{
                 ...state,
-                topics:new_topics
+                topic_entities:top_entities
             } 
         case ForumActions.FORUM_ACTION_FAIL:
             return{
@@ -41,8 +51,23 @@ export function forumReducer(state = initialState, action:ForumActions.ForumActi
                 errorMes: action.payload,
             } 
         case ForumActions.ANSWER_TOPIC_SUCCESS:
+            const comment:Comment = action.payload;
+            let topi_entities = JSON.parse(JSON.stringify(state.topic_entities))
+            if(comment.parent){
+                let comments: Comment[] = topi_entities[comment.object_id]['comments'];
+                comments.find( com => com.id === comment.parent).replies.push(comment);
+                topi_entities[comment.object_id]['comments'] =  comments;
+               
+            }else{
+                let comments: Comment[] = topi_entities[comment.object_id]['comments']
+                comments.push(comment)
+                topi_entities[comment.object_id]['comments'] = comments;
+            }
+            //top_entities[topic.id] = topic;
+            
             return{
-                ...state
+                ...state,
+                topic_entities:{...topi_entities}
             }
                   
         default: {

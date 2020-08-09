@@ -7,6 +7,7 @@ import { Topic } from '../topic.model';
 import { Injectable } from '@angular/core';
 import { Category } from '../category.model';
 import { of } from 'rxjs';
+import {Comment} from '../../feed/comment.model';
 
 
 
@@ -89,9 +90,8 @@ export class ForumEffects{
                 const body=data.payload
             return this.http.post<Comment>(this.tenantUrl + '/forums/comments/api/create/',
             body).pipe(
-                map(res => { 
-                    //console.log(res);
-                    return new ForumActions.AnswerTopicSuccess();
+                map(comment => { 
+                    return new ForumActions.AnswerTopicSuccess(comment);
                 }),
                 catchError(errorMes=>{
                     return handleError(errorMes)

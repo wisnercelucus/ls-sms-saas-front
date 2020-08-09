@@ -54,7 +54,7 @@
           <div class class="comment-box">
               <div class="comment-content-box">
                   <div mat-card-avatar class="comment-user-avatar">
-                      <img class="avatar-xs-card-comment" *ngIf="tenantUrl" [src]=" comment.user.image ? tenantUrl + comment.user.image : comment.user.default_image" alt="{{comment.user.username}}">
+                      <img class="avatar-xs-card-comment" [src]="getUserImageUrl(comment.user.image, comment.user.default_image)" alt="{{comment.user.username}}">
                   </div>
                   <div class="comment-text">
                   <a class="user-link" (click)="getUserData(comment.user.username)"> <span class="comment-user">{{ comment.user.first_name + ' ' + comment.user.last_name }}</span></a>
@@ -106,7 +106,7 @@
                   <div class class="comment-box">
                       <div class="comment-content-box">
                           <div mat-card-avatar class="comment-user-avatar">
-                              <img class="avatar-xs-card-comment" *ngIf="tenantUrl" src="{{ reply.user.image ? tenantUrl +  reply.user.image : reply.user.default_image }}" alt="Photo of a Shiba Inu">
+                              <img class="avatar-xs-card-comment" *ngIf="tenantUrl" [src]="getUserImageUrl(reply.user.image, reply.user.default_image)" alt="Photo of a Shiba Inu">
                             </div>
                       <div class="comment-text">
                       <a class="user-link" (click)="getUserData(reply.user.username)"> <span class="comment-user">{{ reply.user.first_name + ' ' + reply.user.last_name }}</span></a>

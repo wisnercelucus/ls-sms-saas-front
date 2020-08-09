@@ -70,19 +70,25 @@ export class QuestionItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.contentSafe = this.sanitizer.bypassSecurityTrustHtml(this.topic['content'])
-    if(this.topic.user.image){
-      if(this.urlIsComplete(this.topic.user.image)){
-        this.user_image_url = this.topic.user.image;
-      }else{
-        this.user_image_url = this.tenantUrl + this.topic.user.image;
-      }
-    }else{
-      this.user_image_url = this.topic.user.default_image;
-    }
+      this.user_image_url = this.getUserImageUrl(
+        this.topic.user.image, 
+        this.topic.user.default_image);
   }
 
   getSafeContent(content:string){
     return this.sanitizer.bypassSecurityTrustHtml(content)
+  }
+
+  getUserImageUrl(url:string, default_url:string):string{
+    if(url){
+      if(this.urlIsComplete(url)){
+        return url;
+      }else{
+        return this.tenantUrl + url;
+      }
+    }else{
+      return default_url;
+    }
   }
 
 
@@ -117,7 +123,7 @@ export class QuestionItemComponent implements OnInit {
 
   submitComment(form:NgForm){
     this.store.dispatch(new ForumActions.AnswerTopic(form.value));
-    this.store.dispatch(new ForumActions.FetchTopics());
+    //this.store.dispatch(new ForumActions.FetchTopics());
   }
 
   public onEditorCreated(quill: any) {
