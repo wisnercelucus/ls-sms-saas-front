@@ -86,7 +86,7 @@ import { CommentFormComponent } from './comment-form/comment-form.component'
           HighlightModule
     ],
 
-    providers: [
+    /*providers: [
         {
           provide: HIGHLIGHT_OPTIONS,
           useValue: {
@@ -94,6 +94,7 @@ import { CommentFormComponent } from './comment-form/comment-form.component'
           }
         }
       ],
+      */
 
     exports:[
             AlertDialogComponent,

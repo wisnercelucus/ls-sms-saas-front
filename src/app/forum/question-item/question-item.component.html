@@ -8,9 +8,9 @@
   </mat-card-header>
   <mat-card-content>
     <h2>{{topic.title}}</h2>
-    <p [innerHTML]="contentSafe" class="question-content">
-    </p>
-    <mat-divider></mat-divider>
+
+    <quill-view [modules]="{ syntax: true }" [content]="topic.content"></quill-view>
+
     <div class="question-stat" id="{{'topic'+ topic.id}}">
         <span>{{topic.up_likes}} {{topic.up_likes == 1? ' Upvote' : ' Upvotes'}}</span>
         <span>{{topic.down_likes}} {{topic.down_likes == 1? ' Downvote' : ' Downvotes'}}</span>
@@ -60,8 +60,7 @@
                   <a class="user-link" (click)="getUserData(comment.user.username)"> <span class="comment-user">{{ comment.user.first_name + ' ' + comment.user.last_name }}</span></a>
                   <br>
 
-                      <p class="comment-content-text" [innerHTML]="getSafeContent(comment.content)">
-                      </p>
+                      <quill-view [modules]="{ syntax: true }" [content]="comment.content"></quill-view>
 
                   </div>
                   
@@ -112,7 +111,8 @@
                       <div class="comment-text">
                       <a class="user-link" (click)="getUserData(reply.user.username)"> <span class="comment-user">{{ reply.user.first_name + ' ' + reply.user.last_name }}</span></a>
                       <br>
-                      <p class="comment-content-text" [innerHTML]="getSafeContent(reply.content)"></p>
+                       <quill-view [modules]="{ syntax: true }" [content]="reply.content"></quill-view>
+                     
                       </div>
                   </div>
                   <div class="comment-actions comment-actions-row">
