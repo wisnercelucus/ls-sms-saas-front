@@ -1,4 +1,4 @@
-import { User } from '../users/user.model';
+import { User } from '../../users/user.model';
 import { Post } from './post.model';
 
 export interface PostReport{

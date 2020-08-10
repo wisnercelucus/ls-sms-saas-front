@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { Post } from 'src/app/feed/post.model';
-import { FeedService } from '../feed.service';
+import { Post } from 'src/app/feed/models/post.model';
+import { FeedService } from '../services/feed.service';
 import { Subject } from 'rxjs';
 import {  Router, ActivatedRoute} from '@angular/router';
 import { UsersService } from 'src/app/users/users.service';

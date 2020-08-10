@@ -10,7 +10,7 @@ import { faBirthdayCake,
 import { UsersService } from '../users.service';
 import { User } from '../user.model';
 import { Subject } from 'rxjs';
-import { Post } from 'src/app/feed/post.model';
+import { Post } from 'src/app/feed/models/post.model';
 import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { AppService } from 'src/app/app.service';
 import { takeUntil } from 'rxjs/operators';

@@ -1,9 +1,9 @@
 import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http'
 import { Injectable } from '@angular/core';
-import { Category } from './category.model';
 import { tap } from 'rxjs/operators';
-import { Topic } from './topic.model';
+import { Topic } from '../models/topic.model';
 import { Subject } from 'rxjs';
+import { Category } from '../models/category.model';
 
 @Injectable({
     providedIn: 'root'

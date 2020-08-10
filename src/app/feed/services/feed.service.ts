@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http'
 import { AuthService } from 'src/app/auth/auth.service';
-import { AppService } from '../app.service';
-import { Post } from './post.model';
+import { AppService } from '../../app.service';
+import { Post } from '../models/post.model';
 import { Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 

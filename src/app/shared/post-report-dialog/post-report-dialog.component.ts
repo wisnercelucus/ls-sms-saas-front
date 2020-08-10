@@ -7,7 +7,7 @@ import { faPlus, faMinusSquare
 } from '@fortawesome/free-solid-svg-icons';
 
 import { NgForm } from '@angular/forms';
-import { FeedService } from 'src/app/feed/feed.service';
+import { FeedService } from 'src/app/feed/services/feed.service';
 import { User } from 'src/app/users/user.model';
 import { takeUntil } from 'rxjs/operators';
 

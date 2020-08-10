@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Post } from '../post.model';
+import { Post } from '../models/post.model';
 import { User } from 'src/app/users/user.model';
 
 import { faBirthdayCake, 
@@ -15,7 +15,7 @@ import { faBirthdayCake,
  faSpinner,
  faUserCircle, faUsers, faHome, faUser, faShare} from '@fortawesome/free-solid-svg-icons';
 import { Subject } from 'rxjs';
-import { FeedService } from '../feed.service';
+import { FeedService } from '../services/feed.service';
 import { Router} from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { PostShareModalFormComponent } from 'src/app/shared/post-share-modal-form/post-share-modal-form.component';

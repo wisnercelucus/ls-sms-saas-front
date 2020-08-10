@@ -38,7 +38,7 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools'
 import { environment } from 'src/environments/environment';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { ForumEffects } from './forum/store/forum.effects';
-import { TopicResolver } from './forum/topic-resolver.service';
+import { TopicResolver } from './forum/services/topic-resolver.service';
 
 @NgModule({
   declarations: [

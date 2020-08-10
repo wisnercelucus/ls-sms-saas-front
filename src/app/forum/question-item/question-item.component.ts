@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Topic } from '../topic.model';
+import { Topic } from '../models/topic.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { faBirthdayCake, 
   faMapMarker, 
@@ -22,7 +22,7 @@ import {Store} from '@ngrx/store';
 import * as ForumActions from '../store/forum.actions';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { ForumsService } from '../forums.service';
+import { ForumsService } from '../services/forums.service';
 
 
 @Component({

@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
-import { Topic } from '../topic.model';
-import { Category } from '../category.model';
-import {Comment} from '../../feed/comment.model';
+import { Topic } from '../models/topic.model';
+import {Comment} from '../../comments/comment.model';
+import { Category } from '../models/category.model';
 
 
 export const SET_TOPICS = '[Forum] Set Topics';

@@ -1,12 +1,11 @@
-import { Topic } from '../topic.model';
-import { Category } from '../category.model';
+import { Topic } from '../models/topic.model';
 import * as ForumActions from './forum.actions';
-import {Comment} from '../../feed/comment.model';
+import {Comment} from '../../comments/comment.model';
+import { Category } from '../models/category.model';
 
 export interface State{
     topic_entities:{[id:number]:Topic},
     categories:Category[]
-    
 }
 
 const initialState: State = {

@@ -8,7 +8,7 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import { map, startWith, takeUntil } from 'rxjs/operators';
 import { UsersService } from '../users/users.service';
 import { User } from '../users/user.model';
-import { Topic } from './topic.model';
+import { Topic } from './models/topic.model';
 import { Store } from '@ngrx/store';
 
 import * as fromApp from '../store/app.reducer';

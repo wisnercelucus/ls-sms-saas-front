@@ -1,4 +1,4 @@
-import { User } from '../users/user.model';
+import { User } from '../../users/user.model';
 import { Poll } from './poll.model';
 
 export interface PostImage{

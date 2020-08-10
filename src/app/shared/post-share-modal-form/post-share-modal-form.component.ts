@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Subscription, Subject } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UsersService } from 'src/app/users/users.service';
-import { Post } from 'src/app/feed/post.model';
+import { Post } from 'src/app/feed/models/post.model';
 import { NgForm } from '@angular/forms';
-import { FeedService } from 'src/app/feed/feed.service';
+import { FeedService } from 'src/app/feed/services/feed.service';
 import { takeUntil } from 'rxjs/operators';
 
 

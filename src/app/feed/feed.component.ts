@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Subject } from 'rxjs';
-import { FeedService} from './feed.service';
+import { FeedService} from './services/feed.service';
 
 import { faPlus, faMinusSquare} from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormControl, Validators, FormArray, NgForm } from '@angular/forms';

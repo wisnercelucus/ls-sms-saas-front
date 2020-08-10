@@ -7,9 +7,9 @@ import { faPlus, faMinusSquare
 } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormControl, Validators, FormArray, NgForm } from '@angular/forms';
 import {NgxLinkifyjsService, Link} from 'ngx-linkifyjs';
-import { FeedService } from 'src/app/feed/feed.service';
+import { FeedService } from 'src/app/feed/services/feed.service';
 import { User } from 'src/app/users/user.model';
-import { Post } from 'src/app/feed/post.model';
+import { Post } from 'src/app/feed/models/post.model';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { AppService } from 'src/app/app.service';
 import { takeUntil } from 'rxjs/operators';

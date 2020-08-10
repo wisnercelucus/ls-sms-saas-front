@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { Topic } from '../topic.model';
+import { Topic } from '../models/topic.model';
 import { AppService } from 'src/app/app.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';

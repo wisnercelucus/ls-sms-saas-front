@@ -1,11 +1,11 @@
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Topic } from './topic.model';
+import { Topic } from '../models/topic.model';
 import { Observable } from 'rxjs';
 import {Store} from '@ngrx/store';
 import { Injectable } from '@angular/core';
-import * as fromApp from '../store/app.reducer';
+import * as fromApp from '../../store/app.reducer';
 import {Actions, ofType} from '@ngrx/effects';
-import * as ForumActions from './store/forum.actions'
+import * as ForumActions from '../store/forum.actions'
 import { take } from 'rxjs/operators';
 
 @Injectable({providedIn:'root'})

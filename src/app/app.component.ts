@@ -8,10 +8,10 @@ import { Subject } from 'rxjs';
 import * as fromApp from './store/app.reducer';
 import { Store } from '@ngrx/store';
 import * as AuthActions from './auth/store/auth.actions';
-import { FeedService } from './feed/feed.service';
+import { FeedService } from './feed/services/feed.service';
 import { NotificationsService } from './notifications/notifications.service';
 import { takeUntil } from 'rxjs/operators';
-import { ForumsService } from './forum/forums.service';
+import { ForumsService } from './forum/services/forums.service';
 
 @Component({
   selector: 'app-root',

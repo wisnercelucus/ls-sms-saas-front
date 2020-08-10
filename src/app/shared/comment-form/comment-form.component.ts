@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Post } from 'src/app/feed/post.model';
+import { Post } from 'src/app/feed/models/post.model';
 import { User } from 'src/app/users/user.model';
 
 @Component({

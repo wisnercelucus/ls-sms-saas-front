@@ -3,12 +3,11 @@ import * as ForumActions from './forum.actions'
 import { switchMap, tap, map, catchError } from 'rxjs/operators';
 import { AppService } from 'src/app/app.service';
 import { HttpClient } from '@angular/common/http';
-import { Topic } from '../topic.model';
+import { Topic } from '../models/topic.model';
 import { Injectable } from '@angular/core';
-import { Category } from '../category.model';
 import { of } from 'rxjs';
-import {Comment} from '../../feed/comment.model';
-
+import {Comment} from '../../comments/comment.model';
+import { Category } from '../models/category.model';
 
 
 const handleError = (errorRes: any) => {
