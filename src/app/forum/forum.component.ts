@@ -37,6 +37,7 @@ export class ForumComponent implements OnInit, OnDestroy {
   htmlContent:string;
   topicList:Topic[];
   tenantUrl:string;
+  unOrderedTopics: Topic[];
 
   @ViewChild('categoryInput') categoryInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -97,21 +98,21 @@ export class ForumComponent implements OnInit, OnDestroy {
     .subscribe(forumSate=>{
       if(forumSate){
         const topic_entities = forumSate.topic_entities
-        this.topicList = Object.keys(topic_entities).map(id=> 
+        this.topicList = this.sortByDate(Object.keys(topic_entities).map(id=> 
           topic_entities[parseInt(id, 10)]
-        );
+        ));
       }
     })
   }
 
-  private getTime(date?: Date) {
-    return date != null ? date.getTime() : 0;
-}
+  private getTime(date: Date) {
+    return new Date(date).getTime()
+  }
 
 
-  public sortByDate(arr:any): void {
-      arr.sort((a: Topic, b: Topic) => {
-          return this.getTime(a.date) - this.getTime(b.date);
+  public sortByDate(arr:Topic[]):any {
+      return arr.sort((a: Topic, b: Topic) => {
+          return this.getTime(b.date) - this.getTime(a.date);
       });
   }
 
