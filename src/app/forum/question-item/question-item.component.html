@@ -60,7 +60,7 @@
                   <a class="user-link" (click)="getUserData(comment.user.username)"> <span class="comment-user">{{ comment.user.first_name + ' ' + comment.user.last_name }}</span></a>
                   <br>
 
-                    <quill-view [modules]="{ syntax: true }" [content]="comment.content"></quill-view>
+                    <div class="quill-view"><quill-view [modules]="{ syntax: true }" [content]="comment.content"></quill-view></div>
 
                   </div>
                   
@@ -111,7 +111,7 @@
                       <div class="comment-text">
                       <a class="user-link" (click)="getUserData(reply.user.username)"> <span class="comment-user">{{ reply.user.first_name + ' ' + reply.user.last_name }}</span></a>
                       <br>
-                       <quill-view [modules]="{ syntax: true }" [content]="reply.content"></quill-view>
+                       <div><quill-view [modules]="{ syntax: true }" [content]="reply.content"></quill-view></div>
                      
                       </div>
                   </div>

@@ -185,6 +185,10 @@ span.counter{
     color: #606060;
 }
 
+.quill-view{
+    display: flex;
+}
+
 .fadeIn {
     animation: fadein 2s;
     -moz-animation: fadein 2s; /* Firefox */
