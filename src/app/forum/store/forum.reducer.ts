@@ -62,11 +62,31 @@ export function forumReducer(state = initialState, action:ForumActions.ForumActi
                 comments.push(comment)
                 topi_entities[comment.object_id]['comments'] = comments;
             }
-            //top_entities[topic.id] = topic;
             
             return{
                 ...state,
                 topic_entities:{...topi_entities}
+            }
+        
+        case ForumActions.FETCH_TOPIC_ANSERS_SUCESS:
+            const comments:Comment[] = action.payload.comments;
+            let id = action.payload.object_id;
+            
+            let old_topic = JSON.parse(JSON.stringify(state.topic_entities[id]))
+            if(comment.parent){
+                let comments: Comment[] = topi_entities[comment.object_id]['comments'];
+                comments.find( com => com.id === comment.parent).replies.push(comment);
+                topi_entities[comment.object_id]['comments'] =  comments;
+               
+            }else{
+                let comments: Comment[] = topi_entities[comment.object_id]['comments']
+                comments.push(comment)
+                topi_entities[comment.object_id]['comments'] = comments;
+            }
+
+            return {
+                ...state,
+
             }
                   
         default: {

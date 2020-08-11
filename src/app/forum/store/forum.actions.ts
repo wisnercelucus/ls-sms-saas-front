@@ -16,10 +16,14 @@ export const DELETE_TOPIC = '[Forum] Delete Topic';
 export const SET_CATEGORIES = '[Forum] Set Categories';
 export const FETCH_CATEGORIES = '[Forum] Fetch Categories';
 
+
 export const FORUM_ACTION_FAIL = '[Forum] Forum Action Fail';
 
 export const ANSWER_TOPIC = '[Forum] Answer Topic';
 export const ANSWER_TOPIC_SUCCESS = '[Forum] Answer Topic Success';
+
+export const FETCH_TOPIC_ANSERS = '[Forum] Fetch Topic Answers';
+export const FETCH_TOPIC_ANSERS_SUCESS = '[Forum] Fetch Topic Answers Sucess';
 
 export class SetTopics implements Action{
     readonly type = SET_TOPICS;
@@ -84,11 +88,20 @@ export class AnswerTopic implements Action{
     ){} 
 }
 
+export class FetchTopicAnswers implements Action{
+    readonly type = FETCH_TOPIC_ANSERS; 
+    constructor(public payload:{model_type:string, object_id:number}){}
+}
+
+export class FetchTopicAnswersSuccess implements Action{
+    readonly type = FETCH_TOPIC_ANSERS_SUCESS; 
+    constructor(public payload:{comments:Comment[], object_id:number}){}
+}
+
 export class AnswerTopicSuccess implements Action{
     readonly type = ANSWER_TOPIC_SUCCESS; 
     constructor(public payload:Comment){}
 }
-
 
 export type ForumActions = SetTopics 
                             | FetchTopics 
@@ -101,4 +114,6 @@ export type ForumActions = SetTopics
                             | ForumActionFail
                             | AnswerTopic
                             | AnswerTopicSuccess
+                            | FetchTopicAnswers
+                            | FetchTopicAnswersSuccess
                             ;

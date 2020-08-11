@@ -12,6 +12,7 @@ import { takeUntil } from 'rxjs/operators';
 import { ForumsService } from './forum/services/forums.service';
 import { AuthService } from './auth/services/auth.service';
 import { UsersService } from './users/services/users.service';
+import { CommentService } from './comments/services/comments.service';
 
 @Component({
   selector: 'app-root',
@@ -33,7 +34,8 @@ export class AppComponent implements OnInit, OnDestroy {
               private store:Store<fromApp.AppState>,
               private feedService: FeedService,
               private notificationsService:NotificationsService,
-              private forumsService:ForumsService
+              private forumsService:ForumsService,
+              private commentsService:CommentService
               ) {
     this.urlHasInstance();
    
@@ -74,6 +76,7 @@ export class AppComponent implements OnInit, OnDestroy {
           this.feedService.tenantUrl = tenantUrl;
           this.notificationsService.tenantUrl = tenantUrl;
           this.forumsService.tenantUrl = tenantUrl;
+          this.commentsService.tenantUrl = tenantUrl;
         }
     );
 

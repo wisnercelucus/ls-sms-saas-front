@@ -23,6 +23,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ForumsService } from '../services/forums.service';
 import { User } from 'src/app/users/models/user.model';
+import { CommentService } from 'src/app/comments/services/comments.service';
 
 
 @Component({
@@ -60,7 +61,9 @@ export class QuestionItemComponent implements OnInit {
   contentSafe:any;
   user_image_url:string;
   constructor(private sanitizer: DomSanitizer,
-    private store:Store<fromApp.AppState>, private forumsService:ForumsService
+    private store:Store<fromApp.AppState>, 
+    private forumsService:ForumsService,
+    private _commentsService:CommentService
     ) { }
 
   toggleCommentForm:false;
@@ -326,5 +329,13 @@ onDownVoteAnswer(id:number, elid:string, altelid:string){
     }
   )
 }
+
+  ongetComments(model_type:string, object_id:number){
+    this._commentsService.getComments(model_type, object_id)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(res=>{
+      console.log(res)
+    })
+  }
 
 }

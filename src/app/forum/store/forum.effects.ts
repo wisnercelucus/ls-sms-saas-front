@@ -100,6 +100,26 @@ export class ForumEffects{
         
     )
 
+    @Effect()
+    GetAnswers = this.actions$.pipe(
+        ofType(ForumActions.FETCH_TOPIC_ANSERS),
+
+        switchMap(
+            (data:ForumActions.FetchTopicAnswers) => {
+                let model_type = data.payload.model_type
+                let object_id = data.payload.object_id
+            return this.http.get<Comment[]>(this.tenantUrl + '/comments/api/' + model_type + '/' + object_id +'/all/').pipe(
+                map(comments => { 
+                    return new ForumActions.FetchTopicAnswersSuccess({comments:comments, object_id:object_id});
+                }),
+                catchError(errorMes=>{
+                    return handleError(errorMes)
+                })
+            );
+        }),
+        
+    )
+
     constructor(private actions$:Actions, 
         private http:HttpClient,
         private appService:AppService){
