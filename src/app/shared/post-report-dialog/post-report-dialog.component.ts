@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit, Inject } from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { UsersService } from 'src/app/users/users.service';
-import { Subscription, Subject } from 'rxjs';
+import {  Subject } from 'rxjs';
 
 import { faPlus, faMinusSquare
 } from '@fortawesome/free-solid-svg-icons';
 
 import { NgForm } from '@angular/forms';
 import { FeedService } from 'src/app/feed/services/feed.service';
-import { User } from 'src/app/users/user.model';
 import { takeUntil } from 'rxjs/operators';
+import { User } from 'src/app/users/models/user.model';
+import { UsersService } from 'src/app/users/services/users.service';
 
 interface DialogData{
   idPostToReport:number;

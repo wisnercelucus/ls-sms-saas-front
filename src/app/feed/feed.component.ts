@@ -4,12 +4,12 @@ import { FeedService} from './services/feed.service';
 
 import { faPlus, faMinusSquare} from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormControl, Validators, FormArray, NgForm } from '@angular/forms';
-import { User } from '../users/user.model';
-import { UsersService } from '../users/users.service';
 import { Router } from '@angular/router';
 import {NgxLinkifyjsService, Link} from 'ngx-linkifyjs';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { takeUntil } from 'rxjs/operators';
+import { User } from '../users/models/user.model';
+import { UsersService } from '../users/services/users.service';
 
 //Soleil leve deux quiosques. DAI will launch appel d'offre. 
 //

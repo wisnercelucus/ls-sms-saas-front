@@ -135,6 +135,15 @@
     overflow-x: auto;
 }
 
+.topic-content{
+    overflow-x: hidden;
+}
+
+.topic-content:hover{
+    overflow-x: auto;
+}
+
+
 .comment-form{
     margin-bottom: 15px;
 }
@@ -187,6 +196,7 @@ span.counter{
 
 .quill-view{
     display: flex;
+    width: 100%;
 }
 
 .fadeIn {

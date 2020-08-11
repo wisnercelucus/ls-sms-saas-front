@@ -1,15 +1,15 @@
 import { Component, OnInit, EventEmitter, Output, OnDestroy} from '@angular/core';
 import { Subject} from 'rxjs';
 import { Router} from '@angular/router';
-import { User, AuthUser } from 'src/app/users/user.model';
 import { AppService } from 'src/app/app.service';
-import { UsersService } from 'src/app/users/users.service';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../store/app.reducer';
 import { map, takeUntil } from 'rxjs/operators';
 import * as AuthActions from '../../auth/store/auth.actions';
 import { NotificationsService } from 'src/app/notifications/notifications.service';
 import { NotificationModel } from 'src/app/notifications/notification.model';
+import { AuthUser, User } from 'src/app/users/models/user.model';
+import { UsersService } from 'src/app/users/services/users.service';
 
 @Component({
   selector: 'app-header',
@@ -88,7 +88,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   getLogingUser(){
       //this.loginUserSub = 
-      this.userService.getMyProfile()
+      this.userService.loginUser
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         user=>{

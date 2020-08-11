@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { DonorsComponent } from './donors/donors.component';
 import { DonateComponent } from './donate.component';
 import { ProcessDonationComponent } from './process-donation/process-donation.component';
-import { AuthenticatedGuard } from '../auth/authenticated.guard';
+import { AuthenticatedGuard } from '../auth/services/authenticated.guard';
 
 
 const routes: Routes = [

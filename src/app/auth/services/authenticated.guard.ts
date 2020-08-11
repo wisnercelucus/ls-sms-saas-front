@@ -4,7 +4,7 @@ import { AuthService } from './auth.service';
 import { take, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import * as fromApp from '../store/app.reducer';
+import * as fromApp from '../../store/app.reducer';
 
 @Injectable({
     providedIn:'root'

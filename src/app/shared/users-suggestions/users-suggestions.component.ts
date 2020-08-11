@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from 'src/app/users/users.service';
+import { UsersService } from 'src/app/users/services/users.service';
 
 @Component({
   selector: 'app-users-suggestions',

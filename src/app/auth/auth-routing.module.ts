@@ -4,8 +4,8 @@ import { AuthComponent } from './auth.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
-import { AuthenticatedGuard } from './authenticated.guard';
 import { PasswordResetConfirmComponent } from './password-reset-confirm/password-reset-confirm.component';
+import { AuthenticatedGuard } from './services/authenticated.guard';
 
 const routes: Routes = [
     {path:'auth', component:AuthComponent, canActivate:[AuthenticatedGuard], children:[

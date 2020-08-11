@@ -1,8 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from './auth/auth.service';
 import { AppService } from './app.service';
-import { UsersService } from './users/users.service';
 import { Subject } from 'rxjs';
 
 import * as fromApp from './store/app.reducer';
@@ -12,6 +10,8 @@ import { FeedService } from './feed/services/feed.service';
 import { NotificationsService } from './notifications/notifications.service';
 import { takeUntil } from 'rxjs/operators';
 import { ForumsService } from './forum/services/forums.service';
+import { AuthService } from './auth/services/auth.service';
+import { UsersService } from './users/services/users.service';
 
 @Component({
   selector: 'app-root',

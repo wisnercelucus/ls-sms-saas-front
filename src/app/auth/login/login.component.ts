@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { AuthService } from '../auth.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { AppService } from 'src/app/app.service';
-import { UsersService } from 'src/app/users/users.service';
 import * as fromApp from '../../store/app.reducer';
 import { Store } from '@ngrx/store';
 import * as AuthActions from '../store/auth.actions';
+import { AuthService } from '../services/auth.service';
+import { UsersService } from 'src/app/users/services/users.service';
 
 @Component({
   selector: 'app-login',

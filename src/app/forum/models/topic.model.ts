@@ -1,5 +1,5 @@
 import { Category } from './category.model';
-import { User } from '../../users/user.model';
+import { User } from 'src/app/users/models/user.model';
 
 export interface Topic{
     id:number;

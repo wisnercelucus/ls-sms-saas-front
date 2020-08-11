@@ -16,7 +16,6 @@ import { TestimonialsComponent } from './welcome/testimonials/testimonials.compo
 import { FaqComponent } from './welcome/faq/faq.component';
 import { ParticlesModule } from 'ngx-particle';
 import { ParticlesComponent } from './welcome/particles/particles.component';
-import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { SchoolsModule } from './schools/schools.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
@@ -38,7 +37,8 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools'
 import { environment } from 'src/environments/environment';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { ForumEffects } from './forum/store/forum.effects';
-import { TopicResolver } from './forum/services/topic-resolver.service';
+import { AuthInterceptorService } from './auth/services/auth-interceptor.service';
+
 
 @NgModule({
   declarations: [

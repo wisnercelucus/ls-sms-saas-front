@@ -4,10 +4,10 @@ import { Post } from 'src/app/feed/models/post.model';
 import { FeedService } from '../services/feed.service';
 import { Subject } from 'rxjs';
 import {  Router, ActivatedRoute} from '@angular/router';
-import { UsersService } from 'src/app/users/users.service';
-import { User } from 'src/app/users/user.model';
 import { AppService } from 'src/app/app.service';
 import { takeUntil } from 'rxjs/operators';
+import { User } from 'src/app/users/models/user.model';
+import { UsersService } from 'src/app/users/services/users.service';
 
 @Component({
   selector: 'app-feed-timeline',

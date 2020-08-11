@@ -9,8 +9,11 @@
   <mat-card-content>
     <h2>{{topic.title}}</h2>
 
-    <quill-view [modules]="{ syntax: true }" [content]="topic.content"></quill-view>
+    <div class="topic-content">
 
+    <div class="quill-view"><quill-view [modules]="{ syntax: true }" [content]="topic.content"></quill-view></div>
+    
+    </div>
     <div class="question-stat" id="{{'topic'+ topic.id}}">
         <span>{{topic.up_likes}} {{topic.up_likes == 1? ' Upvote' : ' Upvotes'}}</span>
         <span>{{topic.down_likes}} {{topic.down_likes == 1? ' Downvote' : ' Downvotes'}}</span>
@@ -111,7 +114,7 @@
                       <div class="comment-text">
                       <a class="user-link" (click)="getUserData(reply.user.username)"> <span class="comment-user">{{ reply.user.first_name + ' ' + reply.user.last_name }}</span></a>
                       <br>
-                       <div><quill-view [modules]="{ syntax: true }" [content]="reply.content"></quill-view></div>
+                       <div class="quill-view"><quill-view [modules]="{ syntax: true }" [content]="reply.content"></quill-view></div>
                      
                       </div>
                   </div>

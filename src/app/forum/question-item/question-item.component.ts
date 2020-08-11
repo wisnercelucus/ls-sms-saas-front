@@ -16,13 +16,13 @@ import { faBirthdayCake,
  faCommentDots, faPenSquare, faThumbsDown, faRetweet
 } from '@fortawesome/free-solid-svg-icons';
 import { NgForm } from '@angular/forms';
-import { User } from 'src/app/users/user.model';
 import * as fromApp from '../../store/app.reducer';
 import {Store} from '@ngrx/store';
 import * as ForumActions from '../store/forum.actions';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ForumsService } from '../services/forums.service';
+import { User } from 'src/app/users/models/user.model';
 
 
 @Component({

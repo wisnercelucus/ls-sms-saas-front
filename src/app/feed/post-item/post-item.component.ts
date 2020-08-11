@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Post } from '../models/post.model';
-import { User } from 'src/app/users/user.model';
 
 import { faBirthdayCake, 
   faMapMarker, 
@@ -25,6 +24,7 @@ import { PublishModalFormComponent } from 'src/app/shared/publish-modal-form/pub
 import { PostReportDialogComponent } from 'src/app/shared/post-report-dialog/post-report-dialog.component';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { takeUntil } from 'rxjs/operators';
+import { User } from 'src/app/users/models/user.model';
 
 @Component({
   selector: 'app-post-item',

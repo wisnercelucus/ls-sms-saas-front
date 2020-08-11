@@ -7,13 +7,13 @@ import { faBirthdayCake,
           faHeart,
          faSmile , 
          faUserCircle, faUsers, faHome, faUser} from '@fortawesome/free-solid-svg-icons';
-import { UsersService } from '../users.service';
-import { User } from '../user.model';
 import { Subject } from 'rxjs';
 import { Post } from 'src/app/feed/models/post.model';
 import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { AppService } from 'src/app/app.service';
 import { takeUntil } from 'rxjs/operators';
+import { User } from '../models/user.model';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-profile',

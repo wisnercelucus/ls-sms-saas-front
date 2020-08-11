@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Post } from '../models/post.model';
-import { User } from 'src/app/users/user.model';
 import { Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { FeedService } from '../services/feed.service';
 import { Subject } from 'rxjs';
-import { UsersService } from 'src/app/users/users.service';
 import { AppService } from 'src/app/app.service';
 import { takeUntil } from 'rxjs/operators';
+import { User } from 'src/app/users/models/user.model';
+import { UsersService } from 'src/app/users/services/users.service';
 
 
 @Component({

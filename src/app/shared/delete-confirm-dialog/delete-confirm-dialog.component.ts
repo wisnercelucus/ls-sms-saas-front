@@ -1,10 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Post } from 'src/app/feed/models/post.model';
-import { User } from 'src/app/users/user.model';
 import { Subscription } from 'rxjs';
 import { FeedService } from 'src/app/feed/services/feed.service';
 import { Router } from '@angular/router';
+import { User } from 'src/app/users/models/user.model';
 
 
 interface DialogData{

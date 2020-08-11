@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Post } from 'src/app/feed/models/post.model';
-import { User } from 'src/app/users/user.model';
+import { User } from 'src/app/users/models/user.model';
+
 
 @Component({
   selector: 'app-comment-form',

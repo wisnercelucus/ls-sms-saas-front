@@ -1,5 +1,5 @@
-import { User } from '../../users/user.model';
 import { Post } from './post.model';
+import { User } from 'src/app/users/models/user.model';
 
 export interface PostReport{
     post:Post;

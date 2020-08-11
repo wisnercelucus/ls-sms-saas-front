@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { User } from '../user.model';
-import { UsersService } from '../users.service';
 import { Subject } from 'rxjs';
 import { AppService } from 'src/app/app.service';
 import { takeUntil } from 'rxjs/operators';
+import { User } from '../models/user.model';
+import { UsersService } from '../services/users.service';
 
 
 @Component({

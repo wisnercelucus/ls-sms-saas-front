@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { AuthenticatedGuard } from './auth/authenticated.guard';
+import { AuthenticatedGuard } from './auth/services/authenticated.guard';
 
 const routes: Routes = [
   {path:'', component:WelcomeComponent, canActivate:[AuthenticatedGuard]},

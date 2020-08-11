@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
-import { Client } from './register/client.model';
 import {catchError, tap} from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { AuthUser } from '../users/user.model';
 import { Store } from '@ngrx/store';
-import * as fromApp from '../store/app.reducer';
-import * as AuthActions from './store/auth.actions';
+import * as fromApp from '../../store/app.reducer';
+import * as AuthActions from '../store/auth.actions';
+import { Client } from '../register/client.model';
+import { AuthUser } from 'src/app/users/models/user.model';
 
 interface AuthResponseData{
   'token':string;

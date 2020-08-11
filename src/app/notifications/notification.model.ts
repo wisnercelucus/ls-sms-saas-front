@@ -1,4 +1,4 @@
-import { User } from 'src/app/users/user.model';
+import { User } from '../users/models/user.model';
 
 export interface NotificationModel{
     created_at?:Date;

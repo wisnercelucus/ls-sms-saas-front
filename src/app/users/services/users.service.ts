@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Subscription, BehaviorSubject, Subject } from 'rxjs';
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { User } from './user.model';
 import { tap } from 'rxjs/operators';
-import { AuthService } from '../auth/auth.service';
+import { User } from '../models/user.model';
+import { AuthService } from 'src/app/auth/services/auth.service';
+
 
 @Injectable({
   providedIn: 'root'

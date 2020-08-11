@@ -15,7 +15,8 @@ import { faBirthdayCake,
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { PublishModalFormComponent } from '../publish-modal-form/publish-modal-form.component';
-import { User } from 'src/app/users/user.model';
+import { User } from 'src/app/users/models/user.model';
+
 
 @Component({
   selector: 'app-feed-side-menu',

@@ -5,9 +5,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { of, Subscription } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { AuthUser } from 'src/app/users/user.model';
 import { AppService } from 'src/app/app.service';
+import { AuthUser } from 'src/app/users/models/user.model';
+import { AuthService } from '../services/auth.service';
 
 interface AuthResponseData{
         'token':string;

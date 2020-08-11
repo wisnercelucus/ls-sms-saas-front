@@ -1,8 +1,5 @@
-import { Component, OnInit, AfterViewInit, ChangeDetectorRef, ElementRef, Inject, OnDestroy, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { DonateService } from './donate.service';
-import { Subscription } from 'rxjs';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-donate',

@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CountriesService } from './countries.service';
-import { AuthService} from '../auth.service';
 import { Client } from './client.model';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-register',

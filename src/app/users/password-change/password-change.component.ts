@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { UsersService } from '../users.service';
-import { AuthService } from 'src/app/auth/auth.service';
 import { Subscription } from 'rxjs';
+import { UsersService } from '../services/users.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-password-change',

@@ -3,7 +3,7 @@ import { Topic } from '../models/topic.model';
 import { AppService } from 'src/app/app.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { User } from 'src/app/users/user.model';
+import { User } from 'src/app/users/models/user.model';
 
 @Component({
   selector: 'app-question-feed',

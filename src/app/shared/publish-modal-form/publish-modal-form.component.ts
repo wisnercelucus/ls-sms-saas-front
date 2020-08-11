@@ -1,6 +1,5 @@
 import { Component, OnDestroy, ViewChild, ElementRef, OnInit, Inject } from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { UsersService } from 'src/app/users/users.service';
 import { Subject } from 'rxjs';
 
 import { faPlus, faMinusSquare
@@ -8,11 +7,12 @@ import { faPlus, faMinusSquare
 import { FormGroup, FormControl, Validators, FormArray, NgForm } from '@angular/forms';
 import {NgxLinkifyjsService, Link} from 'ngx-linkifyjs';
 import { FeedService } from 'src/app/feed/services/feed.service';
-import { User } from 'src/app/users/user.model';
 import { Post } from 'src/app/feed/models/post.model';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { AppService } from 'src/app/app.service';
 import { takeUntil } from 'rxjs/operators';
+import { User } from 'src/app/users/models/user.model';
+import { UsersService } from 'src/app/users/services/users.service';
 
 interface DialogData{
   postToEdit:Post;

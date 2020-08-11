@@ -1,5 +1,5 @@
-import { User } from '../../users/user.model';
 import { Poll } from './poll.model';
+import { User } from 'src/app/users/models/user.model';
 
 export interface PostImage{
     image:string;
