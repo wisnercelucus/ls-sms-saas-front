@@ -71,21 +71,16 @@ export function forumReducer(state = initialState, action:ForumActions.ForumActi
         case ForumActions.FETCH_TOPIC_ANSERS_SUCESS:
             const comments:Comment[] = action.payload.comments;
             let id = action.payload.object_id;
-            
-            let old_topic = JSON.parse(JSON.stringify(state.topic_entities[id]))
-            if(comment.parent){
-                let comments: Comment[] = topi_entities[comment.object_id]['comments'];
-                comments.find( com => com.id === comment.parent).replies.push(comment);
-                topi_entities[comment.object_id]['comments'] =  comments;
-               
-            }else{
-                let comments: Comment[] = topi_entities[comment.object_id]['comments']
-                comments.push(comment)
-                topi_entities[comment.object_id]['comments'] = comments;
-            }
+
+            let all_entities = JSON.parse(JSON.stringify(state.topic_entities));
+            let old_topic = all_entities[id];
+
+            old_topic['comments'] = comments;
+            all_entities[id] = old_topic;
 
             return {
                 ...state,
+                topic_entities:{...all_entities}
 
             }
                   

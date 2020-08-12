@@ -129,7 +129,6 @@ export class QuestionItemComponent implements OnInit {
 
   submitComment(form:NgForm){
     this.store.dispatch(new ForumActions.AnswerTopic(form.value));
-    //this.store.dispatch(new ForumActions.FetchTopics());
   }
 
   public onEditorCreated(quill: any) {
@@ -145,10 +144,6 @@ export class QuestionItemComponent implements OnInit {
   }
   getUserData(username:string){
   
-  }
-
-  onLikeComment(id:number, ele_id:string){
-    
   }
 
   onUpLikeTopic(id:number){

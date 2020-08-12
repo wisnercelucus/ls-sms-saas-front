@@ -87,10 +87,11 @@ export class ForumEffects{
         switchMap(
             (data:ForumActions.AnswerTopic) => {
                 const body=data.payload
+
             return this.http.post<Comment>(this.tenantUrl + '/forums/comments/api/create/',
             body).pipe(
                 map(comment => { 
-                    return new ForumActions.AnswerTopicSuccess(comment);
+                    return new ForumActions.FetchTopics();
                 }),
                 catchError(errorMes=>{
                     return handleError(errorMes)
@@ -101,7 +102,7 @@ export class ForumEffects{
     )
 
     @Effect()
-    GetAnswers = this.actions$.pipe(
+    fetchAnswers = this.actions$.pipe(
         ofType(ForumActions.FETCH_TOPIC_ANSERS),
 
         switchMap(
