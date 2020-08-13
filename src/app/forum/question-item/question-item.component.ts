@@ -16,16 +16,14 @@ import { faBirthdayCake,
  faCommentDots, faPenSquare, faThumbsDown, faRetweet
 } from '@fortawesome/free-solid-svg-icons';
 import { NgForm } from '@angular/forms';
-import * as fromApp from '../../store/app.reducer';
-import {Store} from '@ngrx/store';
-import * as ForumActions from '../store/forum.actions';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ForumsService } from '../services/forums.service';
 import { User } from 'src/app/users/models/user.model';
 import { CommentService } from 'src/app/comments/services/comments.service';
-import { DeleteConfirmDialogComponent } from 'src/app/shared/delete-confirm-dialog/delete-confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ForumDeleteConfirmDialogComponent } from '../shared/forum-delete-confirm-dialog/forum-delete-confirm-dialog.component';
+import { UpdateTopicDialogComponent } from '../shared/update-topic-dialog/update-topic-dialog.component';
 
 
 @Component({
@@ -62,8 +60,7 @@ export class QuestionItemComponent implements OnInit {
   @Input() loginUser:User;
   contentSafe:any;
   user_image_url:string;
-  constructor(private sanitizer: DomSanitizer,
-    private store:Store<fromApp.AppState>, 
+  constructor(private sanitizer: DomSanitizer, 
     private forumsService:ForumsService,
     private _commentsService:CommentService,
     public dialog_: MatDialog, 
@@ -109,7 +106,13 @@ export class QuestionItemComponent implements OnInit {
     return false
   }
 
-  onToggleCommentForm(id:string){
+  onToggleCommentForm(id:string, editMode?:boolean, tocic?:Topic){
+    let element = document.getElementById(id);
+    element.classList.remove('hide')
+    element.classList.add("fadeIn")
+  }
+
+  onToggleCommentEditForm(id:string){
     let element = document.getElementById(id);
     element.classList.remove('hide')
     element.classList.add("fadeIn")
@@ -131,7 +134,13 @@ export class QuestionItemComponent implements OnInit {
   }
 
   submitComment(form:NgForm){
-    this.store.dispatch(new ForumActions.AnswerTopic(form.value));
+    this.forumsService.createTopicAnswer(form.value)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe()
+  }
+
+  updateComment(form:NgForm){
+    console.log(form.value)
   }
 
   public onEditorCreated(quill: any) {
@@ -145,6 +154,7 @@ export class QuestionItemComponent implements OnInit {
                   ["\\ln{x}","\\ln"]]
     });
   }
+
   getUserData(username:string){
   
   }
@@ -337,16 +347,27 @@ onDownVoteAnswer(id:number, elid:string, altelid:string){
   }
 
   openDeleteConfirmDialog(topic?:Topic, comment?:Comment): void {
-    const dialogRef_ = this.dialog_.open(DeleteConfirmDialogComponent, {
+    const dialogRef_ = this.dialog_.open(ForumDeleteConfirmDialogComponent, {
       width: '500px',
       data:{
         topic:topic,
         loginUser:this.loginUser,
         atPostDetail:true,
-        comment:comment,
-        isTopicAnswer:true
+        comment:comment
       }
     });
   }
+
+  openUpdateDialog(topic:Topic): void {
+    const dialogRef_ = this.dialog_.open(UpdateTopicDialogComponent, {
+      width: '500px',
+      data:{
+        topic:topic,
+        loginUser:this.loginUser,
+        atTopicDetail:true
+      }
+    });
+  }
+
 
 }

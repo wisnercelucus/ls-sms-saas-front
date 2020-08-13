@@ -11,6 +11,8 @@ import { ContributeComponent } from './contribute/contribute.component';
 import { ContributorsComponent } from './contributors/contributors.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { SharedComponent } from './shared/shared.component';
+import { UpdateTopicDialogComponent } from './shared/update-topic-dialog/update-topic-dialog.component';
+import { ForumDeleteConfirmDialogComponent } from './shared/forum-delete-confirm-dialog/forum-delete-confirm-dialog.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { SharedComponent } from './shared/shared.component';
     CategoryListComponent,
     ContributeComponent,
     ContributorsComponent,
-    SharedComponent
+    SharedComponent,
+    UpdateTopicDialogComponent,
+    ForumDeleteConfirmDialogComponent
   ],
   imports: [
     SharedModule,

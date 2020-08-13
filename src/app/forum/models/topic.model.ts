@@ -3,7 +3,7 @@ import { User } from 'src/app/users/models/user.model';
 
 export interface Topic{
     id:number;
-    category?:Category;
+    categories?:Category[];
     user:User;
     title:string;
     content:string;
@@ -25,4 +25,5 @@ export interface Topic{
     did_down_like?:boolean;
     up_likes?:number;
     down_likes?:number;
+    is_owned?:boolean;
 }

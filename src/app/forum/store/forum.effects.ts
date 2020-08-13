@@ -61,7 +61,7 @@ export class ForumEffects{
     )
 
     @Effect()
-    CreateTopic = this.actions$.pipe(
+    createTopic = this.actions$.pipe(
         ofType(ForumActions.CREATE_TOPIC),
 
         switchMap(
@@ -81,11 +81,12 @@ export class ForumEffects{
     )
   
     @Effect()
-    CreateAnswer = this.actions$.pipe(
+    createAnswer = this.actions$.pipe(
         ofType(ForumActions.ANSWER_TOPIC),
 
         switchMap(
             (data:ForumActions.AnswerTopic) => {
+                
                 const body=data.payload
 
             return this.http.post<Comment>(this.tenantUrl + '/forums/comments/api/create/',
@@ -120,6 +121,45 @@ export class ForumEffects{
         }),
         
     )
+
+    @Effect()
+    deleteTopic = this.actions$.pipe(
+        ofType(ForumActions.DELETE_TOPIC),
+
+        switchMap(
+            (data:ForumActions.DeleteTopic) => {
+                let id = data.payload.id;
+            return this.http.delete<any>(this.tenantUrl + '/forums/api/topic/' + id + '/delete/').pipe(
+                map(res => { 
+                    return new ForumActions.FetchTopics();
+                }),
+                catchError(errorMes=>{
+                    return handleError(errorMes)
+                })
+            );
+        }),
+        
+    )
+
+    @Effect()
+    deleteAnswers = this.actions$.pipe(
+        ofType(ForumActions.DELETE_TOPIC_ANSERS),
+
+        switchMap(
+            (data:ForumActions.DeleteTopicAnswers) => {
+                let answer_id = data.payload.answer_id;
+            return this.http.delete<any>(this.tenantUrl + '/comments/api/' + answer_id + '/manage/').pipe(
+                map(res => { 
+                    return new ForumActions.FetchTopics();
+                }),
+                catchError(errorMes=>{
+                    return handleError(errorMes)
+                })
+            );
+        }),
+        
+    )
+
 
     constructor(private actions$:Actions, 
         private http:HttpClient,

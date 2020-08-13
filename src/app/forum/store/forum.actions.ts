@@ -10,8 +10,9 @@ export const FETCH_TOPICS_SUCCESS = '[Forum] Fetch Topics Success';
 export const UPDATE_TOPICS_LOCALY = '[Forum] Update Topic Locally]'
 export const CREATE_TOPIC = '[Forum] Create Topic';
 export const UPDATE_TOPIC = '[Forum] Update Topic';
-export const DELETE_TOPIC = '[Forum] Delete Topic';
 
+export const DELETE_TOPIC = '[Forum] Delete Topic';
+export const DELETE_TOPIC_SUCCESS = '[Forum] Delete Topic';
 
 export const SET_CATEGORIES = '[Forum] Set Categories';
 export const FETCH_CATEGORIES = '[Forum] Fetch Categories';
@@ -24,6 +25,9 @@ export const ANSWER_TOPIC_SUCCESS = '[Forum] Answer Topic Success';
 
 export const FETCH_TOPIC_ANSERS = '[Forum] Fetch Topic Answers';
 export const FETCH_TOPIC_ANSERS_SUCESS = '[Forum] Fetch Topic Answers Sucess';
+
+export const DELETE_TOPIC_ANSERS = '[Forum] Delete Topic Answers';
+export const DELETE_TOPIC_ANSERS_SUCESS = '[Forum] Delete Topic Answers Sucess';
 
 export class SetTopics implements Action{
     readonly type = SET_TOPICS;
@@ -59,6 +63,10 @@ export class UpdateTopicLocally implements Action{
 export class DeleteTopic implements Action{
     readonly type=DELETE_TOPIC;
     constructor(public payload:{id:number}){}
+}
+
+export class DeleteTopicSuccess implements Action{
+    readonly type=DELETE_TOPIC_SUCCESS;
 }
 
 export class SetCategories implements Action{
@@ -97,6 +105,19 @@ export class FetchTopicAnswersSuccess implements Action{
     readonly type = FETCH_TOPIC_ANSERS_SUCESS; 
     constructor(public payload:{comments:Comment[], object_id:number}){}
 }
+
+
+
+export class DeleteTopicAnswers implements Action{
+    readonly type = DELETE_TOPIC_ANSERS; 
+    constructor(public payload:{answer_id:number}){}
+}
+
+
+export class DeleteTopicAnswersSuccess implements Action{
+    readonly type = DELETE_TOPIC_ANSERS_SUCESS; 
+}
+
 
 export class AnswerTopicSuccess implements Action{
     readonly type = ANSWER_TOPIC_SUCCESS; 

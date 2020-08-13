@@ -1,56 +1,65 @@
-import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
-import { NgForm, FormControl } from '@angular/forms';
+import { Component, OnInit, Inject, OnDestroy, ElementRef, ViewChild } from '@angular/core';
+import { ForumsService } from '../../services/forums.service';
+import { Router } from '@angular/router';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { User } from 'src/app/users/models/user.model';
+import { Topic } from '../../models/topic.model';
+import { Subject, Observable } from 'rxjs';
+import { takeUntil, startWith, map } from 'rxjs/operators';
+import { FormControl, NgForm } from '@angular/forms';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import { Observable, Subject } from 'rxjs';
-import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
+import { UsersService } from 'src/app/users/services/users.service';
 import {MatChipInputEvent} from '@angular/material/chips';
-import { map, startWith, takeUntil } from 'rxjs/operators';
-import { Topic } from './models/topic.model';
-import { ActivatedRoute } from '@angular/router';
-import { UsersService } from '../users/services/users.service';
-import { User } from '../users/models/user.model';
-import { ForumsService } from './services/forums.service';
+import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+
+
+interface DialogData{
+  topic?:Topic;
+  loginUser?: User;
+  atPostDetail?:boolean;
+}
 
 @Component({
-  selector: 'app-forum',
-  templateUrl: './forum.component.html',
-  styleUrls: ['./forum.component.css']
+  selector: 'app-update-topic-dialog',
+  templateUrl: './update-topic-dialog.component.html',
+  styleUrls: ['./update-topic-dialog.component.css']
 })
-export class ForumComponent implements OnInit, OnDestroy {
-  config:any;
+export class UpdateTopicDialogComponent implements OnInit, OnDestroy {
+  loginUser:User;
+  atTopicDetail:boolean;
+  topic:Topic;
+  destroy$:Subject<void> = new Subject<void>();
 
   visible = true;
   selectable = true;
   removable = true;
-
+  
   separatorKeysCodes: number[] = [ENTER, COMMA];
   categoryCtrl = new FormControl();
   filteredCategories: Observable<string[]>;
   categories: string[] = [];
   allCategories: string[] = [];
-
-  destroy$:Subject<void> = new Subject<void>();
-  loginUser:User;
-  htmlContent:string;
-  topicList:Topic[];
-  tenantUrl:string;
-  unOrderedTopics: Topic[];
-
   @ViewChild('categoryInput') categoryInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
-  panelOpenState = false;
 
+  constructor(
+    public dialogRef: MatDialogRef<UpdateTopicDialogComponent>,
+    private forumsService:ForumsService,
+    private usersService:UsersService,
 
-  constructor(private usersService:UsersService,
-    private route: ActivatedRoute,
-    private forumsService:ForumsService
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, private router:Router) {
+        this.loginUser = data['loginUser'];
+        this.atTopicDetail = data['atTopicDetail'];
+        this.topic = data['topic'];
+        
+        for(let c of this.topic.categories){
+          this.categories.push(c.title)
+        }
 
-    ) {
-      this.filteredCategories = this.categoryCtrl.valueChanges.pipe(
-      startWith(null),
-      map((category: string | null) => category ? this._filter(category) : this.allCategories.slice()));
-
-   }
+        this.filteredCategories = this.categoryCtrl.valueChanges.pipe(
+          startWith(null),
+          map((category: string | null) => category ? this._filter(category) : this.allCategories.slice()));
+    }
 
     ngOnDestroy(): void {
       this.destroy$.next()
@@ -61,10 +70,12 @@ export class ForumComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getLogingUser();
     this.getCategories();
-    this.getTopics();
+
+    //this.getTopics();
+
     this.forumsService.refreshneeded.pipe(takeUntil(this.destroy$)).subscribe(
       res=>{
-        this.getTopicsOncreate();
+        //this.getTopicsOncreate();
       }
     )
   }
@@ -85,15 +96,6 @@ export class ForumComponent implements OnInit, OnDestroy {
   }
 
 
-  getTopics(){
-    this.topicList = this.route.snapshot.data['topics']
-  }
-
-  getTopicsOncreate(){
-    this.forumsService.getTopics()
-    .pipe(takeUntil(this.destroy$))
-    .subscribe( topics=> this.topicList = topics)
-  }
   private getTime(date: Date) {
     return new Date(date).getTime()
   }
@@ -164,14 +166,17 @@ export class ForumComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const data = {topic:f.value, categories:this.categories}   
-    this.forumsService.createTopic(data)
+    const data = {topic:f.value, categories:this.categories} 
+
+    this.forumsService.updateTopic(data)
     .pipe(takeUntil(this.destroy$))
     .subscribe(res=>{
+      this.dialogRef.close();
       f.resetForm();
       this.categories = [];
     })
   }
+
 
   public onEditorCreated(quill: any) {
 

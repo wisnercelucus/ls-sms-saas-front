@@ -8,6 +8,7 @@ import { NgxLinkifyjsModule } from 'ngx-linkifyjs';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { PostItemComponent } from './post-item/post-item.component';
 import { SharedComponent } from './shared/shared.component';
+import { UpdatePostDialogComponent } from './shared/update-post-dialog/update-post-dialog.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { SharedComponent } from './shared/shared.component';
         FeedComponent,
         PostDetailComponent,
         PostItemComponent,
-        SharedComponent
+        SharedComponent,
+        UpdatePostDialogComponent
     ],
 
     imports:[

@@ -36,6 +36,29 @@ export class ForumsService{
         );
     }
 
+    createTopicAnswer(data:any){
+      const body=data;
+      return this.http.post<Comment>(this.tenantUrl + '/forums/comments/api/create/',
+      body).pipe(
+        tap(res=>{
+          this.refreshneeded.next();
+        })
+      );
+  }
+
+    
+    updateTopic(data:any){
+      const body=data;
+      return this.http.post(this.tenantUrl + '/forums/api/topic/update/',
+      body
+      ).pipe(
+        tap(res=>{
+          this.refreshneeded.next();
+        })
+      );
+  }
+
+
     uploadFile(file){
       let http: HttpClient;
       let name = '';
@@ -63,7 +86,6 @@ export class ForumsService{
     getTopics(){
       return this.http.get<Topic[]>(this.tenantUrl + '/forums/api/topics/').pipe(
         tap(res=>{
-          //console.log(res)
         })
       );
     }
@@ -105,7 +127,7 @@ export class ForumsService{
     voteAnswer(comment_id:number){
  
       if(this.tenantUrl){
-        return this.http.get(this.tenantUrl + '/feed/comments/api/'+ comment_id +'/up_vote/').pipe(
+        return this.http.get(this.tenantUrl + '/comments/api/'+ comment_id +'/up_vote/').pipe(
           tap(res=>{
             //this._refreshNeeded.next();
           })
@@ -119,7 +141,7 @@ export class ForumsService{
      downVoteAnswer(comment_id:number){
  
       if(this.tenantUrl){
-        return this.http.get(this.tenantUrl + '/feed/comments/api/'+ comment_id +'/down_vote/').pipe(
+        return this.http.get(this.tenantUrl + '/comments/api/'+ comment_id +'/down_vote/').pipe(
           tap(res=>{
             //this._refreshNeeded.next();
           })
@@ -128,6 +150,36 @@ export class ForumsService{
         return;
       }
   
+     }
+  
+     deleteAnswer(comment_id:number){
+ 
+      if(this.tenantUrl){
+        return this.http.delete(this.tenantUrl + '/comments/api/'+ comment_id +'/manage/').pipe(
+          tap(res=>{
+            this.refreshneeded.next();
+          })
+        );
+      }else{
+        return;
+      }
+  
+     }
+
+     deleteTopic(id:number){
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+      });
+
+      if(this.tenantUrl){
+        return this.http.delete(this.tenantUrl + '/forums/api/topic/' + id + '/delete/', {headers: headers}).pipe(
+          tap(res=>{
+            this.refreshneeded.next();
+          })
+        );
+      }else{
+        return;
+      }
      }
 
 }
