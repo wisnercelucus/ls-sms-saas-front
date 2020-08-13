@@ -166,6 +166,22 @@ export class ForumsService{
   
      }
 
+     updateAnswer(data:any){
+       let body = data;
+       let comment_id = data['comment_id'];
+
+      if(this.tenantUrl){
+        return this.http.put(this.tenantUrl + '/comments/api/'+ comment_id +'/manage/', body).pipe(
+          tap(res=>{
+            this.refreshneeded.next();
+          })
+        );
+      }else{
+        return;
+      }
+  
+     }
+
      deleteTopic(id:number){
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',

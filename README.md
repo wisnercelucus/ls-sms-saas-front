@@ -43,13 +43,12 @@ Finalize change post visibility
 Update post with files
 add delete specific file
 add delete specific image
-
-delete a comment
-update a comment
+finalize report post
+report comment.
 
 ##Forum
-delete an answer
-update an answer
+Report topic
+report comment
 
 ##Profile
 Zoom user profile photo

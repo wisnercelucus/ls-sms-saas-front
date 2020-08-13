@@ -97,6 +97,22 @@ export class FeedService {
 
    }
 
+   updateComment(data:any){
+    let body = data;
+    let comment_id = data['comment_id'];
+
+   if(this.tenantUrl){
+     return this.http.put(this.tenantUrl + '/comments/api/'+ comment_id +'/manage/', body).pipe(
+       tap(res=>{
+         this._refreshNeeded.next();
+       })
+     );
+   }else{
+     return;
+   }
+
+  }
+
   getUserPost(username:string){
 
     const headers = new HttpHeaders({

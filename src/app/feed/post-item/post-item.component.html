@@ -275,15 +275,21 @@
                                     <mat-icon>more_horiz</mat-icon>
                                     </button>
                                     <mat-menu #menu="matMenu">
-                                    <button mat-menu-item>
+                                    <button mat-menu-item
+                                    *ngIf="loginUser.id == comment.user.id"
+                                    (click)="onToggleCommentEditForm('edit-comment-form' + j + comment.id)">
                                         <mat-icon>create</mat-icon>
                                         <span>Edit</span>
                                     </button>
-                                    <button mat-menu-item (click)="openDeleteConfirmDialog(null, comment)">
+                                    <button
+                                    *ngIf="loginUser.id == comment.user.id"
+                                     mat-menu-item (click)="openDeleteConfirmDialog(null, comment)">
                                         <mat-icon>delete_outline</mat-icon>
                                         <span>Delete</span>
                                     </button>
-                                    <button mat-menu-item>
+                                    <button
+                                    *ngIf="loginUser.id != comment.user.id"
+                                     mat-menu-item>
                                         <mat-icon>report</mat-icon>
                                         <span>Report</span>
                                     </button>
@@ -332,6 +338,30 @@
                             </div>
 
 
+                            <div class="comment-form-handler comment-reply-form-handler hide" id="{{'edit-comment-form' + j + comment.id}}">
+                                <form class="comment-form" (ngSubmit)="updateComment(f7)" #f7="ngForm">
+                                    <div class="form-row">
+                                    <div mat-card-avatar class="comment-user-avatar">
+                                        <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image? loginUser.image : loginUser.default_image" alt="{{loginUser.username}}}">
+                                    </div>
+                                    <input type="hidden" [ngModel] = "comment.id" name='comment_id'>
+                                    <mat-form-field class="comment-form-content-box">
+                                        <textarea id="{{'comment-content' + comment.id}}" (click)="rezizable('comment-content' + comment.id)" name="content" [ngModel]="comment.content" matInput placeholder="Leave a reply..."></textarea>    
+                                    </mat-form-field>  
+                                       
+                                    <button class="post-comment" type="submit"
+                                        matRipple
+                                        [matRippleCentered]="centered"
+                                        [matRippleDisabled]="disabled"
+                                        [matRippleUnbounded]="unbounded"
+                                        [matRippleRadius]="radius"
+                                        [matRippleColor]="color"
+                                    >
+                                        <span class="material-icons">arrow_forward_ios</span>
+                                    </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
 
                         <div class="wrap-inner-comment"  *ngIf="comment.reply_count">
@@ -349,15 +379,20 @@
                                         <mat-icon>more_horiz</mat-icon>
                                         </button>
                                         <mat-menu #menu="matMenu">
-                                        <button mat-menu-item>
+                                        <button mat-menu-item
+                                        *ngIf="loginUser.id == reply.user.id"
+                                        (click)="onToggleCommentEditForm('edit-comment-form' + j + k + reply.id)">
                                             <mat-icon>create</mat-icon>
                                             <span>Edit</span>
                                         </button>
-                                        <button mat-menu-item (click)="openDeleteConfirmDialog(null, reply)">
+                                        <button 
+                                        *ngIf="loginUser.id == reply.user.id"
+                                        mat-menu-item (click)="openDeleteConfirmDialog(null, reply)">
                                             <mat-icon>delete_outline</mat-icon>
                                             <span>Delete</span>
                                         </button>
-                                        <button mat-menu-item>
+                                        <button
+                                        *ngIf="loginUser.id != reply.user.id" mat-menu-item>
                                             <mat-icon>report</mat-icon>
                                             <span>Report</span>
                                         </button>
@@ -402,6 +437,30 @@
                                 </form>
                             </div>
 
+                            <div id="{{'edit-comment-form' + j + k + reply.id }}" class="comment-form-handler comment-reply-form-handler hide">
+                                <form class="comment-form" (ngSubmit)="updateComment(f5)" #f5="ngForm">
+                                    <div class="form-row">
+                                    <div mat-card-avatar class="comment-user-avatar">
+                                        <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image? loginUser.image : loginUser.default_image" alt="{{loginUser.username}}">
+                                    </div>
+                                    <input type="hidden" [ngModel] = "reply.id" name='comment_id'>
+                                    <mat-form-field class="comment-form-content-box">
+                                        <textarea id="{{'comment-content' + j + k}}" (click)="rezizable('comment-content' + j + k)" name="content" [ngModel]="reply.content" matInput placeholder="Leave a reply..."></textarea>    
+                                    </mat-form-field>  
+                                        
+                                    <button class="post-comment" type="submit"
+                                        matRipple
+                                        [matRippleCentered]="centered"
+                                        [matRippleDisabled]="disabled"
+                                        [matRippleUnbounded]="unbounded"
+                                        [matRippleRadius]="radius"
+                                        [matRippleColor]="color"
+                                    >
+                                        <span class="material-icons">arrow_forward_ios</span>
+                                    </button>
+                                    </div>
+                                </form>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -695,15 +754,21 @@
                                         <mat-icon>more_horiz</mat-icon>
                                         </button>
                                         <mat-menu #menu="matMenu">
-                                        <button mat-menu-item>
+                                        <button mat-menu-item
+                                        *ngIf="loginUser.id == comment.user.id"
+                                        (click)="onToggleCommentEditForm('edit-comment-form' + j)">
                                             <mat-icon>create</mat-icon>
                                             <span>Edit</span>
                                         </button>
-                                        <button mat-menu-item (click)="openDeleteConfirmDialog(null, comment)">
+                                        <button 
+                                        *ngIf="loginUser.id == comment.user.id"
+                                        mat-menu-item (click)="openDeleteConfirmDialog(null, comment)">
                                             <mat-icon>delete_outline</mat-icon>
                                             <span>Delete</span>
                                         </button>
-                                        <button mat-menu-item>
+                                        <button
+                                        *ngIf="loginUser.id != comment.user.id"
+                                         mat-menu-item>
                                             <mat-icon>report</mat-icon>
                                             <span>Report</span>
                                         </button>
@@ -747,6 +812,32 @@
                                     </div>
                                 </form>
                             </div>
+                            
+                            <div class="comment-form-handler comment-reply-form-handler hide" id="{{'edit-comment-form' + j}}">
+                                <form class="comment-form" (ngSubmit)="updateComment(f6)" #f6="ngForm">
+                                    <div class="form-row">
+                                    <div mat-card-avatar class="comment-user-avatar">
+                                        <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image? loginUser.image : loginUser.default_image" alt="{{loginUser.username}}">
+                                    </div>
+                                    <input type="hidden" [ngModel] = "comment.id" name='comment_id'>
+                                    <mat-form-field class="comment-form-content-box">
+                                        <textarea id="{{'comment-content' + j}}" (click)="rezizable('comment-content' + j)" name="content" [ngModel]="comment.content" matInput placeholder="Leave a reply..."></textarea>    
+                                    </mat-form-field>  
+                                       
+                                    <button class="post-comment" type="submit"
+                                        matRipple
+                                        [matRippleCentered]="centered"
+                                        [matRippleDisabled]="disabled"
+                                        [matRippleUnbounded]="unbounded"
+                                        [matRippleRadius]="radius"
+                                        [matRippleColor]="color"
+                                    >
+                                        <span class="material-icons">arrow_forward_ios</span>
+                                    </button>
+                                    </div>
+                                </form>
+                            </div>
+
                         </div>
 
                         <div class="wrap-inner-comment"  *ngIf="comment.reply_count">
@@ -764,15 +855,23 @@
                                         <mat-icon>more_horiz</mat-icon>
                                         </button>
                                         <mat-menu #menu="matMenu">
-                                        <button mat-menu-item>
+                                        <button 
+                                            *ngIf="loginUser.id == reply.user.id"
+                                        mat-menu-item
+                                        (click)="onToggleCommentEditForm('edit-comment-form' + j + k)">
                                             <mat-icon>create</mat-icon>
                                             <span>Edit</span>
                                         </button>
-                                        <button mat-menu-item (click)="openDeleteConfirmDialog(null, reply)">
+                                        <button
+                                        *ngIf="loginUser.id == reply.user.id"
+                                         mat-menu-item 
+                                         (click)="openDeleteConfirmDialog(null, reply)">
                                             <mat-icon>delete_outline</mat-icon>
                                             <span>Delete</span>
                                         </button>
-                                        <button mat-menu-item>
+                                        <button
+                                        *ngIf="loginUser.id != reply.user.id"
+                                         mat-menu-item>
                                             <mat-icon>report</mat-icon>
                                             <span>Report</span>
                                         </button>
@@ -817,6 +916,30 @@
                                 </form>
                             </div>
 
+                            <div id="{{'edit-comment-form' + j + k }}" class="comment-form-handler comment-reply-form-handler hide">
+                                <form class="comment-form" (ngSubmit)="updateComment(f9)" #f9="ngForm">
+                                    <div class="form-row">
+                                    <div mat-card-avatar class="comment-user-avatar">
+                                        <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image? loginUser.image : loginUser.default_image" alt="{{loginUser.username}}">
+                                    </div>
+                                    <input type="hidden" [ngModel] = "reply.id" name='comment_id'>
+                                    <mat-form-field class="comment-form-content-box">
+                                        <textarea id="{{'comment-content' + j + k}}" (click)="rezizable('comment-content' + j + k)" name="content" [ngModel]="reply.content" matInput placeholder="Leave a reply..."></textarea>    
+                                    </mat-form-field>  
+                                        
+                                    <button class="post-comment" type="submit"
+                                        matRipple
+                                        [matRippleCentered]="centered"
+                                        [matRippleDisabled]="disabled"
+                                        [matRippleUnbounded]="unbounded"
+                                        [matRippleRadius]="radius"
+                                        [matRippleColor]="color"
+                                    >
+                                        <span class="material-icons">arrow_forward_ios</span>
+                                    </button>
+                                    </div>
+                                </form>
+                            </div>
                             </div>
                         </div>
                     </div>

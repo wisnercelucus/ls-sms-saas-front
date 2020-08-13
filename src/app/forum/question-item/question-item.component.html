@@ -143,14 +143,12 @@
               </div>
 
               <div class="comment-form-handler comment-reply-form-handler hide" id="{{'edit-comment-form' + j + comment.id}}">
-                  <form class="comment-form" (ngSubmit)="submitComment(f2)" #f2="ngForm">
+                  <form class="comment-form" (ngSubmit)="updateComment(f5)" #f5="ngForm">
                       <div class="form-row">
                       <div mat-card-avatar class="comment-user-avatar">
                           <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image? loginUser.image : loginUser.default_image" alt="{{loginUser.username}}}">
                       </div>
-                      <input type="hidden" [ngModel] = "comment.id" name='parent_id'>
-                      <input type="hidden" ngModel = "topic" name='content_type'>
-                      <input type="hidden" [ngModel] = "topic.id" name='object_id'>
+                      <input type="hidden" [ngModel] = "comment.id" name='comment_id'>
 
                       <quill-editor class="comment-form-content-box" (onEditorCreated)="onEditorCreated($event)" id="editor" [styles]="{height: '100px'}" name="content" [ngModel]="comment.content"></quill-editor>
                         
@@ -241,14 +239,12 @@
               </div>
 
               <div id="{{'edit-comment-form' + j + k + reply.id}}" class="comment-form-handler comment-reply-form-handler hide">
-                  <form class="comment-form" (ngSubmit)="submitComment(f3)" #f3="ngForm">
+                  <form class="comment-form" (ngSubmit)="updateComment(f4)" #f4="ngForm">
                       <div class="form-row">
                       <div mat-card-avatar class="comment-user-avatar">
                           <img *ngIf="loginUser" class="avatar-xs-card-comment" [src]="loginUser.image? loginUser.image : loginUser.default_image" alt="{{loginUser.username}}">
                       </div>
-                      <input type="hidden" [ngModel] = "comment.id" name='parent_id'>
-                      <input type="hidden" ngModel = "topic" name='content_type'>
-                      <input type="hidden" [ngModel] = "topic.id" name='object_id'>
+                      <input type="hidden" [ngModel] = "reply.id" name='comment_id'>
                       <quill-editor class="comment-form-content-box" (onEditorCreated)="onEditorCreated($event)" id="editor" [styles]="{height: '100px'}" name="content" [ngModel]="reply.content"></quill-editor>
                           
                       </div>

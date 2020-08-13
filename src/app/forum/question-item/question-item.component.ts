@@ -140,7 +140,9 @@ export class QuestionItemComponent implements OnInit {
   }
 
   updateComment(form:NgForm){
-    console.log(form.value)
+    this.forumsService.updateAnswer(form.value)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe()
   }
 
   public onEditorCreated(quill: any) {

@@ -110,6 +110,11 @@ export class PostItemComponent implements OnInit {
     });
   }
 
+  onToggleCommentEditForm(id:string){
+    let element = document.getElementById(id);
+    element.classList.remove('hide')
+    element.classList.add("fadeIn")
+  }
 
 
  deletePost(id:number){
@@ -126,6 +131,11 @@ onDeleteComment(id:number){
   .subscribe()
 }
 
+updateComment(form:NgForm){
+  this.feedService.updateComment(form.value)
+  .pipe(takeUntil(this.destroy$))
+  .subscribe()
+}
 
  ngOnDestroy(){
    this.destroy$.next()
