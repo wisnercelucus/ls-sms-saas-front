@@ -237,6 +237,15 @@ mat-card-header{
     top:0px;
 }
 
+.comment-text-header{
+    position: relative;
+}
+.comment-sub-menu{
+    position: absolute;
+    top:-5px;
+    right: 0;
+}
+
 .post-stat{
     display:flex;
     padding:6px;

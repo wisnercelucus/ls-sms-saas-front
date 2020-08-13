@@ -7,6 +7,7 @@ import { FeedTimelineComponent } from './feed-timeline/feed-timeline.component';
 import { NgxLinkifyjsModule } from 'ngx-linkifyjs';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { PostItemComponent } from './post-item/post-item.component';
+import { SharedComponent } from './shared/shared.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { PostItemComponent } from './post-item/post-item.component';
         FeedTimelineComponent,
         FeedComponent,
         PostDetailComponent,
-        PostItemComponent
+        PostItemComponent,
+        SharedComponent
     ],
 
     imports:[

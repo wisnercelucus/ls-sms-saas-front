@@ -13,6 +13,7 @@ import { ForumsService } from './forum/services/forums.service';
 import { AuthService } from './auth/services/auth.service';
 import { UsersService } from './users/services/users.service';
 import { CommentService } from './comments/services/comments.service';
+import { TenantService } from './tenant/services/tenant.service';
 
 @Component({
   selector: 'app-root',
@@ -49,8 +50,10 @@ export class AppComponent implements OnInit, OnDestroy {
     }else{
       const hostName = window.location.hostname.toString();
       const hostNameParts = hostName.split(".")
+
       if(hostNameParts.length >= 3){
         this.instance =  hostNameParts.reverse()[2]
+        //this.tenantService.getTenantForHost(hostName);
         return true;
       }else{
         return;

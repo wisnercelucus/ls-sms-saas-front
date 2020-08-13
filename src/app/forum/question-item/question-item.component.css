@@ -143,6 +143,15 @@
     overflow-x: auto;
 }
 
+mat-card-header{
+    position: relative;
+}
+.post-sub-menu{
+    margin-top: 8px;
+    position: absolute;
+    right:0px;
+    top:0px;
+}
 
 .comment-form{
     margin-bottom: 15px;
@@ -197,6 +206,15 @@ span.counter{
 .quill-view{
     display: flex;
     width: 100%;
+}
+
+.comment-text-header{
+    position: relative;
+}
+.comment-sub-menu{
+    position: absolute;
+    top:-5px;
+    right: 0;
 }
 
 .fadeIn {

@@ -83,6 +83,19 @@ export class FeedService {
 
    }
 
+   deleteComment(comment_id:number){
+ 
+    if(this.tenantUrl){
+      return this.http.delete(this.tenantUrl + '/comments/api/'+ comment_id +'/manage/').pipe(
+        tap(res=>{
+          this._refreshNeeded.next();
+        })
+      );
+    }else{
+      return;
+    }
+
+   }
 
   getUserPost(username:string){
 

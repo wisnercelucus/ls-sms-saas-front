@@ -98,13 +98,14 @@ export class PostItemComponent implements OnInit {
     
  }
 
-  openDeleteConfirmDialog(post:Post): void {
+  openDeleteConfirmDialog(post?:Post, comment?:Comment): void {
     const dialogRef_ = this.dialog_.open(DeleteConfirmDialogComponent, {
       width: '500px',
       data:{
         post:post,
         loginUser:this.loginUser,
-        atPostDetail:true
+        atPostDetail:true,
+        comment:comment
       }
     });
   }
@@ -118,6 +119,14 @@ export class PostItemComponent implements OnInit {
   .subscribe()
   this.router.navigate(['/feed'])
 }
+
+onDeleteComment(id:number){
+  this.feedService.deleteComment(+id)
+  .pipe(takeUntil(this.destroy$))
+  .subscribe()
+}
+
+
  ngOnDestroy(){
    this.destroy$.next()
    this.destroy$.complete()

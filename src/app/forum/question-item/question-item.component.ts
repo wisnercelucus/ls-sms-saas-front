@@ -24,6 +24,8 @@ import { Subject } from 'rxjs';
 import { ForumsService } from '../services/forums.service';
 import { User } from 'src/app/users/models/user.model';
 import { CommentService } from 'src/app/comments/services/comments.service';
+import { DeleteConfirmDialogComponent } from 'src/app/shared/delete-confirm-dialog/delete-confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -63,7 +65,8 @@ export class QuestionItemComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer,
     private store:Store<fromApp.AppState>, 
     private forumsService:ForumsService,
-    private _commentsService:CommentService
+    private _commentsService:CommentService,
+    public dialog_: MatDialog, 
     ) { }
 
   toggleCommentForm:false;
@@ -331,6 +334,19 @@ onDownVoteAnswer(id:number, elid:string, altelid:string){
     .subscribe(res=>{
       console.log(res)
     })
+  }
+
+  openDeleteConfirmDialog(topic?:Topic, comment?:Comment): void {
+    const dialogRef_ = this.dialog_.open(DeleteConfirmDialogComponent, {
+      width: '500px',
+      data:{
+        topic:topic,
+        loginUser:this.loginUser,
+        atPostDetail:true,
+        comment:comment,
+        isTopicAnswer:true
+      }
+    });
   }
 
 }

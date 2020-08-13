@@ -10,6 +10,7 @@ import { CategoryListComponent } from './category-list/category-list.component';
 import { ContributeComponent } from './contribute/contribute.component';
 import { ContributorsComponent } from './contributors/contributors.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { SharedComponent } from './shared/shared.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { BrowserModule } from '@angular/platform-browser';
     QuestionFeedComponent,
     CategoryListComponent,
     ContributeComponent,
-    ContributorsComponent
+    ContributorsComponent,
+    SharedComponent
   ],
   imports: [
     SharedModule,

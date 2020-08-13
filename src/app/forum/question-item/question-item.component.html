@@ -5,6 +5,28 @@
     ></div>
     <mat-card-title>{{topic.user.first_name + " " + topic.user.last_name}}</mat-card-title>
     <mat-card-subtitle>{{topic.user.user_profile.title}} &middot; {{ topic.timesince }}</mat-card-subtitle>
+        <button class="post-sub-menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Topic sub-menu">
+        <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+            <mat-icon>create</mat-icon>
+            <span>Edit</span>
+        </button>
+        <button mat-menu-item>
+            <mat-icon>security</mat-icon>
+            <span>Change post visibility</span>
+        </button>
+        <button mat-menu-item>
+            <mat-icon>report</mat-icon>
+            <span>Report this post</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="openDeleteConfirmDialog(topic, null)">
+            <mat-icon>delete_outline</mat-icon>
+            <span>Delete</span>
+        </button>
+        </mat-menu>
   </mat-card-header>
   <mat-card-content>
     <h2>{{topic.title}}</h2>
@@ -60,8 +82,26 @@
                       <img class="avatar-xs-card-comment" [src]="getUserImageUrl(comment.user.image, comment.user.default_image)" alt="{{comment.user.username}}">
                   </div>
                   <div class="comment-text">
+                  <div class="comment-text-header">
                   <a class="user-link" (click)="getUserData(comment.user.username)"> <span class="comment-user">{{ comment.user.first_name + ' ' + comment.user.last_name }}</span></a>
-                  <br>
+                      <button class="comment-sub-menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                        <mat-icon>more_horiz</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                        <button mat-menu-item>
+                            <mat-icon>create</mat-icon>
+                            <span>Edit</span>
+                        </button>
+                        <button mat-menu-item (click)="openDeleteConfirmDialog(null, comment)">
+                            <mat-icon>delete_outline</mat-icon>
+                            <span>Delete</span>
+                        </button>
+                        <button mat-menu-item>
+                            <mat-icon>report</mat-icon>
+                            <span>Report</span>
+                        </button>
+                        </mat-menu>
+                  </div>
 
                     <div class="quill-view"><quill-view [modules]="{ syntax: true }" [content]="comment.content"></quill-view></div>
 
@@ -112,9 +152,31 @@
                               <img class="avatar-xs-card-comment" *ngIf="tenantUrl" [src]="getUserImageUrl(reply.user.image, reply.user.default_image)" alt="Photo of a Shiba Inu">
                             </div>
                       <div class="comment-text">
-                      <a class="user-link" (click)="getUserData(reply.user.username)"> <span class="comment-user">{{ reply.user.first_name + ' ' + reply.user.last_name }}</span></a>
-                      <br>
-                       <div class="quill-view"><quill-view [modules]="{ syntax: true }" [content]="reply.content"></quill-view></div>
+
+                      <div class="comment-text-header">
+                        <a class="user-link" (click)="getUserData(reply.user.username)"> <span class="comment-user">{{ reply.user.first_name + ' ' + reply.user.last_name }}</span></a>
+                        <button class="comment-sub-menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                        <mat-icon>more_horiz</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                        <button mat-menu-item>
+                            <mat-icon>create</mat-icon>
+                            <span>Edit</span>
+                        </button>
+                        <button mat-menu-item (click)="openDeleteConfirmDialog(null, reply)">
+                            <mat-icon>delete_outline</mat-icon>
+                            <span>Delete</span>
+                        </button>
+                        <button mat-menu-item>
+                            <mat-icon>report</mat-icon>
+                            <span>Report</span>
+                        </button>
+                        </mat-menu>
+
+                      </div>
+
+                       <div class="quill-view"><quill-view [modules]="{ syntax: true }" [content]="reply.content"></quill-view>
+                      </div>
                      
                       </div>
                   </div>

@@ -24,7 +24,7 @@
                             <span>Report this post</span>
                         </button>
                         <mat-divider></mat-divider>
-                        <button *ngIf="post.is_owned" (click) ="openDeleteConfirmDialog(post)" mat-menu-item>
+                        <button *ngIf="post.is_owned" (click) ="openDeleteConfirmDialog(post, null)" mat-menu-item>
                             <mat-icon>delete_outline</mat-icon>
                             <span>Delete</span>
                         </button>
@@ -267,13 +267,35 @@
                                 <div mat-card-avatar class="comment-user-avatar">
                                     <img class="avatar-xs-card-comment" *ngIf="tenantUrl" [src]=" comment.user.image ? tenantUrl + comment.user.image : comment.user.default_image" alt="{{comment.user.username}}">
                                 </div>
-                                <p class="comment-text">
-                                <a class="user-link" (click)="getUserData(comment.user.username)"> <span class="comment-user">{{ comment.user.first_name + ' ' + comment.user.last_name }}</span></a>
-                                <br>
+                                <div class="comment-text">
 
+                                <div class="comment-text-header">
+                                    <a class="user-link" (click)="getUserData(comment.user.username)"> <span class="comment-user">{{ comment.user.first_name + ' ' + comment.user.last_name }}</span></a>
+                                    <button class="comment-sub-menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                                    <mat-icon>more_horiz</mat-icon>
+                                    </button>
+                                    <mat-menu #menu="matMenu">
+                                    <button mat-menu-item>
+                                        <mat-icon>create</mat-icon>
+                                        <span>Edit</span>
+                                    </button>
+                                    <button mat-menu-item (click)="openDeleteConfirmDialog(null, comment)">
+                                        <mat-icon>delete_outline</mat-icon>
+                                        <span>Delete</span>
+                                    </button>
+                                    <button mat-menu-item>
+                                        <mat-icon>report</mat-icon>
+                                        <span>Report</span>
+                                    </button>
+                                    </mat-menu>
+
+                                </div>
+                            
+                                <div>
                                     {{comment.content}}
+                                </div>
 
-                                </p>
+                                </div>
                                 
                             </div>
 
@@ -320,11 +342,33 @@
                                         <div mat-card-avatar class="comment-user-avatar">
                                             <img class="avatar-xs-card-comment" *ngIf="tenantUrl" src="{{ reply.user.image ? tenantUrl +  reply.user.image : reply.user.default_image }}" alt="Photo of a Shiba Inu">
                                          </div>
-                                    <p class="comment-text">
-                                    <a class="user-link" (click)="getUserData(reply.user.username)"> <span class="comment-user">{{ reply.user.first_name + ' ' + reply.user.last_name }}</span></a>
-                                    <br>
+                                    <div class="comment-text">
+                                    <div class="comment-text-header">
+                                        <a class="user-link" (click)="getUserData(reply.user.username)"> <span class="comment-user">{{ reply.user.first_name + ' ' + reply.user.last_name }}</span></a>
+                                        <button class="comment-sub-menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                                        <mat-icon>more_horiz</mat-icon>
+                                        </button>
+                                        <mat-menu #menu="matMenu">
+                                        <button mat-menu-item>
+                                            <mat-icon>create</mat-icon>
+                                            <span>Edit</span>
+                                        </button>
+                                        <button mat-menu-item (click)="openDeleteConfirmDialog(null, reply)">
+                                            <mat-icon>delete_outline</mat-icon>
+                                            <span>Delete</span>
+                                        </button>
+                                        <button mat-menu-item>
+                                            <mat-icon>report</mat-icon>
+                                            <span>Report</span>
+                                        </button>
+                                        </mat-menu>
+
+                                    </div>
+                                                                       
+                                    <div>
                                     {{reply.content}}
-                                    </p>
+                                    </div>
+                                    </div>
                                 </div>
                                 <div class="comment-actions">
                                     <button id="{{'comment-reply-btn' + post.id + reply.id}}"  *ngIf="reply && loginUser" (click) = "onLikeComment(reply.id, 'comment-reply-btn' + post.id + reply.id)" [class]="reply.likers.includes(loginUser.id)? 'did_like': 'general-icon' " mat-button><span><fa-icon [icon]="faThumbsUp"></fa-icon></span> <span class="counter">{{reply.likes}}</span></button>
@@ -390,7 +434,7 @@
                             <span>Report this post</span>
                         </button>
                         <mat-divider></mat-divider>
-                        <button *ngIf="post.is_owned" (click) =" openDeleteConfirmDialog(post)" mat-menu-item>
+                        <button *ngIf="post.is_owned" (click) ="openDeleteConfirmDialog(post, null)" mat-menu-item>
                             <mat-icon>delete_outline</mat-icon>
                             <span>Delete</span>
                         </button>
@@ -644,11 +688,33 @@
                                 <div mat-card-avatar class="comment-user-avatar">
                                     <img class="avatar-xs-card-comment" *ngIf="tenantUrl" src="{{ comment.user.image ? tenantUrl + comment.user.image : comment.user.default_image}}" alt="{{comment.user.username}}">
                                 </div>
-                                <p class="comment-text">
-                                <a class="user-link" (click)="getUserData(comment.user.username)"> <span class="comment-user">{{ comment.user.first_name + ' ' + comment.user.last_name }}</span></a>
-                                <br>
-                                {{comment.content}}
-                                </p>
+                                <div class="comment-text">
+                                    <div class="comment-text-header">
+                                         <a class="user-link" (click)="getUserData(comment.user.username)"> <span class="comment-user">{{ comment.user.first_name + ' ' + comment.user.last_name }}</span></a>
+                                        <button class="comment-sub-menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                                        <mat-icon>more_horiz</mat-icon>
+                                        </button>
+                                        <mat-menu #menu="matMenu">
+                                        <button mat-menu-item>
+                                            <mat-icon>create</mat-icon>
+                                            <span>Edit</span>
+                                        </button>
+                                        <button mat-menu-item (click)="openDeleteConfirmDialog(null, comment)">
+                                            <mat-icon>delete_outline</mat-icon>
+                                            <span>Delete</span>
+                                        </button>
+                                        <button mat-menu-item>
+                                            <mat-icon>report</mat-icon>
+                                            <span>Report</span>
+                                        </button>
+                                        </mat-menu>
+
+                                    </div>
+                                                              
+                                <div>
+                                    {{comment.content}}
+                                </div>
+                                </div>
                             </div>
                             <div class="comment-actions">
                                 <button id="{{'comment-btn' + comment.id}}" *ngIf="comment && loginUser" (click) ="onLikeComment(comment.id, 'comment-btn' + comment.id)" [class]="comment.likers.includes(loginUser.id)? 'did_like': 'general-icon' " mat-button><span><fa-icon [icon]="faThumbsUp"></fa-icon></span> <span class="counter">{{comment.likes}}</span></button>
@@ -691,11 +757,33 @@
                                         <div mat-card-avatar class="comment-user-avatar">
                                             <img class="avatar-xs-card-comment" *ngIf="tenantUrl" src="{{ reply.user.image ? tenantUrl + reply.user.image: reply.user.default_image }}" alt="{{reply.user.username}}">
                                          </div>
-                                    <p class="comment-text">
-                                    <a class="user-link" (click)="getUserData(reply.user.username)"> <span class="comment-user">{{ reply.user.first_name + ' ' + reply.user.last_name }}</span></a>
-                                    <br>
-                                    {{reply.content}}
-                                    </p>
+                                    <div class="comment-text">
+                                    <div class="comment-text-header">
+                                        <a class="user-link" (click)="getUserData(reply.user.username)"> <span class="comment-user">{{ reply.user.first_name + ' ' + reply.user.last_name }}</span></a>
+                                        <button class="comment-sub-menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                                        <mat-icon>more_horiz</mat-icon>
+                                        </button>
+                                        <mat-menu #menu="matMenu">
+                                        <button mat-menu-item>
+                                            <mat-icon>create</mat-icon>
+                                            <span>Edit</span>
+                                        </button>
+                                        <button mat-menu-item (click)="openDeleteConfirmDialog(null, reply)">
+                                            <mat-icon>delete_outline</mat-icon>
+                                            <span>Delete</span>
+                                        </button>
+                                        <button mat-menu-item>
+                                            <mat-icon>report</mat-icon>
+                                            <span>Report</span>
+                                        </button>
+                                        </mat-menu>
+
+                                    </div>
+                                                                       
+                                    <div>
+                                        {{reply.content}}
+                                    </div>
+                                    </div>
                                 </div>
                                 <div class="comment-actions">
                                     <button id="{{'comment-reply-btn' + reply.id}}" *ngIf="reply && loginUser" (click) = "onLikeComment(reply.id, 'comment-reply-btn' + reply.id)" [class]="reply.likers.includes(loginUser.id)? 'did_like': 'general-icon' " mat-button><span><fa-icon [icon]="faThumbsUp"></fa-icon></span> <span class="counter">{{reply.likes}}</span></button>

@@ -35,6 +35,10 @@ const handleAuthentication = (
 
 const handleError = (errorRes: any) => {
     let errorMessage = 'An unknown error occurred!';
+    
+    if(errorRes){
+      return of(new AuthActions.LoginFail(errorMessage));
+    }
 
     if(errorRes.error.message.non_field_errors[0]){
         errorMessage = errorRes.error.message.non_field_errors[0];

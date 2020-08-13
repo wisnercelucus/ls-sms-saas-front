@@ -38,6 +38,7 @@ import { environment } from 'src/environments/environment';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { ForumEffects } from './forum/store/forum.effects';
 import { AuthInterceptorService } from './auth/services/auth-interceptor.service';
+//import { TenantModule } from './tenant/tenant.module';
 
 
 @NgModule({
