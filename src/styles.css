@@ -12,8 +12,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
       
   }
 */
-  .mat-form-field-underline{
-      background-color: #0ec54e !important;
-  }
+.mat-form-field-underline{
+    background-color: #0ec54e !important;
+}
+
+.ql-editing{
+    z-index: 2 !important;
+}
     
   

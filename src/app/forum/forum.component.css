@@ -75,14 +75,18 @@ ul li{
     height: 25px;
     width: 25px;
 }
+
+
 .publish{
     background-color: dodgerblue;
     color: white;
     margin-top: 8px;
+
 }
 .discard{
     margin-top: 8px;
     margin-right: 8px;
+
 }
 
 
