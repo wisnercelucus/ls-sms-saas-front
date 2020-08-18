@@ -1,5 +1,6 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import { Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { User } from 'src/app/users/models/user.model';
 
 
 @Component({
@@ -11,6 +12,7 @@ export class SchoolRootComponent implements OnInit, OnDestroy {
 
   panelOpenState = false; 
   atSchoolRoot=false;
+  loginUser:User;
 
   constructor(private router:Router, private route: ActivatedRoute) {
     
@@ -23,7 +25,11 @@ export class SchoolRootComponent implements OnInit, OnDestroy {
      };
      
     this.atSchoolRoot = window.location.pathname === '/school'? true : false;
+
+    this.loginUser = this.route.snapshot.data['loginUser'];
+    
   }
+
   ngOnDestroy(){
 
   }

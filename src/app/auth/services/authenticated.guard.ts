@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
-import { CanActivate, Router, UrlTree } from "@angular/router";
-import { AuthService } from './auth.service';
+import { CanActivate, Router, UrlTree} from "@angular/router";
 import { take, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -11,8 +10,10 @@ import * as fromApp from '../../store/app.reducer';
 })
 export class AuthenticatedGuard implements CanActivate {
 
-    constructor(private authService: AuthService, 
-        private router: Router, private store:Store<fromApp.AppState>) { }
+    constructor(private router: Router, 
+        private store:Store<fromApp.AppState>) { }
+
+
 
     canActivate(): boolean 
                    | Promise<boolean> 

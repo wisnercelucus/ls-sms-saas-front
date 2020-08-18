@@ -230,7 +230,7 @@
     
     <div class="main-content">
         <div class="placeholder" *ngIf="atSchoolRoot">
-            <h1>Perform an action to the left...</h1>
+            <app-user-dashboard [loginUser]="loginUser"></app-user-dashboard>
         </div>
         <div>
         <router-outlet></router-outlet>

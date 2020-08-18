@@ -9,6 +9,12 @@ import { InformationComponent } from './information/information.component';
 import { SchoolRootComponent } from './school-root/school-root.component';
 import { DataTableContentComponent } from './data-table-content/data-table-content.component';
 import { EntitiesFormsComponent } from './entities-forms/entities-forms.component';
+import { UserDashboardComponent } from './school-root/user-dashboard/user-dashboard.component';
+import { TodosListComponent } from './todos-list/todos-list.component';
+import { TodoItemComponent } from './todos-list/todo-item/todo-item.component';
+import { TasksListComponent } from './tasks-list/tasks-list.component';
+import { TaskItemComponent } from './tasks-list/task-item/task-item.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +24,13 @@ import { EntitiesFormsComponent } from './entities-forms/entities-forms.componen
     InformationComponent, 
     SchoolRootComponent,
     DataTableContentComponent,
-    EntitiesFormsComponent
+    EntitiesFormsComponent,
+    UserDashboardComponent,
+    TodosListComponent,
+    TodoItemComponent,
+    TasksListComponent,
+    TaskItemComponent,
+    CalendarComponent
   ],
   imports: [
     SharedModule,

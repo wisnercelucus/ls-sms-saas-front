@@ -1,0 +1,100 @@
+.title{
+    text-align: center;
+    color: white;
+    margin-top: 20px;
+}
+
+.row1{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 50px;
+}
+
+.row1 .duties{
+    display: flex;
+    flex-direction: column;
+    /*border: 1px solid white;*/
+    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.4);
+    margin-right: 50px;
+    padding: 8px;
+    border-radius: 4px;
+    margin: 0 auto;
+}
+
+.row1 .class-stats{
+    display: flex;
+    flex-direction: column;
+    /*border: 1px solid white;*/
+    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.4);
+    padding: 8px;
+    border-radius: 4px;
+    margin: 0 auto;
+}
+
+.row1 .duties h3,
+.row1 .class-stats h3{
+    text-align: center;
+    color:  #0ec54e;
+}
+
+.row1 .class-stats .stat-badges,
+.row1 .duties .duties-badges
+{
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;   
+    flex-wrap: wrap; 
+}
+
+.row1 .class-stats .stat-badges .stat-badge,
+.row1 .duties .duties-badges .duty-badge
+{
+    padding-top: 8px;
+    padding-bottom: 8px;
+    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.4);
+    margin-right: 20px;
+    border-radius: 4px;
+    width: 150px;
+    text-align: center;
+}
+.row1 .class-stats .stat-badges .stat-badge:last-child,
+.row1 .duties .duties-badges .duty-badge:last-child
+{
+   margin-right: 0px;
+}
+
+
+.pending-tasks{
+    background-color: #df4a63;
+}
+
+.todos{
+    background-color: fuchsia;
+}
+
+
+.attendance-badge{
+    background-color: #0fc14e;
+}
+
+.active-students{
+    background-color: dodgerblue;
+}
+
+.vertical-divider{
+    content: "";
+    height: 70px;
+    border: 2px solid #0ec54e;
+}
+
+.exam-rate{
+    background-color: #e0928e;
+}
+.row{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 50px;
+}

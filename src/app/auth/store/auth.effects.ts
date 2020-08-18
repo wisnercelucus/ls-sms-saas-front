@@ -3,7 +3,7 @@ import * as AuthActions from './auth.actions';
 import { switchMap, catchError, map, tap} from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
-import { of, Subscription } from 'rxjs';
+import { of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AppService } from 'src/app/app.service';
 import { AuthUser } from 'src/app/users/models/user.model';

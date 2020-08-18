@@ -6,7 +6,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { ActivatedRoute, Router, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 import {Event as ngEvent } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Student, Attendance, Teacher, Course, Operation, Payment, Grade, Term, Parent, ExamMark } from './entities.model';
+import { Student, Attendance, Teacher, Course, Operation, Payment, Grade, Term, Parent, ExamMark } from '../models/entities.model';
 
 @Component({
   selector: 'app-data-table-content',
