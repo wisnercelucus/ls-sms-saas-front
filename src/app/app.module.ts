@@ -38,6 +38,7 @@ import { environment } from 'src/environments/environment';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { ForumEffects } from './forum/store/forum.effects';
 import { AuthInterceptorService } from './auth/services/auth-interceptor.service';
+
 //import { TenantModule } from './tenant/tenant.module';
 
 
@@ -85,7 +86,7 @@ import { AuthInterceptorService } from './auth/services/auth-interceptor.service
     ForumModule,
     ForumRoutingModule,
     FeedRoutingModule,
-    FeedModule
+    FeedModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi:true}

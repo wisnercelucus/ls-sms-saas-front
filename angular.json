@@ -24,6 +24,8 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/angular-calendar/css/angular-calendar.css",
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
               "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css",
@@ -34,6 +36,7 @@
               "./node_modules/katex/dist/katex.min.css",
               "./node_modules/mathquill/build/mathquill.css",
               "./node_modules/mathquill4quill/build/mathquill4quill.min.css",
+              "./node_modules/flatpickr/dist/flatpickr.css",
               "src/styles.css"
             ],
             "scripts": [
@@ -42,8 +45,8 @@
               "./node_modules/mathquill/build/mathquill.min.js",
               "./node_modules/mathquill4quill/build/mathquill4quill.min.js",
               "./node_modules/quill/dist/quill.js",
+              "./node_modules/flatpickr/dist/flatpickr.js",
               "src/assets/scripts/mathquilladvanced.js"
-              
             ]
           },
           "configurations": {
@@ -106,11 +109,11 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/angular-calendar/css/angular-calendar.css",
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css"
             ],
-            "scripts": [
-            ]
+            "scripts": []
           }
         },
         "lint": {

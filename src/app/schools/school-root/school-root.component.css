@@ -5,12 +5,13 @@
     color: white;
     flex-wrap: wrap;
     width: 100%;
+    overflow: hidden;
 }
 
 .main-content{
-    padding: 5px;
     padding-top: 20px !important; 
     padding-right: 12px;
+    padding-left: 20px;
     flex: 2;
 }
 
