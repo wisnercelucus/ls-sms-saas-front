@@ -1,0 +1,23 @@
+table {
+    width: 100%;
+}
+
+table th{
+   color: #010101;
+   font-size: 14px;
+}
+
+.high{
+    background-color: firebrick;
+}
+
+.moderate{
+    background-color: rgb(255, 102, 0);
+}
+
+.low{
+    background-color: yellow;
+}
+.text-center{
+    text-align: center;
+}

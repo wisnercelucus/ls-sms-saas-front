@@ -3,20 +3,24 @@
 
     <div class="row1">
         <div class="duties">
-            <h3>Duties overview</h3>
+            <!--<h3>Duties overview</h3>-->
             <div class="duties-badges">
                 <div class="duty-badge pending-tasks">
                     <h4>6</h4>
-                    <p>Pending taks</p>
+                    <p>Pending tasks</p>
                 </div>
                 <div class="duty-badge todos">
                     <h4>4</h4>
                     <p>Todos</p>
                 </div>
+                <div class="duty-badge upcoming-events">
+                    <h4>2</h4>
+                    <p>Upcoming events</p>
+                </div>
             </div>
         </div>
         <div class="class-stats">
-            <h3>Class performance overview</h3>
+            <!--<h3>Class performance overview</h3>-->
             <div class="stat-badges">
                 <div class="stat-badge active-students">
                     <h4>78</h4>
@@ -34,7 +38,17 @@
         </div>
     </div>
     <div class="row">
-        <div class="pending-activities">
+        <div class="col-md-8">
+        <h3 class="text-center">Tasks your are assigned</h3>
+           <app-tasks-list></app-tasks-list>
+        </div> 
+        <div class="col-md-4">
+        <h3 class="text-center">Todo list</h3>
+           <app-todos-list></app-todos-list>
+        </div> 
+    </div>
+    <div class="row">
+        <div class="calendar">
            <app-calendar></app-calendar>
         </div> 
     </div>
