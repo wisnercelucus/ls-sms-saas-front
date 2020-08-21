@@ -33,10 +33,7 @@ button{
   border: none;
   outline:none;
 }
-.mat-focus-indicator{
-  border: none !important;
-  outline:none !important;
-}
+
 
 .event-input{
   width: 100%;
