@@ -7,4 +7,5 @@ export interface Task{
     assigned_by?:any;
     assigned_to?:User;
     priority?: string;
+    status?:string;
 }

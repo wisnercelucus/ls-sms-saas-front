@@ -95,6 +95,26 @@
     background-color: #e0928e;
 }
 
-.row{
+.tasks-list, .todo-list{
     margin-bottom: 70px;
 }
+
+.tasks-list h3, .todo-list h3{
+   text-align: center;
+   box-sizing: border-box;
+}
+
+.calendar{
+    padding: 8px;
+}
+
+.title-group{
+    margin-bottom: 30px;
+}
+.underline{
+    content: "";
+    border: 2px solid dodgerblue;
+    width: 70px;
+    margin: 0 auto;
+}
+

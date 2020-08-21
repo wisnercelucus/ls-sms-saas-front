@@ -1,8 +1,6 @@
 import {
   Component,
   ChangeDetectionStrategy,
-  ViewChild,
-  TemplateRef,
 } from '@angular/core';
 import {
   startOfDay,
@@ -15,13 +13,14 @@ import {
   addHours,
 } from 'date-fns';
 import { Subject } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+//import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   CalendarEvent,
   CalendarEventAction,
   CalendarEventTimesChangedEvent,
   CalendarView,
 } from 'angular-calendar';
+//import { MatTableDataSource } from '@angular/material/table';
 
 const colors: any = {
   red: {
@@ -45,7 +44,7 @@ const colors: any = {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarComponent {
-  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+  //@ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
   view: CalendarView = CalendarView.Month;
 
@@ -119,9 +118,11 @@ export class CalendarComponent {
     },
   ];
 
+  //dataSource = new MatTableDataSource<CalendarEvent>(this.events);
+
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal) {}
+  constructor(/*private modal: NgbModal*/) {}
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -157,7 +158,7 @@ export class CalendarComponent {
 
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
+    //this.modal.open(this.modalContent, { size: 'lg' });
   }
 
   addEvent(): void {

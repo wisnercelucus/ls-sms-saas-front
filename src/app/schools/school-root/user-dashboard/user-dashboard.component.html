@@ -37,19 +37,23 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-8">
-        <h3 class="text-center">Tasks your are assigned</h3>
-           <app-tasks-list></app-tasks-list>
-        </div> 
-        <div class="col-md-4">
-        <h3 class="text-center">Todo list</h3>
-           <app-todos-list></app-todos-list>
-        </div> 
+
+    <div class="tasks-list">
+        <div class="title-group">  
+            <h3 class="text-center">Tasks your are assigned</h3>
+            <div class="underline"></div>
+        </div>
+        <app-tasks-list></app-tasks-list>
     </div>
-    <div class="row">
-        <div class="calendar">
-           <app-calendar></app-calendar>
-        </div> 
-    </div>
+    <div class="todo-list"> 
+        <div class="title-group">
+            <h3 class="text-center">Todo list</h3>
+            <div class="underline"></div>
+        </div>
+        <app-todos-list></app-todos-list>
+    </div> 
+
+    <div class="calendar">
+        <app-calendar></app-calendar>
+    </div> 
 </div>

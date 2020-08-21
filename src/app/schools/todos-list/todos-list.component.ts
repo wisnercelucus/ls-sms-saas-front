@@ -20,7 +20,7 @@ const TODO_DATA: Todo[] = [
 })
 export class TodosListComponent implements OnInit {
 
-  displayedColumns: string[] = ['select', 'id', 'description', 'priority'];
+  displayedColumns: string[] = ['description', 'priority', 'status', 'star'];
   dataSource = new MatTableDataSource<Todo>(TODO_DATA);
   selection = new SelectionModel<Todo>(true, []);
 
@@ -68,4 +68,21 @@ export class TodosListComponent implements OnInit {
       }
     }
    }
+
+   getStatusClass(status:string){
+    switch(status){
+      case 'Complete':{
+        return 'complete';
+      }
+      case 'In progress':{
+        return 'in-progress';
+      }
+      case 'Not started':{
+        return 'not-started';
+      }
+      default:{
+        return '';
+      }
+   }
+  }
 }

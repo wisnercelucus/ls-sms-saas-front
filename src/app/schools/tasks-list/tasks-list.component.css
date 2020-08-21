@@ -20,3 +20,15 @@ table th{
 .text-center{
     text-align: center;
 }
+
+.complete{
+    background-color: chartreuse;
+}
+
+.in-progress{
+    background-color: yellow;
+}
+
+.not-started{
+   background-color: beige; 
+}

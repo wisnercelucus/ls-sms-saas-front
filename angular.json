@@ -34,7 +34,6 @@
               "./node_modules/katex/dist/katex.min.css",
               "./node_modules/mathquill/build/mathquill.css",
               "./node_modules/mathquill4quill/build/mathquill4quill.min.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/angular-calendar/css/angular-calendar.css",
               "./node_modules/flatpickr/dist/flatpickr.css",
               "src/styles.css"

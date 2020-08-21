@@ -1,3 +1,89 @@
 .table thead tr th{
     color: white;
 }
+
+.clearfix {
+    overflow: auto;
+  }
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
+.color-td{
+    padding-left: 10px;
+}
+.color-th{
+    text-align: left;
+}
+
+.table-bordered{
+    width: 100%;
+    border-top: 1px solid white !important;
+    margin-top: 20px !important;
+}
+
+.table-bordered tr th{
+    border-bottom: 1px solid white !important;
+    height: 35px;
+}
+
+.table-bordered tr td{
+    border-bottom: 1px solid white !important;
+}
+
+/*
+.table-bordered td{
+    border: 1px solid white !important;
+}
+
+.table-bordered th{
+    border: 1px solid white !important;
+}*/
+
+.add-event-btn{
+    background-color: dodgerblue;
+    color: floralwhite;
+}
+
+.event-delete-cell{
+    text-align: center;
+}
+
+.event-delete-btn{
+    color: firebrick;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.float-right{
+ float: right;
+}
+
+
+.row{
+    display: flex;
+    flex-direction: row;
+    width:  100%;
+}
+
+.row .col-md-4{
+    flex: 1;
+}
+
+.row .col-md-4 .btn-group button{
+    margin-right: 10px;
+    background-color: dodgerblue;
+    color:white;
+}
+
+.row .col-md-4 .btn-group button:last-child{
+    margin-right: 0px;
+}
+
+.text-center{
+    text-align: center;
+}
