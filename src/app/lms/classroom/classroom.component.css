@@ -18,8 +18,17 @@
 
 .lms-section .row .column-left{
     width: 60%;
+    margin-right: 20px;
+    margin-left: 40px;
 }
 
 .lms-section .column-right{
     width: 40%;
+    margin-right: 40px;
+    margin-left: 20px;
 }
+
+.lms-section .row .column-left .class-moderators{
+    margin-top: 70px;
+}
+

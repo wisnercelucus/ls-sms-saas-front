@@ -8,7 +8,7 @@ const routes: Routes = [
 
   {path: 'feed', redirectTo:'/feed', pathMatch: 'full'},
   {path:'school', redirectTo: '/school', pathMatch: 'full'},
-  {path:'lms', redirectTo: '/lms', pathMatch: 'full'},
+  {path:'classrooms', redirectTo: '/classrooms', pathMatch: 'full'},
   {path:'donate', redirectTo: '/donate/process', pathMatch: 'full'},
   {path: 'auth', redirectTo:'/auth/login', pathMatch:'full'},
   {path: 'accounts', redirectTo:'/accounts/all', pathMatch:'full'},
