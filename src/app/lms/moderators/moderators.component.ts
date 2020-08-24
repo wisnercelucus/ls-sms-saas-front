@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./moderators.component.css']
 })
 export class ModeratorsComponent implements OnInit {
-
+  
   constructor() { }
 
   ngOnInit(): void {

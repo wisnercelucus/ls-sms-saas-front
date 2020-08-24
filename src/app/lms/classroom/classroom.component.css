@@ -1,5 +1,5 @@
 .lms-section{
-    padding-top: 70px;
+    padding: 70px;
     display: flex;
     flex-direction: column;
     background-color: #272953;
@@ -8,27 +8,32 @@
 
 .lms-section .row{
     display: flex;
+    width: 100%;
+}
+
+.lms-section .row .course-list { 
+    width: 100%;
+    margin: 0 auto;
+}
+
+.lms-section .row  .class-moderators{
+    width: 100%;
 }
 
 
 .lms-section .row .calendar-envents{
     width: 100%;
-    padding: 70px 120px;
 }
 
-.lms-section .row .column-left{
-    width: 60%;
-    margin-right: 20px;
-    margin-left: 40px;
+.lms-section .row  .term-overview{
+    width: 100%;
 }
 
-.lms-section .column-right{
-    width: 40%;
-    margin-right: 40px;
-    margin-left: 20px;
+.tab-icon{
+    color: white !important;
 }
-
-.lms-section .row .column-left .class-moderators{
-    margin-top: 70px;
+.tab-title{
+    color: white !important;
+    margin-left:8px;
 }
 

@@ -11,6 +11,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { SharedModule } from '../shared/shared.module';
 import { ClassroomComponent } from './classroom/classroom.component';
 import { CourseItemComponent } from './course-list/course-item/course-item.component';
+import { ModeratorComponent } from './moderators/moderator/moderator.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CourseItemComponent } from './course-list/course-item/course-item.compo
     CalendarEventsComponent,
     ModeratorsComponent,
     ClassroomComponent,
-    CourseItemComponent
+    CourseItemComponent,
+    ModeratorComponent
   ],
   imports: [
     SharedModule,

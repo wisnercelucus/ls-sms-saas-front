@@ -1,13 +1,12 @@
-<mat-card class="course-card">  
-    <span class="material-icons course-card-icons">escalator_warning</span>
-    <h3>
-        <mat-card-title>  
-            {{course.name}}
-        </mat-card-title>
-    </h3>
+<mat-card class="course-card"> 
+   <div style="background-image: url({{course.image}});" class="course-image"></div> 
+
     <mat-card-content>
-        <p>
-            {{course.description}}
-        </p>
+        <h3 class="course-title">{{course.name}}</h3>
+        <div class="underline"></div>
+        <div class="course-description">{{ course.description.length > 150?  (course.description | slice:0:150) + '...' : course.description}}</div>
     </mat-card-content>
+    <mat-card-actions>
+        <button mat-button>Launch</button>
+    </mat-card-actions>
 </mat-card>

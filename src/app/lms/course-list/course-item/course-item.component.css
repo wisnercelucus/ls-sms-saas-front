@@ -1,7 +1,7 @@
 .course-card{
     text-align: center;
-    width: 300px;
-    height: 200px;
+    height: 420px;
+    max-height: 420px;
     z-index: 1;
     border-radius: 0px;
     background-color: #001528;
@@ -9,6 +9,7 @@
     margin-bottom: 25px;
     color: white;
     transition: ease-in-out .3s;
+    padding: 0px !important;
 }
 
 .course-card:hover{
@@ -22,19 +23,51 @@
     transition: ease-in-out .3s;
 }
 
-.course-card:hover .course-card-icons{
-    background-color: fuchsia;
-    color: white;
-    border-radius: 8px;
+.course-card mat-card-actions{
+    text-align: left;
+
 }
 
-
-.course-card mat-card-header mat-card-title{
-    text-align: center;
+.course-image{
+    background-size: cover;
+    height: 225px;
+    background-repeat: no-repeat;
+    background-position: center;
     width: 100%;
 }
 
-.course-card mat-card-actions{
+.course-title{
+    margin-top: 10px;
     text-align: left;
+    padding: 4px;
+}
+
+.course-description{
+    text-align: justify;
+    padding: 4px;
+    margin-top: 10px;
+}
+
+mat-card-actions{
+    padding: 8px;
+    padding-left: 14px;
+    width: 100%;
+    position: absolute;
+    bottom: 8px;
+    
+}
+
+mat-card-actions button{
+    background-color: dodgerblue;  
+    margin-left: 16px; 
+    margin-bottom: 8px;   
+}
+
+.underline{
+    content: "";
+    width: 70px;
+    border: 2px solid dodgerblue;
+    margin-top:-20px;
+    margin-left: 4px;
 
 }
