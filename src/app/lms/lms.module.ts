@@ -12,6 +12,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ClassroomComponent } from './classroom/classroom.component';
 import { CourseItemComponent } from './course-list/course-item/course-item.component';
 import { ModeratorComponent } from './moderators/moderator/moderator.component';
+import { CourseItemOddComponent } from './course-list/course-item-odd/course-item-odd.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ModeratorComponent } from './moderators/moderator/moderator.component';
     ModeratorsComponent,
     ClassroomComponent,
     CourseItemComponent,
-    ModeratorComponent
+    ModeratorComponent,
+    CourseItemOddComponent
   ],
   imports: [
     SharedModule,

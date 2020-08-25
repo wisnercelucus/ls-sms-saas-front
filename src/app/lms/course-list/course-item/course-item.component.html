@@ -1,12 +1,30 @@
-<mat-card class="course-card"> 
-   <div style="background-image: url({{course.image}});" class="course-image"></div> 
+<mat-card class="course-card">
+    <mat-grid-list cols="4" rowHeight="230px">
+  
+        <mat-grid-tile
+        [rowspan]="1"
+        [colspan]="2"
+        >
+        <div style="background-image: url({{course.image}});" class="course-image"></div> 
+        </mat-grid-tile>
 
-    <mat-card-content>
-        <h3 class="course-title">{{course.name}}</h3>
-        <div class="underline"></div>
-        <div class="course-description">{{ course.description.length > 150?  (course.description | slice:0:150) + '...' : course.description}}</div>
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-button>Launch</button>
-    </mat-card-actions>
-</mat-card>
+      <mat-grid-tile
+      [rowspan]="1"
+      [colspan]="2"
+      class="course-detail-tile"
+      >
+          <div class="course-description">
+              <h3 class="course-title">{{course.name}}</h3>
+              <p class="course-desc-p">
+              {{ course.description.length > 250?  (course.description | slice:0:250) + '...' : course.description}}
+              </p>
+  
+          </div>
+          <div class="course-action">
+              <button class="launch-course-btn" mat-raised-button type="button">Launch</button>
+          </div>
+      </mat-grid-tile>
+  
+  
+    </mat-grid-list>
+  </mat-card>

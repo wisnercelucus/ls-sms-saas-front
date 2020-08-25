@@ -1,17 +1,19 @@
 .term-detail-card{
     z-index: 1;
     border-radius: 0px;
-    background-color: #001528;
+    background-color: white;
     box-shadow: 0 0 0 0 !important;
     margin-bottom: 25px;
-    color: white;
-    padding: 0px !important;
+    color: black;
     margin-top: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
 .term-description{
     text-align: justify;
     padding: 12px;
+    font-size: 14px;
 }
 
 .underline{

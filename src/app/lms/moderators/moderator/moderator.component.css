@@ -1,16 +1,23 @@
 .classroom-moderator{
-    text-align: center;
+    text-align: left;
     z-index: 1;
-    border-radius: 0px;
-    background-color: #001528;
+    background-color: white;
     box-shadow: 0 0 0 0 !important;
     margin-bottom: 25px;
-    color: white;
+    color: black;
     transition: ease-in-out .3s;
-    padding: 0px !important;
+    padding: 8px !important;
+
 }
 
 .classroom-moderator:hover{
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.5) !important;
     
 }
+.header-image {
+    background-size: cover;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }

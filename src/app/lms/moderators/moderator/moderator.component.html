@@ -1,12 +1,12 @@
 <mat-card class="classroom-moderator">
-    <div class="row">
-        <div class="side-picture">
-        </div>
-        <div class="right-detail">
-            <h2>Naomie CELUCUS</h2>
-            <h3>Teacher</h3>
-        </div>
-    </div>
+    <mat-card-header>
+        <div mat-card-avatar 
+        class="header-image"
+        style="background-image: url({{moderator.image}});"
+        ></div>
+        <mat-card-title>{{moderator.name}}</mat-card-title>
+        <mat-card-subtitle>{{moderator.title}}</mat-card-subtitle>
+      </mat-card-header>
 </mat-card>
 
 

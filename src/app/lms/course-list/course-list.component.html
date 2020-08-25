@@ -1,5 +1,23 @@
 <div class="course-list">
     <div class="grid-courses">
-        <app-course-item class="course-item" *ngFor="let course of courses" [course]="course"></app-course-item>
+        <span *ngFor="let course of courses; let i = index">
+            <app-course-item class="course-item"  [course]="course"></app-course-item>
+        <!--<app-course-item *ngIf="isEven(i)" class="course-item"  [course]="course"></app-course-item>-->
+        <!--<app-course-item-odd *ngIf="!isEven(i)" class="course-item" [course]="course"></app-course-item-odd>-->
+    </span>
+    </div>
+    <div class="pedagogical-team">
+        
+        <div class="handle-title">
+            <h3>Pedagogical team</h3>
+            <div class="underline"></div>
+        </div>
+
+        <div class="row">
+            <div class="class-moderators">
+                <app-moderators></app-moderators>
+            </div>
+        </div>
+
     </div>
 </div>

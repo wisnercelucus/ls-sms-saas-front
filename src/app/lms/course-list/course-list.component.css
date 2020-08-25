@@ -1,6 +1,5 @@
 .course-list{
     display: flex;
-    flex-direction: column;
 }
 
 .course-list .handle-title{
@@ -17,12 +16,20 @@
 
 .course-list > .grid-courses{
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
     margin-top: 20px;
+    flex:3;
+    margin-right: 50px;
 }
+
 
 .course-list > div .course-item{
     margin-right: 20px;
-    width: 280px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.pedagogical-team{
+    flex: 1;
+    margin-top: 20px;
 }

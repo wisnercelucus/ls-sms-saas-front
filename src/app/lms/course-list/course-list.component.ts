@@ -10,7 +10,7 @@ import { Course } from 'src/app/schools/models/entities.model';
 export class CourseListComponent implements OnInit {
   courses: Course[] = [
                         {  id: 1, 
-                          name:'Master the fundamental of Math', 
+                          name:'Master the fundamental of Math. This course is entended to initiate you to the fundamental.', 
                           description:'This course is entended to initiate you to the fundamental.',
                           base:10,
                           coefficient:1,
@@ -19,19 +19,19 @@ export class CourseListComponent implements OnInit {
                          },
                           
                          {  id: 2, 
-                          name:'English 101', 
+                          name:'English 101. This course is entended to initiate you to the fundamental.', 
                           description:'This course is an intro to English composition 1.'+ 
                                         'It is focuses in helping you with citation, quote and helping you to avoid plagiarism.',
                           base:20,
                           coefficient:2,
                           code:'eng101',
-                          image:'https://www.hastingssecondarycollege.com.au/sites/default/files/styles/header_slideshow_xs_x_1/public/2018-06/English.jpg'
+                          image:'https://m.jagranjosh.com/imported/images/E/Articles/English%20class%2010%20all%20chapters.jpg'
                          },
 
                          { id: 3, 
-                          name:'Creole 101', 
+                          name:'Creole 101. This course is entended to initiate you to the fundamental.', 
                           description:'You will discover the beauty of creole, the languange spoken by a vast majority of people living in the Caraibe.'+ 
-                                        'It will also focus on helping you with citation, quote and helping you to avoid plagiarism.',
+                                        'It will also focus on helping you with citation, quote and helping you to avoid plagiarism. This course is entended to initiate you to the fundamental.',
                           base:10,
                           coefficient:1,
                           code:'creo101',
@@ -70,6 +70,12 @@ export class CourseListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+
+  isEven(num:number): boolean
+  { 
+    return num % 2== 0? true: false;
   }
 
 }
