@@ -94,6 +94,7 @@ export class ForumComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.destroy$))
     .subscribe( topics=> this.topicList = topics)
   }
+
   private getTime(date: Date) {
     return new Date(date).getTime()
   }
@@ -113,7 +114,7 @@ export class ForumComponent implements OnInit, OnDestroy {
           this.loginUser = user;
       }
     );
-}
+  }
 
 
   add(event: MatChipInputEvent): void {

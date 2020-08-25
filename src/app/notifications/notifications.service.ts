@@ -20,7 +20,6 @@ import { tap } from 'rxjs/operators';
     getUsersNotification(){
         return this.http.get<NotificationModel[]>(this.tenantUrl + '/notifications/api/all/').pipe(
           tap(res=>{
-            //console.log(res)
           })
         );
     }

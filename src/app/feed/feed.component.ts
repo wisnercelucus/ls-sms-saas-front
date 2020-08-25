@@ -25,10 +25,6 @@ export class FeedComponent implements OnInit, OnDestroy {
   @ViewChild('form') form: ElementRef;
   @ViewChild("textarea") textarea: ElementRef;
 
-  //postsSub:Subscription;
-  //postCreateSub:Subscription;
-  //loginUserSub:Subscription;
-  //pollCreateSub:Subscription;
 
   pollForm: FormGroup;
   postForm:FormGroup;
