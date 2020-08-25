@@ -2,8 +2,10 @@
     padding: 70px;
     display: flex;
     flex-direction: column;
+    background-color: #eeeeee;
+    /*
     background-color: #272953;
-    color: white;
+    color: white;*/
 }
 
 .lms-section .row{
@@ -23,17 +25,22 @@
 
 .lms-section .row .calendar-envents{
     width: 100%;
+    padding-left: 120px;
+    padding-right: 120px;
+    margin-top: 20px;
 }
 
 .lms-section .row  .term-overview{
     width: 100%;
+    padding-left: 120px;
+    padding-right: 120px;
 }
 
 .tab-icon{
-    color: white !important;
+    color: #101010 !important;
 }
 .tab-title{
-    color: white !important;
+    color: #101010 !important;
     margin-left:8px;
 }
 
