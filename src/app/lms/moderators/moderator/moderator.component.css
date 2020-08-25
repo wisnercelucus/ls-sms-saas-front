@@ -1,0 +1,16 @@
+.classroom-moderator{
+    text-align: center;
+    z-index: 1;
+    border-radius: 0px;
+    background-color: #001528;
+    box-shadow: 0 0 0 0 !important;
+    margin-bottom: 25px;
+    color: white;
+    transition: ease-in-out .3s;
+    padding: 0px !important;
+}
+
+.classroom-moderator:hover{
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.5) !important;
+    
+}

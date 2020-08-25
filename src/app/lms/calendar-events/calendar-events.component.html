@@ -1,3 +1,90 @@
+<h3>
+  Edit events
+  <button mat-raised-button class="btn btn-primary float-right add-event-btn" (click)="addEvent()">
+    <i class="fa fa-plus" aria-hidden="true"></i> Add new
+  </button>
+  <div class="clearfix"></div>
+</h3>
+
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th class="color-th">Primary color</th>
+        <th class="color-th">Secondary color</th>
+        <th >Starts at</th>
+        <th>Ends at</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let event of events">
+        <td>
+          <input
+            type="text"
+            class="event-input"
+            [(ngModel)]="event.title"
+            (keyup)="refresh.next()"
+          />
+        </td>
+        <td class="color-td">
+          <input
+           class="color-input"
+            type="color"
+            [(ngModel)]="event.color.primary"
+            (change)="refresh.next()"
+          />
+        </td>
+        <td>
+          <input
+            class="color-input"
+            type="color"
+            [(ngModel)]="event.color.secondary"
+            (change)="refresh.next()"
+          />
+        </td>
+        <td>
+          <input
+            class="event-input"
+            type="text"
+            mwlFlatpickr
+            [(ngModel)]="event.start"
+            (ngModelChange)="refresh.next()"
+            [altInput]="true"
+            [convertModelValue]="true"
+            [enableTime]="true"
+            dateFormat="Y-m-dTH:i"
+            altFormat="F j, Y H:i"
+            placeholder="Not set"
+          />
+        </td>
+        <td>
+          <input
+            class="event-input"
+            type="text"
+            mwlFlatpickr
+            [(ngModel)]="event.end"
+            (ngModelChange)="refresh.next()"
+            [altInput]="true"
+            [convertModelValue]="true"
+            [enableTime]="true"
+            dateFormat="Y-m-dTH:i"
+            altFormat="F j, Y H:i"
+            placeholder="Not set"
+          />
+        </td>
+        <td class="event-delete-cell">
+            <mat-icon class="event-delete-btn" (click)="deleteEvent(event)">delete</mat-icon>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<br /><br /><br />
+
 <div class="row">
   <div class="col-md-4 text-center">
     <div class="btn-group">
@@ -104,91 +191,4 @@
 </div>
 
 <!-- Everything you see below is just for the demo, you don't need to include it in your app -->
-
-<br /><br /><br />
-
-<h3>
-  Edit events
-  <button mat-raised-button class="btn btn-primary float-right add-event-btn" (click)="addEvent()">
-    <i class="fa fa-plus" aria-hidden="true"></i> Add new
-  </button>
-  <div class="clearfix"></div>
-</h3>
-
-<div class="table-responsive">
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th class="color-th">Primary color</th>
-        <th class="color-th">Secondary color</th>
-        <th >Starts at</th>
-        <th>Ends at</th>
-        <th>Remove</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr *ngFor="let event of events">
-        <td>
-          <input
-            type="text"
-            class="event-input"
-            [(ngModel)]="event.title"
-            (keyup)="refresh.next()"
-          />
-        </td>
-        <td class="color-td">
-          <input
-           class="color-input"
-            type="color"
-            [(ngModel)]="event.color.primary"
-            (change)="refresh.next()"
-          />
-        </td>
-        <td>
-          <input
-            class="color-input"
-            type="color"
-            [(ngModel)]="event.color.secondary"
-            (change)="refresh.next()"
-          />
-        </td>
-        <td>
-          <input
-            class="event-input"
-            type="text"
-            mwlFlatpickr
-            [(ngModel)]="event.start"
-            (ngModelChange)="refresh.next()"
-            [altInput]="true"
-            [convertModelValue]="true"
-            [enableTime]="true"
-            dateFormat="Y-m-dTH:i"
-            altFormat="F j, Y H:i"
-            placeholder="Not set"
-          />
-        </td>
-        <td>
-          <input
-            class="event-input"
-            type="text"
-            mwlFlatpickr
-            [(ngModel)]="event.end"
-            (ngModelChange)="refresh.next()"
-            [altInput]="true"
-            [convertModelValue]="true"
-            [enableTime]="true"
-            dateFormat="Y-m-dTH:i"
-            altFormat="F j, Y H:i"
-            placeholder="Not set"
-          />
-        </td>
-        <td class="event-delete-cell">
-            <mat-icon class="event-delete-btn" (click)="deleteEvent(event)">delete</mat-icon>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
 

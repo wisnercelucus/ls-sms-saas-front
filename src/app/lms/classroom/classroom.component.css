@@ -1,0 +1,39 @@
+.lms-section{
+    padding: 70px;
+    display: flex;
+    flex-direction: column;
+    background-color: #272953;
+    color: white;
+}
+
+.lms-section .row{
+    display: flex;
+    width: 100%;
+}
+
+.lms-section .row .course-list { 
+    width: 100%;
+    margin: 0 auto;
+}
+
+.lms-section .row  .class-moderators{
+    width: 100%;
+}
+
+
+.lms-section .row .calendar-envents{
+    width: 100%;
+}
+
+.lms-section .row  .term-overview{
+    width: 100%;
+}
+
+.tab-icon{
+    color: white !important;
+}
+.tab-title{
+    color: white !important;
+    margin-left:8px;
+}
+

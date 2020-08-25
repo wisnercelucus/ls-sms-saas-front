@@ -1,0 +1,11 @@
+.moderators-list{
+    margin-top: 20px;
+}
+
+.underline{
+    content: "";
+    width: 70px;
+    border: 2px solid dodgerblue;
+    margin-top: -15px;
+}
+

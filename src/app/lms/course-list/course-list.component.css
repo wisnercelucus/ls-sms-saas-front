@@ -1,0 +1,28 @@
+.course-list{
+    display: flex;
+    flex-direction: column;
+}
+
+.course-list .handle-title{
+    margin-bottom: 30px;
+}
+
+.underline{
+    content: "";
+    width: 70px;
+    border: 2px solid dodgerblue;
+    margin-top: -15px;
+}
+
+
+.course-list > .grid-courses{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.course-list > div .course-item{
+    margin-right: 20px;
+    width: 280px;
+}

@@ -14,11 +14,6 @@ import { TodosListComponent } from './todos-list/todos-list.component';
 import { TodoItemComponent } from './todos-list/todo-item/todo-item.component';
 import { TasksListComponent } from './tasks-list/tasks-list.component';
 import { TaskItemComponent } from './tasks-list/task-item/task-item.component';
-import { CalendarComponent } from './calendar/calendar.component';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-//import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { FlatpickrModule } from 'angularx-flatpickr';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { EventDetailDialogComponent } from './shared/event-detail-dialog/event-detail-dialog.component';
 import { TodoDetailDialogComponent } from './shared/todo-detail-dialog/todo-detail-dialog.component';
 import { TaskDetailDialogComponent } from './shared/task-detail-dialog/task-detail-dialog.component';
@@ -38,7 +33,6 @@ import { TaskDetailDialogComponent } from './shared/task-detail-dialog/task-deta
     TodoItemComponent,
     TasksListComponent,
     TaskItemComponent,
-    CalendarComponent,
     EventDetailDialogComponent,
     TodoDetailDialogComponent,
     TaskDetailDialogComponent,
@@ -47,14 +41,8 @@ import { TaskDetailDialogComponent } from './shared/task-detail-dialog/task-deta
     SharedModule,
     RouterModule,
     SchoolRoutingModule,
-    FlatpickrModule.forRoot(),
-    //NgbModalModule,
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
   exports:[
-    FlatpickrModule,
-    //NgbModalModule,
-    CalendarModule
   ]
 })
 export class SchoolsModule { }

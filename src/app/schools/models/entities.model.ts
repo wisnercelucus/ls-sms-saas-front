@@ -54,7 +54,8 @@ export interface Course{
 	grade?:Grade;
 	code:string;
     term?:Term;
-    version?:string;
+	version?:string;
+	image?:string;
 
 	created_at?:Date;
 	updated_at?:Date;

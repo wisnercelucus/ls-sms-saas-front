@@ -21,9 +21,14 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { QuillModule } from 'ngx-quill';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import 'quill-emoji/dist/quill-emoji.js';
 import { CommentFormComponent } from './comment-form/comment-form.component'
+import { CalendarComponent } from './calendar/calendar.component';
+
 
 
 @NgModule({
@@ -43,6 +48,7 @@ import { CommentFormComponent } from './comment-form/comment-form.component'
         DeleteConfirmDialogComponent,
         PostReportDialogComponent,
         CommentFormComponent,
+        CalendarComponent
     ],
 
     imports:[CommonModule, 
@@ -52,6 +58,9 @@ import { CommentFormComponent } from './comment-form/comment-form.component'
         FontAwesomeModule,
         CarouselModule,
         CKEditorModule,
+        FlatpickrModule.forRoot(),
+        CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+
         QuillModule.forRoot({
             modules: {
               syntax: true,
@@ -112,10 +121,13 @@ import { CommentFormComponent } from './comment-form/comment-form.component'
             GroupsSuggestionsComponent,
             PublishModalFormComponent,
             DataTableRowHeaderComponent,
+            CalendarComponent,
             CarouselModule,
             CKEditorModule,
             QuillModule,
-            HighlightModule
+            HighlightModule,
+            CalendarModule,
+            FlatpickrModule
         ]
 }
 )

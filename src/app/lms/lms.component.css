@@ -1,3 +1,25 @@
 .lms-section{
     padding-top: 70px;
+    display: flex;
+    flex-direction: column;
+    background-color: #272953;
+    color: white;
+}
+
+.lms-section .row{
+    display: flex;
+}
+
+
+.lms-section .row .calendar-envents{
+    width: 100%;
+    padding: 70px 120px;
+}
+
+.lms-section .row .column-left{
+    width: 60%;
+}
+
+.lms-section .column-right{
+    width: 40%;
 }
