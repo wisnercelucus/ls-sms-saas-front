@@ -16,6 +16,9 @@ import { CourseItemOddComponent } from './course-list/course-item-odd/course-ite
 import { CourseDetailComponent } from './course-list/course-detail/course-detail.component';
 import { CourseSyllabusComponent } from './course-list/course-detail/course-syllabus/course-syllabus.component';
 import { CourseWikiComponent } from './course-list/course-detail/course-wiki/course-wiki.component';
+import { CourseDetailSideMenuComponent } from './course-list/course-detail/course-detail-side-menu/course-detail-side-menu.component';
+import { CourseModuleComponent } from './course-list/course-detail/course-module/course-module.component';
+import { CourseModuleSideMenuComponent } from './course-list/course-detail/course-module/course-module-side-menu/course-module-side-menu.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { CourseWikiComponent } from './course-list/course-detail/course-wiki/cou
     CourseItemOddComponent,
     CourseDetailComponent,
     CourseSyllabusComponent,
-    CourseWikiComponent
+    CourseWikiComponent,
+    CourseDetailSideMenuComponent,
+    CourseModuleComponent,
+    CourseModuleSideMenuComponent
   ],
   imports: [
     SharedModule,
