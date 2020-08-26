@@ -1,0 +1,17 @@
+.course-overview{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+}
+.side-menu-left{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-overview{
+    flex: 3;
+    display: flex;
+}
+
+

@@ -22,6 +22,7 @@ import { CourseModuleSideMenuComponent } from './course-list/course-detail/cours
 import { StudentStatsComponent } from './course-list/course-detail/student-stats/student-stats.component';
 import { StudentNotesComponent } from './course-list/course-detail/student-notes/student-notes.component';
 import { CourseDiscussionComponent } from './course-list/course-detail/course-discussion/course-discussion.component';
+import { CourseOverviewComponent } from './course-list/course-detail/course-overview/course-overview.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { CourseDiscussionComponent } from './course-list/course-detail/course-di
     CourseModuleSideMenuComponent,
     StudentStatsComponent,
     StudentNotesComponent,
-    CourseDiscussionComponent
+    CourseDiscussionComponent,
+    CourseOverviewComponent
   ],
   imports: [
     SharedModule,

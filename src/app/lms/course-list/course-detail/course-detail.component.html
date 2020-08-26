@@ -1,5 +1,19 @@
 <section class="course-detail-section">
     <mat-tab-group animationDuration="0ms">
+
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="tab-icon">local_library</mat-icon>
+                <span class="tab-title">
+                    Course
+                </span>
+            </ng-template>
+
+            <div class="course-overview">
+                <app-course-overview></app-course-overview>
+            </div>
+        </mat-tab>
+
         <mat-tab>
             <ng-template mat-tab-label>
                 <mat-icon class="tab-icon">description</mat-icon>
@@ -14,15 +28,6 @@
 
         </mat-tab>
 
-        <mat-tab>
-            <ng-template mat-tab-label>
-                <mat-icon class="tab-icon">local_library</mat-icon>
-                <span class="tab-title">
-                    Course
-                </span>
-            </ng-template>
-            Course
-        </mat-tab>
 
         <mat-tab>
             <ng-template mat-tab-label>
@@ -31,7 +36,10 @@
                 Course discussion
                 </span>
             </ng-template>
-            Course discussion
+
+            <div class="course-discussion">
+                <app-course-discussion></app-course-discussion>
+            </div>
         </mat-tab>
 
         <mat-tab>
@@ -41,7 +49,10 @@
                 Student's notes
                 </span>
             </ng-template>
-            Student's notes
+            <div class="student-note">
+                <app-student-notes></app-student-notes>
+            </div>
+            
         </mat-tab>        
 
 
@@ -52,7 +63,11 @@
                 Course stats
               </span>
             </ng-template>
-            Course stats
+
+            <div class="student-stats">
+                <app-student-stats></app-student-stats>
+            </div>
+
         </mat-tab>
 
         <mat-tab>
