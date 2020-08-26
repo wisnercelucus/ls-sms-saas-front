@@ -6,16 +6,23 @@ import { LoginUserResolverService } from '../users/services/login-user-resolver.
 import { ClassroomComponent } from './classroom/classroom.component';
 import { CourseDetailComponent } from './course-list/course-detail/course-detail.component';
 import { MillestoneOverviewComponent } from './course-list/course-detail/course-overview/millestone-overview/millestone-overview.component';
+import { CourseModuleComponent } from './course-list/course-detail/course-module/course-module.component';
+import { CourseModulLessonComponent } from './course-list/course-detail/course-module/course-modul-lesson/course-modul-lesson.component';
 
 const routes: Routes = [
     {path:'classrooms', component:LmsComponent,  canActivate:[AuthGuard], resolve:{loginUser:LoginUserResolverService},
     children:[
         {path:'course/:course-id', component:CourseDetailComponent,
         children:[
-            {path:':millestone', component:MillestoneOverviewComponent}
+            {path:':millestone', component:MillestoneOverviewComponent},
+            {path:':millestone/:module', component:CourseModuleComponent}
         ]
         },
-        {path:':classroomName/:group', component:ClassroomComponent}
+        {path:':classroomName/:group', component:ClassroomComponent},
+        {path:'course/:course-id/:millestone/:module', component:CourseModuleComponent,
+        children:[
+            {path:'lesson/:lesson_id', component:CourseModulLessonComponent}
+        ]}
     ] }
 ]
 

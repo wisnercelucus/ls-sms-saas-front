@@ -1,0 +1,88 @@
+.mellestone-overview-section{
+    display: flex;
+}
+
+.mellestone-overview-section .column-left{
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #b9b8b8;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.mellestone-overview-section .column-left h1{
+    font-size: 28px;
+}
+
+.mellestone-overview-section .column-left p{
+    font-size: 16px;
+}
+
+
+.mellestone-overview-section .column-right{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-right: 8px;
+    padding-left: 8px;
+    margin-left: 30px;
+}
+
+.underline{
+    content: "";
+    width: 70px;
+    border: 2px solid dodgerblue;
+    margin-top:-15px;
+    margin-left: 4px;
+
+}
+
+.launche-week-discussion-box,.module-overview, .welcome-module-overview, .module-ressource-overview{
+    margin-top: 50px;
+    padding: 12px;
+}
+
+.launche-week-discussion-box,.module-overview, .module-ressource-overview{
+    border: 1px solid #cecaca;
+    border-radius: 5px;
+
+}
+
+.launche-week-discussion-box{
+    display: flex;
+    flex-direction: column;
+}
+
+.launche-week-discussion-box{
+    display: flex;
+    flex-direction: column;
+}
+
+.launche-week-discussion-box .handle-discussion-detail{
+    display: flex;
+    flex-direction: column;
+}
+
+.launche-week-discussion-box .handle-discussion-detail p{
+    font-size: 16px;
+}
+
+.launche-week-discussion-box .handle-discussion-detail .detail-stats{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.launche-week-discussion-box .handle-discussion-detail .detail-stats span{
+    margin-right: 15px;
+}
+
+.launche-week-discussion-box .handle-discussion-detail .detail-stats span:last-child{
+    margin-right: 0px;
+}
+
+.goto-discussion-forum-btn{
+    background-color: dodgerblue;
+    color: white;
+}

@@ -1,3 +1,8 @@
+.side-menu-card {
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.5) !important;
+    padding: 12px;
+    margin-left: 8px;
+}
 .side-menu-card mat-card-header{
     background-color: #fafafa;
     color: #3d3d3d;
@@ -58,11 +63,17 @@ ul li{
 }
 
 .side-menu-card mat-card-content ul li:hover{
-    background-color: #f1f1f1;
     cursor: pointer;
 }
 
+.side-menu-card mat-card-content ul .mellestones-list:hover{
+    background-color: #ffffff;
+    cursor: pointer;
+}
 
+.margin-left{
+    margin-left: 13px;
+}
 
 .avatar-xs-card{
     border-radius: 100%;
@@ -97,13 +108,13 @@ ul li{
 }
 
 .nav-link fa-icon{
-    color: dodgerblue;
+    color: rgb(95, 92, 92);
 }
 
 .mat-form-field {
     margin-right: 4px;
   }
 
-  .node-text{
+.node-text{
       margin-left: 12px;
-  }
+}

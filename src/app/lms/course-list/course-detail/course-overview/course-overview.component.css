@@ -3,15 +3,18 @@
     display: flex;
     flex-direction: row;
 }
-.side-menu-left{
+
+.course-overview .side-menu-left{
     flex: 1;
     display: flex;
     flex-direction: column;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 12px;
 }
 
-.main-overview{
+.course-overview .main-overview{
     flex: 3;
-    display: flex;
     margin-left: 20px;
 }
 

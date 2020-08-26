@@ -1,0 +1,12 @@
+.course-module-section{
+    padding-top: 70px;
+    display: flex;
+}
+
+.course-module-section .column-left{
+    flex: 1;
+}
+
+.course-module-section .column-right{
+    flex: 3;
+}

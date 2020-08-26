@@ -24,6 +24,9 @@ import { StudentNotesComponent } from './course-list/course-detail/student-notes
 import { CourseDiscussionComponent } from './course-list/course-detail/course-discussion/course-discussion.component';
 import { CourseOverviewComponent } from './course-list/course-detail/course-overview/course-overview.component';
 import { MillestoneOverviewComponent } from './course-list/course-detail/course-overview/millestone-overview/millestone-overview.component';
+import { CourseModuleMenuComponent } from './course-list/course-detail/course-module/course-module-menu/course-module-menu.component';
+import { CourseModulLessonComponent } from './course-list/course-detail/course-module/course-modul-lesson/course-modul-lesson.component';
+import { LessonNotesComponent } from './course-list/course-detail/course-module/course-modul-lesson/lesson-notes/lesson-notes.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,10 @@ import { MillestoneOverviewComponent } from './course-list/course-detail/course-
     StudentNotesComponent,
     CourseDiscussionComponent,
     CourseOverviewComponent,
-    MillestoneOverviewComponent
+    MillestoneOverviewComponent,
+    CourseModuleMenuComponent,
+    CourseModulLessonComponent,
+    LessonNotesComponent
   ],
   imports: [
     SharedModule,
