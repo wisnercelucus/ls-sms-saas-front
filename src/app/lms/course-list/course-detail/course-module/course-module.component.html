@@ -1,8 +1,27 @@
-<section class="course-module-section">
+<!--
     <div class="column-left">
-        <app-course-module-side-menu></app-course-module-side-menu>
+        
     </div>
     <div class="column-right">
-        <router-outlet></router-outlet>
+        
     </div>
+-->
+
+<section class="course-module-section">
+    <mat-drawer-container class="lesson-container" autosize>
+
+        <mat-drawer #drawer class="lesson-sidenav" mode="side" opened>
+            <app-course-module-side-menu></app-course-module-side-menu>
+        </mat-drawer>
+    
+        <div class="lesson-sidenav-content">
+            <div class="toggle-side-menu">
+                    <span (click)="drawer.toggle()" class="material-icons toggle-sidenav">menu</span>
+            </div>
+            <div class="lesson-content">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    
+    </mat-drawer-container>
 </section>

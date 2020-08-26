@@ -1,4 +1,9 @@
 .course-lesson{
-    margin-top: 70px;
-    
+    display: flex;
+}
+.course-lesson .lesson-content{
+    flex: 3;
+}
+.course-lesson .lesson-notes{
+    flex: 1;
 }

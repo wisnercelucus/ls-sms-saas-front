@@ -1,0 +1,16 @@
+.menu-list{
+    box-sizing: border-box;
+}
+
+.menu-list li{
+    list-style: none;
+    padding: 12px;
+    margin-left: -50px;
+}
+
+.menu-list li a{
+    text-decoration: none;
+    width: 100%;
+    font-size: 18px;
+    color: rgb(90, 30, 255);
+}

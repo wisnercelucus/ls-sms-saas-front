@@ -1,8 +1,8 @@
 .course-module-section{
     padding-top: 70px;
-    display: flex;
 }
 
+/*
 .course-module-section .column-left{
     flex: 1;
 }
@@ -10,3 +10,35 @@
 .course-module-section .column-right{
     flex: 3;
 }
+*/
+
+.lesson-container {
+    width: 100%;
+    height: 100vh;
+  }
+  
+.lesson-sidenav-content {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    flex-direction: row;
+}
+ 
+.lesson-sidenav-content .lesson-content{
+    width: 100%;
+    margin-left: 12px;
+}
+
+.lesson-sidenav-content .toggle-side-menu{
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.lesson-sidenav {
+    padding: 20px;
+    height: 100%;
+    
+}
+.toggle-sidenav{
+    cursor: pointer;
+}
+
