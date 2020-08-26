@@ -12,6 +12,7 @@
 .main-overview{
     flex: 3;
     display: flex;
+    margin-left: 20px;
 }
 
 
