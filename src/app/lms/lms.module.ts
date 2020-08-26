@@ -14,6 +14,8 @@ import { CourseItemComponent } from './course-list/course-item/course-item.compo
 import { ModeratorComponent } from './moderators/moderator/moderator.component';
 import { CourseItemOddComponent } from './course-list/course-item-odd/course-item-odd.component';
 import { CourseDetailComponent } from './course-list/course-detail/course-detail.component';
+import { CourseSyllabusComponent } from './course-list/course-detail/course-syllabus/course-syllabus.component';
+import { CourseWikiComponent } from './course-list/course-detail/course-wiki/course-wiki.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { CourseDetailComponent } from './course-list/course-detail/course-detail
     CourseItemComponent,
     ModeratorComponent,
     CourseItemOddComponent,
-    CourseDetailComponent
+    CourseDetailComponent,
+    CourseSyllabusComponent,
+    CourseWikiComponent
   ],
   imports: [
     SharedModule,

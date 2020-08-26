@@ -1,7 +1,6 @@
 .course-card{
     text-align: center;
     z-index: 1;
-    border-radius: 0px;
     background-color: white;
     box-shadow: 0 0 0 0 !important;
     color: #000;
@@ -48,11 +47,12 @@
 
 .course-desc-p{
     margin-top: -12px;
+    font-size: 14px;
 }
 
 .course-title{
-    font-size: 16PX;
-    font-weight: 600;
+    font-size: 20PX;
+    color: dodgerblue;
 }
 
 .course-action{

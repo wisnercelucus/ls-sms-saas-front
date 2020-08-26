@@ -3,3 +3,20 @@
     padding-left: 50px;
     padding-right: 50px;
 }
+
+.tab-icon{
+    color: #101010 !important;
+}
+.tab-title{
+    color: #101010 !important;
+    margin-left:8px;
+    font-size: 20px;
+}
+
+.course-sylabus{
+    background-color: rgb(255, 255, 255);
+}
+
+.course-wiki{
+    background-color: rgb(255, 255, 255); 
+}

@@ -1,7 +1,73 @@
 <section class="course-detail-section">
     <mat-tab-group animationDuration="0ms">
-        <mat-tab label="Course">Course</mat-tab>
-        <mat-tab label="Course discussion">Course discussion</mat-tab>
-        <mat-tab label="Course statistics">Course stats</mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="tab-icon">description</mat-icon>
+              <span class="tab-title">
+                Course syllabus
+              </span>
+            </ng-template>
+
+            <div class="course-sylabus">
+                <app-course-syllabus></app-course-syllabus>
+            </div>
+
+        </mat-tab>
+
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="tab-icon">local_library</mat-icon>
+                <span class="tab-title">
+                    Course
+                </span>
+            </ng-template>
+            Course
+        </mat-tab>
+
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="tab-icon">forum</mat-icon>
+                <span class="tab-title">
+                Course discussion
+                </span>
+            </ng-template>
+            Course discussion
+        </mat-tab>
+
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="tab-icon">note</mat-icon>
+                <span class="tab-title">
+                Student's notes
+                </span>
+            </ng-template>
+            Student's notes
+        </mat-tab>        
+
+
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="tab-icon">poll</mat-icon>
+              <span class="tab-title">
+                Course stats
+              </span>
+            </ng-template>
+            Course stats
+        </mat-tab>
+
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="tab-icon">history_edu</mat-icon>
+                <span class="tab-title">
+                Wiki
+                </span>
+            </ng-template>
+
+            <div class="course-wiki">
+                <app-course-wiki></app-course-wiki>
+            </div>
+            
+        </mat-tab>
+
       </mat-tab-group>
 </section>
